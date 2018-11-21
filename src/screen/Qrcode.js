@@ -30,7 +30,7 @@ export default class App extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        tokenTable: '5a9263aabb15178dfa79af3b79edf1de',
+        tokenTable: result.data,
         token: Store.Token,
         idProf: Store.IdUser,
       }),
@@ -40,7 +40,6 @@ export default class App extends Component {
 	           this.props.navigation.navigate('Profil')
           }
           else {
-            Alert.alert('Error Token Table')
           }
         })
         .catch((error) => {
