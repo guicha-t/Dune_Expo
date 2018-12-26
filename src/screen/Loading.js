@@ -26,7 +26,7 @@ export default class AuthLoadingScreen extends Component {
       Store.setToken(localToken)
       Store.setTypeUser(localType)
     }
-    this.props.navigation.navigate(localId ? 'Dashboard' : 'Start');
+    this.props.navigation.navigate(localId ? 'StudentList' : 'Start');
   };
 
   render() {

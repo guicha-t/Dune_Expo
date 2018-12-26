@@ -89,6 +89,7 @@ export default class EditProfilInfo extends Component {
             <View style={{flex: 0.7}}>
               <TextInput
                style={styles.input}
+               editable={false}
                placeholder='Email'
                onChangeText={(email) => this.setState({email})}
                value={this.state.email}
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
     width: 220,
     height: 44,
     padding: 10,
-    borderWidth: 0,
+    borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
   },

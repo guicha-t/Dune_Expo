@@ -32,6 +32,14 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentList')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Liste des élèves</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
@@ -47,6 +55,7 @@ export default class CustomDrawerItems extends Component {
               </View>
             </View>
           </TouchableOpacity>
+
 
         </ScrollView>
       </View>

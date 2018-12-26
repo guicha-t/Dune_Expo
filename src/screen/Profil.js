@@ -53,12 +53,12 @@ export default class Profil extends Component {
         <Header navigation={this.props.navigation}/>
 
         <View style={styles.topBodyPicture}>
-            <Text style={styles.title}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
-            <Image
-              style={styles.profilPicture}
-              source={require('./../picture/profil/imageProf.jpg')}
-              resizeMode="contain"
-              />
+          <Text style={styles.title}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+          <Image
+            style={styles.profilPicture}
+            source={require('./../picture/profil/imageProf.jpg')}
+            resizeMode="contain"
+            />
         </View>
 
         <ScrollView style={styles.bodyInfo}>
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
   profilPicture: {
     height: 150,
     width: 150,
-    borderRadius: 64,
     marginTop: 10
   },
   bodyInfo: {

@@ -23,7 +23,7 @@ export default class App extends Component {
   };
 
   _handleBarCodeRead = result => {
-    fetch('http://176.31.252.134:9001/api/v1/cnxTable/useToken', {
+    fetch('http://176.31.252.134:7001/api/v1/cnxTable/useToken', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -31,7 +31,7 @@ export default class App extends Component {
       },
       body: JSON.stringify({
         tokenTable: result.data,
-        token: Store.Token,
+        token: 'a4aeb20492e3b5a709e265edc9814a60',
         idProf: Store.IdUser,
       }),
     }).then((response) => response.json())

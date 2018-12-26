@@ -75,7 +75,7 @@ export default class Start extends Component {
   }
 
   _fgtPass = async () => {
-        Store.setToken('OIAKL')
+        Store.setToken('Unknown Token')
         this.props.navigation.navigate('ForgottenPass');
       };
 
@@ -112,7 +112,7 @@ export default class Start extends Component {
 
             <Button
               title={'Connexion'}
-              style={styles.input}
+              style={styles.ButtonCo}
               color='#363453'
               onPress={this.onLogin.bind(this)}
             />
@@ -141,7 +141,13 @@ const styles = StyleSheet.create({
     width: 220,
     height: 44,
     padding: 10,
-    borderWidth: 0,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 10,
+  },
+  ButtonCo: {
+    padding: 10,
+    borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
   },

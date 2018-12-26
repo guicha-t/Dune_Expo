@@ -11,6 +11,10 @@ import QRCode from './../../screen/Qrcode';
 import Loading from './../../screen/Loading';
 import ForgottenPass from './../../screen/ForgottenPass';
 import EditProfilInfo from './../../screen/EditProfilInfo';
+import StudentList from './../../screen/StudentList';
+import StudentProfil from './../../screen/StudentProfil';
+import StudentEdit from './../../screen/StudentEdit';
+import StudentContainer from './../../screen/StudentContainer';
 
 const CustomDrawerContentComponent = (props) => (
   <View style={styles.drawerContainer}>
@@ -32,6 +36,10 @@ const DrawerMenu = createDrawerNavigator(
     'Dashboard': {screen: Dashboard},
     'Profil': {screen: Profil},
     'EditProfilInfo': {screen: EditProfilInfo},
+    'StudentList': {screen: StudentList},
+    'StudentContainer': {screen: StudentContainer},
+    'StudentEdit': {screen: StudentEdit},
+    'StudentProfil': {screen: StudentProfil},
     'QRCode': {screen: QRCode},
     'ForgottenPass': {screen: ForgottenPass},
   },
