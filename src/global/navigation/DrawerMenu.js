@@ -11,6 +11,8 @@ import QRCode from './../../screen/Qrcode';
 import Loading from './../../screen/Loading';
 import ForgottenPass from './../../screen/ForgottenPass';
 import EditProfilInfo from './../../screen/EditProfilInfo';
+import EditEmailUser from './../../screen/EditEmailUser';
+import EditPassUser from './../../screen/EditPassUser';
 import StudentList from './../../screen/StudentList';
 import StudentProfil from './../../screen/StudentProfil';
 import StudentEdit from './../../screen/StudentEdit';
@@ -36,6 +38,8 @@ const DrawerMenu = createDrawerNavigator(
     'Dashboard': {screen: Dashboard},
     'Profil': {screen: Profil},
     'EditProfilInfo': {screen: EditProfilInfo},
+    'EditEmailUser': {screen: EditEmailUser},
+    'EditPassUser': {screen: EditPassUser},
     'StudentList': {screen: StudentList},
     'StudentContainer': {screen: StudentContainer},
     'StudentEdit': {screen: StudentEdit},

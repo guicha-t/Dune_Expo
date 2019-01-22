@@ -23,58 +23,89 @@ export default class StudentEdit extends Component {
   };
 
   _confirmEdit = async () => {
-    this.props.navigation.navigate('StudentList');
+    fetch('http://176.31.252.134:7001/api/v1/eleves/update', {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        idEleve: this.state.Id,
+        nomEleve: this.state.Nom,
+        prenomEleve: this.state.Prenom,
+      }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          this.props.navigation.navigate('StudentContainer', {
+            idStudent: this.state.Id,
+          });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
 
   render() {
       return (
         <View style={{flex:1, backgroundColor: '#fff'}}>
           <Header navigation={this.props.navigation}/>
-          <View style={{flex: 1, justifyContent: 'flex-start', alignItems: 'center'}}>
-            <Text>EDITION</Text>
-            <Text>Prenom: {this.state.Prenom}</Text>
-            <Text>Nom: {this.state.Nom}</Text>
-            <Text>ID: {this.state.Id}</Text>
-
-
-            <TextInput
-             style={styles.input}
-             placeholder='Nom'
-             onChangeText={(Nom) => this.setState({Nom})}
-             value={this.state.Nom}
-            />
-
-            <TextInput
-             style={styles.input}
-             placeholder='Prenom'
-             onChangeText={(Prenom) => this.setState({Prenom})}
-             value={this.state.Prenom}
-            />
-
-            <TouchableOpacity onPress={this._cancelEdit}>
-              <Image
-                style={{height: 42, width: 42}}
-                source={require('./../picture/profil/error.png')}
-                resizeMode="contain"
+          <View style={styles.containerBody}>
+            <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
+              <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
+                <Text style={styles.titleInfo}>Nom</Text>
+              </View>
+              <View style={{flex: 0.7}}>
+                <TextInput
+                 style={styles.input}
+                 placeholder='Nom'
+                 onChangeText={(Nom) => this.setState({Nom})}
+                 value={this.state.Nom}
                 />
-            </TouchableOpacity>
+               </View>
+            </View>
 
-            <TouchableOpacity onPress={this._confirmEdit}>
-              <Image
-                style={{height: 42, width: 42}}
-                source={require('./../picture/profil/success.png')}
-                resizeMode="contain"
-                />
-            </TouchableOpacity>
-
-
+            <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
+              <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
+                <Text style={styles.titleInfo}>Prénom</Text>
+              </View>
+              <View style={{flex: 0.7}}>
+                <TextInput
+                   style={styles.input}
+                   placeholder='Prénom'
+                   onChangeText={(Prenom) => this.setState({Prenom})}
+                   value={this.state.Prenom}
+                 />
+               </View>
+            </View>
           </View>
+
+          <View style={styles.containerFooter}>
+            <Button
+              title={'Retour'}
+              style={styles.ButtonCo}
+              color='#363453'
+              onPress={this._cancelEdit}
+            />
+            <Button
+              title={'Valider'}
+              style={styles.ButtonCo}
+              color='#363453'
+              onPress={this._confirmEdit}
+            />
+          </View>
+
+
         </View>
       );
     }
   }
 
   const styles = StyleSheet.create({
+    container: {
+      backgroundColor: '#FFF',
+      flex: 1
+    },
     input: {
       width: 220,
       height: 44,
@@ -82,5 +113,20 @@ export default class StudentEdit extends Component {
       borderWidth: 1,
       borderColor: 'black',
       marginBottom: 10,
+    },
+    containerBody: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    titleInfo: {
+      color: '#363453',
+      fontWeight: 'bold',
+      fontSize: 14,
+    },
+    containerFooter: {
+      flexDirection: 'row',
+      paddingBottom: 10,
+      justifyContent:'space-around',
     },
   });

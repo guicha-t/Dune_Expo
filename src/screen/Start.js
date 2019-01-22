@@ -42,7 +42,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://176.31.252.134:9001/api/v1/login/', {
+    fetch('http://176.31.252.134:7001/api/v1/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -56,10 +56,8 @@ export default class Start extends Component {
         .then((responseJson) => {
           if (responseJson.status === 200) {
             Store.setToken(responseJson.token)
-            Store.setIdUser(responseJson.currUser)
             Store.setTypeUser(responseJson.typeUser)
             Store.setIsLog(true)
-            this._storeId(JSON.stringify(responseJson.currUser))
             this._storeToken(responseJson.token)
             this._storeType(JSON.stringify(responseJson.typeUser))
 

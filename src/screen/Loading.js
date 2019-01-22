@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   View,
+  Alert,
 } from 'react-native';
 
 import Store from './../global/store/Store'
@@ -20,13 +21,40 @@ export default class AuthLoadingScreen extends Component {
     const localToken = await AsyncStorage.getItem('localToken');
     const localType = await AsyncStorage.getItem('localType');
 
+    fetch('http://176.31.252.134:7001/api/v1/tokens/verifyToken', {
+      method: 'POST',
+      Accept: 'application/json',
+      headers: {
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        token: localToken,
+      }),
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      if ((responseJson.response != 'Token valid') && (localToken))
+      {
+        AsyncStorage.clear();
+        Store.setToken('');
+        Store.setTypeUser('')
+        Store.setIsLog(false);
+        Alert.alert('Session expirée - Déconnexion');
+        this.props.navigation.navigate('Start');
+      }
+      else {
+        if (localToken) {
+          Store.setToken(localToken)
+          Store.setTypeUser(localType)
+        }
+        this.props.navigation.navigate(localToken ? 'StudentList' : 'Start');
+      }
 
-    if (localId) {
-      Store.setIdUser(localId)
-      Store.setToken(localToken)
-      Store.setTypeUser(localType)
-    }
-    this.props.navigation.navigate(localId ? 'StudentList' : 'Start');
+      })
+      .catch((error) => {
+      console.error(error);
+    });
+
   };
 
   render() {

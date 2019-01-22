@@ -32,7 +32,6 @@ import { Alert, Button, TextInput, View, Text,
         },
         body: JSON.stringify({
           typeUser: Store.TypeUser,
-          idUser: Store.IdUser,
         }),
       }).then((response) => response.json())
       .then((responseJson) => {
@@ -43,16 +42,12 @@ import { Alert, Button, TextInput, View, Text,
       });
 
       fetch('http://176.31.252.134:7001/api/v1/trombi/classes', {
-        method: 'POST',
+        method: 'GET',
         Accept: 'application/json',
         headers: {
           'Content-Type': 'application/json',
           token: Store.Token,
         },
-        body: JSON.stringify({
-          typeUser: Store.TypeUser,
-          idUser: Store.IdUser,
-        }),
       }).then((response) => response.json())
       .then((responseJson) => {
         this.setState({'Classes':responseJson.response})
@@ -78,7 +73,6 @@ import { Alert, Button, TextInput, View, Text,
         },
         body: JSON.stringify({
           typeUser: Store.TypeUser,
-          idUser: Store.IdUser,
           idClasse: param.idClasse,
         }),
       }).then((response) => response.json())
@@ -102,7 +96,6 @@ import { Alert, Button, TextInput, View, Text,
         },
         body: JSON.stringify({
           typeUser: Store.TypeUser,
-          idUser: Store.IdUser,
         }),
       }).then((response) => response.json())
       .then((responseJson) => {
@@ -127,7 +120,6 @@ import { Alert, Button, TextInput, View, Text,
           },
           body: JSON.stringify({
             typeUser: Store.TypeUser,
-            idUser: Store.IdUser,
             search: this.state.Search,
           }),
         }).then((response) => response.json())
@@ -148,7 +140,6 @@ import { Alert, Button, TextInput, View, Text,
           },
           body: JSON.stringify({
             typeUser: Store.TypeUser,
-            idUser: Store.IdUser,
             idClasse: this.state.Class,
             search: this.state.Search,
           }),
@@ -255,8 +246,8 @@ import { Alert, Button, TextInput, View, Text,
                   <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
                     <View style={{flex: 0.7, paddingTop: 10}}>
                       <Image
-                        style={{flex: 1}}
-                        source={{uri: 'https://assets.vogue.com/photos/59726f1974b72106b2ef2a5d/master/w_780,c_limit/00-lede-prince-george-4th-birthday-portrait.jpg'}}
+                        style={{flex: 1, backgroundColor: '#252525'}}
+                        source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
                         />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
@@ -286,9 +277,10 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   searchContainer: {
-    flex: 0.1,
+    flex: 0.05,
     flexDirection: 'row',
-    paddingTop: 2,
+    paddingTop: 5,
+    paddingBottom: 5,
     alignItems: 'center',
     margin: 5,
   },

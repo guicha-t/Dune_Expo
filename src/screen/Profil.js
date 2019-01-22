@@ -15,7 +15,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:9001/api/v1/users/' + Store.IdUser, {
+    fetch('http://176.31.252.134:7001/api/v1/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -33,19 +33,30 @@ export default class Profil extends Component {
 
     _goToEditProfil = async () => {
       this.props.navigation.navigate('EditProfilInfo', {
+        id: this.state.Profil.idUser,
         name: this.state.Profil.prenomUser,
         lastname: this.state.Profil.nomUser,
-        email: this.state.Profil.emailUser,
       });
     };
 
     _disconnect = async () => {
       await AsyncStorage.clear();
       Store.setToken('')
-      Store.setIdUser('')
+      Store.setTypeUser('')
       Store.setIsLog(false)
       this.props.navigation.navigate('Loading');
     };
+
+    displayTypeLabel(param) {
+        if (param.typeUser === 1) {
+            return <Text style={styles.title}> Professeur</Text>;
+        } else if (param.typeUser === 2){
+            return <Text style={styles.title}> Directeur</Text>;
+        } else {
+            return <Text style={styles.title}> Poste inconnu </Text>;
+        }
+    }
+
 
   render() {
     return(
@@ -53,59 +64,54 @@ export default class Profil extends Component {
         <Header navigation={this.props.navigation}/>
 
         <View style={styles.topBodyPicture}>
-          <Text style={styles.title}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
           <Image
             style={styles.profilPicture}
-            source={require('./../picture/profil/imageProf.jpg')}
+            source={{uri: 'http://176.31.252.134:7001/files/profs/' + this.state.Profil.picPath}}
             resizeMode="contain"
             />
+            <Text style={styles.title}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+            {this.displayTypeLabel(this.state.Profil)}
+            <Text style={styles.subtitle}>{this.state.Profil.emailUser}</Text>
         </View>
 
-        <ScrollView style={styles.bodyInfo}>
-          <View style={{flex: 1, paddingTop: 10}}>
-            <View style={{flex: 1}}>
-              <Text style={styles.titleInfo}>Nom</Text>
-              <Text style={styles.contentInfo}>{this.state.Profil.nomUser}</Text>
-            </View>
-            <View style={styles.separator}></View>
+        <View style={styles.bodyInfo}>
+          <View style={{paddingBottom: 10}}>
+            <Button
+              title={'Modifier les informations'}
+              style={styles.ButtonCo}
+              color='#363453'
+              onPress={this._goToEditProfil}
+            />
           </View>
 
-          <View style={{flex: 1, paddingTop: 10}}>
-            <View style={{flex: 1}}>
-              <Text style={styles.titleInfo}>Prénom</Text>
-              <Text style={styles.contentInfo}>{this.state.Profil.prenomUser}</Text>
-            </View>
-            <View style={styles.separator}></View>
+          <View style={{paddingBottom: 10}}>
+            <Button
+              title={'Modifier l \' E-mail'}
+              style={styles.ButtonCo}
+              color='#363453'
+              onPress={() => this.props.navigation.navigate('EditEmailUser')}
+            />
           </View>
 
-          <View style={{flex: 1, paddingTop: 10}}>
-            <View style={{flex: 1}}>
-              <Text style={styles.titleInfo}>E-mail</Text>
-              <Text style={styles.contentInfo}>{this.state.Profil.emailUser}</Text>
-            </View>
-            <View style={styles.separator}></View>
+          <View style={{paddingBottom: 10}}>
+            <Button
+              title={'Modifier le mot de passe'}
+              style={styles.ButtonCo}
+              color='#363453'
+              onPress={() => this.props.navigation.navigate('EditPassUser')}
+            />
           </View>
-        </ScrollView>
 
-          <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-
-            <TouchableOpacity onPress={this._goToEditProfil}>
-              <Image
-                style={{height: 36, width: 36}}
-                source={require('./../picture/profil/edit.png')}
-                resizeMode="contain"
-                />
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={this._disconnect}>
-              <Image
-                style={{height: 42, width: 42}}
-                source={require('./../picture/profil/logout.png')}
-                resizeMode="contain"
-                />
-            </TouchableOpacity>
-
+          <View style={{}}>
+            <Button
+              title={'Déconnexion'}
+              style={styles.ButtonCo}
+              color='#363453'
+              onPress={this._disconnect}
+            />
           </View>
+        </View>
+
       </View>
     );
   }
@@ -113,45 +119,31 @@ export default class Profil extends Component {
 
 const styles = StyleSheet.create({
   topBodyPicture: {
-    flex: 0.6,
+    flex: 0.5,
     paddingTop: 20,
     paddingBottom: 20,
-    backgroundColor: '#363453',
     alignItems: 'center',
     justifyContent: 'center',
   },
   profilPicture: {
-    height: 150,
-    width: 150,
-    marginTop: 10
+    height: 120,
+    width: 120,
+    marginBottom: 10,
+    borderRadius: 200,
   },
   bodyInfo: {
     flex: 1,
+    justifyContent:'flex-end',
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
     marginBottom: 10,
-    backgroundColor: '#FFF'
   },
   title: {
-    color: '#FFF',
     fontWeight: 'bold',
     fontSize: 18,
   },
-  titleInfo: {
-    color: '#363453',
-    fontWeight: 'bold',
-    fontSize: 14,
+  subtitle: {
+    fontSize: 18,
   },
-  contentInfo: {
-    color: '#000000',
-    fontSize: 14
-  },
-  separator: {
-    marginTop: 10,
-    backgroundColor: '#eaeaea',
-    height: 1
-  },
-  buttonBottom: {
-  }
 });
