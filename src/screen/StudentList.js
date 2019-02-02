@@ -23,7 +23,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-      fetch('http://176.31.252.134:7001/api/v1/trombi/', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -41,7 +41,7 @@ import { Alert, Button, TextInput, View, Text,
         console.error(error);
       });
 
-      fetch('http://176.31.252.134:7001/api/v1/trombi/classes', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/classes', {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -64,7 +64,7 @@ import { Alert, Button, TextInput, View, Text,
     };
 
     _setCurrentClass = async (param) => {
-      fetch('http://176.31.252.134:7001/api/v1/trombi/byClasse', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/byClasse', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -87,7 +87,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     _resetTrombi = async () => {
-      fetch('http://176.31.252.134:7001/api/v1/trombi/', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -111,7 +111,7 @@ import { Alert, Button, TextInput, View, Text,
     _searchRequest = async () => {
       Keyboard.dismiss()
       if (this.state.Class === null) {
-        fetch('http://176.31.252.134:7001/api/v1/trombi/', {
+        fetch('http://176.31.252.134:9001/api/v1/trombi/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -131,7 +131,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://176.31.252.134:7001/api/v1/trombi/byClasse', {
+        fetch('http://176.31.252.134:9001/api/v1/trombi/byClasse', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -211,7 +211,7 @@ import { Alert, Button, TextInput, View, Text,
                   </TouchableOpacity>
                 </View>
               }
-              keyExtractor={item => item.idClasse}
+              keyExtractor={item => item.idClasse.toString()}
               />
           </View>
         </View>
@@ -240,14 +240,13 @@ import { Alert, Button, TextInput, View, Text,
             items={this.state.Trombi}
             style={styles.GridView}
             renderItem={item => (
-
               <View style={styles.itemContainer}>
                 <TouchableOpacity style={{flex: 1}} onPress={() => this._goToStudentProfil(item.idEleve)}>
                   <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
                     <View style={{flex: 0.7, paddingTop: 10}}>
                       <Image
                         style={{flex: 1, backgroundColor: '#252525'}}
-                        source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        source={{uri: 'http://176.31.252.134:9001/files/eleves/' + item.idEleve + '-eleve.png'}}
                         />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>

@@ -48,15 +48,6 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('AddUserDirector')}>
-              <View style={styles.button}>
-                <View style={styles.labelContainer}>
-                  <Text style={styles.label}>Ajouter un directeur</Text>
-                </View>
-              </View>
-          </TouchableOpacity>
-
-
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>

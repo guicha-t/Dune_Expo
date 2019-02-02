@@ -20,7 +20,6 @@ import StudentContainer from './../../screen/StudentContainer';
 import GamesList from './../../screen/GamesList';
 import GameProfil from './../../screen/GameProfil';
 import GameContainer from './../../screen/GameContainer';
-import AddUserDirector from './../../screen/AddUserDirector';
 
 const CustomDrawerContentComponent = (props) => (
   <View style={styles.drawerContainer}>
@@ -53,7 +52,6 @@ const DrawerMenu = createDrawerNavigator(
     'GamesList': {screen: GamesList},
     'GameContainer': {screen: GameContainer},
     'GameProfil': {screen: GameProfil},
-    'AddUserDirector': {screen: AddUserDirector},
   },
   {
     initialRouteName: 'Loading',
