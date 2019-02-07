@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, TouchableOpacity, Image, AsyncStorage, KeyboardAvoidingView} from 'react-native';
 import { observer } from 'mobx-react';
 
-import Store from './../global/store/Store'
+import Store from './../../global/store/Store'
 
 @observer
 export default class Start extends Component {
@@ -42,7 +42,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://176.31.252.134:7001/api/v1/login/', {
+    fetch('http://176.31.252.134:9001/api/v1/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -87,7 +87,7 @@ export default class Start extends Component {
           <View style={{flex: 0.5}}>
             <Image
               style={{flex: 1, height: undefined, width: undefined}}
-              source={require('./../picture/header/dunelogo.png')}
+              source={require('./../../picture/header/dunelogo.png')}
               resizeMode="contain"
               />
           </View>

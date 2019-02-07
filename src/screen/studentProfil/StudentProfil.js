@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store'
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store'
 
 @observer
 export default class StudentProfil extends Component {
@@ -17,12 +17,12 @@ export default class StudentProfil extends Component {
 
   static navigationOptions = {
     tabBarIcon: () => {
-      return <Image source={require('./../picture/profil/information.png')} style={{width:32, height:32}}/>
+      return <Image source={require('./../../picture/profil/information.png')} style={{width:32, height:32}}/>
     }
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:7001/api/v1/eleves/' + this.props.screenProps.idStudent, {
+    fetch('http://176.31.252.134:9001/api/v1/eleves/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -46,7 +46,7 @@ export default class StudentProfil extends Component {
 
           <View style={styles.topBodyPicture}>
             <Image
-              source={{uri: 'http://176.31.252.134:7001/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
+              source={{uri: 'http://176.31.252.134:9001/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
               style={styles.profilPicture}
               resizeMode="contain"
               />

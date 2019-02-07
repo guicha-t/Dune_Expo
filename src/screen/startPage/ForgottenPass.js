@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import { observer } from 'mobx-react';
 
-import Store from './../global/store/Store'
+import Store from './../../global/store/Store'
 
 @observer
 export default class ForgottenPass extends Component {

@@ -4,24 +4,30 @@ import {createDrawerNavigator, DrawerItems} from 'react-navigation';
 
 import CustomDrawerItems from './CustomDrawerItem'
 
-import Start from './../../screen/Start';
-import Dashboard from './../../screen/Dashboard';
-import Profil from './../../screen/Profil';
-import QRCode from './../../screen/Qrcode';
-import Loading from './../../screen/Loading';
-import ForgottenPass from './../../screen/ForgottenPass';
-import EditProfilInfo from './../../screen/EditProfilInfo';
-import EditEmailUser from './../../screen/EditEmailUser';
-import EditPassUser from './../../screen/EditPassUser';
-import StudentList from './../../screen/StudentList';
-import StudentProfil from './../../screen/StudentProfil';
-import StudentEdit from './../../screen/StudentEdit';
-import StudentContainer from './../../screen/StudentContainer';
-import GamesList from './../../screen/GamesList';
-import GameProfil from './../../screen/GameProfil';
-import GameContainer from './../../screen/GameContainer';
-import AddUserDirector from './../../screen/AddUserDirector';
-import UserDemands from './../../screen/UserDemands';
+
+import Loading from './../../screen/startPage/Loading';
+import Start from './../../screen/startPage/Start';
+import ForgottenPass from './../../screen/startPage/ForgottenPass';
+import Dashboard from './../../screen/dashboard/Dashboard';
+
+import QRCode from './../../screen/qrcode/Qrcode';
+
+import Profil from './../../screen/userProfil/Profil';
+import EditProfilInfo from './../../screen/userProfil/EditProfilInfo';
+import EditEmailUser from './../../screen/userProfil/EditEmailUser';
+import EditPassUser from './../../screen/userProfil/EditPassUser';
+
+import StudentList from './../../screen/trombinoscope/StudentList';
+import StudentProfil from './../../screen/studentProfil/StudentProfil';
+import StudentEdit from './../../screen/studentProfil/StudentEdit';
+import StudentContainer from './../../screen/studentProfil/StudentContainer';
+
+import GamesList from './../../screen/gameStore/GamesList';
+import GameProfil from './../../screen/gameStore/GameProfil';
+import GameContainer from './../../screen/gameStore/GameContainer';
+import UserDemands from './../../screen/gameStore/UserDemands';
+
+import AddUserDirector from './../../screen/director/AddUserDirector';
 
 const CustomDrawerContentComponent = (props) => (
   <View style={styles.drawerContainer}>

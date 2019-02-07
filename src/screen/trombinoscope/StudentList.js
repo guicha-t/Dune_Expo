@@ -7,8 +7,8 @@ import { Alert, Button, TextInput, View, Text,
 
   import GridView from 'react-native-super-grid';
 
-  import Header from './../global/header/Header';
-  import Store from './../global/store/Store'
+  import Header from './../../global/header/Header';
+  import Store from './../../global/store/Store'
 
   @observer
   export default class StudentList extends Component {

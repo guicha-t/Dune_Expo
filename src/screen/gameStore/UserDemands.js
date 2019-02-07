@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, SectionList} from 'react-native';
 import { observer } from 'mobx-react';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store';
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store';
 
 @observer
 export default class UserDemands extends Component {

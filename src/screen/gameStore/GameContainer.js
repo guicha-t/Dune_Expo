@@ -3,23 +3,9 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListVie
 import { observer } from 'mobx-react';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store';
-
-import StudentProfil from './GameProfil';
-import StudentHistory from './StudentHistory';
-
-const Tabs = createBottomTabNavigator({
-  'Profil': StudentProfil,
-  'Historique': StudentHistory,
-}, {
-  tabBarOptions: {
-    activeBackgroundColor: '#e5c35c',
-    inactiveBackgroundColor:'#FEE599',
-    showIcon: false,
-    showLabel: true,
-  }
-});
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store';
+import GameProfil from './GameProfil';
 
 @observer
 export default class GameContainer extends Component {
@@ -36,7 +22,8 @@ export default class GameContainer extends Component {
       return (
         <View style={{flex: 1}}>
           <Header navigation={this.props.navigation}/>
-          <Tabs screenProps={screenProps}/>
+          <GameProfil id={this.state.id} navigation={this.props.navigation}/>
+          <Text>{this.state.id}</Text>
         </View>
       );
     }

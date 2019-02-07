@@ -3,8 +3,8 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListVie
 import { observer } from 'mobx-react';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store';
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store';
 
 import StudentProfil from './StudentProfil';
 import StudentHistory from './StudentHistory';

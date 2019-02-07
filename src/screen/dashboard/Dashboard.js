@@ -3,8 +3,8 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, 
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store'
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store';
 
 @observer
 export default class Dashboard extends Component {

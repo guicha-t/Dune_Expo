@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import { observer } from 'mobx-react';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store'
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store'
 
 @observer
 export default class Profil extends Component {
@@ -15,7 +15,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:7001/api/v1/users/infos', {
+    fetch('http://176.31.252.134:9001/api/v1/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',

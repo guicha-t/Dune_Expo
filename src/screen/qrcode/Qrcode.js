@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
-import Header from './../global/header/Header';
-import Store from './../global/store/Store'
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store'
 
 export default class App extends Component {
   state = {
@@ -23,7 +23,7 @@ export default class App extends Component {
   };
 
   _handleBarCodeRead = result => {
-    fetch('http://176.31.252.134:7001/api/v1/cnxTable/useToken', {
+    fetch('http://176.31.252.134:9001/api/v1/cnxTable2/useToken', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -31,13 +31,13 @@ export default class App extends Component {
       },
       body: JSON.stringify({
         tokenTable: result.data,
-        token: 'a4aeb20492e3b5a709e265edc9814a60',
-        idProf: Store.IdUser,
+        token: Store.Token,
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
           if (responseJson.status == 200) {
 	           this.props.navigation.navigate('Profil')
+             Alert.alert('Table connectée')
           }
           else {
           }
