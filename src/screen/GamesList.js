@@ -17,6 +17,7 @@ import { Alert, Button, TextInput, View, Text,
       this.state = {
         GameList: [],
         Search: '',
+	Viewtype: '0',
       }
     }
 
@@ -83,9 +84,7 @@ import { Alert, Button, TextInput, View, Text,
           .catch((error) => {
             console.error(error);
           });
-    }
-    else
-    Alert.alert('Alert Title3')
+        }
     }
 
     _searchRequest = async () => {
@@ -111,6 +110,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     render() {
+
       return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
@@ -120,10 +120,10 @@ import { Alert, Button, TextInput, View, Text,
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                data={[{key: 'Enregistrées'}, {key: 'Disponibles'}, {key: 'Demandes'}]}
+                data={[{key: 'Enregistrées'}, {key: 'Disponibles'}]}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
-                <View style={{width: 120}}>
+                <View style={{width: 178}}>
                   <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame(item)}>
                     <View style={styles.buttonClass}>
                         <Text style={styles.textClass}>{item.key}</Text>
@@ -182,11 +182,24 @@ import { Alert, Button, TextInput, View, Text,
             />
         </View>
       </View>
-    );
+     );
   }
 }
 
 const styles = StyleSheet.create({
+
+
+  container: {
+   flex: 1,
+   paddingTop: 22
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+
+
   mainContainer: {
     flex:1,
     backgroundColor: '#fff',
@@ -243,7 +256,7 @@ const styles = StyleSheet.create({
     margin:2,
   },
   buttonClass: {
-    width:116,
+    width:178,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

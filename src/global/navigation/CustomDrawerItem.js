@@ -2,7 +2,22 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {ScrollView, Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
+import Store from './../store/Store'
+
 export default class CustomDrawerItems extends Component {
+
+  renderElement(){
+   if(Store.TypeUser == 2)
+        return <TouchableOpacity onPress={() => this.props.navigation.navigate('AddUserDirector')}>
+          <View style={styles.button}>
+            <View style={styles.labelContainer}>
+              <Text style={styles.label}>Ajouter un professeur</Text>
+            </View>
+          </View>
+        </TouchableOpacity>;
+   return null;
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -47,6 +62,17 @@ export default class CustomDrawerItems extends Component {
               </View>
             </View>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Mes demandes</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+
+          {this.renderElement() }
 
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
             <View style={styles.button}>
