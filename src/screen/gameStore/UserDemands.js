@@ -3,48 +3,9 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, To
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
-import Store from './../../global/store/Store';
 
 @observer
 export default class UserDemands extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      name: this.props.navigation.getParam('name', ''),
-      lastname: this.props.navigation.getParam('lastname', ''),
-      email: this.props.navigation.getParam('email', ''),
-    }
-  }
-
-  _cancelEdit = async () => {
-    this.props.navigation.navigate('Profil');
-  };
-
-  _confirmEdit = async () => {
-    fetch('http://176.31.252.134:9001/api/v1/users/add', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        idUser: Store.IdUser,
-        nomUser: this.state.lastname,
-        prenomUser: this.state.name,
-        emailUser: this.state.email,
-        token: Store.Token,
-
-      }),
-    }).then((response) => response.json())
-        .then((responseJson) => {
-          //Handle what you want
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    this.props.navigation.navigate('Profil');
-  };
-
   render() {
     return(
 
@@ -62,7 +23,8 @@ export default class UserDemands extends Component {
         <SectionList
           sections={[
             {title: 'Récent(s)', data: ['Zelda : validé']},
-            {title: 'Accepté(s)', data: ['Candy Crush', 'Puzzle', 'Zelda']},
+            {title: 'En attente', data: ['Puzzle']},
+            {title: 'Accepté(s)', data: ['Candy Crush', 'Zelda']},
             {title: 'Refusé(s)', data: ['Fallout 76']},
           ]}
           renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
