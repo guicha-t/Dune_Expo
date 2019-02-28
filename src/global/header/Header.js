@@ -10,13 +10,13 @@ export default class Header extends Component {
             <Image source={require('./../../picture/header/openDrawer.png')} style={{width:24, height:24}}/>
           </TouchableOpacity>
         </View>
-        <View style={styles.containerLogo}>
+        <TouchableOpacity style={styles.containerLogo} onPress={() => this.props.navigation.navigate('Dashboard')}>
           <Image
             style={{flex: 1, height: undefined, width: undefined}}
             source={require('./../../picture/header/dunelogo.png')}
             resizeMode="contain"
             />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.containerProfil}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
