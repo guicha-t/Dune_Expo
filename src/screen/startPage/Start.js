@@ -12,6 +12,7 @@ export default class Start extends Component {
     this.state = {
       username: '',
       password: '',
+      pwdhide: true,
     };
   }
 
@@ -77,6 +78,14 @@ export default class Start extends Component {
         this.props.navigation.navigate('ForgottenPass');
       };
 
+  _pwdhide = async () => {
+    if (this.state.pwdhide === true) {
+      this.setState({'pwdhide':false})
+    } else {
+      this.setState({'pwdhide':true})
+    }
+      };
+
   render() {
     return (
       <View style={styles.container}>
@@ -91,7 +100,11 @@ export default class Start extends Component {
               resizeMode="contain"
               />
           </View>
-          <View style={{flex: 0.4, alignItems: 'center', justifyContent:'center'}}>
+
+
+
+          <View style={{flex: 0.4, alignItems:'center', justifyContent:'center'}}>
+
             <TextInput
               value={this.state.username}
               onChangeText={(username) => this.setState({ username })}
@@ -103,11 +116,19 @@ export default class Start extends Component {
               value={this.state.password}
               onChangeText={(password) => this.setState({ password })}
               placeholder={'Mot de passe'}
-              secureTextEntry={true}
+              secureTextEntry={this.state.pwdhide}
               autoCapitalize = 'none'
               style={styles.input}
             />
 
+          <View style={{flex: 0.4, marginBottom: 20}}>
+            <Button
+              title={'AFFICHER'}
+              style={styles.ButtonHide}
+              color='#FEE599'
+              onPress={this._pwdhide}
+            />
+          </View>
             <Button
               title={'Connexion'}
               style={styles.ButtonCo}
@@ -115,6 +136,9 @@ export default class Start extends Component {
               onPress={this.onLogin.bind(this)}
             />
         </View>
+
+
+
         <View style={{flex: 0.1, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 20}}>
           <TouchableOpacity onPress={this._fgtPass}>
             <Text>
@@ -148,5 +172,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
+  },
+  ButtonHide: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 10,
+  },
+  buttonCase: {
+    flex: 1,
   },
 });
