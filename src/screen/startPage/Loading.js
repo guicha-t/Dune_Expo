@@ -21,7 +21,7 @@ export default class AuthLoadingScreen extends Component {
     const localToken = await AsyncStorage.getItem('localToken');
     const localType = await AsyncStorage.getItem('localType');
 
-    fetch('http://176.31.252.134:9001/api/v1/tokens/verifyToken', {
+    fetch('http://176.31.252.134:7001/api/v1/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',
       headers: {

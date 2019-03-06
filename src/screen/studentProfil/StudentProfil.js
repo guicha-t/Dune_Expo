@@ -22,7 +22,7 @@ export default class StudentProfil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:9001/api/v1/eleves/' + this.props.screenProps.idStudent, {
+    fetch('http://176.31.252.134:7001/api/v1/eleves/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -46,7 +46,7 @@ export default class StudentProfil extends Component {
 
           <View style={styles.topBodyPicture}>
             <Image
-              source={{uri: 'http://176.31.252.134:9001/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
+              source={{uri: 'http://176.31.252.134:7001/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
               style={styles.profilPicture}
               resizeMode="contain"
               />

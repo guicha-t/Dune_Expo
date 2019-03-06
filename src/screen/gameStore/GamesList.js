@@ -22,7 +22,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-        fetch('http://176.31.252.134:9001/api/v1/store/', {
+        fetch('http://176.31.252.134:7001/api/v1/store/', {
                 method: 'POST',
                 Accept: 'application/json',
                 headers: {
@@ -49,7 +49,7 @@ import { Alert, Button, TextInput, View, Text,
 
     _setCurrentGame = async (param) => {
     if (param.key === 'Enregistrées'){
-    fetch('http://176.31.252.134:9001/api/v1/store/getAppsEcole', {
+    fetch('http://176.31.252.134:7001/api/v1/store/getAppsEcole', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -66,7 +66,7 @@ import { Alert, Button, TextInput, View, Text,
       }
 
     else if (param.key === 'Disponibles'){
-    fetch('http://176.31.252.134:9001/api/v1/store/', {
+    fetch('http://176.31.252.134:7001/api/v1/store/', {
             method: 'POST',
             Accept: 'application/json',
             headers: {
@@ -88,7 +88,7 @@ import { Alert, Button, TextInput, View, Text,
 
     _searchRequest = async () => {
       Keyboard.dismiss()
-              fetch('http://176.31.252.134:9001/api/v1/store/', {
+              fetch('http://176.31.252.134:7001/api/v1/store/', {
                 method: 'POST',
                 Accept: 'application/json',
                 headers: {
@@ -165,7 +165,7 @@ import { Alert, Button, TextInput, View, Text,
                     <View style={{flex: 0.7, paddingTop: 10}}>
                       <Image
                         style={{flex: 1, borderRadius:10}}
-                        source={{uri: 'http://176.31.252.134:9001/files/apps/' + item.picPath}}
+                        source={{uri: 'http://176.31.252.134:7001/files/apps/' + item.picPath}}
                       />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>

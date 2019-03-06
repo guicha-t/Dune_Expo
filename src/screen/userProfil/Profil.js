@@ -15,7 +15,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:9001/api/v1/users/infos', {
+    fetch('http://176.31.252.134:7001/api/v1/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
