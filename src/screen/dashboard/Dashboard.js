@@ -187,8 +187,8 @@ export default class Dashboard extends Component {
         return (
               <View style={styles.datacase}>
                 <Text style={styles.primetextwhite}>{this.state.Notif}</Text>
+                <Text style={styles.datetext}>AUCUNE{this.addplural(this.state.Notif)}</Text>
                 <Text style={styles.datetext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
-                <Text style={styles.datetext}>NON-LUE{this.addplural(this.state.Notif)}</Text>
               </View>);
     }
 
