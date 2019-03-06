@@ -3,27 +3,69 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, To
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
+import Store from './../../global/store/Store';
 
 @observer
 export default class UserDemands extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      GamesRequested: [],
+    }
+  }
+
+  componentDidMount(){
+   fetch('http://176.31.252.134:7001/api/v1/notifs', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({'GamesRequested':responseJson.response[0]})
+          //Alert.alert('lol', JSON.stringify(responseJson.response))
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+
+  renderAppName(){
+  if (this.state.GamesRequested != null)
+    return(
+        <SectionList
+          items={this.state.GamesRequested}
+          sections={[
+            {title: 'En attente', data: [this.state.GamesRequested.nomApp]},
+          ]}
+          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+          keyExtractor={(item, index) => index}
+        />);
+  }
+
   render() {
     return(
 
       <View style={styles.container}>
         <Header navigation={this.props.navigation}/>
 
-	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
+    	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
           <Text style={{fontSize:20,}}>
              Mes demandes d'application
           </Text>
         </View>
 
+      {this.renderAppName()}
 
       <View style={styles.containerList}>
         <SectionList
+          //items={this.state.GamesRequested}
           sections={[
             {title: 'Récent(s)', data: ['Zelda : validé']},
-            {title: 'En attente', data: ['Puzzle']},
+            //{title: 'En attente', data: [this.state.GamesRequested.nomApp]},
             {title: 'Accepté(s)', data: ['Candy Crush', 'Zelda']},
             {title: 'Refusé(s)', data: ['Fallout 76']},
           ]}

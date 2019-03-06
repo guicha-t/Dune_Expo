@@ -4,6 +4,7 @@ class Store {
   @observable Token = null;
   @observable IsLog = false;
   @observable TypeUser = false;
+  @observable AppId = false;
 
   @action setToken(param) {
     this.Token = param;
@@ -15,6 +16,10 @@ class Store {
 
   @action setTypeUser(param) {
     this.TypeUser = param;
+  }
+
+  @action setAppId(param) {
+    this.AppId = param;
   }
 }
 

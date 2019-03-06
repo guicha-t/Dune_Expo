@@ -17,7 +17,7 @@ import { Alert, Button, TextInput, View, Text,
       this.state = {
         GameList: [],
         Search: '',
-	Viewtype: '0',
+	    Viewtype: '0',
       }
     }
 
@@ -39,7 +39,6 @@ import { Alert, Button, TextInput, View, Text,
               .catch((error) => {
                 console.error(error);
               });
-
     }
 
     _goToGameProfil = async (param) => {
@@ -160,7 +159,6 @@ import { Alert, Button, TextInput, View, Text,
             items={this.state.GameList}
             style={styles.GridView}
             renderItem={item => (
-
               <View style={styles.itemContainer}>
                 <TouchableOpacity style={{flex: 1}} onPress={() => this._goToGameProfil(item.id)}>
                   <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>

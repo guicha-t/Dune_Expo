@@ -26,6 +26,7 @@ import GamesList from './../../screen/gameStore/GamesList';
 import GameProfil from './../../screen/gameStore/GameProfil';
 import GameContainer from './../../screen/gameStore/GameContainer';
 import UserDemands from './../../screen/gameStore/UserDemands';
+import RequestApp from './../../screen/gameStore/RequestApp';
 
 import AddUserDirector from './../../screen/director/AddUserDirector';
 
@@ -62,6 +63,7 @@ const DrawerMenu = createDrawerNavigator(
     'GameProfil': {screen: GameProfil},
     'AddUserDirector': {screen: AddUserDirector},
     'UserDemands' : {screen: UserDemands},
+    'RequestApp': {screen: RequestApp},
   },
   {
     initialRouteName: 'Loading',

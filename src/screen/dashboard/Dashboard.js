@@ -145,6 +145,84 @@ export default class Dashboard extends Component {
       }
   }
 
+  renderAlertsDir(){
+      if (this.state.Notif != 0)
+        return (
+              <View style={{flex: 0.2, flexDirection: 'row'}}>
+                <View style={{flex: 0.3}}></View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
+                  <Image
+                    style={{flex: 1, height: 50, width: 50, marginLeft:30}}
+                    source={{uri: 'https://user-images.githubusercontent.com/3471415/31066487-f29af78e-a76a-11e7-90c1-2f01642294d7.gif'}}
+                    resizeMode="contain"
+                    />
+                </TouchableOpacity>
+                <View style={{flex: 0.3}}></View>
+              </View>);
+      else
+        return (
+              <View style={{flex: 0.2, flexDirection: 'row'}}>
+                <View style={{flex: 0.3}}></View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
+                  <Image
+                    style={{flex: 1, height: 50, width: 50, marginLeft:30}}
+                    source={{uri: 'https://user-images.githubusercontent.com/3471415/31066486-ede76d76-a76a-11e7-9146-d9119c952a5e.png'}}
+                    resizeMode="contain"
+                    />
+                </TouchableOpacity>
+                <View style={{flex: 0.3}}></View>
+              </View>);
+   return null;
+  }
+
+
+  renderAlertsDir(){
+      if (this.state.Notif != 0)
+        return (
+              <View style={{flex: 0.2, flexDirection: 'row'}}>
+                <View style={{flex: 0.3}}></View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
+                  <Image
+                    style={{flex: 1, height: 50, width: 50, marginLeft:30}}
+                    source={{uri: 'https://user-images.githubusercontent.com/3471415/31066487-f29af78e-a76a-11e7-90c1-2f01642294d7.gif'}}
+                    resizeMode="contain"
+                    />
+                </TouchableOpacity>
+                <View style={{flex: 0.3}}></View>
+              </View>);
+      else
+        return (
+              <View style={{flex: 0.2, flexDirection: 'row'}}>
+                <View style={{flex: 0.3}}></View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
+                  <Image
+                    style={{flex: 1, height: 50, width: 50, marginLeft:30}}
+                    source={{uri: 'https://user-images.githubusercontent.com/3471415/31066486-ede76d76-a76a-11e7-9146-d9119c952a5e.png'}}
+                    resizeMode="contain"
+                    />
+                </TouchableOpacity>
+                <View style={{flex: 0.3}}></View>
+              </View>);
+   return null;
+  }
+
+  renderAlertsText(){
+      if (this.state.Notif != 0)
+        return (
+              <View style={styles.datacase}>
+                <Text style={styles.primetext}>{this.state.Notif}</Text>
+                <Text style={styles.subtext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
+                <Text style={styles.subtext}>NON-LUE{this.addplural(this.state.Notif)}</Text>
+              </View>);
+      else
+        return (
+              <View style={styles.datacase}>
+                <Text style={styles.primetext}>{this.state.Notif}</Text>
+                <Text style={styles.subtext}>AUCUNE{this.addplural(this.state.Notif)}</Text>
+                <Text style={styles.subtext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
+              </View>);
+  }
+
   render() {
     return(
       <View style={{flex:1}}>
@@ -165,22 +243,11 @@ export default class Dashboard extends Component {
             </View>
 
             <View style={styles.rightcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Notif}</Text>
-                <Text style={styles.subtext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
-                <Text style={styles.subtext}>NON-LUE{this.addplural(this.state.Notif)}</Text>
-              </View>
-              <View style={{flex: 0.2, flexDirection: 'row'}}>
-                <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('UserDemands')}>
-                  <Image
-                    style={{flex: 1, height: undefined, width: undefined}}
-                    source={require('./../../picture/dashboard/notification.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
-                <View style={{flex: 0.3}}></View>
-              </View>
+
+            {this.renderAlertsText()}
+
+            {this.renderAlertsDir()}
+
             </View>
           </View>
 

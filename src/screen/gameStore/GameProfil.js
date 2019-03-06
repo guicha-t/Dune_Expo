@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image } from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image } from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
@@ -8,15 +8,14 @@ import Store from './../../global/store/Store'
 @observer
 export default class GameProfil extends Component {
   constructor(props){
-
     super(props);
     this.state = {
       Game: [],
-      id:'',
     }
   }
 
   componentDidMount(){
+
     fetch('http://176.31.252.134:9001/api/v1/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
@@ -34,11 +33,19 @@ export default class GameProfil extends Component {
         .catch((error) => {
           console.error(error);
         });
+
+    _goToAppsRequest = async () => {
+          this.props.navigation.navigate('RequestApp', {
+            id: this.state.Game.id,
+          });
+        };
+
   }
 
 
   render() {
       const { navigation, id, screenProps } = { ...this.props };
+      Store.setAppId(this.state.Game.id)
       return (
         <View style={{flex:1, backgroundColor: '#fff'}}>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -54,8 +61,18 @@ export default class GameProfil extends Component {
             <Text style={styles.titleInfo}>ID : {this.state.Game.id}</Text>
             </View>
             <View style={{paddingTop:30}}>
+
+            <View style={{paddingBottom: 10}}>
+              <Button
+                title={'Demander cette application'}
+                color='#363453'
+                onPress={() => this.props.navigation.navigate('RequestApp')}
+              />
+            </View>
+
             <Button
               title="Retour"
+              color='#363453'
               onPress={() => this.props.navigation.navigate('GamesList')}
             />
             </View>
