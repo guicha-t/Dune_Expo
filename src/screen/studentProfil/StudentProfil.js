@@ -38,6 +38,13 @@ export default class StudentProfil extends Component {
     });
   }
 
+  _goBackAccordingId = async (param) => {
+    if (param.idBack === '1') {
+      param.navigation.navigate('StudentResultList')
+    } else {
+      param.navigation.navigate('StudentList')
+    }
+  };
 
   render() {
       const { navigation, idStudent, screenProps } = { ...this.props };
@@ -72,7 +79,7 @@ export default class StudentProfil extends Component {
                 title={'Retour'}
                 style={styles.ButtonCo}
                 color='#363453'
-                onPress={() => screenProps.navigation.navigate('StudentList')}
+                onPress={() => this._goBackAccordingId(screenProps)}
               />
             </View>
           </View>

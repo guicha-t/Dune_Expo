@@ -27,11 +27,16 @@ export default class StudentContainer extends Component {
     super(props);
     this.state = {
       idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
+      idBack: this.props.navigation.getParam('idBack', 'Unknown'),
     }
   }
 
   render() {
-      const screenProps = {navigation: this.props.navigation, idStudent: this.props.navigation.getParam('idStudent', 'Unknown')}
+      const screenProps = {
+        navigation: this.props.navigation,
+        idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
+        idBack: this.props.navigation.getParam('idBack', 'Unknown'),
+      }
 
       return (
         <View style={{flex: 1}}>

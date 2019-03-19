@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
 import { observer } from 'mobx-react';
-import PropTypes from 'prop-types';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -225,7 +224,7 @@ export default class Dashboard extends Component {
               </View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
+                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
                   <Image
                     style={{flex: 1, height: undefined, width: undefined}}
                     source={require('./../../picture/dashboard/class.png')}

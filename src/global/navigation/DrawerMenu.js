@@ -22,6 +22,10 @@ import StudentProfil from './../../screen/studentProfil/StudentProfil';
 import StudentEdit from './../../screen/studentProfil/StudentEdit';
 import StudentContainer from './../../screen/studentProfil/StudentContainer';
 
+import ClassList from './../../screen/resultsClass/classList';
+import GameList from './../../screen/resultsClass/gameList';
+import StudentResultList from './../../screen/resultsClass/studentResultList';
+
 import GamesList from './../../screen/gameStore/GamesList';
 import GameProfil from './../../screen/gameStore/GameProfil';
 import GameContainer from './../../screen/gameStore/GameContainer';
@@ -64,6 +68,9 @@ const DrawerMenu = createDrawerNavigator(
     'AddUserDirector': {screen: AddUserDirector},
     'UserDemands' : {screen: UserDemands},
     'RequestApp': {screen: RequestApp},
+    'ClassList': {screen: ClassList},
+    'GameList': {screen: GameList},
+    'StudentResultList': {screen: StudentResultList},
   },
   {
     initialRouteName: 'Loading',

@@ -60,6 +60,7 @@ import { Alert, Button, TextInput, View, Text,
     _goToStudentProfil = async (param) => {
       this.props.navigation.navigate('StudentContainer', {
         idStudent: param,
+        idBack: '0',
       });
     };
 
@@ -192,7 +193,7 @@ import { Alert, Button, TextInput, View, Text,
             <View style={styles.allClassContainer}>
               <TouchableOpacity style={{flex: 1}} onPress={() => this._resetTrombi()}>
                 <View style={styles.buttonClassAll}>
-                  <Text style={styles.textClass}>Tout</Text>
+                  <Text style={styles.textClass}>TOUT</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -224,6 +225,7 @@ import { Alert, Button, TextInput, View, Text,
             autoCapitalize = 'none'
             style={styles.input}
           />
+
           <Button
             title={'Go'}
             style={styles.ButtonSearch}
@@ -233,30 +235,29 @@ import { Alert, Button, TextInput, View, Text,
         </View>
 
 
-        <View style={{flex: 0.8}}>
+        <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
           <GridView
             itemDimension={100}
-            spacing={1}
+            spacing={5}
             items={this.state.Trombi}
             style={styles.GridView}
             renderItem={item => (
               <View style={styles.itemContainer}>
                 <TouchableOpacity style={{flex: 1}} onPress={() => this._goToStudentProfil(item.idEleve)}>
-                  <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-                    <View style={{flex: 0.7, paddingTop: 10}}>
+                  <View style={{flex: 1, padding: 6}}>
+                    <View style={{flex: 0.7, backgroundColor:'#FFF', padding: 4}}>
                       <Image
                         style={{flex: 1, backgroundColor: '#252525'}}
                         source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
                         />
                     </View>
-                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={styles.itemName}>{item.nomEleve}</Text>
+                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', backgroundColor:'#FFF'}}>
+                      <Text style={styles.itemName}>{item.nomEleve.toUpperCase()}</Text>
                       <Text style={styles.itemName}>{item.prenomEleve}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
               </View>
-
             )}
             />
         </View>
@@ -268,7 +269,7 @@ import { Alert, Button, TextInput, View, Text,
 const styles = StyleSheet.create({
   mainContainer: {
     flex:1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
   },
   classContainer: {
     flex: 0.1,
@@ -307,12 +308,12 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     height: 160,
-    backgroundColor: '#161616',
+    backgroundColor: '#363453',
   },
   itemName: {
-    fontSize: 12,
-    color: '#FFF',
-    fontWeight: '600',
+    fontSize: 14,
+    color: '#363453',
+    fontWeight:'bold',
   },
   buttonClassAll: {
     flex: 1,
@@ -330,7 +331,7 @@ const styles = StyleSheet.create({
   },
   textClass: {
     fontSize: 14,
-    color: '#161616',
+    color: '#363453',
     fontWeight: '600',
   },
 });
