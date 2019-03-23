@@ -80,11 +80,11 @@ export default class ClassList extends Component {
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-          <View style={{flex: 0.2, alignItems:'center', justifyContent:'center'}}>
+          <View style={{flex: 0.1, alignItems:'center', justifyContent:'center'}}>
             <Text style={styles.primetextblue}>LISTE DES CLASSES</Text>
           </View>
 
-          <View style={{flex: 0.7}}>
+          <View style={{flex: 0.8}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Classes}

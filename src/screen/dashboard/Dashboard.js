@@ -205,7 +205,6 @@ export default class Dashboard extends Component {
               </View>
               <View style={{flex: 0.6, alignItems:'center', justifyContent: 'center'}}>
                 <Text style={styles.datetext}>BONJOUR</Text>
-                <Text style={styles.datetext}>{this.state.Profil.nomUser}</Text>
                 <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
               </View>
             </View>

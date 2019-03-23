@@ -49,25 +49,23 @@ export default class GameList extends Component {
   }
 
   render() {
-    Moment.locale();
-
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-          <View style={{flex: 0.2, alignItems:'center', justifyContent:'center'}}>
+          <View style={{flex: 0.1, alignItems:'center', justifyContent:'center'}}>
             <Text style={styles.primetextblue}>{this.state.labelClasse}</Text>
             <Text style={styles.primetextblue}>LISTE DES APPLICATIONS</Text>
           </View>
 
-          <View style={{flex: 0.7}}>
+          <View style={{flex: 0.8}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Games}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGame, nameGame: item.nameGame})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGame, Game: item})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
 
                 <View style={{flex: 0.5, paddingLeft: 10}}>
                   <View style={{flex: 0.5, justifyContent:'center'}}>
@@ -88,7 +86,7 @@ export default class GameList extends Component {
                   </View>
 
                   <View style={{flex: 0.3}}>
-                    <Text style={styles.subtextwhite}>{Moment(item.date).format('d/MM/YYYY')}</Text>
+                    <Text style={styles.subtextwhite}>{Moment(item.date).locale('fr').format('DD/MM/YYYY')}</Text>
                   </View>
                 </View>
 
