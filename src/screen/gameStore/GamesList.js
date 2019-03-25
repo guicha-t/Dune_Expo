@@ -175,7 +175,6 @@ import { Alert, Button, TextInput, View, Text,
                   </View>
                 </TouchableOpacity>
               </View>
-
             )}
             />
         </View>

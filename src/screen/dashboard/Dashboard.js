@@ -186,7 +186,6 @@ export default class Dashboard extends Component {
       else
         return (
               <View style={styles.datacase}>
-                <Text style={styles.primetextwhite}>{this.state.Notif}</Text>
                 <Text style={styles.datetext}>AUCUNE{this.addplural(this.state.Notif)}</Text>
                 <Text style={styles.datetext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
               </View>);

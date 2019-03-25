@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, SectionList} from 'react-native';
 import { observer } from 'mobx-react';
+import { List, ListItem } from "react-native-elements";
+import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -11,11 +13,13 @@ export default class UserDemands extends Component {
     super(props);
     this.state = {
       GamesRequested: [],
+      ProfArray:[],
+      Test:'',
     }
   }
 
   componentDidMount(){
-   fetch('http://176.31.252.134:7001/api/v1/notifs', {
+   fetch('http://176.31.252.134:7001/api/v1/notifs', { //Requête pour get les jeux en attentes de demandes
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -24,59 +28,147 @@ export default class UserDemands extends Component {
       },
     }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'GamesRequested':responseJson.response[0]})
-          //Alert.alert('lol', JSON.stringify(responseJson.response))
+          this.setState({'GamesRequested':responseJson.response})
         })
         .catch((error) => {
           console.error(error);
         });
   }
 
-  renderAppName(){
-  if (this.state.GamesRequested != null)
-    return(
-        <SectionList
-          items={this.state.GamesRequested}
-          sections={[
-            {title: 'En attente', data: [this.state.GamesRequested.nomApp]},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
-        />);
+  renderProfArray = (param) => {
+   fetch('http://176.31.252.134:7001/api/v1/notifs/getArrayProf/' + param.toString(), { //ici je rempli un objet avec l'ensemble des profs lié à un jeu
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({'ProfArray':responseJson.response})
+          Alert.alert(param.toString(), JSON.stringify(this.state.ProfArray)) // test pour afficher les objets
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+   return( //et ici j'essaie de display ma liste de prof sous forme de grid
+        <View style={{flex: 0.8}}>
+          <GridView
+            itemDimension={100}
+            spacing={1}
+            items={this.state.ProfArray}
+            style={styles.GridView}
+            renderItem={item => (
+              <View style={styles.itemContainer}>
+                <TouchableOpacity style={{flex: 1}} onPress={() => {Alert.alert(item.dateDemande, item.commentaire);}}>
+                  <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
+                    <View style={{flex: 0.7, paddingTop: 10}}>
+                      <Image
+                        style={{flex: 1, borderRadius:10}}
+                        source={{uri: 'http://176.31.252.134:7001/files/profs/' + item.picPath}}
+                      />
+                    </View>
+                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+                      <Text style={styles.ProfName}>{item.nomPrenom}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
+            />
+        </View>
+   );
+  }
+
+
+  _confirmDemand = (param) => {
+    /*fetch('http://176.31.252.134:7001/api/v1/store/validating', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        idDemande: param,
+        validate: 1,
+      }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          this.props.navigation.navigate('UserDemands');
+    })
+    .catch((error) => {
+      console.error(error);
+    });*/
+  }
+
+
+  _cancelDemand = (param) => {
+    /*fetch('http://176.31.252.134:7001/api/v1/store/validating', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        idDemande: param,
+        validate: 0,
+      }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          this.props.navigation.navigate('UserDemands');
+    })
+    .catch((error) => {
+      console.error(error);
+    });*/
   }
 
   render() {
-    return(
+    return (
+        <View style={styles.mainContainer}>
+          <Header navigation={this.props.navigation}/>
 
-      <View style={styles.container}>
-        <Header navigation={this.props.navigation}/>
-
-    	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
+    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
           <Text style={{fontSize:20,}}>
-             Mes demandes d'application
+             Application(s) demandée(s)
           </Text>
         </View>
 
-      {this.renderAppName()}
+        <View style={{flex: 0.8}}>
+          <List>
+            <FlatList //Flatlist me permettant d'afficher les jeux que j'ai get
+                data={this.state.GamesRequested}
+                renderItem={({ item }) => (
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                      <Text style={styles.itemName}>{item.nomApp}</Text>
+                      <View style={{flex: 0.5, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
+                          {this.renderProfArray(item.idToNotify)} //ici j'appelle une fonction en passant en param l'id de l'app que je veux traiter
+                      </View>
+                      <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
+                          <TouchableOpacity style={{ flex: 0.12 }} onPress={this._cancelDemand(item.idApp)}>
+                             <Image
+                               style={{height: 32, width: 32}}
+                               source={require('./../../picture/profil/error.png')}
+                               resizeMode="contain"
+                              />
+                          </TouchableOpacity>
 
-      <View style={styles.containerList}>
-        <SectionList
-          //items={this.state.GamesRequested}
-          sections={[
-            {title: 'Récent(s)', data: ['Zelda : validé']},
-            //{title: 'En attente', data: [this.state.GamesRequested.nomApp]},
-            {title: 'Accepté(s)', data: ['Candy Crush', 'Zelda']},
-            {title: 'Refusé(s)', data: ['Fallout 76']},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
-        />
+                          <TouchableOpacity style={{ flex: 0.12 }} onPress={this._confirmDemand(item.idApp)}>
+                             <Image
+                               style={{height: 32, width: 32}}
+                               source={require('./../../picture/profil/success.png')}
+                               resizeMode="contain"
+                             />
+                          </TouchableOpacity>
+                      </View>
+                    </View>
+                )}
+            keyExtractor={item => item.nomApp}
+            />
+          </List>
+        </View>
       </View>
-
-
-    </View>
     );
   }
 }
@@ -84,18 +176,9 @@ export default class UserDemands extends Component {
 const styles = StyleSheet.create({
 
 
-  containerList: {
+  container: {
    flex: 1,
    paddingTop: 22
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {
     padding: 10,
@@ -104,31 +187,78 @@ const styles = StyleSheet.create({
   },
 
 
-  container: {
-    backgroundColor: '#FFF',
-    flex: 1
+  mainContainer: {
+    flex:1,
+    backgroundColor: '#fff',
+  },
+  classContainer: {
+    flex: 0.1,
+    flexDirection: 'row',
+    paddingTop: 2,
+  },
+  searchContainer: {
+    flex: 0.1,
+    flexDirection: 'row',
+    paddingTop: 2,
+    alignItems: 'center',
+    margin: 5,
   },
   input: {
-    width: 220,
+    flex: 1,
     height: 44,
     padding: 10,
-    borderWidth: 0,
+    marginRight: 5,
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  ButtonSearch: {
+    padding: 10,
+    borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
   },
-  containerBody: {
+  allClassContainer: {
+    flex:0.2,
+  },
+  gridView: {
+    paddingTop: 25,
+    flex: 1,
+  },
+  itemContainer: {
+    flex: 1,
+    height: 160,
+    backgroundColor: '#FFF',
+    borderRadius:10,
+  },
+  itemName: {
+    fontSize: 18,
+    color: '#434B77',
+    fontWeight: '600',
+  },
+  buttonClassAll: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FEE599',
+    margin:2,
   },
-  titleInfo: {
-    color: '#363453',
-    fontWeight: 'bold',
+  buttonClass: {
+    width:178,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 2,
+    backgroundColor: '#FEE599',
+    borderRadius:10,
+  },
+  textClass: {
     fontSize: 14,
+    color: '#434B77',
+    fontWeight: '600',
   },
-  containerFooter: {
-    flexDirection: 'row',
-    paddingBottom: 10,
-    justifyContent:'space-around',
+  ProfName: {
+    fontSize: 12,
+    color: '#434B77',
+    fontWeight: '600',
   },
 });

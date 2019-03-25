@@ -103,7 +103,7 @@ import { Alert, Button, TextInput, View, Text,
           body: JSON.stringify({
             typeUser: Store.TypeUser,
             idUser: Store.IdUser,
-            id /*TROUVER LA VARIABLE IDGAME*/: this.state.Game,
+            id: this.state.Game,
             search: this.state.Search,
           }),
         }).then((response) => response.json())
