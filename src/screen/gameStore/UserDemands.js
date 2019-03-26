@@ -19,7 +19,7 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
-   fetch('http://176.31.252.134:7001/api/v1/notifs', { //Requête pour get les jeux en attentes de demandes
+   fetch('http://176.31.252.134:7001/api/v1/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -28,7 +28,7 @@ export default class UserDemands extends Component {
       },
     }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'GamesRequested':responseJson.response})
+          this.setState({'GamesRequested':responseJson.response});
         })
         .catch((error) => {
           console.error(error);
@@ -36,7 +36,7 @@ export default class UserDemands extends Component {
   }
 
   renderProfArray = (param) => {
-   fetch('http://176.31.252.134:7001/api/v1/notifs/getArrayProf/' + param.toString(), { //ici je rempli un objet avec l'ensemble des profs lié à un jeu
+   fetch('http://176.31.252.134:7001/api/v1/notifs/getArrayProf/' + param.toString(), {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -46,12 +46,14 @@ export default class UserDemands extends Component {
     }).then((response) => response.json())
         .then((responseJson) => {
           this.setState({'ProfArray':responseJson.response})
-          Alert.alert(param.toString(), JSON.stringify(this.state.ProfArray)) // test pour afficher les objets
+          //Alert.alert(this.state.ProfArray.length.toString())
+          //Alert.alert(param.toString())
+          Alert.alert(param.toString(), JSON.stringify(responseJson.response))
         })
         .catch((error) => {
           console.error(error);
         });
-   return( //et ici j'essaie de display ma liste de prof sous forme de grid
+     return(
         <View style={{flex: 0.8}}>
           <GridView
             itemDimension={100}
@@ -77,7 +79,7 @@ export default class UserDemands extends Component {
             )}
             />
         </View>
-   );
+     );
   }
 
 
@@ -137,13 +139,13 @@ export default class UserDemands extends Component {
 
         <View style={{flex: 0.8}}>
           <List>
-            <FlatList //Flatlist me permettant d'afficher les jeux que j'ai get
+            <FlatList
                 data={this.state.GamesRequested}
                 renderItem={({ item }) => (
                     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                       <Text style={styles.itemName}>{item.nomApp}</Text>
                       <View style={{flex: 0.5, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
-                          {this.renderProfArray(item.idToNotify)} //ici j'appelle une fonction en passant en param l'id de l'app que je veux traiter
+                        {this.renderProfArray(item.idToNotify)}
                       </View>
                       <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
                           <TouchableOpacity style={{ flex: 0.12 }} onPress={this._cancelDemand(item.idApp)}>
