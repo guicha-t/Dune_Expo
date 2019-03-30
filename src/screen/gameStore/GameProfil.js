@@ -11,10 +11,26 @@ export default class GameProfil extends Component {
     super(props);
     this.state = {
       Game: [],
+      Status:'',
     }
   }
 
   componentDidMount(){
+
+    fetch('http://176.31.252.134:7001/api/v1/store/getAppStatus/' + this.props.id.toString(), {
+       method: 'GET',
+       headers: {
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+         token: Store.Token,
+       },
+     }).then((response) => response.json())
+         .then((responseJson) => {
+           this.setState({'Status':JSON.stringify(responseJson.appStatus)})
+         })
+         .catch((error) => {
+           console.error(error);
+         });
 
     fetch('http://176.31.252.134:7001/api/v1/store/getApp', {
           method: 'POST',
@@ -34,18 +50,37 @@ export default class GameProfil extends Component {
           console.error(error);
         });
 
-    _goToAppsRequest = async () => {
-          this.props.navigation.navigate('RequestApp', {
-            id: this.state.Game.id,
-          });
-        };
-
   }
 
+  _renderAppRequest(){
+
+  Alert.alert(this.state.Status)
+
+  if (this.state.Status == 1)
+    return(
+      <View style={{paddingBottom: 10}}>
+        <Button
+          title={'Demander cette application'}
+          color='#363453'
+          onPress={() => this.props.navigation.navigate('RequestApp')}
+        />
+      </View>
+    );
+  if (this.state.Status == 0)
+    return(
+      <View style={{paddingBottom: 10}}>
+        <Button
+          title={'Noter cette application'}
+          color='#363453'
+          onPress={() => this.props.navigation.navigate('RequestApp')}
+        />
+      </View>
+    );
+  }
 
   render() {
-      const { navigation, id, screenProps } = { ...this.props };
-      Store.setAppId(this.state.Game.id)
+      //const { navigation, id, screenProps } = { ...this.props };
+      //Store.setAppId(this.state.Game.id)
       return (
         <View style={{flex:1, backgroundColor: '#fff'}}>
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -62,13 +97,7 @@ export default class GameProfil extends Component {
             </View>
             <View style={{paddingTop:30}}>
 
-            <View style={{paddingBottom: 10}}>
-              <Button
-                title={'Demander cette application'}
-                color='#363453'
-                onPress={() => this.props.navigation.navigate('RequestApp')}
-              />
-            </View>
+            {this._renderAppRequest()}
 
             <Button
               title="Retour"
