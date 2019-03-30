@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, SectionList} from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, TouchableHighlight, Modal} from 'react-native';
 import { observer } from 'mobx-react';
 import { List, ListItem } from "react-native-elements";
 import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import Video from "expo/build/av/Video";
 
 @observer
 export default class UserDemands extends Component {
@@ -14,12 +15,20 @@ export default class UserDemands extends Component {
     this.state = {
       GamesRequested: [],
       ProfArray:[],
-      Test:'',
+        ModalVisibleStatus: false,
+        idAppModal: null,
+        nomAppModal: null,
+        dateDemandeModal: null,
+        commentaireModal: null
     }
+
+    this.ts = new Date();
+
+    this.contentToRender = []
   }
 
   componentDidMount(){
-   fetch('http://176.31.252.134:7001/api/v1/notifs', { //Requête pour get les jeux en attentes de demandes
+      fetch('http://176.31.252.134:7001/api/v1/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -28,7 +37,7 @@ export default class UserDemands extends Component {
       },
     }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'GamesRequested':responseJson.response})
+          this.setState({'GamesRequested':responseJson.response});
         })
         .catch((error) => {
           console.error(error);
@@ -36,50 +45,24 @@ export default class UserDemands extends Component {
   }
 
   renderProfArray = (param) => {
-   fetch('http://176.31.252.134:7001/api/v1/notifs/getArrayProf/' + param.toString(), { //ici je rempli un objet avec l'ensemble des profs lié à un jeu
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-        .then((responseJson) => {
-          this.setState({'ProfArray':responseJson.response})
-          Alert.alert(param.toString(), JSON.stringify(this.state.ProfArray)) // test pour afficher les objets
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-   return( //et ici j'essaie de display ma liste de prof sous forme de grid
-        <View style={{flex: 0.8}}>
-          <GridView
-            itemDimension={100}
-            spacing={1}
-            items={this.state.ProfArray}
-            style={styles.GridView}
-            renderItem={item => (
-              <View style={styles.itemContainer}>
-                <TouchableOpacity style={{flex: 1}} onPress={() => {Alert.alert(item.dateDemande, item.commentaire);}}>
-                  <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-                    <View style={{flex: 0.7, paddingTop: 10}}>
-                      <Image
-                        style={{flex: 1, borderRadius:10}}
-                        source={{uri: 'http://176.31.252.134:7001/files/profs/' + item.picPath}}
-                      />
-                    </View>
-                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={styles.ProfName}>{item.nomPrenom}</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-            />
-        </View>
-   );
-  }
 
+      fetch('http://176.31.252.134:7001/api/v1/notifs/getArrayProf/' + param.toString(), {
+          method: 'GET',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: Store.Token,
+          },
+      }).then((response) => response.json())
+          .then((responseJson) => {
+              this.setState({'ProfArray': responseJson.response});
+          })
+          .catch((error) => {
+
+              console.error(error);
+          });
+
+  }
 
   _confirmDemand = (param) => {
     /*fetch('http://176.31.252.134:7001/api/v1/store/validating', {
@@ -124,7 +107,33 @@ export default class UserDemands extends Component {
     });*/
   }
 
-  render() {
+
+    ShowProfInModal = (visible, item) =>{
+
+        this.renderProfArray(item.idToNotify);
+
+        this.setState({"Test": item.idToNotify.toString()});
+
+        this.setState({ModalVisibleStatus: visible});
+
+        this.setState({idAppModal: item.idApp});
+
+        this.setState({nomAppModal: item.nomApp});
+
+        this.setState({dateDemandeModal: item.dateDemande});
+
+        this.setState({commentaireModal: item.commentaire});
+    }
+
+    ShowModalFunction = (visible) => {
+
+      this.setState({'ModalVisibleStatus': visible});
+
+}
+
+
+    render() {
+
     return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
@@ -132,42 +141,112 @@ export default class UserDemands extends Component {
     	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
           <Text style={{fontSize:20,}}>
              Application(s) demandée(s)
+
           </Text>
+
         </View>
 
-        <View style={{flex: 0.8}}>
-          <List>
-            <FlatList //Flatlist me permettant d'afficher les jeux que j'ai get
-                data={this.state.GamesRequested}
-                renderItem={({ item }) => (
-                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={styles.itemName}>{item.nomApp}</Text>
-                      <View style={{flex: 0.5, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
-                          {this.renderProfArray(item.idToNotify)} //ici j'appelle une fonction en passant en param l'id de l'app que je veux traiter
-                      </View>
-                      <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
-                          <TouchableOpacity style={{ flex: 0.12 }} onPress={this._cancelDemand(item.idApp)}>
-                             <Image
-                               style={{height: 32, width: 32}}
-                               source={require('./../../picture/profil/error.png')}
-                               resizeMode="contain"
-                              />
-                          </TouchableOpacity>
+            <View style={{flex: 0.8}}>
+                <List>
+                    <FlatList
+                        data={this.state.GamesRequested}
+                        extraData={this.state}
+                        rightIcon={'../../picture/profil/eye.png'}
+                        renderItem={({ item }) => (
+                            <ListItem
+                                title={`${ item.nomApp }`}
+                                onPress={() => this.ShowProfInModal(true, item)}
+                            />
+                            )}
+                        keyExtractor={item => item.nomApp}
+                    />
+                </List>
 
-                          <TouchableOpacity style={{ flex: 0.12 }} onPress={this._confirmDemand(item.idApp)}>
-                             <Image
-                               style={{height: 32, width: 32}}
-                               source={require('./../../picture/profil/success.png')}
-                               resizeMode="contain"
-                             />
-                          </TouchableOpacity>
-                      </View>
-                    </View>
-                )}
-            keyExtractor={item => item.nomApp}
-            />
-          </List>
-        </View>
+                <View>
+
+                    <Modal
+                        transparent={true}
+
+                        animationType={"slide"}
+
+                        visible={this.state.ModalVisibleStatus}
+
+                        onRequestClose={ () => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } >
+
+                        <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
+
+                            <View style={styles.ModalInsideView}>
+
+                                    <Text style={styles.TextStyle}> Vous avez une demande sur l'application
+
+                                            { " " + this.state.nomAppModal }.
+
+                                    </Text>
+
+                                <Text onPress={() => this.props.navigation.navigate('GameProfil', {id: this.state.idAppModal})}  style={styles.TextStyle}>
+
+                                    Voir l'application
+
+                                </Text>
+
+                                <Text  style={styles.TextProfStyle}> Cette demande a été faite par:</Text>
+
+                                <GridView
+                                    itemDimension={100}
+                                    spacing={1}
+                                    items={this.state.ProfArray}
+                                    style={styles.GridView}
+                                    renderItem={item => (
+                                        <View style={styles.itemContainer}>
+                                            <Text>{item.length}</Text>
+                                            <TouchableOpacity style={{flex: 1}} onPress={() => {
+                                                Alert.alert(item.dateDemande, item.commentaire);
+                                            }}>
+                                                <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
+                                                    <View style={{flex: 0.7, paddingTop: 10}}>
+                                                        <Image
+                                                            style={{flex: 1, borderRadius: 10}}
+                                                            source={{uri: 'http://176.31.252.134:7001/files/profs/' + item.picPath}}
+                                                        />
+                                                    </View>
+                                                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+                                                        <Text style={styles.ProfName}>{item.nomPrenom}</Text>
+                                                    </View>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
+
+                                    )}
+                                />
+
+                                <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center', marginTop: '10%', marginBottom: '5%'}}>
+                                    <TouchableHighlight style={{margin: '5%'}} onPress={this._confirmDemand(this.state.idAppModal)}>
+                                        <Image
+                                            style={{height: 50, width: 50}}
+                                            source={require('./../../picture/profil/errorWhite.png')}
+                                            resizeMode="contain"
+                                        />
+                                    </TouchableHighlight>
+
+                                    <TouchableHighlight style={{margin: '5%'}} onPress={this._confirmDemand(this.state.idAppModal)}>
+                                        <Image
+                                            style={{height: 50, width: 50}}
+                                            source={require('./../../picture/profil/successWhite.png')}
+                                            resizeMode="contain"
+                                        />
+                                    </TouchableHighlight>
+                                </View>
+
+                                <Button color={"white"} title="Décider plus tard" onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+
+                            </View>
+
+                        </View>
+
+                    </Modal>
+
+                </View>
+            </View>
       </View>
     );
   }
@@ -222,11 +301,11 @@ const styles = StyleSheet.create({
   },
   gridView: {
     paddingTop: 25,
-    flex: 1,
+    flex: 1
   },
   itemContainer: {
     flex: 1,
-    height: 160,
+    height: 130,
     backgroundColor: '#FFF',
     borderRadius:10,
   },
@@ -261,4 +340,38 @@ const styles = StyleSheet.create({
     color: '#434B77',
     fontWeight: '600',
   },
+    MainContainer :{
+
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+
+    ModalInsideView:{
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor : "#363453",
+        height: 450 ,
+        width: '90%',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff'
+
+    },
+
+    TextStyle:{
+
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center'
+
+    },
+    TextProfStyle:{
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center',
+        padding: 20
+    }
 });
