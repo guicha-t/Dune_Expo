@@ -11,7 +11,6 @@ export default class StudentProfil extends Component {
     super(props);
     this.state = {
       Student: [],
-      IdStudent: '',
     }
   }
 

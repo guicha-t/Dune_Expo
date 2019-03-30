@@ -10,7 +10,7 @@ export default class StudentHistory extends Component {
 
   static navigationOptions = {
     tabBarIcon: () => {
-      return <Image source={require('./../../picture/profil/evolution.png')} style={{width:32, height:32}}/>
+      return <Image source={require('./../../picture/profil/history.png')} style={{width:32, height:32}}/>
     }
   }
 

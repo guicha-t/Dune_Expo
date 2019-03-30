@@ -48,37 +48,37 @@ export default class ForgottenPass extends Component {
   render() {
     return (
       <View style={styles.container}>
-	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
-	<Text style={{fontSize:20,}}>
-	Réinitialiser votre mot de passe
-	</Text>
-	</View>
-        <View style={{flex:0.1, alignItems: 'center', justifyContent:'center'}}>
-          <TextInput
-            value={this.state.username}
-            onChangeText={(username) => this.setState({ username })}
-            placeholder={'Adresse e-mail'}
-            autoCapitalize = 'none'
-            style={styles.input}
-          />
-          <Button
-            title={'Envoyer'}
-            style={styles.input}
-            color='#363453'
-            onPress={this.onLogin.bind(this)}
-          />
-      </View>
-      <View style={{flex: 0.1, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 20}}>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Start')}>
-          <Text>
-            Retour
-          </Text>
-        </TouchableOpacity>
-      </View>
-      </View>
-    );
-  }
-}
+	       <View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
+	          <Text style={{fontSize:20,}}>
+	             Réinitialiser votre mot de passe
+	            </Text>
+	           </View>
+             <View style={{flex:0.1, alignItems: 'center', justifyContent:'center'}}>
+               <TextInput
+                  value={this.state.username}
+                  onChangeText={(username) => this.setState({ username })}
+                  placeholder={'Adresse e-mail'}
+                  autoCapitalize = 'none'
+                  style={styles.input}
+                />
+                <Button
+                  title={'Envoyer'}
+                  style={styles.input}
+                  color='#363453'
+                  onPress={this.onLogin.bind(this)}
+                />
+            </View>
+            <View style={{flex: 0.1, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 20}}>
+              <TouchableOpacity onPress={()=>this.props.navigation.navigate('Start')}>
+                <Text>
+                  Retour
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        );
+      }
+    }
 
 const styles = StyleSheet.create({
   container: {
@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FEE599',
   },
   input: {
-    width: 200,
+    width: 220,
     height: 44,
     padding: 10,
-    borderWidth: 0,
-    borderColor: 'black',
-    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#363453',
   },
+
 });

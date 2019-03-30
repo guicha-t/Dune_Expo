@@ -17,7 +17,7 @@ import { Alert, Button, TextInput, View, Text,
       this.state = {
         Trombi: [],
         Classes: [],
-        Class: null,
+        Class: 0,
         Search: '',
       }
     }
@@ -78,7 +78,7 @@ import { Alert, Button, TextInput, View, Text,
         }),
       }).then((response) => response.json())
       .then((responseJson) => {
-        this.setState({'Class':param.idClasse})
+        this.setState({'Class': param.idClasse})
         this.setState({'Search': null})
         this.setState({'Trombi':responseJson.response})
       })
@@ -100,7 +100,7 @@ import { Alert, Button, TextInput, View, Text,
         }),
       }).then((response) => response.json())
       .then((responseJson) => {
-        this.setState({'Class':null})
+        this.setState({'Class':0})
         this.setState({'Search':null})
         this.setState({'Trombi':responseJson.response})
       })
@@ -111,7 +111,7 @@ import { Alert, Button, TextInput, View, Text,
 
     _searchRequest = async () => {
       Keyboard.dismiss()
-      if (this.state.Class === null) {
+      if (this.state.Class === 0) {
         fetch('http://176.31.252.134:7001/api/v1/trombi/', {
           method: 'POST',
           Accept: 'application/json',
@@ -156,33 +156,59 @@ import { Alert, Button, TextInput, View, Text,
 
     displayClassLabel(param) {
         if (param.level === 1) {
-            return <Text style={styles.textClass}> PS-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> PS-{param.num}</Text>;
         } else if (param.level === 2){
-            return <Text style={styles.textClass}> MS-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> MS-{param.num}</Text>;
         } else if (param.level === 3){
-            return <Text style={styles.textClass}> GS-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> GS-{param.num} </Text>;
         } else if (param.level === 4){
-            return <Text style={styles.textClass}> CP-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CP-{param.num}</Text>;
         } else if (param.level === 5){
-            return <Text style={styles.textClass}> CE1-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CE1-{param.num}</Text>;
         } else if (param.level === 6){
-            return <Text style={styles.textClass}> CE2-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CE2-{param.num}</Text>;
         } else if (param.level === 7){
-            return <Text style={styles.textClass}> CM1-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CM1-{param.num}</Text>;
         } else if (param.level === 8){
-            return <Text style={styles.textClass}> CM2-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CM2-{param.num} </Text>;
         } else if (param.level === 9){
-            return <Text style={styles.textClass}> '6e'-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '6e'-{param.num} </Text>;
         } else if (param.level === 10){
-            return <Text style={styles.textClass}> '5e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '5e'-{param.num}</Text>;
         } else if (param.level === 11){
-            return <Text style={styles.textClass}> '4e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '4e'-{param.num}</Text>;
         } else if (param.level === 12){
-            return <Text style={styles.textClass}> '3e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '3e'-{param.num}</Text>;
         } else {
-            return <Text style={styles.textClass}> Autre </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> Autre </Text>;
         }
     }
+
+     setColorFocused = function(param) {
+       if (this.state.Class === param) {
+         return {
+           backgroundColor: '#363453',
+         }
+       } else {
+         return {
+           backgroundColor:'#FEE599',
+         }
+       }
+      }
+
+    setColorTextFocused = function(param) {
+      if (this.state.Class === param) {
+        return {
+          color: '#FFF',
+        }
+      } else {
+        return {
+          color:'#363453',
+        }
+      }
+     }
+
+
 
     render() {
       return (
@@ -192,8 +218,8 @@ import { Alert, Button, TextInput, View, Text,
           <View style={styles.classContainer}>
             <View style={styles.allClassContainer}>
               <TouchableOpacity style={{flex: 1}} onPress={() => this._resetTrombi()}>
-                <View style={styles.buttonClassAll}>
-                  <Text style={styles.textClass}>TOUT</Text>
+                <View style={[styles.buttonClassAll, this.setColorFocused(0)]}>
+                  <Text style={[styles.textClass, this.setColorTextFocused(0)]}>TOUT</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -202,11 +228,12 @@ import { Alert, Button, TextInput, View, Text,
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 data={this.state.Classes}
+                extraData={this.state}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
                 <View style={{width: 80}}>
                   <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentClass(item)}>
-                    <View style={styles.buttonClass}>
+                    <View style={[styles.buttonClass, this.setColorFocused(item.idClasse)]}>
                       {this.displayClassLabel(item)}
                     </View>
                   </TouchableOpacity>
@@ -234,8 +261,7 @@ import { Alert, Button, TextInput, View, Text,
           />
         </View>
 
-
-        <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
+        <View style={{flex: 1, backgroundColor: '#FCFCFC'}}>
           <GridView
             itemDimension={100}
             spacing={5}
@@ -244,17 +270,21 @@ import { Alert, Button, TextInput, View, Text,
             renderItem={item => (
               <View style={styles.itemContainer}>
                 <TouchableOpacity style={{flex: 1}} onPress={() => this._goToStudentProfil(item.idEleve)}>
-                  <View style={{flex: 1, padding: 6}}>
-                    <View style={{flex: 0.7, backgroundColor:'#FFF', padding: 4}}>
+
+                  <View style={{flex: 1, padding: 4}}>
+
+                    <View style={{flex: 0.7, backgroundColor:'#363453'}}>
                       <Image
                         style={{flex: 1, backgroundColor: '#252525'}}
                         source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
                         />
                     </View>
-                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', backgroundColor:'#FFF'}}>
+
+                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', backgroundColor:'#363453'}}>
                       <Text style={styles.itemName}>{item.nomEleve.toUpperCase()}</Text>
                       <Text style={styles.itemName}>{item.prenomEleve}</Text>
                     </View>
+
                   </View>
                 </TouchableOpacity>
               </View>
@@ -312,14 +342,13 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 14,
-    color: '#363453',
+    color: '#FFF',
     fontWeight:'bold',
   },
   buttonClassAll: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
     margin:2,
   },
   buttonClass: {
@@ -327,11 +356,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 2,
-    backgroundColor: '#FEE599',
   },
   textClass: {
     fontSize: 14,
-    color: '#363453',
     fontWeight: '600',
   },
 });
