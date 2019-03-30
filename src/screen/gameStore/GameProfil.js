@@ -17,7 +17,7 @@ export default class GameProfil extends Component {
 
   componentDidMount(){
 
-    fetch('http://176.31.252.134:7001/api/v1/store/getAppStatus/' + this.props.id.toString(), {
+    fetch('http://176.31.252.134:7001/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -40,7 +40,7 @@ export default class GameProfil extends Component {
             token: Store.Token,
           },
           body: JSON.stringify({
-           idApp: this.props.id,
+           idApp: this.props.navigation.getParam('id', this.props.id).toString(),
           })
         }).then((response) => response.json())
         .then((responseJson) => {
@@ -53,8 +53,6 @@ export default class GameProfil extends Component {
   }
 
   _renderAppRequest(){
-
-  Alert.alert(this.state.Status)
 
   if (this.state.Status == 1)
     return(
