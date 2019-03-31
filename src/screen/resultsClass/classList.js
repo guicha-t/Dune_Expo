@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage,
-  Image, TouchableOpacity, TouchableHighlight, FlatList} from 'react-native';
+  Image, TouchableOpacity, TouchableHighlight, FlatList, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
@@ -12,6 +12,7 @@ export default class ClassList extends Component {
     super(props);
     this.state = {
       Classes: [],
+      loading: true,
     }
   }
 
@@ -26,6 +27,7 @@ export default class ClassList extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       this.setState({'Classes':responseJson.response})
+      this.setState({'loading':false})
     })
     .catch((error) => {
       console.error(error);
@@ -75,6 +77,19 @@ export default class ClassList extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+        return (
+          <View style={{flex: 1}}>
+            <Header navigation={this.props.navigation}/>
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator animating={true} />
+            </View>
+          </View>
+        )
+      }
+
+
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
@@ -120,6 +135,12 @@ export default class ClassList extends Component {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'#F9F9F9',
+  },
   body: {
     flex: 1,
     backgroundColor: '#F9F9F9',

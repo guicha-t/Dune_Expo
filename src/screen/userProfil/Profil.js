@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet,
+  ScrollView, Image, TouchableOpacity, AsyncStorage, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
@@ -11,6 +12,7 @@ export default class Profil extends Component {
     super(props);
     this.state = {
       Profil: [],
+      loading: true,
     }
   }
 
@@ -25,6 +27,7 @@ export default class Profil extends Component {
     }).then((response) => response.json())
         .then((responseJson) => {
           this.setState({'Profil':JSON.parse(JSON.stringify(responseJson.response[0]))})
+          this.setState({'loading':false})
         })
         .catch((error) => {
           console.error(error);
@@ -59,6 +62,19 @@ export default class Profil extends Component {
 
 
   render() {
+
+    if (this.state.loading) {
+        return (
+          <View style={{flex:1}}>
+            <Header navigation={this.props.navigation}/>
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator animating={true} />
+            </View>
+          </View>
+        )
+      }
+      
+
     return(
       <View style={{flex:1, backgroundColor: '#fff'}}>
         <Header navigation={this.props.navigation}/>

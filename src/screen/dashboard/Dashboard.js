@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet,
+  AsyncStorage, Image, TouchableOpacity, TouchableHighlight,
+  ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
@@ -8,6 +10,7 @@ import Store from './../../global/store/Store';
 @observer
 export default class Dashboard extends Component {
   state = {
+    loading: true,
     Table: '',
     Student: '',
     Notif: '',
@@ -18,7 +21,7 @@ export default class Dashboard extends Component {
     Profil: [],
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch('http://176.31.252.134:7001/api/v1/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
@@ -29,77 +32,84 @@ export default class Dashboard extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       this.setState({'Student':JSON.stringify(responseJson.nbEleves)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 
-    fetch('http://176.31.252.134:7001/api/v1/dashboard/nbNotifsNonL', {
-      method: 'GET',
-      Accept: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    fetch('http://176.31.252.134:7001/api/v1/dashboard/nbClasses', {
-      method: 'GET',
-      Accept: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({'Class':JSON.stringify(responseJson.nbClasses)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    fetch('http://176.31.252.134:7001/api/v1/games/nbGames', {
-      method: 'GET',
-      Accept: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({'Store':JSON.stringify(responseJson.response[0].nbGames)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    var date = new Date().getDate(); //Current Date
-    var month = new Date().getMonth() + 1; //Current Month
-    this.setState({
-          Day: date,
-          Month: month,
-        });
-
-    fetch('http://176.31.252.134:7001/api/v1/users/infos', {
-      method: 'GET',
-      headers: {
+      fetch('http://176.31.252.134:7001/api/v1/dashboard/nbNotifsNonL', {
+        method: 'GET',
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
+        headers: {
+          'Content-Type': 'application/json',
+          token: Store.Token,
+        },
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
+
+        fetch('http://176.31.252.134:7001/api/v1/dashboard/nbClasses', {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'Profil':JSON.parse(JSON.stringify(responseJson.response[0]))})
+          this.setState({'Class':JSON.stringify(responseJson.nbClasses)})
+
+          fetch('http://176.31.252.134:7001/api/v1/games/nbGames', {
+            method: 'GET',
+            Accept: 'application/json',
+            headers: {
+              'Content-Type': 'application/json',
+              token: Store.Token,
+            },
+          }).then((response) => response.json())
+          .then((responseJson) => {
+            this.setState({'Store':JSON.stringify(responseJson.response[0].nbGames)})
+
+            var date = new Date().getDate(); //Current Date
+            var month = new Date().getMonth() + 1; //Current Month
+            this.setState({Day: date, Month: month,});
+
+            fetch('http://176.31.252.134:7001/api/v1/users/infos', {
+              method: 'GET',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: Store.Token,
+              },
+            }).then((response) => response.json())
+            .then((responseJson) => {
+              this.setState({'Profil':JSON.parse(JSON.stringify(responseJson.response[0]))})
+              this.setState({'loading':false})
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
         })
         .catch((error) => {
           console.error(error);
         });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+
+
+
+
   }
 
   getCurrentMonth(param) {
@@ -192,6 +202,18 @@ export default class Dashboard extends Component {
     }
 
   render() {
+
+    if (this.state.loading) {
+        return (
+          <View style={{flex:1}}>
+            <Header navigation={this.props.navigation}/>
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator animating={true} />
+            </View>
+          </View>
+        )
+      }
+      
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
@@ -300,6 +322,12 @@ export default class Dashboard extends Component {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#F9F9F9',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   body: {
     flex: 1,
     backgroundColor: '#F9F9F9',

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage,
-  Image, TouchableOpacity, TouchableHighlight, FlatList} from 'react-native';
+  Image, TouchableOpacity, TouchableHighlight, FlatList, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
 import Moment from 'moment';
 
@@ -16,6 +16,7 @@ export default class StudentResultList extends Component {
       StudentAlpha: [],
       StudentNote: [],
       Game: this.props.navigation.getParam('Game', 'Unknown'),
+      loading: true,
     }
   }
 
@@ -33,6 +34,7 @@ export default class StudentResultList extends Component {
       this.setState({'StudentAlpha':responseJson.ascEleve})
       this.setState({'StudentNote':responseJson.descNote})
       this.setState({'Student':this.state.StudentAlpha})
+      this.setState({'loading':false})
     })
     .catch((error) => {
       console.error(error);
@@ -71,6 +73,18 @@ export default class StudentResultList extends Component {
    }
 
   render() {
+    if (this.state.loading) {
+        return (
+          <View style={{flex: 1}}>
+            <Header navigation={this.props.navigation}/>
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator animating={true} />
+            </View>
+          </View>
+        )
+      }
+
+
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
@@ -136,6 +150,12 @@ export default class StudentResultList extends Component {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor:'#F9F9F9',
+  },
   body: {
     flex: 1,
     backgroundColor: '#F9F9F9',

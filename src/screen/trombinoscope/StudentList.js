@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text,
   StyleSheet, AsyncStorage, ListView, TouchableOpacity,
-  Picker, Item, FlatList, Image, Keyboard} from 'react-native';
+  Picker, Item, FlatList, Image, Keyboard, ActivityIndicator} from 'react-native';
   import { observer } from 'mobx-react';
   import { Avatar } from 'react-native-elements';
 
@@ -19,6 +19,7 @@ import { Alert, Button, TextInput, View, Text,
         Classes: [],
         Class: 0,
         Search: '',
+        loading: true,
       }
     }
 
@@ -36,26 +37,29 @@ import { Alert, Button, TextInput, View, Text,
       }).then((response) => response.json())
       .then((responseJson) => {
         this.setState({'Trombi':responseJson.response})
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
-      fetch('http://176.31.252.134:7001/api/v1/trombi/classes', {
-        method: 'GET',
-        Accept: 'application/json',
-        headers: {
-          'Content-Type': 'application/json',
-          token: Store.Token,
-        },
-      }).then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({'Classes':responseJson.response})
+        fetch('http://176.31.252.134:7001/api/v1/trombi/classes', {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({'Classes':responseJson.response})
+          this.setState({'loading':false})
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       })
       .catch((error) => {
         console.error(error);
       });
     }
+
 
     _goToStudentProfil = async (param) => {
       this.props.navigation.navigate('StudentContainer', {
@@ -211,6 +215,18 @@ import { Alert, Button, TextInput, View, Text,
 
 
     render() {
+
+      if (this.state.loading) {
+          return (
+            <View style={{flex:1}}>
+              <Header navigation={this.props.navigation}/>
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator animating={true} />
+              </View>
+            </View>
+          )
+        }
+
       return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
@@ -297,6 +313,12 @@ import { Alert, Button, TextInput, View, Text,
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor:'#F9F9F9',
+  },
   mainContainer: {
     flex:1,
     backgroundColor: '#FFF',

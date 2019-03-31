@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity } from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet,
+  AsyncStorage, ListView, Image, TouchableOpacity, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
@@ -10,6 +11,7 @@ export default class StudentProfil extends Component {
   constructor(props){
     super(props);
     this.state = {
+      loading: true,
       Student: [],
     }
   }
@@ -31,6 +33,7 @@ export default class StudentProfil extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       this.setState({'Student':responseJson.response[0]})
+      this.setState({'loading':false})
     })
     .catch((error) => {
       console.error(error);
@@ -47,6 +50,15 @@ export default class StudentProfil extends Component {
 
   render() {
       const { navigation, idStudent, screenProps } = { ...this.props };
+
+      if (this.state.loading) {
+          return (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator animating={true} />
+            </View>
+          )
+        }
+
       return (
         <View style={{flex:1, backgroundColor: '#fff'}}>
 
@@ -88,6 +100,12 @@ export default class StudentProfil extends Component {
   }
 
   const styles = StyleSheet.create({
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems:'center',
+      backgroundColor:'#F9F9F9',
+    },
     topBodyPicture: {
       flex: 0.5,
       paddingTop: 20,
