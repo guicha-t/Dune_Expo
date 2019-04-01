@@ -7,6 +7,9 @@ import { Alert, Button, TextInput, View, Text,
 
   import GridView from 'react-native-super-grid';
 
+  import Loading from './../../global/loading/Loading';
+
+
   import Header from './../../global/header/Header';
   import Store from './../../global/store/Store'
 
@@ -218,12 +221,7 @@ import { Alert, Button, TextInput, View, Text,
 
       if (this.state.loading) {
           return (
-            <View style={{flex:1}}>
-              <Header navigation={this.props.navigation}/>
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator animating={true} />
-              </View>
-            </View>
+            <Loading navigation={this.props.navigation}/>
           )
         }
 
@@ -291,7 +289,7 @@ import { Alert, Button, TextInput, View, Text,
 
                     <View style={{flex: 0.7, backgroundColor:'#363453'}}>
                       <Image
-                        style={{flex: 1, backgroundColor: '#252525'}}
+                        style={{flex: 1, backgroundColor: '#F9F9F9'}}
                         source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
                         />
                     </View>

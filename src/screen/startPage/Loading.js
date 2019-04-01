@@ -8,7 +8,20 @@ import {
   Alert,
 } from 'react-native';
 
+import {
+    BallIndicator,
+    BarIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
+  } from 'react-native-indicators';
+
 import Store from './../../global/store/Store'
+import Header from './../../global/header/Header';
 
 export default class AuthLoadingScreen extends Component {
   constructor(props) {
@@ -60,7 +73,8 @@ export default class AuthLoadingScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+        <Header navigation={this.props.navigation}/>
+        <BarIndicator color='#363453'/>
         <StatusBar barStyle="default" />
       </View>
     );

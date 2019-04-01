@@ -4,6 +4,7 @@ import { Alert, Button, TextInput, View, Text, StyleSheet,
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
+import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store'
 
 @observer
@@ -53,9 +54,7 @@ export default class StudentProfil extends Component {
 
       if (this.state.loading) {
           return (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator animating={true} />
-            </View>
+              <Loading navigation={this.props.navigation}/>
           )
         }
 

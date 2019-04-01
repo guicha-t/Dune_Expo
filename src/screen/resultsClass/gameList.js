@@ -6,6 +6,8 @@ import Moment from 'moment';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import Loading from './../../global/loading/Loading';
+
 
 @observer
 export default class GameList extends Component {
@@ -54,12 +56,7 @@ export default class GameList extends Component {
 
     if (this.state.loading) {
         return (
-          <View style={{flex: 1}}>
-            <Header navigation={this.props.navigation}/>
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator animating={true} />
-            </View>
-          </View>
+              <Loading navigation={this.props.navigation}/>
         )
       }
 

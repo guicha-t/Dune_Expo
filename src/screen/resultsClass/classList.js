@@ -4,6 +4,7 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage,
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
+import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
 
 @observer
@@ -80,12 +81,7 @@ export default class ClassList extends Component {
 
     if (this.state.loading) {
         return (
-          <View style={{flex: 1}}>
-            <Header navigation={this.props.navigation}/>
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator animating={true} />
-            </View>
-          </View>
+          <Loading navigation={this.props.navigation}/>
         )
       }
 

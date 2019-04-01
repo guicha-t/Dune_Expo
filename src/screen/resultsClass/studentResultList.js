@@ -5,6 +5,7 @@ import { observer } from 'mobx-react';
 import Moment from 'moment';
 
 import Header from './../../global/header/Header';
+import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
 
 @observer
@@ -75,12 +76,7 @@ export default class StudentResultList extends Component {
   render() {
     if (this.state.loading) {
         return (
-          <View style={{flex: 1}}>
-            <Header navigation={this.props.navigation}/>
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator animating={true} />
-            </View>
-          </View>
+          <Loading navigation={this.props.navigation}/>
         )
       }
 
