@@ -19,6 +19,7 @@ export default class Dashboard extends Component {
     Store: '',
     Day: '',
     Month: '',
+    Year: '',
     Profil: [],
   }
 
@@ -69,7 +70,9 @@ export default class Dashboard extends Component {
 
             var date = new Date().getDate(); //Current Date
             var month = new Date().getMonth() + 1; //Current Month
-            this.setState({Day: date, Month: month,});
+            var year = new Date().getFullYear(); //Current Year
+
+            this.setState({Day: date, Month: month, Year: year,});
 
             fetch('http://176.31.252.134:7001/api/v1/users/infos', {
               method: 'GET',
@@ -192,7 +195,6 @@ export default class Dashboard extends Component {
         return (
               <View style={styles.datacase}>
                 <Text style={styles.primetextwhite}>{this.state.Notif}</Text>
-                <Text style={styles.datetext}>AUCUNE{this.addplural(this.state.Notif)}</Text>
                 <Text style={styles.datetext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
               </View>);
     }
@@ -215,9 +217,10 @@ export default class Dashboard extends Component {
               <View style={styles.caseTopRight}>
                 <Text style={styles.datetext}>{this.state.Day}</Text>
                 <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+                <Text style={styles.datetext}>{this.state.Year}</Text>
               </View>
-              <View style={{flex: 0.6, alignItems:'center', justifyContent: 'center'}}>
-                <Text style={styles.datetext}>BONJOUR</Text>
+              <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
+                <Text style={styles.datetext}>Bonjour</Text>
                 <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
               </View>
             </View>
@@ -340,7 +343,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   caseTopRight: {
-    flex: 0.4,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent:'center',
     borderBottomWidth: 2,

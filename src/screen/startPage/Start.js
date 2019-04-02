@@ -8,7 +8,6 @@ import Store from './../../global/store/Store'
 export default class Start extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       username: '',
       password: '',
@@ -16,6 +15,10 @@ export default class Start extends Component {
       opacity: 1,
     };
   }
+
+  static navigationOptions = {
+     drawerLockMode: 'locked-open',
+}
 
   _storeId = async (param) => {
   try {
@@ -151,7 +154,7 @@ export default class Start extends Component {
                 color='#363453'
                 onPress={this.onLogin.bind(this)}
                 />
-              </View>
+            </View>
         </View>
 
 

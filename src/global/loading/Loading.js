@@ -22,7 +22,6 @@ export default class Dashboard extends Component {
   render() {
     return(
       <View style={{flex:1}}>
-        <Header navigation={this.props.navigation}/>
         <View style={styles.loadingContainer}>
           <BarIndicator color='#363453'/>
         </View>

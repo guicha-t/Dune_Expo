@@ -73,7 +73,6 @@ export default class AuthLoadingScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header navigation={this.props.navigation}/>
         <BarIndicator color='#363453'/>
         <StatusBar barStyle="default" />
       </View>
