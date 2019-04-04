@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
     Table: '',
     Student: '',
     Notif: '',
-    Class: '',
+    Result: '',
     Store: '',
     Day: '',
     Month: '',
@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
       .then((responseJson) => {
         this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
 
-        fetch('http://176.31.252.134:7001/api/v1/dashboard/nbClasses', {
+        fetch('http://176.31.252.134:7001/api/v1/dashboard/nbAppsStarted', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
           },
         }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'Class':JSON.stringify(responseJson.nbClasses)})
+          this.setState({'Result':JSON.stringify(responseJson.nbAppsStarted)})
 
           fetch('http://176.31.252.134:7001/api/v1/games/nbGames', {
             method: 'GET',
@@ -234,8 +234,8 @@ export default class Dashboard extends Component {
           <View style={styles.midbody}>
             <View style={styles.leftcase}>
               <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Class}</Text>
-                <Text style={styles.subtext}>CLASSE{this.addplural(this.state.Class)}</Text>
+                <Text style={styles.primetext}>{this.state.Result}</Text>
+                <Text style={styles.subtext}>RÉSULTAT{this.addplural(this.state.Result)}</Text>
               </View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
@@ -395,6 +395,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#363453',
     borderRadius: 200,
     padding: 7,
+
+    borderBottomColor: 'black',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+
   },
 
 

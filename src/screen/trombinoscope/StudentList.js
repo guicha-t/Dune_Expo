@@ -275,7 +275,7 @@ import { Alert, Button, TextInput, View, Text,
           />
         </View>
 
-        <View style={{flex: 1, backgroundColor: '#FCFCFC'}}>
+        <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
           <GridView
             itemDimension={100}
             spacing={5}
@@ -283,23 +283,21 @@ import { Alert, Button, TextInput, View, Text,
             style={styles.GridView}
             renderItem={item => (
               <View style={styles.itemContainer}>
-                <TouchableOpacity style={{flex: 1}} onPress={() => this._goToStudentProfil(item.idEleve)}>
+                <TouchableOpacity style={{flex: 1, backgroundColor:'#FFF', padding: 4, borderWidth: 2, borderColor:'#363453'}} onPress={() => this._goToStudentProfil(item.idEleve)}>
 
-                  <View style={{flex: 1, padding: 4}}>
-
-                    <View style={{flex: 0.7, backgroundColor:'#363453'}}>
+                    <View style={{flex: 0.7}}>
                       <Image
-                        style={{flex: 1, backgroundColor: '#F9F9F9'}}
+                        style={{flex: 1}}
                         source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        resizeMode="contain"
                         />
                     </View>
 
-                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center', backgroundColor:'#363453'}}>
+                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
                       <Text style={styles.itemName}>{item.nomEleve.toUpperCase()}</Text>
                       <Text style={styles.itemName}>{item.prenomEleve}</Text>
                     </View>
 
-                  </View>
                 </TouchableOpacity>
               </View>
             )}
@@ -344,8 +342,6 @@ const styles = StyleSheet.create({
   },
   ButtonSearch: {
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
     marginBottom: 10,
   },
   allClassContainer: {
@@ -362,7 +358,11 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 14,
-    color: '#FFF',
+    color: '#363453',
+  },
+  itemNameBold: {
+    fontSize: 14,
+    color: '#363453',
     fontWeight:'bold',
   },
   buttonClassAll: {

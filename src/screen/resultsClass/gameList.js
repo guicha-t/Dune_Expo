@@ -76,7 +76,7 @@ export default class GameList extends Component {
               data={this.state.Games}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGame, Game: item})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGP, Game: item, idBack: '0'})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
 
                 <View style={{flex: 0.5, paddingLeft: 10}}>
                   <View style={{flex: 0.5, justifyContent:'center'}}>
@@ -93,7 +93,7 @@ export default class GameList extends Component {
                   </View>
 
                   <View style={{flex: 0.4}}>
-                    <Text style={styles.subtextwhite}>Moyenne: {item.moyenne}</Text>
+                    <Text style={styles.subtextwhite}>Moyenne: {item.moyenne.toFixed(2)}</Text>
                   </View>
 
                   <View style={{flex: 0.3}}>
@@ -103,7 +103,7 @@ export default class GameList extends Component {
 
               </TouchableOpacity>
             }
-            keyExtractor={item => item.idGame.toString()}
+            keyExtractor={item => item.idGP.toString()}
             />
           </View>
 

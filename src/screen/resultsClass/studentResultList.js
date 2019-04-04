@@ -18,11 +18,12 @@ export default class StudentResultList extends Component {
       StudentNote: [],
       Game: this.props.navigation.getParam('Game', 'Unknown'),
       loading: true,
+      idBack: this.props.navigation.getParam('idBack', 'Unknown'),
     }
   }
 
   componentDidMount() {
-    fetch('http://176.31.252.134:7001/api/v1/eleves/stats/byGame/' + this.props.navigation.getParam('idGame', '0'), {
+    fetch('http://176.31.252.134:7001/api/v1/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -40,6 +41,16 @@ export default class StudentResultList extends Component {
     .catch((error) => {
       console.error(error);
     });
+  }
+
+  backAccordingId() {
+    if (this.state.idBack === '0') {
+      this.props.navigation.navigate('GameList', {idBack: '0',});
+    } else if (this.state.idBack === '1'){
+      this.props.navigation.navigate('StudentContainer', {
+        idBack: '1',
+      });
+    }
   }
 
   setAlpha() {
@@ -90,7 +101,7 @@ export default class StudentResultList extends Component {
             <Text style={styles.primetextblue}>{this.state.Game.nameGame.toUpperCase()}</Text>
             <Text style={styles.subtextblue}>{this.state.Game.matiere}</Text>
             <Text style={styles.subtextblue}>{Moment(this.state.Game.date).locale('fr').format('DD/MM/YYYY HH:mm')}</Text>
-            <Text style={styles.subtextblue}>Moyenne: {this.state.Game.moyenne}</Text>
+            <Text style={styles.subtextblue}>Moyenne: {this.state.Game.moyenne.toFixed(2)}</Text>
           </View>
 
           <View style={{flex: 0.7}}>
@@ -129,7 +140,7 @@ export default class StudentResultList extends Component {
               title={'RETOUR'}
               style={styles.ButtonCo}
               color='#363453'
-              onPress={() => this.props.navigation.navigate('GameList')}
+              onPress={() => this.backAccordingId(this.state.idBack)}
             />
             <Button
               title={'TRIER NOTE'}

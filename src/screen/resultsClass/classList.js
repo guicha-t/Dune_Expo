@@ -102,12 +102,8 @@ export default class ClassList extends Component {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('GameList', {idClasse: item.idClasse, labelClasse:this.displayClassLabel(item)})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
-                <View style={{flex: 0.7, paddingLeft: 10, flexDirection: 'row'}}>
+                <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
                   <Text style={styles.primetextwhite}>{this.displayClassLabel(item)}</Text>
-                </View>
-                <View style={{flex: 0.3, alignItems:'center', flexDirection:'row'}}>
-                  <Text style={styles.subtextwhite}>{item.effectif}</Text>
-                  <Text style={styles.subtextwhite}> élève{this.addplural(item.effectif)}</Text>
                 </View>
               </TouchableOpacity>
             }
