@@ -75,7 +75,6 @@ export default class UserDemands extends Component {
           }
       }).then((response) => response.json())
           .then((responseJson) => {
-              //this.props.navigation.navigate('UserDemands');
           })
           .catch((error) => {
               //Alert.alert("ERROR", error);
@@ -93,7 +92,7 @@ export default class UserDemands extends Component {
       },
       body: JSON.stringify({
         idDemande: this.state.idToNotify,
-        validate: 1,
+        validate: true,
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
@@ -133,7 +132,7 @@ export default class UserDemands extends Component {
 
         this.renderProfArray(item.idToNotify);
 
-        this.setState({idToNotif: item.idToNotify.toString()});
+        this.setState({idToNotify: item.idToNotify.toString()});
 
         this.setState({ModalVisibleStatus: visible});
 
