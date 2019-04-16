@@ -19,7 +19,8 @@ export default class UserDemands extends Component {
         idAppModal: null,
         nomAppModal: null,
         dateDemandeModal: null,
-        commentaireModal: null
+        commentaireModal: null,
+        idToNotify: null
     }
 
     this.ts = new Date();
@@ -64,8 +65,26 @@ export default class UserDemands extends Component {
 
   }
 
-  _confirmDemand = (param) => {
-    /*fetch('http://176.31.252.134:7001/api/v1/store/validating', {
+  readNotification = () => {
+      fetch('http://176.31.252.134:7001/api/v1/notifs/read/' + this.state.idAppModal.toString(), {
+          method: 'PUT',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: Store.Token,
+          }
+      }).then((response) => response.json())
+          .then((responseJson) => {
+              //this.props.navigation.navigate('UserDemands');
+          })
+          .catch((error) => {
+              //Alert.alert("ERROR", error);
+              console.error(error);
+          });
+  }
+
+  _confirmDemand = () => {
+    fetch('http://176.31.252.134:7001/api/v1/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -73,16 +92,18 @@ export default class UserDemands extends Component {
         token: Store.Token,
       },
       body: JSON.stringify({
-        idDemande: param,
+        idDemande: this.state.idToNotify,
         validate: 1,
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
-          this.props.navigation.navigate('UserDemands');
+            this.readNotification();
+            this.props.navigation.navigate('UserDemands');
     })
     .catch((error) => {
+        Alert.alert("ERROR", error);
       console.error(error);
-    });*/
+    });
   }
 
 
@@ -112,7 +133,7 @@ export default class UserDemands extends Component {
 
         this.renderProfArray(item.idToNotify);
 
-        this.setState({"Test": item.idToNotify.toString()});
+        this.setState({idToNotif: item.idToNotify.toString()});
 
         this.setState({ModalVisibleStatus: visible});
 
@@ -220,21 +241,21 @@ export default class UserDemands extends Component {
                                 />
 
                                 <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center', marginTop: '10%', marginBottom: '5%'}}>
-                                    <TouchableHighlight style={{margin: '5%'}} onPress={this._confirmDemand(this.state.idAppModal)}>
+                                    <TouchableOpacity style={{margin: '5%'}} onPress={() => { this._confirmDemand} }>
                                         <Image
                                             style={{height: 50, width: 50}}
                                             source={require('./../../picture/profil/errorWhite.png')}
                                             resizeMode="contain"
                                         />
-                                    </TouchableHighlight>
+                                    </TouchableOpacity>
 
-                                    <TouchableHighlight style={{margin: '5%'}} onPress={this._confirmDemand(this.state.idAppModal)}>
+                                    <TouchableOpacity style={{margin: '5%'}} onPress={this._confirmDemand}>
                                         <Image
                                             style={{height: 50, width: 50}}
                                             source={require('./../../picture/profil/successWhite.png')}
                                             resizeMode="contain"
                                         />
-                                    </TouchableHighlight>
+                                    </TouchableOpacity>
                                 </View>
 
                                 <Button color={"white"} title="Décider plus tard" onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />

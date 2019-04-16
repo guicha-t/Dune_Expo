@@ -113,7 +113,6 @@ import { Alert, Button, TextInput, View, Text,
       return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
-
           <View style={styles.classContainer}>
             <View style={{flex: 1}}>
               <FlatList
@@ -130,7 +129,6 @@ import { Alert, Button, TextInput, View, Text,
                   </TouchableOpacity>
                 </View>
               }
-              keyExtractor={item => item.idClasse}
               />
           </View>
         </View>
