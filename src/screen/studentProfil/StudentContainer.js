@@ -8,13 +8,12 @@ import Store from './../../global/store/Store';
 
 import StudentProfil from './StudentProfil';
 import StudentHistory from './StudentHistory';
-import StudentGradebook from './StudentGradebook';
 
 const Tabs = createBottomTabNavigator({
-  'Profil': StudentProfil,
   'Historique': StudentHistory,
-  'Gradebook': StudentGradebook,
+  'Profil': StudentProfil,
 }, {
+  initialRouteName: 'Historique',
   tabBarOptions: {
     activeBackgroundColor: '#e5c35c',
     inactiveBackgroundColor:'#FEE599',

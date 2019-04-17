@@ -91,17 +91,33 @@ export default class ClassList extends Component {
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-          <View style={{flex: 0.1, alignItems:'center', justifyContent:'center'}}>
-            <Text style={styles.primetextblue}>LISTE DES CLASSES</Text>
+          <View style={{flex: 0.1, flexDirection: 'row'}}>
+
+            <View style={{flex: 0.2, justifyContent:'center', paddingLeft: 6}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
+                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
+              <Text style={styles.primetextblue}>LISTE DES CLASSES</Text>
+            </View>
+            <View style={{flex: 0.2}}>
+
+            </View>
+
+
           </View>
 
-          <View style={{flex: 0.8}}>
+          <View style={{flex: 0.9}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Classes}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('GameList', {idClasse: item.idClasse, labelClasse:this.displayClassLabel(item)})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('GameList', {idClasse: item.idClasse, labelClasse:this.displayClassLabel(item)})}
+                style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
                 <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
                   <Text style={styles.primetextwhite}>{this.displayClassLabel(item)}</Text>
                 </View>
@@ -110,16 +126,6 @@ export default class ClassList extends Component {
             keyExtractor={item => item.idClasse.toString()}
             />
           </View>
-
-          <View style={{flex: 0.1, justifyContent:'center', alignItems:'center'}}>
-            <Button
-              title={'RETOUR'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.props.navigation.navigate('Dashboard')}
-            />
-          </View>
-
         </View>
       </View>
     );

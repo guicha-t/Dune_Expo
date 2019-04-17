@@ -65,18 +65,33 @@ export default class GameList extends Component {
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-          <View style={{flex: 0.1, alignItems:'center', justifyContent:'center'}}>
-            <Text style={styles.primetextblue}>{this.state.labelClasse}</Text>
-            <Text style={styles.primetextblue}>LISTE DES APPLICATIONS</Text>
+          <View style={{flex: 0.1, flexDirection: 'row'}}>
+            <View style={{flex: 0.2, justifyContent:'center', paddingLeft: 6}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('ClassList')}>
+                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
+              <Text style={styles.primetextblue}>{this.state.labelClasse}</Text>
+              <Text style={styles.primetextblue}>HISTORIQUE</Text>
+            </View>
+
+            <View style={{flex: 0.2}}>
+
+            </View>
           </View>
 
-          <View style={{flex: 0.8}}>
+
+          <View style={{flex: 0.9}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Games}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGP, Game: item, idBack: '0'})} style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGP, Game: item, idBack: '0'})}
+                style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
 
                 <View style={{flex: 0.5, paddingLeft: 10}}>
                   <View style={{flex: 0.5, justifyContent:'center'}}>
@@ -107,15 +122,6 @@ export default class GameList extends Component {
             />
           </View>
 
-          <View style={{flex: 0.1, justifyContent:'center', alignItems:'center'}}>
-            <Button
-              title={'RETOUR'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.props.navigation.navigate('ClassList')}
-            />
-          </View>
-
         </View>
       </View>
     );
@@ -140,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   subtextwhite: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#FFF',
   },
   primetextblue: {

@@ -230,6 +230,14 @@ import { Alert, Button, TextInput, View, Text,
           <Header navigation={this.props.navigation}/>
 
           <View style={styles.classContainer}>
+
+            <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 10, paddingRight: 10}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
+                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+              </TouchableOpacity>
+            </View>
+
+
             <View style={styles.allClassContainer}>
               <TouchableOpacity style={{flex: 1}} onPress={() => this._resetTrombi()}>
                 <View style={[styles.buttonClassAll, this.setColorFocused(0)]}>
@@ -237,6 +245,7 @@ import { Alert, Button, TextInput, View, Text,
                 </View>
               </TouchableOpacity>
             </View>
+
             <View style={{flex: 0.8}}>
               <FlatList
                 horizontal={true}
@@ -256,6 +265,7 @@ import { Alert, Button, TextInput, View, Text,
               keyExtractor={item => item.idClasse.toString()}
               />
           </View>
+
         </View>
 
         <View style={styles.searchContainer}>
@@ -322,7 +332,7 @@ const styles = StyleSheet.create({
   classContainer: {
     flex: 0.1,
     flexDirection: 'row',
-    paddingTop: 2,
+    paddingTop: 4,
   },
   searchContainer: {
     flex: 0.05,

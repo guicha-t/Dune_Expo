@@ -103,11 +103,40 @@ export default class StudentHistory extends Component {
       return (
         <View style={{flex:1, backgroundColor: '#fff', padding: 4}}>
 
-          <View style={{flex: 0.1, justifyContent:'center', alignItems:'center'}}>
-            <Text style={styles.primetextblue}>{this.state.Student.prenomEleve} {this.state.Student.nomEleve}</Text>
+          <View style={{flex: 0.1, flexDirection:'row'}}>
+            <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 6, paddingRight: 10}}>
+              <TouchableOpacity onPress={() => this._goBackAccordingId(screenProps)}>
+                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity style={{flex: 0.2}} onPress={() => this._goBackAccordingId(screenProps)}>
+              <View style={styles.buttonClass}>
+                <Text style={styles.textClass}>TOUT</Text>
+              </View>
+            </TouchableOpacity>
+
+            <View style={{flex: 0.9}}>
+              <FlatList
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                data={this.state.Games}
+                extraData={this.state}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) =>
+                  <TouchableOpacity style={{flex: 1}} onPress={() => this._goBackAccordingId(screenProps)}>
+                    <View style={styles.buttonClass}>
+                      <Text style={styles.textClass}>{item.matiere.toUpperCase()}</Text>
+                    </View>
+                  </TouchableOpacity>
+              }
+              keyExtractor={item => item.idGP.toString()}
+              />
+            </View>
+
           </View>
 
-          <View style={{flex: 0.8}}>
+          <View style={{flex: 0.9}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Games}
@@ -133,16 +162,6 @@ export default class StudentHistory extends Component {
             keyExtractor={item => item.idGP.toString()}
             />
           </View>
-
-          <View style={{flex: 0.1, justifyContent:'center', alignItems:'center'}}>
-            <Button
-              title={'Retour'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this._goBackAccordingId(screenProps)}
-            />
-          </View>
-
         </View>
       );
     }
@@ -172,6 +191,15 @@ export default class StudentHistory extends Component {
       fontSize: 20,
       color: '#363453',
     },
+    buttonClass: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 2,
+      marginBottom: 4,
+      padding: 5,
+      backgroundColor: '#FEE599'
+    },
     containerFlatList: {
       flex: 1,
       marginBottom: 6,
@@ -186,4 +214,10 @@ export default class StudentHistory extends Component {
       justifyContent:'center',
       marginRight: 10,
     },
+    textClass: {
+      fontSize: 14,
+      color: '#363453',
+      fontWeight: '600',
+    },
+
   });

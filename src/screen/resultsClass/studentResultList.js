@@ -97,14 +97,40 @@ export default class StudentResultList extends Component {
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-          <View style={{flex: 0.2, alignItems:'center', justifyContent:'center'}}>
-            <Text style={styles.primetextblue}>{this.state.Game.nameGame.toUpperCase()}</Text>
-            <Text style={styles.subtextblue}>{this.state.Game.matiere}</Text>
-            <Text style={styles.subtextblue}>{Moment(this.state.Game.date).locale('fr').format('DD/MM/YYYY HH:mm')}</Text>
-            <Text style={styles.subtextblue}>Moyenne: {this.state.Game.moyenne.toFixed(2)}</Text>
+          <View style={{flex: 0.2, flexDirection:'row'}}>
+
+            <View style={{flex: 0.2, justifyContent: 'center', paddingLeft: 6}}>
+              <TouchableOpacity onPress={() => this.backAccordingId(this.state.idBack)}>
+                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+              </TouchableOpacity>
+            </View>
+
+            <View style={{flex: 0.6, alignItems:'center', justifyContent:'center'}}>
+              <Text style={styles.primetextblue}>{this.state.Game.nameGame.toUpperCase()}</Text>
+              <Text style={styles.subtextblue}>{this.state.Game.matiere}</Text>
+              <Text style={styles.subtextblue}>{Moment(this.state.Game.date).locale('fr').format('DD/MM/YYYY HH:mm')}</Text>
+              <Text style={styles.subtextblue}>Moyenne: {this.state.Game.moyenne.toFixed(2)}</Text>
+            </View>
+
+            <View style={{flex: 0.2, padding: 5}}>
+
+              <View style={{flex: 0.5, justifyContent:'center', alignItems:'center'}}>
+                <TouchableOpacity onPress={() => this.setAlpha()}>
+                  <Image source={require('./../../picture/profil/orderAlpha.png')} style={{width:30, height: 30}}/>
+                </TouchableOpacity>
+              </View>
+
+              <View style={{flex: 0.5, justifyContent:'center', alignItems:'center'}}>
+                <TouchableOpacity onPress={() => this.setNote()}>
+                  <Image source={require('./../../picture/profil/orderNum.png')} style={{width:30, height: 30}}/>
+                </TouchableOpacity>
+              </View>
+
+            </View>
           </View>
 
-          <View style={{flex: 0.7}}>
+
+          <View style={{flex: 0.8}}>
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Student}
@@ -128,28 +154,6 @@ export default class StudentResultList extends Component {
             keyExtractor={item => item.idEleve.toString()}
             />
           </View>
-
-          <View style={{flex: 0.1, flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>
-            <Button
-              title={'TRIER NOM'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.setAlpha()}
-              />
-            <Button
-              title={'RETOUR'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.backAccordingId(this.state.idBack)}
-            />
-            <Button
-              title={'TRIER NOTE'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.setNote()}
-            />
-          </View>
-
         </View>
       </View>
     );
