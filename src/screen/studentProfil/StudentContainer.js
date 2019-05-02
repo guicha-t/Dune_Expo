@@ -29,6 +29,8 @@ export default class StudentContainer extends Component {
     this.state = {
       idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
       idBack: this.props.navigation.getParam('idBack', 'Unknown'),
+      idGameType: this.props.navigation.getParam('ididGameType', 'Unknown'),
+
     }
   }
 
@@ -37,6 +39,7 @@ export default class StudentContainer extends Component {
         navigation: this.props.navigation,
         idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
         idBack: this.props.navigation.getParam('idBack', 'Unknown'),
+        idGameType: this.props.navigation.getParam('idGameType', 'Unknown'),
       }
 
       return (

@@ -17,6 +17,8 @@ export default class StudentHistory extends Component {
       loading: true,
       Games: [],
       Student: [],
+      GameType: [],
+      CurrentType: 0,
     }
   }
   static navigationOptions = {
@@ -34,7 +36,141 @@ export default class StudentHistory extends Component {
   };
 
   componentDidMount(){
-    fetch('http://176.31.252.134:7001/api/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
+    if (this.props.screenProps.idGameType==='0')
+    {
+      fetch('http://176.31.252.134:9001/api/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
+        method: 'GET',
+        Accept: 'application/json',
+        headers: {
+          'Content-Type': 'application/json',
+          token: Store.Token,
+        },
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({'Games':responseJson.response})
+
+        fetch('http://176.31.252.134:9001/api/v1/eleves/' + this.props.screenProps.idStudent, {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({'Student':responseJson.response[0]})
+
+          fetch('http://176.31.252.134:9001/api/v1/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
+            method: 'GET',
+            Accept: 'application/json',
+            headers: {
+              'Content-Type': 'application/json',
+              token: Store.Token,
+              idEleve: this.props.screenProps.idStudent,
+
+            },
+          }).then((response) => response.json())
+          .then((responseJson) => {
+            this.setState({'GameType':responseJson.response})
+            this.setState({'loading':false})
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    } else {
+      fetch('http://176.31.252.134:9001/api/v1/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + this.props.screenProps.idGameType, {
+        method: 'GET',
+        Accept: 'application/json',
+        headers: {
+          'Content-Type': 'application/json',
+          token: Store.Token,
+          idMat: this.props.screenProps.idTypeGame,
+          idEleve: this.props.screenProps.idStudent,
+        },
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({'Games':responseJson.response})
+        this.setState({'CurrentType':this.props.screenProps.idGameType})
+
+        fetch('http://176.31.252.134:9001/api/v1/eleves/' + this.props.screenProps.idStudent, {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({'Student':responseJson.response[0]})
+
+          fetch('http://176.31.252.134:9001/api/v1/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
+            method: 'GET',
+            Accept: 'application/json',
+            headers: {
+              'Content-Type': 'application/json',
+              token: Store.Token,
+              idEleve: this.props.screenProps.idStudent,
+
+            },
+          }).then((response) => response.json())
+          .then((responseJson) => {
+            this.setState({'GameType':responseJson.response})
+            this.setState({'loading':false})
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+
+
+  }
+
+  _setCurrentCat = async (param) => {
+    fetch('http://176.31.252.134:9001/api/v1/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + param.idTypeGame, {
+      method: 'GET',
+      Accept: 'application/json',
+      headers: {
+        'Content-Type': 'application/json',
+        token: Store.Token,
+        idMat: param.idTypeGame,
+        idEleve: this.props.screenProps.idStudent,
+      },
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({'Games':responseJson.response})
+      this.setState({'CurrentType':param.idTypeGame})
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  _resetCat = async (param) => {
+    fetch('http://176.31.252.134:9001/api/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -44,28 +180,14 @@ export default class StudentHistory extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       this.setState({'Games':responseJson.response})
-
-      fetch('http://176.31.252.134:7001/api/v1/eleves/' + this.props.screenProps.idStudent, {
-        method: 'GET',
-        Accept: 'application/json',
-        headers: {
-          'Content-Type': 'application/json',
-          token: Store.Token,
-        },
-      }).then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({'Student':responseJson.response[0]})
-        this.setState({'loading':false})
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      this.setState({'CurrentType':0})
 
     })
     .catch((error) => {
       console.error(error);
     });
   }
+
 
   setColorAccordingNote = function(param) {
     if (param >= 0 && param < 25) {
@@ -88,7 +210,38 @@ export default class StudentHistory extends Component {
         backgroundColor: '#297334',
       }
     }
+    else {
+      return {
+        backgroundColor: '#CECECE',
+      }
+    }
+
    }
+
+   setColorFocused = function(param) {
+     if (this.state.CurrentType.toString() === param.toString()) {
+       return {
+         backgroundColor: '#363453',
+       }
+     } else {
+       return {
+         backgroundColor:'#FEE599',
+       }
+     }
+    }
+
+   setColorTextFocused = function(param) {
+     if (this.state.CurrentType.toString() === param.toString()) {
+       return {
+         color: '#FFF',
+       }
+     } else {
+       return {
+         color:'#363453',
+       }
+     }
+    }
+
 
   render() {
       const { navigation, idStudent, screenProps } = { ...this.props };
@@ -110,9 +263,9 @@ export default class StudentHistory extends Component {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={{flex: 0.2}} onPress={() => this._goBackAccordingId(screenProps)}>
-              <View style={styles.buttonClass}>
-                <Text style={styles.textClass}>TOUT</Text>
+            <TouchableOpacity style={{flex: 0.2}} onPress={() => this._resetCat(screenProps)}>
+              <View style={[styles.buttonClass, this.setColorFocused('0')]}>
+                <Text style={[styles.textClass, this.setColorTextFocused('0')]}>TOUT</Text>
               </View>
             </TouchableOpacity>
 
@@ -120,21 +273,21 @@ export default class StudentHistory extends Component {
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                data={this.state.Games}
+                data={this.state.GameType}
                 extraData={this.state}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
-                  <TouchableOpacity style={{flex: 1}} onPress={() => this._goBackAccordingId(screenProps)}>
-                    <View style={styles.buttonClass}>
-                      <Text style={styles.textClass}>{item.matiere.toUpperCase()}</Text>
+                  <TouchableOpacity style={{flex: 1}} onPress={() => this._setCurrentCat(item)}>
+                    <View style={[styles.buttonClass, this.setColorFocused(item.idTypeGame)]}>
+                      <Text style={[styles.textClass, this.setColorTextFocused(item.idTypeGame)]}>{item.labelType.toUpperCase()}</Text>
                     </View>
                   </TouchableOpacity>
               }
-              keyExtractor={item => item.idGP.toString()}
+              keyExtractor={item => item.idTypeGame.toString()}
               />
             </View>
-
           </View>
+
 
           <View style={{flex: 0.9}}>
             <FlatList

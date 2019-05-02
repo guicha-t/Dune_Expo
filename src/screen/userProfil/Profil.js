@@ -18,7 +18,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:7001/api/v1/users/infos', {
+    fetch('http://176.31.252.134:9001/api/v1/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -75,10 +75,16 @@ export default class Profil extends Component {
       <View style={{flex:1, backgroundColor: '#fff'}}>
         <Header navigation={this.props.navigation}/>
 
+        <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 6}}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
+            <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+          </TouchableOpacity>
+        </View>
+
         <View style={styles.topBodyPicture}>
           <Image
             style={styles.profilPicture}
-            source={{uri: 'http://176.31.252.134:7001/files/profs/' + this.state.Profil.picPath}}
+            source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Profil.picPath}}
             resizeMode="contain"
             />
             <Text style={styles.title}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
@@ -93,24 +99,6 @@ export default class Profil extends Component {
               style={styles.ButtonCo}
               color='#363453'
               onPress={this._goToEditProfil}
-            />
-          </View>
-
-          <View style={{paddingBottom: 10}}>
-            <Button
-              title={'Modifier l \' E-mail'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.props.navigation.navigate('EditEmailUser')}
-            />
-          </View>
-
-          <View style={{paddingBottom: 10}}>
-            <Button
-              title={'Modifier le mot de passe'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={() => this.props.navigation.navigate('EditPassUser')}
             />
           </View>
 
@@ -135,7 +123,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
     alignItems: 'center',
-    justifyContent: 'center',
   },
   profilPicture: {
     height: 120,
@@ -144,7 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
   },
   bodyInfo: {
-    flex: 1,
+    flex: 0.4,
     justifyContent:'flex-end',
     paddingLeft: 10,
     paddingRight: 10,

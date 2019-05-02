@@ -16,7 +16,7 @@ export default class EditEmailUser extends Component {
   }
 
   _confirmEdit = async () => {
-    fetch('http://176.31.252.134:7001/api/v1/users/changeEmail', {
+    fetch('http://176.31.252.134:9001/api/v1/users/changeEmail', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -52,8 +52,8 @@ export default class EditEmailUser extends Component {
 
         <View style={styles.containerBody}>
 
-          <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
             <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
+            <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
               <Text style={styles.titleInfo}>Email</Text>
             </View>
             <View style={{flex: 0.7}}>

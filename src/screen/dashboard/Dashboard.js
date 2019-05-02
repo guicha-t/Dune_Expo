@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
   }
 
   componentWillMount() {
-    fetch('http://176.31.252.134:7001/api/v1/dashboard/nbEleves', {
+    fetch('http://176.31.252.134:9001/api/v1/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -35,7 +35,7 @@ export default class Dashboard extends Component {
     .then((responseJson) => {
       this.setState({'Student':JSON.stringify(responseJson.nbEleves)})
 
-      fetch('http://176.31.252.134:7001/api/v1/dashboard/nbNotifsNonL', {
+      fetch('http://176.31.252.134:9001/api/v1/dashboard/nbNotifsNonL', {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
       .then((responseJson) => {
         this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
 
-        fetch('http://176.31.252.134:7001/api/v1/dashboard/nbAppsStarted', {
+        fetch('http://176.31.252.134:9001/api/v1/dashboard/nbAppsStarted', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
         .then((responseJson) => {
           this.setState({'Result':JSON.stringify(responseJson.nbAppsStarted)})
 
-          fetch('http://176.31.252.134:7001/api/v1/games/nbGames', {
+          fetch('http://176.31.252.134:9001/api/v1/games/nbGames', {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -74,7 +74,7 @@ export default class Dashboard extends Component {
 
             this.setState({Day: date, Month: month, Year: year,});
 
-            fetch('http://176.31.252.134:7001/api/v1/users/infos', {
+            fetch('http://176.31.252.134:9001/api/v1/users/infos', {
               method: 'GET',
               headers: {
                 Accept: 'application/json',
@@ -199,6 +199,53 @@ export default class Dashboard extends Component {
               </View>);
     }
 
+
+    renderTopBody(){
+        if (Store.TypeUser.toString() === '2')
+          return (
+            <View style={styles.topbody}>
+              <View style={[styles.leftcase, styles.topleftcase]}>
+                <View style={styles.caseTopRight}>
+                  <Text style={styles.datetext}>{this.state.Day}</Text>
+                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+                  <Text style={styles.datetext}>{this.state.Year}</Text>
+                </View>
+                <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
+                  <Text style={styles.datetext}>Bonjour</Text>
+                  <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
+                  <Text style={styles.datetext}>{this.state.Profil.nomUser}</Text>
+                </View>
+              </View>
+              <View style={[styles.rightcase, styles.topleftcase]}>
+                {this.renderAlertsText()}
+                {this.renderAlertsDir()}
+              </View>
+            </View>
+          );
+        else
+          return (
+            <View style={styles.topbody}>
+              <View style={[styles.leftcase, styles.topleftcase]}>
+                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={styles.datetext}>{this.state.Day}</Text>
+                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+                  <Text style={styles.datetext}>{this.state.Year}</Text>
+                </View>
+              </View>
+
+              <View style={[styles.rightcase, styles.topleftcase]}>
+                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={styles.datetext}>Bonjour</Text>
+                  <Text style={styles.datetext}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+                </View>
+              </View>
+            </View>
+
+          );
+      }
+
+
+
   render() {
 
     if (this.state.loading) {
@@ -212,31 +259,19 @@ export default class Dashboard extends Component {
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-          <View style={styles.topbody}>
-            <View style={[styles.leftcase, styles.topleftcase]}>
-              <View style={styles.caseTopRight}>
-                <Text style={styles.datetext}>{this.state.Day}</Text>
-                <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
-                <Text style={styles.datetext}>{this.state.Year}</Text>
-              </View>
-              <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
-                <Text style={styles.datetext}>Bonjour</Text>
-                <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
-              </View>
-            </View>
 
-            <View style={[styles.rightcase, styles.topleftcase]}>
-              {this.renderAlertsText()}
-              {this.renderAlertsDir()}
-            </View>
-          </View>
+
+          {this.renderTopBody()}
 
           <View style={styles.midbody}>
             <View style={styles.leftcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Result}</Text>
-                <Text style={styles.subtext}>RÉSULTAT{this.addplural(this.state.Result)}</Text>
+
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>HISTORIQUE</Text>
+                <Text style={styles.subtext}>DES SESSIONS</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
@@ -248,13 +283,16 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
 
             <View style={styles.rightcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Student}</Text>
-                <Text style={styles.subtext}>ÉLÈVE{this.addplural(this.state.Student)}</Text>
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>TROMBINOSCOPE</Text>
+                <Text style={styles.subtext}>DES ÉTUDIANTS</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('StudentList')}>
@@ -266,16 +304,19 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
           </View>
 
           <View style={styles.botbody}>
             <View style={styles.leftcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Store}</Text>
-                <Text style={styles.subtext}>APPLICATION{this.addplural(this.state.Store)}</Text>
-                <Text style={styles.subtext}>POSSÉDÉE{this.addplural(this.state.Store)}</Text>
+
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>LOGITHÈQUE /</Text>
+                <Text style={styles.subtext}>STORE</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('GamesList')}>
@@ -287,14 +328,18 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
 
             <View style={styles.rightcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Table}0</Text>
-                <Text style={styles.subtext}>TABLE{this.addplural(this.state.Table)}</Text>
-                <Text style={styles.subtext}>CONNECTÉE{this.addplural(this.state.Table)}</Text>
+
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>SCANNER</Text>
+                <Text style={styles.subtext}>UN QR-CODE</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
+
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
@@ -306,6 +351,7 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
           </View>
 

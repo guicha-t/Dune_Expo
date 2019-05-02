@@ -22,7 +22,7 @@ export default class GameList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://176.31.252.134:7001/api/v1/eleves/stats/byClasse/' + this.props.navigation.getParam('idClasse', '0'), {
+    fetch('http://176.31.252.134:9001/api/v1/eleves/stats/byClasse/' + this.props.navigation.getParam('idClasse', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {

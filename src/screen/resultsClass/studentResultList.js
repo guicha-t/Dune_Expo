@@ -19,11 +19,13 @@ export default class StudentResultList extends Component {
       Game: this.props.navigation.getParam('Game', 'Unknown'),
       loading: true,
       idBack: this.props.navigation.getParam('idBack', 'Unknown'),
+      alphaOpacity: 0.2,
+      numOpacity: 1,
     }
   }
 
   componentDidMount() {
-    fetch('http://176.31.252.134:7001/api/v1/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
+    fetch('http://176.31.252.134:9001/api/v1/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -55,10 +57,16 @@ export default class StudentResultList extends Component {
 
   setAlpha() {
     this.setState({'Student':this.state.StudentAlpha})
+    this.setState({'alphaOpacity':0.2})
+    this.setState({'numOpacity':1})
+
   }
 
   setNote() {
     this.setState({'Student':this.state.StudentNote})
+    this.setState({'alphaOpacity':1})
+    this.setState({'numOpacity':0.2})
+
   }
 
   setColorAccordingNote = function(param) {
@@ -116,13 +124,13 @@ export default class StudentResultList extends Component {
 
               <View style={{flex: 0.5, justifyContent:'center', alignItems:'center'}}>
                 <TouchableOpacity onPress={() => this.setAlpha()}>
-                  <Image source={require('./../../picture/profil/orderAlpha.png')} style={{width:30, height: 30}}/>
+                  <Image source={require('./../../picture/profil/orderAlpha.png')} style={{width:30, height: 30, opacity: this.state.alphaOpacity}}/>
                 </TouchableOpacity>
               </View>
 
               <View style={{flex: 0.5, justifyContent:'center', alignItems:'center'}}>
                 <TouchableOpacity onPress={() => this.setNote()}>
-                  <Image source={require('./../../picture/profil/orderNum.png')} style={{width:30, height: 30}}/>
+                  <Image source={require('./../../picture/profil/orderNum.png')} style={{width:30, height: 30, opacity: this.state.numOpacity}}/>
                 </TouchableOpacity>
               </View>
 
@@ -137,7 +145,7 @@ export default class StudentResultList extends Component {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('StudentContainer', {idStudent: item.idEleve, idBack: '1',})}
+                onPress={() => this.props.navigation.navigate('StudentContainer', {idStudent: item.idEleve, idBack: '1', idGameType: this.state.Game.idMatiere})}
                 style={[styles.containerFlatList]}>
 
                 <View style={{flex: 0.8, paddingLeft: 10, justifyContent:'center'}}>

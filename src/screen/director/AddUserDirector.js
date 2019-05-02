@@ -21,7 +21,7 @@ export default class AddUserDirector extends Component {
   };
 
   _confirmEdit = async () => {
-    fetch('http://176.31.252.134:7001/api/v1/users/add', {
+    fetch('http://176.31.252.134:9001/api/v1/users/add', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
