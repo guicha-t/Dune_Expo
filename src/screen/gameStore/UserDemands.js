@@ -20,7 +20,8 @@ export default class UserDemands extends Component {
         nomAppModal: null,
         dateDemandeModal: null,
         commentaireModal: null,
-        idToNotify: null
+        idToNotify: null,
+        idNotif: null
     }
 
     this.ts = new Date();
@@ -66,7 +67,7 @@ export default class UserDemands extends Component {
   }
 
   readNotification = () => {
-      fetch('http://176.31.252.134:7001/api/v1/notifs/read/' + this.state.idAppModal.toString(), {
+      fetch('http://176.31.252.134:7001/api/v1/notifs/read/' + this.state.idNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -77,7 +78,6 @@ export default class UserDemands extends Component {
           .then((responseJson) => {
           })
           .catch((error) => {
-              //Alert.alert("ERROR", error);
               console.error(error);
           });
   }
@@ -92,12 +92,13 @@ export default class UserDemands extends Component {
       },
       body: JSON.stringify({
         idDemande: this.state.idToNotify,
-        validate: true,
+        validate: 1,
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
             this.readNotification();
-            this.props.navigation.navigate('UserDemands');
+            this.ShowModalFunction(!this.state.ModalVisibleStatus);
+            this.props.navigation.navigate('Dashboard');
     })
     .catch((error) => {
         Alert.alert("ERROR", error);
@@ -106,8 +107,8 @@ export default class UserDemands extends Component {
   }
 
 
-  _cancelDemand = (param) => {
-    /*fetch('http://176.31.252.134:7001/api/v1/store/validating', {
+  _cancelDemand = () => {
+    fetch('http://176.31.252.134:7001/api/v1/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -115,16 +116,19 @@ export default class UserDemands extends Component {
         token: Store.Token,
       },
       body: JSON.stringify({
-        idDemande: param,
-        validate: 0,
+        idDemande: this.state.idToNotify,
+        validate: '0',
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
-          this.props.navigation.navigate('UserDemands');
+            this.readNotification();
+            this.ShowModalFunction(!this.state.ModalVisibleStatus);
+            this.props.navigation.navigate('Dashboard');
     })
     .catch((error) => {
+        Alert.alert("ERROR", error);
       console.error(error);
-    });*/
+    });
   }
 
 
@@ -143,29 +147,27 @@ export default class UserDemands extends Component {
         this.setState({dateDemandeModal: item.dateDemande});
 
         this.setState({commentaireModal: item.commentaire});
+
+        this.setState({idNotif: item.idNotif});
+
     }
 
     ShowModalFunction = (visible) => {
 
       this.setState({'ModalVisibleStatus': visible});
 
-}
+    }
 
 
     render() {
-
     return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
-
     	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
           <Text style={{fontSize:20,}}>
              Application(s) demandée(s)
-
           </Text>
-
         </View>
-
             <View style={{flex: 0.8}}>
                 <List>
                     <FlatList
@@ -181,36 +183,21 @@ export default class UserDemands extends Component {
                         keyExtractor={item => item.nomApp}
                     />
                 </List>
-
                 <View>
-
                     <Modal
                         transparent={true}
-
                         animationType={"slide"}
-
                         visible={this.state.ModalVisibleStatus}
-
                         onRequestClose={ () => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } >
-
                         <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
-
                             <View style={styles.ModalInsideView}>
-
                                     <Text style={styles.TextStyle}> Vous avez une demande sur l'application
-
                                             { " " + this.state.nomAppModal }.
-
                                     </Text>
-
-                                <Text onPress={() => this.props.navigation.navigate('GameProfil', {id: this.state.idAppModal})}  style={styles.TextStyle}>
-
+                                <Text onPress={() => this.props.navigation.navigate('GameContainer', {id: this.state.idAppModal})}  style={{textDecorationLine: 'underline',fontSize: 20, color: "#fff", textAlign: 'center'}}>
                                     Voir l'application
-
                                 </Text>
-
                                 <Text  style={styles.TextProfStyle}> Cette demande a été faite par:</Text>
-
                                 <GridView
                                     itemDimension={100}
                                     spacing={1}
@@ -235,19 +222,16 @@ export default class UserDemands extends Component {
                                                 </View>
                                             </TouchableOpacity>
                                         </View>
-
                                     )}
                                 />
-
                                 <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center', marginTop: '10%', marginBottom: '5%'}}>
-                                    <TouchableOpacity style={{margin: '5%'}} onPress={() => { this._confirmDemand} }>
+                                    <TouchableOpacity style={{margin: '5%'}} onPress={ this._cancelDemand}>
                                         <Image
                                             style={{height: 50, width: 50}}
                                             source={require('./../../picture/profil/errorWhite.png')}
                                             resizeMode="contain"
                                         />
                                     </TouchableOpacity>
-
                                     <TouchableOpacity style={{margin: '5%'}} onPress={this._confirmDemand}>
                                         <Image
                                             style={{height: 50, width: 50}}
@@ -256,15 +240,10 @@ export default class UserDemands extends Component {
                                         />
                                     </TouchableOpacity>
                                 </View>
-
-                                <Button color={"white"} title="Décider plus tard" onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
-
+                                <Button title={'Retour'} color='#363453' onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
                             </View>
-
                         </View>
-
                     </Modal>
-
                 </View>
             </View>
       </View>

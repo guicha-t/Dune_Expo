@@ -118,7 +118,7 @@ import { Alert, Button, TextInput, View, Text,
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                data={[{key: 'Enregistrées'}, {key: 'Disponibles'}]}
+                data={[{key: 'Enregistrées'}, {key: 'Dune Store'}]}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
                 <View style={{width: 178}}>

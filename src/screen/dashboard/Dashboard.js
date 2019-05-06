@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight} from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight, Modal} from 'react-native';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
+import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import Video from "expo/build/av/Video";
 
 @observer
 export default class Dashboard extends Component {
@@ -17,9 +19,43 @@ export default class Dashboard extends Component {
     Day: '',
     Month: '',
     Profil: [],
+    GamesLength:'',
+    GamesRequested: [],
+    i:0,
+    idReadNotif:0,
+    ModalVisibleStatus: false,
   }
 
   componentDidMount() {
+
+        if (Store.TypeUser != 2){
+          fetch('http://176.31.252.134:7001/api/v1/notifs/popUpMenu', {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
+            .then((responseJson) => {
+              this.setState({'GamesRequested':responseJson.response});
+              this.setState({'GamesLength':this.state.GamesRequested.length});
+              if (this.state.GamesRequested.length > 0)
+                this.setState({'ModalVisibleStatus': true});
+              if (this.state.GamesLength > 0){
+                while(this.state.i != this.state.GamesLength){
+                  this.state.idReadNotif = this.state.GamesRequested[this.state.i].idNotif;
+                  this.readNotification();
+                  this.state.i++;
+                }
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+
+
     fetch('http://176.31.252.134:7001/api/v1/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
@@ -103,6 +139,22 @@ export default class Dashboard extends Component {
         });
   }
 
+  readNotification = () => {
+      fetch('http://176.31.252.134:7001/api/v1/notifs/read/' + this.state.idReadNotif.toString(), {
+          method: 'PUT',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: Store.Token,
+          }
+      }).then((response) => response.json())
+          .then((responseJson) => {
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+  }
+
   getCurrentMonth(param) {
       if (param === '1') {
           return <Text>JANVIER</Text>;
@@ -146,6 +198,7 @@ export default class Dashboard extends Component {
   }
 
   renderAlertsDir(){
+    if (Store.TypeUser == 2){
       if (this.state.Notif != 0)
         return (
               <View style={{flex: 0.2, flexDirection: 'row'}}>
@@ -172,10 +225,12 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>);
-   return null;
+    }
+    return null;
   }
 
   renderAlertsText(){
+    if (Store.TypeUser == 2){
       if (this.state.Notif != 0)
         return (
               <View style={styles.datacase}>
@@ -190,12 +245,86 @@ export default class Dashboard extends Component {
                 <Text style={styles.datetext}>NOTIFICATION{this.addplural(this.state.Notif)}</Text>
               </View>);
     }
+  }
+
+  ShowModalFunction = (visible) => {
+    this.setState({'ModalVisibleStatus': visible});
+  }
+
+  renderTextNotifProf = (text) => {
+    if (text === "Votre demande d'achat a été validée par le directeur.")
+     return(
+      <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.NotifName}>Validée</Text>
+      </View>);
+    else
+     return(
+      <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.NotifName}>Refusée</Text>
+      </View>);
+  }
+
+  renderAlertsProf(){
+              return(
+                <View>
+                    <Modal
+                        transparent={true}
+
+                        animationType={"slide"}
+
+                        visible={this.state.ModalVisibleStatus}
+
+                          onRequestClose={() => {
+                            Alert.alert('Modal has been closed.');
+                          }}>
+                        <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={styles.ModalInsideView}>
+                                <Text style={styles.TextStyle}>
+                                   Vous avez une ou plusieurs demande(s) d'application(s) traîtée(s)
+                                </Text>
+                                <GridView
+                                    itemDimension={100}
+                                    spacing={1}
+                                    items={this.state.GamesRequested}
+                                    style={{paddingTop: 25, flex: 1}}
+                                    renderItem={item => (
+                                        <View style={styles.itemContainer}>
+                                                <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
+                                                    <View style={{flex: 1, paddingTop: 10}}>
+                                                        <Image
+                                                            style={{flex: 1, borderRadius: 10}}
+                                                            source={{uri: 'http://176.31.252.134:7001/files/apps/' + item.game_image}}
+                                                        />
+                                                    </View>
+                                                </View>
+                                                {this.renderTextNotifProf(item.textNotif)}
+                                        </View>
+                                    )}
+                                />
+                                <Button title={'Retour'} color='#363453' onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+
+              );
+  }
 
   render() {
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
+
+
+
+          <View>
+            {this.renderAlertsProf()}
+          </View>
+
+
+
+
 
           <View style={styles.topbody}>
             <View style={[styles.leftcase, styles.topleftcase]}>
@@ -328,7 +457,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#FFF',
   },
-
+  itemContainer: {
+    flex: 1,
+    height: 130,
+    backgroundColor: '#FFF',
+    borderRadius:10,
+  },
   leftcase: {
     flex: 1,
     backgroundColor: '#FFF',
@@ -344,8 +478,28 @@ const styles = StyleSheet.create({
   topleftcase: {
     backgroundColor: '#363453',
   },
+    ModalInsideView:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor : "#363453",
+        height: 280 ,
+        width: '90%',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff'
 
+    },
+  NotifName: {
+    fontSize: 12,
+    color: '#434B77',
+    fontWeight: '600',
+  },
+    TextStyle:{
 
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center'
+  },
   datacase: {
     alignItems: 'center',
     justifyContent: 'center',
