@@ -13,6 +13,8 @@ export default class EditPassUser extends Component {
       oldpassword: '',
       newpassword: '',
       newpasswordbis: '',
+      pwdhide: true,
+      opacity: 1,
     }
   }
 
@@ -23,7 +25,7 @@ export default class EditPassUser extends Component {
   _confirmEdit = async () => {
     if (this.state.newpassword === this.state.newpasswordbis)
     {
-      fetch('http://176.31.252.134:7001/api/v1/users/changePassword', {
+      fetch('http://176.31.252.134:9001/api/v1/users/changePassword', {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
@@ -51,6 +53,17 @@ export default class EditPassUser extends Component {
     }
   };
 
+  _pwdhide = async () => {
+    if (this.state.pwdhide === true) {
+      this.setState({'pwdhide':false})
+      this.setState({'opacity':0.1})
+    } else {
+      this.setState({'pwdhide':true})
+      this.setState({'opacity':1})
+    }
+  };
+
+
 
   render() {
     return(
@@ -69,7 +82,7 @@ export default class EditPassUser extends Component {
                  style={styles.input}
                  placeholder='Mot de passe'
                  onChangeText={(oldpassword) => this.setState({oldpassword})}
-                 secureTextEntry={true}
+                 secureTextEntry={this.state.pwdhide}
                  value={this.state.oldpassword}
                />
              </View>
@@ -84,7 +97,7 @@ export default class EditPassUser extends Component {
                  style={styles.input}
                  placeholder='Mot de passe'
                  onChangeText={(newpassword) => this.setState({newpassword})}
-                 secureTextEntry={true}
+                 secureTextEntry={this.state.pwdhide}
                  value={this.state.newpassword}
                />
              </View>
@@ -99,12 +112,23 @@ export default class EditPassUser extends Component {
                  style={styles.input}
                  placeholder='Mot de passe'
                  onChangeText={(newpasswordbis) => this.setState({newpasswordbis})}
-                 secureTextEntry={true}
+                 secureTextEntry={this.state.pwdhide}
                  value={this.state.newpasswordbis}
                />
              </View>
           </View>
+
+          <View>
+            <TouchableOpacity onPress={this._pwdhide}>
+              <Image
+                style={{height: 40, width: 40, opacity: this.state.opacity}}
+                source={require('./../../picture/start/eye.png')}
+                resizeMode="contain"
+                />
+            </TouchableOpacity>
+          </View>
           <Text style={{fontSize: 10}}>* le nouveau mot de passe doit contenir au minimum 8 caractères.</Text>
+
 
          </View>
          <View style={styles.containerFooter}>

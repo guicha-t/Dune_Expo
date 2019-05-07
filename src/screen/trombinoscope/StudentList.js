@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text,
   StyleSheet, AsyncStorage, ListView, TouchableOpacity,
-  Picker, Item, FlatList, Image, Keyboard} from 'react-native';
+  Picker, Item, FlatList, Image, Keyboard, ActivityIndicator} from 'react-native';
   import { observer } from 'mobx-react';
   import { Avatar } from 'react-native-elements';
 
   import GridView from 'react-native-super-grid';
+
+  import Loading from './../../global/loading/Loading';
+
 
   import Header from './../../global/header/Header';
   import Store from './../../global/store/Store'
@@ -17,13 +20,14 @@ import { Alert, Button, TextInput, View, Text,
       this.state = {
         Trombi: [],
         Classes: [],
-        Class: null,
+        Class: 0,
         Search: '',
+        loading: true,
       }
     }
 
     componentDidMount(){
-      fetch('http://176.31.252.134:7001/api/v1/trombi/', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -36,35 +40,40 @@ import { Alert, Button, TextInput, View, Text,
       }).then((response) => response.json())
       .then((responseJson) => {
         this.setState({'Trombi':responseJson.response})
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
-      fetch('http://176.31.252.134:7001/api/v1/trombi/classes', {
-        method: 'GET',
-        Accept: 'application/json',
-        headers: {
-          'Content-Type': 'application/json',
-          token: Store.Token,
-        },
-      }).then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({'Classes':responseJson.response})
+        fetch('http://176.31.252.134:9001/api/v1/trombi/classes', {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
+        .then((responseJson) => {
+          this.setState({'Classes':responseJson.response})
+          this.setState({'loading':false})
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       })
       .catch((error) => {
         console.error(error);
       });
     }
 
+
     _goToStudentProfil = async (param) => {
       this.props.navigation.navigate('StudentContainer', {
         idStudent: param,
+        idBack: '0',
+        idGameType: '0',
       });
     };
 
     _setCurrentClass = async (param) => {
-      fetch('http://176.31.252.134:7001/api/v1/trombi/byClasse', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/byClasse', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -77,7 +86,7 @@ import { Alert, Button, TextInput, View, Text,
         }),
       }).then((response) => response.json())
       .then((responseJson) => {
-        this.setState({'Class':param.idClasse})
+        this.setState({'Class': param.idClasse})
         this.setState({'Search': null})
         this.setState({'Trombi':responseJson.response})
       })
@@ -87,7 +96,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     _resetTrombi = async () => {
-      fetch('http://176.31.252.134:7001/api/v1/trombi/', {
+      fetch('http://176.31.252.134:9001/api/v1/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -99,7 +108,7 @@ import { Alert, Button, TextInput, View, Text,
         }),
       }).then((response) => response.json())
       .then((responseJson) => {
-        this.setState({'Class':null})
+        this.setState({'Class':0})
         this.setState({'Search':null})
         this.setState({'Trombi':responseJson.response})
       })
@@ -110,8 +119,8 @@ import { Alert, Button, TextInput, View, Text,
 
     _searchRequest = async () => {
       Keyboard.dismiss()
-      if (this.state.Class === null) {
-        fetch('http://176.31.252.134:7001/api/v1/trombi/', {
+      if (this.state.Class === 0) {
+        fetch('http://176.31.252.134:9001/api/v1/trombi/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -131,7 +140,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://176.31.252.134:7001/api/v1/trombi/byClasse', {
+        fetch('http://176.31.252.134:9001/api/v1/trombi/byClasse', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -155,57 +164,100 @@ import { Alert, Button, TextInput, View, Text,
 
     displayClassLabel(param) {
         if (param.level === 1) {
-            return <Text style={styles.textClass}> PS-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> PS-{param.num}</Text>;
         } else if (param.level === 2){
-            return <Text style={styles.textClass}> MS-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> MS-{param.num}</Text>;
         } else if (param.level === 3){
-            return <Text style={styles.textClass}> GS-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> GS-{param.num} </Text>;
         } else if (param.level === 4){
-            return <Text style={styles.textClass}> CP-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CP-{param.num}</Text>;
         } else if (param.level === 5){
-            return <Text style={styles.textClass}> CE1-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CE1-{param.num}</Text>;
         } else if (param.level === 6){
-            return <Text style={styles.textClass}> CE2-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CE2-{param.num}</Text>;
         } else if (param.level === 7){
-            return <Text style={styles.textClass}> CM1-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CM1-{param.num}</Text>;
         } else if (param.level === 8){
-            return <Text style={styles.textClass}> CM2-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CM2-{param.num} </Text>;
         } else if (param.level === 9){
-            return <Text style={styles.textClass}> '6e'-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '6e'-{param.num} </Text>;
         } else if (param.level === 10){
-            return <Text style={styles.textClass}> '5e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '5e'-{param.num}</Text>;
         } else if (param.level === 11){
-            return <Text style={styles.textClass}> '4e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '4e'-{param.num}</Text>;
         } else if (param.level === 12){
-            return <Text style={styles.textClass}> '3e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '3e'-{param.num}</Text>;
         } else {
-            return <Text style={styles.textClass}> Autre </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> Autre </Text>;
         }
     }
 
+     setColorFocused = function(param) {
+       if (this.state.Class === param) {
+         return {
+           backgroundColor: '#363453',
+         }
+       } else {
+         return {
+           backgroundColor:'#FEE599',
+         }
+       }
+      }
+
+    setColorTextFocused = function(param) {
+      if (this.state.Class === param) {
+        return {
+          color: '#FFF',
+        }
+      } else {
+        return {
+          color:'#363453',
+        }
+      }
+     }
+
+
+
     render() {
+
+      if (this.state.loading) {
+          return (
+            <Loading navigation={this.props.navigation}/>
+          )
+        }
+
       return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
 
           <View style={styles.classContainer}>
+
+            <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 10, paddingRight: 10}}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
+                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
+              </TouchableOpacity>
+            </View>
+
+
             <View style={styles.allClassContainer}>
               <TouchableOpacity style={{flex: 1}} onPress={() => this._resetTrombi()}>
-                <View style={styles.buttonClassAll}>
-                  <Text style={styles.textClass}>Tout</Text>
+                <View style={[styles.buttonClassAll, this.setColorFocused(0)]}>
+                  <Text style={[styles.textClass, this.setColorTextFocused(0)]}>TOUT</Text>
                 </View>
               </TouchableOpacity>
             </View>
+
             <View style={{flex: 0.8}}>
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 data={this.state.Classes}
+                extraData={this.state}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
                 <View style={{width: 80}}>
                   <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentClass(item)}>
-                    <View style={styles.buttonClass}>
+                    <View style={[styles.buttonClass, this.setColorFocused(item.idClasse)]}>
                       {this.displayClassLabel(item)}
                     </View>
                   </TouchableOpacity>
@@ -214,6 +266,7 @@ import { Alert, Button, TextInput, View, Text,
               keyExtractor={item => item.idClasse.toString()}
               />
           </View>
+
         </View>
 
         <View style={styles.searchContainer}>
@@ -224,6 +277,7 @@ import { Alert, Button, TextInput, View, Text,
             autoCapitalize = 'none'
             style={styles.input}
           />
+
           <Button
             title={'Go'}
             style={styles.ButtonSearch}
@@ -232,31 +286,31 @@ import { Alert, Button, TextInput, View, Text,
           />
         </View>
 
-
-        <View style={{flex: 0.8}}>
+        <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
           <GridView
             itemDimension={100}
-            spacing={1}
+            spacing={5}
             items={this.state.Trombi}
             style={styles.GridView}
             renderItem={item => (
               <View style={styles.itemContainer}>
-                <TouchableOpacity style={{flex: 1}} onPress={() => this._goToStudentProfil(item.idEleve)}>
-                  <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-                    <View style={{flex: 0.7, paddingTop: 10}}>
+                <TouchableOpacity style={{flex: 1, backgroundColor:'#FFF', padding: 4, borderWidth: 2, borderColor:'#363453'}} onPress={() => this._goToStudentProfil(item.idEleve)}>
+
+                    <View style={{flex: 0.7}}>
                       <Image
-                        style={{flex: 1, backgroundColor: '#252525'}}
-                        source={{uri: 'http://176.31.252.134:7001/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        style={{flex: 1}}
+                        source={{uri: 'http://176.31.252.134:9001/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        resizeMode="contain"
                         />
                     </View>
+
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={styles.itemName}>{item.nomEleve}</Text>
+                      <Text style={styles.itemName}>{item.nomEleve.toUpperCase()}</Text>
                       <Text style={styles.itemName}>{item.prenomEleve}</Text>
                     </View>
-                  </View>
+
                 </TouchableOpacity>
               </View>
-
             )}
             />
         </View>
@@ -266,14 +320,20 @@ import { Alert, Button, TextInput, View, Text,
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor:'#F9F9F9',
+  },
   mainContainer: {
     flex:1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
   },
   classContainer: {
     flex: 0.1,
     flexDirection: 'row',
-    paddingTop: 2,
+    paddingTop: 4,
   },
   searchContainer: {
     flex: 0.05,
@@ -293,8 +353,6 @@ const styles = StyleSheet.create({
   },
   ButtonSearch: {
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
     marginBottom: 10,
   },
   allClassContainer: {
@@ -307,18 +365,21 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     height: 160,
-    backgroundColor: '#161616',
+    backgroundColor: '#363453',
   },
   itemName: {
-    fontSize: 12,
-    color: '#FFF',
-    fontWeight: '600',
+    fontSize: 14,
+    color: '#363453',
+  },
+  itemNameBold: {
+    fontSize: 14,
+    color: '#363453',
+    fontWeight:'bold',
   },
   buttonClassAll: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
     margin:2,
   },
   buttonClass: {
@@ -326,11 +387,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 2,
-    backgroundColor: '#FEE599',
   },
   textClass: {
     fontSize: 14,
-    color: '#161616',
     fontWeight: '600',
   },
 });

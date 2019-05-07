@@ -8,13 +8,17 @@ import Store from './../../global/store/Store'
 export default class Start extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       username: '',
       password: '',
       pwdhide: true,
+      opacity: 1,
     };
   }
+
+  static navigationOptions = {
+     drawerLockMode: 'locked-open',
+}
 
   _storeId = async (param) => {
   try {
@@ -43,7 +47,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://176.31.252.134:7001/api/v1/login/', {
+    fetch('http://176.31.252.134:9001/api/v1/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -81,10 +85,12 @@ export default class Start extends Component {
   _pwdhide = async () => {
     if (this.state.pwdhide === true) {
       this.setState({'pwdhide':false})
+      this.setState({'opacity':0.1})
     } else {
       this.setState({'pwdhide':true})
+      this.setState({'opacity':1})
     }
-      };
+  };
 
   render() {
     return (
@@ -103,45 +109,59 @@ export default class Start extends Component {
 
 
 
-          <View style={{flex: 0.4, alignItems:'center', justifyContent:'center'}}>
+          <View style={{flex: 0.4}}>
 
-            <TextInput
-              value={this.state.username}
-              onChangeText={(username) => this.setState({ username })}
-              placeholder={'Nom de compte'}
-              autoCapitalize = 'none'
-              style={styles.input}
-            />
-            <TextInput
-              value={this.state.password}
-              onChangeText={(password) => this.setState({ password })}
-              placeholder={'Mot de passe'}
-              secureTextEntry={this.state.pwdhide}
-              autoCapitalize = 'none'
-              style={styles.input}
-            />
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.6, alignItems: 'center', justifyContent:'flex-end'}}>
+                <TextInput
+                  value={this.state.username}
+                  onChangeText={(username) => this.setState({ username })}
+                  placeholder={'Nom de compte'}
+                  autoCapitalize = 'none'
+                  style={styles.input}
+                  />
+              </View>
+              <View style={{flex: 0.2}}></View>
+            </View>
 
-          <View style={{flex: 0.4, marginBottom: 20}}>
-            <Button
-              title={'AFFICHER'}
-              style={styles.ButtonHide}
-              color='#FEE599'
-              onPress={this._pwdhide}
-            />
-          </View>
-            <Button
-              title={'Connexion'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={this.onLogin.bind(this)}
-            />
+            <View style={{flex: 0.3, flexDirection: 'row'}}>
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.6, alignItems: 'center', justifyContent:'center'}}>
+                <TextInput
+                  value={this.state.password}
+                  onChangeText={(password) => this.setState({ password })}
+                  placeholder={'Mot de passe'}
+                  secureTextEntry={this.state.pwdhide}
+                  autoCapitalize = 'none'
+                  style={styles.input}
+                  />
+              </View>
+              <View style={{flex: 0.2}}>
+                <TouchableOpacity onPress={this._pwdhide} style={{flex: 1, justifyContent:'center', marginRight: 10}}>
+                  <Image
+                    style={{flex: 0.4, height: undefined, width: undefined, opacity: this.state.opacity}}
+                    source={require('./../../picture/start/eye.png')}
+                    resizeMode="contain"
+                    />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
+              <Button
+                title={'Connexion'}
+                style={styles.ButtonCo}
+                color='#363453'
+                onPress={this.onLogin.bind(this)}
+                />
+            </View>
         </View>
 
 
 
         <View style={{flex: 0.1, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 20}}>
           <TouchableOpacity onPress={this._fgtPass}>
-            <Text>
+            <Text style={{color: '#343653'}}>
               Mot de passe oublié
             </Text>
           </TouchableOpacity>
@@ -164,13 +184,12 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 10,
+    borderColor: '#363453',
   },
   ButtonCo: {
     padding: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#363453',
     marginBottom: 10,
   },
   ButtonHide: {

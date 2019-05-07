@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight, Modal} from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight, Modal, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
+import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
 import Video from "expo/build/av/Video";
 
 @observer
 export default class Dashboard extends Component {
   state = {
+    loading: true,
     Table: '',
     Student: '',
     Notif: '',
-    Class: '',
+    Result: '',
     Store: '',
     Day: '',
     Month: '',
+    Year: '',
     Profil: [],
     GamesLength:'',
     GamesRequested: [],
@@ -26,10 +29,10 @@ export default class Dashboard extends Component {
     ModalVisibleStatus: false,
   }
 
-  componentDidMount() {
+  componentWillMount() {
 
         if (Store.TypeUser != 2){
-          fetch('http://176.31.252.134:7001/api/v1/notifs/popUpMenu', {
+          fetch('http://176.31.252.134:9001/api/v1/notifs/popUpMenu', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -56,7 +59,7 @@ export default class Dashboard extends Component {
         }
 
 
-    fetch('http://176.31.252.134:7001/api/v1/dashboard/nbEleves', {
+      fetch('http://176.31.252.134:9001/api/v1/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -66,81 +69,85 @@ export default class Dashboard extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       this.setState({'Student':JSON.stringify(responseJson.nbEleves)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 
-    fetch('http://176.31.252.134:7001/api/v1/dashboard/nbNotifsNonL', {
-      method: 'GET',
-      Accept: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    fetch('http://176.31.252.134:7001/api/v1/dashboard/nbClasses', {
-      method: 'GET',
-      Accept: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({'Class':JSON.stringify(responseJson.nbClasses)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    fetch('http://176.31.252.134:7001/api/v1/games/nbGames', {
-      method: 'GET',
-      Accept: 'application/json',
-      headers: {
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({'Store':JSON.stringify(responseJson.response[0].nbGames)})
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    var date = new Date().getDate(); //Current Date
-    var month = new Date().getMonth() + 1; //Current Month
-    this.setState({
-          Day: date,
-          Month: month,
-        });
-
-    fetch('http://176.31.252.134:7001/api/v1/users/infos', {
-      method: 'GET',
-      headers: {
+      fetch('http://176.31.252.134:9001/api/v1/dashboard/nbNotifsNonL', {
+        method: 'GET',
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-    }).then((response) => response.json())
+        headers: {
+          'Content-Type': 'application/json',
+          token: Store.Token,
+        },
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
+
+        fetch('http://176.31.252.134:9001/api/v1/dashboard/nbAppsStarted', {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'Profil':JSON.parse(JSON.stringify(responseJson.response[0]))})
+          this.setState({'Result':JSON.stringify(responseJson.nbAppsStarted)})
+
+          fetch('http://176.31.252.134:9001/api/v1/games/nbGames', {
+            method: 'GET',
+            Accept: 'application/json',
+            headers: {
+              'Content-Type': 'application/json',
+              token: Store.Token,
+            },
+          }).then((response) => response.json())
+          .then((responseJson) => {
+            this.setState({'Store':JSON.stringify(responseJson.response[0].nbGames)})
+
+            var date = new Date().getDate(); //Current Date
+            var month = new Date().getMonth() + 1; //Current Month
+            var year = new Date().getFullYear(); //Current Year
+
+            this.setState({Day: date, Month: month, Year: year,});
+
+            fetch('http://176.31.252.134:9001/api/v1/users/infos', {
+              method: 'GET',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: Store.Token,
+              },
+            }).then((response) => response.json())
+            .then((responseJson) => {
+              this.setState({'Profil':JSON.parse(JSON.stringify(responseJson.response[0]))})
+              this.setState({'loading':false})
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
         })
         .catch((error) => {
           console.error(error);
         });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   readNotification = () => {
-      fetch('http://176.31.252.134:7001/api/v1/notifs/read/' + this.state.idReadNotif.toString(), {
+      fetch('http://176.31.252.134:9001/api/v1/notifs/read/' + this.state.idReadNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -293,7 +300,7 @@ export default class Dashboard extends Component {
                                                     <View style={{flex: 1, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
-                                                            source={{uri: 'http://176.31.252.134:7001/files/apps/' + item.game_image}}
+                                                            source={{uri: 'http://176.31.252.134:9001/files/apps/' + item.game_image}}
                                                         />
                                                     </View>
                                                 </View>
@@ -310,21 +317,69 @@ export default class Dashboard extends Component {
               );
   }
 
+
+    renderTopBody(){
+        if (Store.TypeUser.toString() === '2')
+          return (
+            <View style={styles.topbody}>
+              <View style={[styles.leftcase, styles.topleftcase]}>
+                <View style={styles.caseTopRight}>
+                  <Text style={styles.datetext}>{this.state.Day}</Text>
+                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+                  <Text style={styles.datetext}>{this.state.Year}</Text>
+                </View>
+                <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
+                  <Text style={styles.datetext}>Bonjour</Text>
+                  <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
+                  <Text style={styles.datetext}>{this.state.Profil.nomUser}</Text>
+                </View>
+              </View>
+              <View style={[styles.rightcase, styles.topleftcase]}>
+                {this.renderAlertsText()}
+                {this.renderAlertsDir()}
+              </View>
+            </View>
+          );
+        else
+          return (
+            <View style={styles.topbody}>
+              <View style={[styles.leftcase, styles.topleftcase]}>
+                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={styles.datetext}>{this.state.Day}</Text>
+                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+                  <Text style={styles.datetext}>{this.state.Year}</Text>
+                </View>
+              </View>
+
+              <View style={[styles.rightcase, styles.topleftcase]}>
+                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={styles.datetext}>Bonjour</Text>
+                  <Text style={styles.datetext}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+                </View>
+              </View>
+            </View>
+
+          );
+      }
+
+
+
   render() {
+
+    if (this.state.loading) {
+        return (
+          <Loading navigation={this.props.navigation}/>
+        )
+      }
+
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
         <View style={styles.body}>
 
-
-
           <View>
             {this.renderAlertsProf()}
           </View>
-
-
-
-
 
           <View style={styles.topbody}>
             <View style={[styles.leftcase, styles.topleftcase]}>
@@ -339,21 +394,21 @@ export default class Dashboard extends Component {
               </View>
             </View>
 
-            <View style={[styles.rightcase, styles.topleftcase]}>
-              {this.renderAlertsText()}
-              {this.renderAlertsDir()}
-            </View>
-          </View>
+
+          {this.renderTopBody()}
 
           <View style={styles.midbody}>
             <View style={styles.leftcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Class}</Text>
-                <Text style={styles.subtext}>CLASSE{this.addplural(this.state.Class)}</Text>
+
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>HISTORIQUE</Text>
+                <Text style={styles.subtext}>DES SESSIONS</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
+                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
                   <Image
                     style={{flex: 1, height: undefined, width: undefined}}
                     source={require('./../../picture/dashboard/class.png')}
@@ -362,13 +417,16 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
 
             <View style={styles.rightcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Student}</Text>
-                <Text style={styles.subtext}>ÉLÈVE{this.addplural(this.state.Student)}</Text>
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>TROMBINOSCOPE</Text>
+                <Text style={styles.subtext}>DES ÉTUDIANTS</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('StudentList')}>
@@ -380,16 +438,19 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
           </View>
 
           <View style={styles.botbody}>
             <View style={styles.leftcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Store}</Text>
-                <Text style={styles.subtext}>APPLICATION{this.addplural(this.state.Store)}</Text>
-                <Text style={styles.subtext}>POSSÉDÉE{this.addplural(this.state.Store)}</Text>
+
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>LOGITHÈQUE /</Text>
+                <Text style={styles.subtext}>STORE</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('GamesList')}>
@@ -401,14 +462,18 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
 
             <View style={styles.rightcase}>
-              <View style={styles.datacase}>
-                <Text style={styles.primetext}>{this.state.Table}0</Text>
-                <Text style={styles.subtext}>TABLE{this.addplural(this.state.Table)}</Text>
-                <Text style={styles.subtext}>CONNECTÉE{this.addplural(this.state.Table)}</Text>
+
+              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                <Text style={styles.subtext}>SCANNER</Text>
+                <Text style={styles.subtext}>UN QR-CODE</Text>
               </View>
+              <View style={{flex: 0.1}}></View>
+
               <View style={{flex: 0.2, flexDirection: 'row'}}>
                 <View style={{flex: 0.3}}></View>
                 <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
@@ -420,6 +485,7 @@ export default class Dashboard extends Component {
                 </TouchableOpacity>
                 <View style={{flex: 0.3}}></View>
               </View>
+              <View style={{flex: 0.1}}></View>
             </View>
           </View>
 
@@ -433,6 +499,12 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: '#F9F9F9',
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: '#F9F9F9',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   topbody: {
     flex: 1,
@@ -451,7 +523,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   caseTopRight: {
-    flex: 0.4,
+    flex: 0.5,
     alignItems: 'center',
     justifyContent:'center',
     borderBottomWidth: 2,
@@ -528,8 +600,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#363453',
     borderRadius: 200,
     padding: 7,
+
+    borderBottomColor: 'black',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+
   },
-
-
 
 });

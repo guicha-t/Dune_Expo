@@ -23,7 +23,7 @@ export default class StudentEdit extends Component {
   };
 
   _confirmEdit = async () => {
-    fetch('http://176.31.252.134:7001/api/v1/eleves/update', {
+    fetch('http://176.31.252.134:9001/api/v1/eleves/update', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

@@ -8,7 +8,20 @@ import {
   Alert,
 } from 'react-native';
 
+import {
+    BallIndicator,
+    BarIndicator,
+    DotIndicator,
+    MaterialIndicator,
+    PacmanIndicator,
+    PulseIndicator,
+    SkypeIndicator,
+    UIActivityIndicator,
+    WaveIndicator,
+  } from 'react-native-indicators';
+
 import Store from './../../global/store/Store'
+import Header from './../../global/header/Header';
 
 export default class AuthLoadingScreen extends Component {
   constructor(props) {
@@ -21,7 +34,7 @@ export default class AuthLoadingScreen extends Component {
     const localToken = await AsyncStorage.getItem('localToken');
     const localType = await AsyncStorage.getItem('localType');
 
-    fetch('http://176.31.252.134:7001/api/v1/tokens/verifyToken', {
+    fetch('http://176.31.252.134:9001/api/v1/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',
       headers: {
@@ -60,7 +73,7 @@ export default class AuthLoadingScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+        <BarIndicator color='#363453'/>
         <StatusBar barStyle="default" />
       </View>
     );
@@ -73,6 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
+    backgroundColor: '#F9F9F9',
   },
 });

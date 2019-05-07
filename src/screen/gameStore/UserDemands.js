@@ -30,7 +30,7 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
-      fetch('http://176.31.252.134:7001/api/v1/notifs/popUpMenu', {
+   fetch('http://176.31.252.134:9001/api/v1/notifs', {
       method: 'GET',
       headers: {
         Accept: 'application/json',

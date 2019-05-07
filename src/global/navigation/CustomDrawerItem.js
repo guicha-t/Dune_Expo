@@ -23,22 +23,6 @@ export default class CustomDrawerItems extends Component {
       <View style={styles.container}>
         <ScrollView>
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Loading')}>
-            <View style={styles.button}>
-              <View style={styles.labelContainer}>
-                <Text style={styles.label}>Loading</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Start')}>
-            <View style={styles.button}>
-              <View style={styles.labelContainer}>
-                <Text style={styles.label}>Start</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
@@ -50,7 +34,7 @@ export default class CustomDrawerItems extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.navigate('StudentList')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
-                <Text style={styles.label}>Liste des élèves</Text>
+                <Text style={styles.label}>Trombinoscope</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -58,7 +42,7 @@ export default class CustomDrawerItems extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.navigate('GamesList')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
-                <Text style={styles.label}>Store</Text>
+                <Text style={styles.label}>Logithèque</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -66,7 +50,7 @@ export default class CustomDrawerItems extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
-                <Text style={styles.label}>Mes demandes</Text>
+                <Text style={styles.label}>Notification</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -85,7 +69,7 @@ export default class CustomDrawerItems extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.navigate('QRCode')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
-                <Text style={styles.label}>QR-Code</Text>
+                <Text style={styles.label}>Scan QR-Code</Text>
               </View>
             </View>
           </TouchableOpacity>

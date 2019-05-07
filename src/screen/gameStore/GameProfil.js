@@ -15,8 +15,7 @@ export default class GameProfil extends Component {
     this.state = {
       Game: [],
       Status:'',
-      Rating:[],
-      Moyenne:0,
+      Rating:[]
     }
   }
 
@@ -24,7 +23,7 @@ export default class GameProfil extends Component {
 
     Store.setAppId((this.props.id).toString())
 
-    fetch('http://176.31.252.134:7001/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://176.31.252.134:9001/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -40,7 +39,7 @@ export default class GameProfil extends Component {
          });
 
 
-    fetch('http://176.31.252.134:7001/api/v1/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://176.31.252.134:9001/api/v1/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -50,13 +49,12 @@ export default class GameProfil extends Component {
      }).then((response) => response.json())
          .then((responseJson) => {
            this.setState({'Rating':responseJson.response[0]})
-           this.setState({'Moyenne': this.state.Rating.moyenne})
          })
          .catch((error) => {
            console.error(error);
          });
 
-    fetch('http://176.31.252.134:7001/api/v1/store/getApp', {
+    fetch('http://176.31.252.134:9001/api/v1/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -81,7 +79,7 @@ export default class GameProfil extends Component {
       return;
     }
     else{
-      fetch('http://176.31.252.134:7001/api/v1/store/buyAppDirecteur', {
+      fetch('http://176.31.252.134:9001/api/v1/store/buyAppDirecteur', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -163,12 +161,12 @@ export default class GameProfil extends Component {
           <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{height: 120, width: 120, marginBottom: 10, borderRadius: 30,}}
-              source={{uri: 'http://176.31.252.134:7001/files/apps/' + this.state.Game.picPath}}
+              source={{uri: 'http://176.31.252.134:9001/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
               <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:10, paddingBottom:15}}>{this.state.Game.nomCreator}</Text>
-              <Star score={this.state.Moyenne} style={starStyle} />
+              <Star score={this.state.Rating.moyenne} style={starStyle} />
               <TouchableOpacity onPress={() => this.props.navigation.navigate('AppNotice')} >
                 <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
               </TouchableOpacity>

@@ -10,9 +10,10 @@ import StudentProfil from './StudentProfil';
 import StudentHistory from './StudentHistory';
 
 const Tabs = createBottomTabNavigator({
-  'Profil': StudentProfil,
   'Historique': StudentHistory,
+  'Profil': StudentProfil,
 }, {
+  initialRouteName: 'Historique',
   tabBarOptions: {
     activeBackgroundColor: '#e5c35c',
     inactiveBackgroundColor:'#FEE599',
@@ -27,11 +28,19 @@ export default class StudentContainer extends Component {
     super(props);
     this.state = {
       idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
+      idBack: this.props.navigation.getParam('idBack', 'Unknown'),
+      idGameType: this.props.navigation.getParam('ididGameType', 'Unknown'),
+
     }
   }
 
   render() {
-      const screenProps = {navigation: this.props.navigation, idStudent: this.props.navigation.getParam('idStudent', 'Unknown')}
+      const screenProps = {
+        navigation: this.props.navigation,
+        idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
+        idBack: this.props.navigation.getParam('idBack', 'Unknown'),
+        idGameType: this.props.navigation.getParam('idGameType', 'Unknown'),
+      }
 
       return (
         <View style={{flex: 1}}>
