@@ -365,146 +365,129 @@ export default class Dashboard extends Component {
 
 
   render() {
-
     if (this.state.loading) {
         return (
           <Loading navigation={this.props.navigation}/>
         )
       }
-
     return(
       <View style={{flex:1}}>
-        <Header navigation={this.props.navigation}/>
-        <View style={styles.body}>
-
-          <View>
-            {this.renderAlertsProf()}
-          </View>
-
-          <View style={styles.topbody}>
-            <View style={[styles.leftcase, styles.topleftcase]}>
-              <View style={styles.caseTopRight}>
-                <Text style={styles.datetext}>{this.state.Day}</Text>
-                <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
-              </View>
-              <View style={{flex: 0.6, alignItems:'center', justifyContent: 'center'}}>
-                <Text style={styles.datetext}>BONJOUR</Text>
-                <Text style={styles.datetext}>{this.state.Profil.nomUser}</Text>
-                <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
-              </View>
-            </View>
+   <Header navigation={this.props.navigation}/>
+   <View style={styles.body}>
 
 
-          {this.renderTopBody()}
 
-          <View style={styles.midbody}>
-            <View style={styles.leftcase}>
+     {this.renderTopBody()}
 
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-                <Text style={styles.subtext}>HISTORIQUE</Text>
-                <Text style={styles.subtext}>DES SESSIONS</Text>
-              </View>
-              <View style={{flex: 0.1}}></View>
-              <View style={{flex: 0.2, flexDirection: 'row'}}>
-                <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
-                  <Image
-                    style={{flex: 1, height: undefined, width: undefined}}
-                    source={require('./../../picture/dashboard/class.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
-                <View style={{flex: 0.3}}></View>
-              </View>
-              <View style={{flex: 0.1}}></View>
-            </View>
+     <View style={styles.midbody}>
+       <View style={styles.leftcase}>
 
-            <View style={styles.rightcase}>
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-                <Text style={styles.subtext}>TROMBINOSCOPE</Text>
-                <Text style={styles.subtext}>DES ÉTUDIANTS</Text>
-              </View>
-              <View style={{flex: 0.1}}></View>
-              <View style={{flex: 0.2, flexDirection: 'row'}}>
-                <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('StudentList')}>
-                  <Image
-                    style={{flex: 1, height: undefined, width: undefined}}
-                    source={require('./../../picture/dashboard/student.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
-                <View style={{flex: 0.3}}></View>
-              </View>
-              <View style={{flex: 0.1}}></View>
-            </View>
-          </View>
+         <View style={{flex: 0.2}}></View>
+         <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+           <Text style={styles.subtext}>HISTORIQUE</Text>
+           <Text style={styles.subtext}>DES SESSIONS</Text>
+         </View>
+         <View style={{flex: 0.1}}></View>
+         <View style={{flex: 0.2, flexDirection: 'row'}}>
+           <View style={{flex: 0.3}}></View>
+           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
+             <Image
+               style={{flex: 1, height: undefined, width: undefined}}
+               source={require('./../../picture/dashboard/class.png')}
+               resizeMode="contain"
+               />
+           </TouchableOpacity>
+           <View style={{flex: 0.3}}></View>
+         </View>
+         <View style={{flex: 0.1}}></View>
+       </View>
 
-          <View style={styles.botbody}>
-            <View style={styles.leftcase}>
+       <View style={styles.rightcase}>
+         <View style={{flex: 0.2}}></View>
+         <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+           <Text style={styles.subtext}>TROMBINOSCOPE</Text>
+           <Text style={styles.subtext}>DES ÉTUDIANTS</Text>
+         </View>
+         <View style={{flex: 0.1}}></View>
+         <View style={{flex: 0.2, flexDirection: 'row'}}>
+           <View style={{flex: 0.3}}></View>
+           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('StudentList')}>
+             <Image
+               style={{flex: 1, height: undefined, width: undefined}}
+               source={require('./../../picture/dashboard/student.png')}
+               resizeMode="contain"
+               />
+           </TouchableOpacity>
+           <View style={{flex: 0.3}}></View>
+         </View>
+         <View style={{flex: 0.1}}></View>
+       </View>
+     </View>
 
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-                <Text style={styles.subtext}>LOGITHÈQUE /</Text>
-                <Text style={styles.subtext}>STORE</Text>
-              </View>
-              <View style={{flex: 0.1}}></View>
-              <View style={{flex: 0.2, flexDirection: 'row'}}>
-                <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('GamesList')}>
-                  <Image
-                    style={{flex: 1, height: undefined, width: undefined}}
-                    source={require('./../../picture/dashboard/store.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
-                <View style={{flex: 0.3}}></View>
-              </View>
-              <View style={{flex: 0.1}}></View>
-            </View>
+     <View style={styles.botbody}>
+       <View style={styles.leftcase}>
 
-            <View style={styles.rightcase}>
+         <View style={{flex: 0.2}}></View>
+         <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+           <Text style={styles.subtext}>LOGITHÈQUE /</Text>
+           <Text style={styles.subtext}>STORE</Text>
+         </View>
+         <View style={{flex: 0.1}}></View>
+         <View style={{flex: 0.2, flexDirection: 'row'}}>
+           <View style={{flex: 0.3}}></View>
+           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('GamesList')}>
+             <Image
+               style={{flex: 1, height: undefined, width: undefined}}
+               source={require('./../../picture/dashboard/store.png')}
+               resizeMode="contain"
+               />
+           </TouchableOpacity>
+           <View style={{flex: 0.3}}></View>
+         </View>
+         <View style={{flex: 0.1}}></View>
+       </View>
 
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-                <Text style={styles.subtext}>SCANNER</Text>
-                <Text style={styles.subtext}>UN QR-CODE</Text>
-              </View>
-              <View style={{flex: 0.1}}></View>
+       <View style={styles.rightcase}>
 
-              <View style={{flex: 0.2, flexDirection: 'row'}}>
-                <View style={{flex: 0.3}}></View>
-                <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
-                  <Image
-                    style={{flex: 1, height: undefined, width: undefined}}
-                    source={require('./../../picture/dashboard/table.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
-                <View style={{flex: 0.3}}></View>
-              </View>
-              <View style={{flex: 0.1}}></View>
-            </View>
-          </View>
+         <View style={{flex: 0.2}}></View>
+         <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+           <Text style={styles.subtext}>SCANNER</Text>
+           <Text style={styles.subtext}>UN QR-CODE</Text>
+         </View>
+         <View style={{flex: 0.1}}></View>
 
-        </View>
-      </View>
+         <View style={{flex: 0.2, flexDirection: 'row'}}>
+           <View style={{flex: 0.3}}></View>
+           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
+             <Image
+               style={{flex: 1, height: undefined, width: undefined}}
+               source={require('./../../picture/dashboard/table.png')}
+               resizeMode="contain"
+               />
+           </TouchableOpacity>
+           <View style={{flex: 0.3}}></View>
+         </View>
+         <View style={{flex: 0.1}}></View>
+       </View>
+     </View>
+
+   </View>
+ </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-  },
   loadingContainer: {
     flex: 1,
     backgroundColor: '#F9F9F9',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  body: {
+    flex: 1,
+    backgroundColor: '#F9F9F9',
   },
   topbody: {
     flex: 1,
@@ -529,12 +512,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#FFF',
   },
-  itemContainer: {
-    flex: 1,
-    height: 130,
-    backgroundColor: '#FFF',
-    borderRadius:10,
-  },
   leftcase: {
     flex: 1,
     backgroundColor: '#FFF',
@@ -549,28 +526,6 @@ const styles = StyleSheet.create({
   },
   topleftcase: {
     backgroundColor: '#363453',
-  },
-    ModalInsideView:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor : "#363453",
-        height: 280 ,
-        width: '90%',
-        borderRadius:10,
-        borderWidth: 1,
-        borderColor: '#fff'
-
-    },
-  NotifName: {
-    fontSize: 12,
-    color: '#434B77',
-    fontWeight: '600',
-  },
-    TextStyle:{
-
-        fontSize: 20,
-        color: "#fff",
-        textAlign: 'center'
   },
   datacase: {
     alignItems: 'center',
@@ -600,14 +555,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#363453',
     borderRadius: 200,
     padding: 7,
-
     borderBottomColor: 'black',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 5,
-
   },
-
 });
