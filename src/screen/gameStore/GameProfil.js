@@ -156,6 +156,9 @@ export default class GameProfil extends Component {
         marginBottom: 20,
       };
       //const { navigation, id, screenProps } = { ...this.props };
+
+      const count = parseFloat(this.state.Rating.moyenne, 10) //1234
+
       return(
         <ScrollView style={{flex:1, backgroundColor: '#fff'}}>
           <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
@@ -166,10 +169,11 @@ export default class GameProfil extends Component {
               />
               <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:10, paddingBottom:15}}>{this.state.Game.nomCreator}</Text>
-              <Star score={this.state.Rating.moyenne} style={starStyle} />
+
+              <Star score={count} style={starStyle} />
+
               <TouchableOpacity onPress={() => this.props.navigation.navigate('AppNotice')} >
                 <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
-                <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.moyenne}</Text>
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>

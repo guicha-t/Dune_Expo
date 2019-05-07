@@ -180,7 +180,7 @@ export default class UserDemands extends Component {
                                 onPress={() => this.ShowProfInModal(true, item)}
                             />
                             )}
-                        keyExtractor={item => item.nomApp}
+                        keyExtractor={item => item.idNotif.toString()}
                     />
                 </List>
                 <View>
