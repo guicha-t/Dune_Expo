@@ -113,13 +113,12 @@ import { Alert, Button, TextInput, View, Text,
       return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
-
           <View style={styles.classContainer}>
             <View style={{flex: 1}}>
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                data={[{key: 'Enregistrées'}, {key: 'Disponibles'}]}
+                data={[{key: 'Enregistrées'}, {key: 'Dune Store'}]}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
                 <View style={{width: 178}}>
@@ -130,7 +129,6 @@ import { Alert, Button, TextInput, View, Text,
                   </TouchableOpacity>
                 </View>
               }
-              keyExtractor={item => item.idClasse}
               />
           </View>
         </View>
@@ -175,7 +173,6 @@ import { Alert, Button, TextInput, View, Text,
                   </View>
                 </TouchableOpacity>
               </View>
-
             )}
             />
         </View>

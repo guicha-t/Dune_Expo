@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, SectionList} from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, TouchableHighlight, Modal} from 'react-native';
 import { observer } from 'mobx-react';
+import { List, ListItem } from "react-native-elements";
+import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import Video from "expo/build/av/Video";
 
 @observer
 export default class UserDemands extends Component {
@@ -11,11 +14,23 @@ export default class UserDemands extends Component {
     super(props);
     this.state = {
       GamesRequested: [],
+      ProfArray:[],
+        ModalVisibleStatus: false,
+        idAppModal: null,
+        nomAppModal: null,
+        dateDemandeModal: null,
+        commentaireModal: null,
+        idToNotify: null,
+        idNotif: null
     }
+
+    this.ts = new Date();
+
+    this.contentToRender = []
   }
 
   componentDidMount(){
-   fetch('http://176.31.252.134:7001/api/v1/notifs', {
+      fetch('http://176.31.252.134:7001/api/v1/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -24,59 +39,214 @@ export default class UserDemands extends Component {
       },
     }).then((response) => response.json())
         .then((responseJson) => {
-          this.setState({'GamesRequested':responseJson.response[0]})
-          //Alert.alert('lol', JSON.stringify(responseJson.response))
+          this.setState({'GamesRequested':responseJson.response});
         })
         .catch((error) => {
           console.error(error);
         });
   }
 
-  renderAppName(){
-  if (this.state.GamesRequested != null)
-    return(
-        <SectionList
-          items={this.state.GamesRequested}
-          sections={[
-            {title: 'En attente', data: [this.state.GamesRequested.nomApp]},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
-        />);
+  renderProfArray = (param) => {
+
+      fetch('http://176.31.252.134:7001/api/v1/notifs/getArrayProf/' + param.toString(), {
+          method: 'GET',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: Store.Token,
+          },
+      }).then((response) => response.json())
+          .then((responseJson) => {
+              this.setState({'ProfArray': responseJson.response});
+          })
+          .catch((error) => {
+
+              console.error(error);
+          });
+
   }
 
-  render() {
-    return(
+  readNotification = () => {
+      fetch('http://176.31.252.134:7001/api/v1/notifs/read/' + this.state.idNotif.toString(), {
+          method: 'PUT',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: Store.Token,
+          }
+      }).then((response) => response.json())
+          .then((responseJson) => {
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+  }
 
-      <View style={styles.container}>
-        <Header navigation={this.props.navigation}/>
+  _confirmDemand = () => {
+    fetch('http://176.31.252.134:7001/api/v1/store/validating', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        idDemande: this.state.idToNotify,
+        validate: 1,
+      }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+            this.readNotification();
+            this.ShowModalFunction(!this.state.ModalVisibleStatus);
+            this.props.navigation.navigate('Dashboard');
+    })
+    .catch((error) => {
+        Alert.alert("ERROR", error);
+      console.error(error);
+    });
+  }
 
-    	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
+
+  _cancelDemand = () => {
+    fetch('http://176.31.252.134:7001/api/v1/store/validating', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        idDemande: this.state.idToNotify,
+        validate: '0',
+      }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+            this.readNotification();
+            this.ShowModalFunction(!this.state.ModalVisibleStatus);
+            this.props.navigation.navigate('Dashboard');
+    })
+    .catch((error) => {
+        Alert.alert("ERROR", error);
+      console.error(error);
+    });
+  }
+
+
+    ShowProfInModal = (visible, item) =>{
+
+        this.renderProfArray(item.idToNotify);
+
+        this.setState({idToNotify: item.idToNotify.toString()});
+
+        this.setState({ModalVisibleStatus: visible});
+
+        this.setState({idAppModal: item.idApp});
+
+        this.setState({nomAppModal: item.nomApp});
+
+        this.setState({dateDemandeModal: item.dateDemande});
+
+        this.setState({commentaireModal: item.commentaire});
+
+        this.setState({idNotif: item.idNotif});
+
+    }
+
+    ShowModalFunction = (visible) => {
+
+      this.setState({'ModalVisibleStatus': visible});
+
+    }
+
+
+    render() {
+    return (
+        <View style={styles.mainContainer}>
+          <Header navigation={this.props.navigation}/>
+    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
           <Text style={{fontSize:20,}}>
-             Mes demandes d'application
+             Application(s) demandée(s)
           </Text>
         </View>
-
-      {this.renderAppName()}
-
-      <View style={styles.containerList}>
-        <SectionList
-          //items={this.state.GamesRequested}
-          sections={[
-            {title: 'Récent(s)', data: ['Zelda : validé']},
-            //{title: 'En attente', data: [this.state.GamesRequested.nomApp]},
-            {title: 'Accepté(s)', data: ['Candy Crush', 'Zelda']},
-            {title: 'Refusé(s)', data: ['Fallout 76']},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
-        />
+            <View style={{flex: 0.8}}>
+                <List>
+                    <FlatList
+                        data={this.state.GamesRequested}
+                        extraData={this.state}
+                        rightIcon={'../../picture/profil/eye.png'}
+                        renderItem={({ item }) => (
+                            <ListItem
+                                title={`${ item.nomApp }`}
+                                onPress={() => this.ShowProfInModal(true, item)}
+                            />
+                            )}
+                        keyExtractor={item => item.nomApp}
+                    />
+                </List>
+                <View>
+                    <Modal
+                        transparent={true}
+                        animationType={"slide"}
+                        visible={this.state.ModalVisibleStatus}
+                        onRequestClose={ () => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } >
+                        <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={styles.ModalInsideView}>
+                                    <Text style={styles.TextStyle}> Vous avez une demande sur l'application
+                                            { " " + this.state.nomAppModal }.
+                                    </Text>
+                                <Text onPress={() => this.props.navigation.navigate('GameContainer', {id: this.state.idAppModal})}  style={{textDecorationLine: 'underline',fontSize: 20, color: "#fff", textAlign: 'center'}}>
+                                    Voir l'application
+                                </Text>
+                                <Text  style={styles.TextProfStyle}> Cette demande a été faite par:</Text>
+                                <GridView
+                                    itemDimension={100}
+                                    spacing={1}
+                                    items={this.state.ProfArray}
+                                    style={styles.GridView}
+                                    renderItem={item => (
+                                        <View style={styles.itemContainer}>
+                                            <Text>{item.length}</Text>
+                                            <TouchableOpacity style={{flex: 1}} onPress={() => {
+                                                Alert.alert(item.dateDemande, item.commentaire);
+                                            }}>
+                                                <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
+                                                    <View style={{flex: 0.7, paddingTop: 10}}>
+                                                        <Image
+                                                            style={{flex: 1, borderRadius: 10}}
+                                                            source={{uri: 'http://176.31.252.134:7001/files/profs/' + item.picPath}}
+                                                        />
+                                                    </View>
+                                                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+                                                        <Text style={styles.ProfName}>{item.nomPrenom}</Text>
+                                                    </View>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>
+                                    )}
+                                />
+                                <View style={{flex: 1, flexDirection:'row', justifyContent: 'center', alignItems: 'center', marginTop: '10%', marginBottom: '5%'}}>
+                                    <TouchableOpacity style={{margin: '5%'}} onPress={ this._cancelDemand}>
+                                        <Image
+                                            style={{height: 50, width: 50}}
+                                            source={require('./../../picture/profil/errorWhite.png')}
+                                            resizeMode="contain"
+                                        />
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{margin: '5%'}} onPress={this._confirmDemand}>
+                                        <Image
+                                            style={{height: 50, width: 50}}
+                                            source={require('./../../picture/profil/successWhite.png')}
+                                            resizeMode="contain"
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                                <Button title={'Retour'} color='#363453' onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+            </View>
       </View>
-
-
-    </View>
     );
   }
 }
@@ -84,18 +254,9 @@ export default class UserDemands extends Component {
 const styles = StyleSheet.create({
 
 
-  containerList: {
+  container: {
    flex: 1,
    paddingTop: 22
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {
     padding: 10,
@@ -104,31 +265,112 @@ const styles = StyleSheet.create({
   },
 
 
-  container: {
-    backgroundColor: '#FFF',
-    flex: 1
+  mainContainer: {
+    flex:1,
+    backgroundColor: '#fff',
+  },
+  classContainer: {
+    flex: 0.1,
+    flexDirection: 'row',
+    paddingTop: 2,
+  },
+  searchContainer: {
+    flex: 0.1,
+    flexDirection: 'row',
+    paddingTop: 2,
+    alignItems: 'center',
+    margin: 5,
   },
   input: {
-    width: 220,
+    flex: 1,
     height: 44,
     padding: 10,
-    borderWidth: 0,
+    marginRight: 5,
+    borderWidth: 1,
+    borderColor: 'black',
+  },
+  ButtonSearch: {
+    padding: 10,
+    borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
   },
-  containerBody: {
+  allClassContainer: {
+    flex:0.2,
+  },
+  gridView: {
+    paddingTop: 25,
+    flex: 1
+  },
+  itemContainer: {
+    flex: 1,
+    height: 130,
+    backgroundColor: '#FFF',
+    borderRadius:10,
+  },
+  itemName: {
+    fontSize: 18,
+    color: '#434B77',
+    fontWeight: '600',
+  },
+  buttonClassAll: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FEE599',
+    margin:2,
   },
-  titleInfo: {
-    color: '#363453',
-    fontWeight: 'bold',
+  buttonClass: {
+    width:178,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 2,
+    backgroundColor: '#FEE599',
+    borderRadius:10,
+  },
+  textClass: {
     fontSize: 14,
+    color: '#434B77',
+    fontWeight: '600',
   },
-  containerFooter: {
-    flexDirection: 'row',
-    paddingBottom: 10,
-    justifyContent:'space-around',
+  ProfName: {
+    fontSize: 12,
+    color: '#434B77',
+    fontWeight: '600',
   },
+    MainContainer :{
+
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+
+    ModalInsideView:{
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor : "#363453",
+        height: 450 ,
+        width: '90%',
+        borderRadius:10,
+        borderWidth: 1,
+        borderColor: '#fff'
+
+    },
+
+    TextStyle:{
+
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center'
+
+    },
+    TextProfStyle:{
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center',
+        padding: 20
+    }
 });
