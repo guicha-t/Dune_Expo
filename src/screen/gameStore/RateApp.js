@@ -21,7 +21,7 @@ export default class RateApp extends Component {
 
   componentDidMount(){
 
-    fetch('http://176.31.252.134:7001/api/v1/store/getApp', {
+    fetch('http://176.31.252.134:9001/api/v1/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -56,7 +56,7 @@ _cancelDemand = async () => {
     }
 
 
-    fetch('http://176.31.252.134:7001/api/v1/store/addAvis', {
+    fetch('http://176.31.252.134:9001/api/v1/store/addAvis', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -92,7 +92,7 @@ render() {
             <View style={{flex:0.3, width:120, height:120, paddingBottom:20}}>
               <Image
                 style={{flex: 1, borderRadius:10}}
-                source={{uri: 'http://176.31.252.134:7001/files/apps/' + this.state.Game.picPath}}
+                source={{uri: 'http://176.31.252.134:9001/files/apps/' + this.state.Game.picPath}}
               />
             </View>
 

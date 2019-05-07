@@ -169,6 +169,7 @@ export default class GameProfil extends Component {
               <Star score={this.state.Rating.moyenne} style={starStyle} />
               <TouchableOpacity onPress={() => this.props.navigation.navigate('AppNotice')} >
                 <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
+                <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.moyenne}</Text>
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
