@@ -65,7 +65,7 @@ import { Alert, Button, TextInput, View, Text,
             });
       }
 
-    else if (param.key === 'Disponibles'){
+    else if (param.key === 'Dune Store'){
     fetch('http://176.31.252.134:9001/api/v1/store/', {
             method: 'POST',
             Accept: 'application/json',
