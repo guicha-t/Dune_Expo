@@ -275,7 +275,7 @@ export default class Dashboard extends Component {
               return(
                 <View>
                     <Modal
-                        transparent={false}
+                        transparent={true}
 
                         animationType={"slide"}
 
@@ -497,6 +497,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingBottom: 2,
   },
+  itemContainer: {
+   flex: 1,
+   height: 130,
+   backgroundColor: '#FFF',
+   borderRadius:10,
+ },
   midbody: {
     flex: 1,
     flexDirection: 'row',
@@ -514,6 +520,18 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     borderBottomWidth: 2,
     borderBottomColor: '#FFF',
+  },
+  ModalInsideView:{
+
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor : "#363453",
+      height: 450 ,
+      width: '90%',
+      borderRadius:10,
+      borderWidth: 1,
+      borderColor: '#fff'
+
   },
   leftcase: {
     flex: 1,
@@ -565,4 +583,15 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
   },
+    TextStyle:{
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center'
+    },
+    TextProfStyle:{
+        fontSize: 20,
+        color: "#fff",
+        textAlign: 'center',
+        padding: 20
+    }
 });
