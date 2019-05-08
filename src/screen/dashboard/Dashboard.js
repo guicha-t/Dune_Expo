@@ -275,7 +275,7 @@ export default class Dashboard extends Component {
               return(
                 <View>
                     <Modal
-                        transparent={true}
+                        transparent={false}
 
                         animationType={"slide"}
 
@@ -372,10 +372,13 @@ export default class Dashboard extends Component {
       }
     return(
       <View style={{flex:1}}>
-   <Header navigation={this.props.navigation}/>
-   <View style={styles.body}>
+         <Header navigation={this.props.navigation}/>
+         <View style={styles.body}>
 
 
+         <View>
+           {this.renderAlertsProf()}
+         </View>
 
      {this.renderTopBody()}
 
