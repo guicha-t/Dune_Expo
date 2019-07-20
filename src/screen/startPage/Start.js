@@ -47,7 +47,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://176.31.252.134:9001/api/v1/login/', {
+    fetch('http://api.dune-table.com/v1/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

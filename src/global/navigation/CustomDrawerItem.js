@@ -74,6 +74,22 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('TermsOfUse')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>CGU</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ContactForm')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Nous contacter</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
 
         </ScrollView>
       </View>

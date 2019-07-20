@@ -27,7 +27,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-      fetch('http://176.31.252.134:9001/api/v1/trombi/', {
+      fetch('http://api.dune-table.com/v1/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -41,7 +41,7 @@ import { Alert, Button, TextInput, View, Text,
       .then((responseJson) => {
         this.setState({'Trombi':responseJson.response})
 
-        fetch('http://176.31.252.134:9001/api/v1/trombi/classes', {
+        fetch('http://api.dune-table.com/v1/trombi/classes', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -73,7 +73,7 @@ import { Alert, Button, TextInput, View, Text,
     };
 
     _setCurrentClass = async (param) => {
-      fetch('http://176.31.252.134:9001/api/v1/trombi/byClasse', {
+      fetch('http://api.dune-table.com/v1/trombi/byClasse', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -96,7 +96,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     _resetTrombi = async () => {
-      fetch('http://176.31.252.134:9001/api/v1/trombi/', {
+      fetch('http://api.dune-table.com/v1/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -120,7 +120,7 @@ import { Alert, Button, TextInput, View, Text,
     _searchRequest = async () => {
       Keyboard.dismiss()
       if (this.state.Class === 0) {
-        fetch('http://176.31.252.134:9001/api/v1/trombi/', {
+        fetch('http://api.dune-table.com/v1/trombi/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -140,7 +140,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://176.31.252.134:9001/api/v1/trombi/byClasse', {
+        fetch('http://api.dune-table.com/v1/trombi/byClasse', {
           method: 'POST',
           Accept: 'application/json',
           headers: {

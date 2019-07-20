@@ -18,7 +18,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:9001/api/v1/users/infos', {
+    fetch('http://api.dune-table.com/v1/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',

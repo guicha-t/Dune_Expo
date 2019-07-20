@@ -16,7 +16,7 @@ export default class EditEmailUser extends Component {
   }
 
   _confirmEdit = async () => {
-    fetch('http://176.31.252.134:9001/api/v1/users/changeEmail', {
+    fetch('http://api.dune-table.com/v1/users/changeEmail', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

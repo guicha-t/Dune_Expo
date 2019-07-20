@@ -30,7 +30,7 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
-   fetch('http://176.31.252.134:9001/api/v1/notifs/popUpMenu', {
+   fetch('http://api.dune-table.com/v1/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -48,7 +48,7 @@ export default class UserDemands extends Component {
 
   renderProfArray = (param) => {
 
-      fetch('http://176.31.252.134:9001/api/v1/notifs/getArrayProf/' + param.toString(), {
+      fetch('http://api.dune-table.com/v1/notifs/getArrayProf/' + param.toString(), {
           method: 'GET',
           headers: {
               Accept: 'application/json',
@@ -67,7 +67,7 @@ export default class UserDemands extends Component {
   }
 
   readNotification = () => {
-      fetch('http://176.31.252.134:9001/api/v1/notifs/read/' + this.state.idNotif.toString(), {
+      fetch('http://api.dune-table.com/v1/notifs/read/' + this.state.idNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -83,7 +83,7 @@ export default class UserDemands extends Component {
   }
 
   _confirmDemand = () => {
-    fetch('http://176.31.252.134:9001/api/v1/store/validating', {
+    fetch('http://api.dune-table.com/v1/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -108,7 +108,7 @@ export default class UserDemands extends Component {
 
 
   _cancelDemand = () => {
-    fetch('http://176.31.252.134:9001/api/v1/store/validating', {
+    fetch('http://api.dune-table.com/v1/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

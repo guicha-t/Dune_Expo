@@ -27,7 +27,7 @@ export default class EditProfilInfo extends Component {
   };
 
   _confirmEditName = async () => {
-    fetch('http://176.31.252.134:9001/api/v1/users/update', {
+    fetch('http://api.dune-table.com/v1/users/update', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -49,7 +49,7 @@ export default class EditProfilInfo extends Component {
   };
 
   _confirmEditMail = async () => {
-    fetch('http://176.31.252.134:9001/api/v1/users/changeEmail', {
+    fetch('http://api.dune-table.com/v1/users/changeEmail', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -76,7 +76,7 @@ export default class EditProfilInfo extends Component {
   _confirmEditPwd = async () => {
     if (this.state.newpassword === this.state.newpasswordbis)
     {
-      fetch('http://176.31.252.134:9001/api/v1/users/changePassword', {
+      fetch('http://api.dune-table.com/v1/users/changePassword', {
         method: 'PUT',
         headers: {
           Accept: 'application/json',

@@ -28,7 +28,7 @@ export default class StudentProfil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://176.31.252.134:9001/api/v1/eleves/' + this.props.screenProps.idStudent, {
+    fetch('http://api.dune-table.com/v1/eleves/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -39,7 +39,7 @@ export default class StudentProfil extends Component {
     .then((responseJson) => {
       this.setState({'Student':responseJson.response[0]})
 
-      fetch('http://176.31.252.134:9001/api/v1/eleves/stats/bulletin/' + this.props.screenProps.idStudent, {
+      fetch('http://api.dune-table.com/v1/eleves/stats/bulletin/' + this.props.screenProps.idStudent, {
         method: 'GET',
         Accept: 'application/json',
         headers: {

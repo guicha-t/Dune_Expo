@@ -23,7 +23,7 @@ export default class App extends Component {
   };
 
   _handleBarCodeRead = result => {
-    fetch('http://176.31.252.134:9001/api/v1/cnxTable2/useToken', {
+    fetch('http://api.dune-table.com/v1/cnxTable2/useToken', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

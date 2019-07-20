@@ -8,7 +8,10 @@ import CustomDrawerItems from './CustomDrawerItem'
 import Loading from './../../screen/startPage/Loading';
 import Start from './../../screen/startPage/Start';
 import ForgottenPass from './../../screen/startPage/ForgottenPass';
+
 import Dashboard from './../../screen/dashboard/Dashboard';
+import TermsOfUse from './../../screen/dashboard/TermsOfUse';
+import ContactForm from './../../screen/dashboard/ContactForm';
 
 import QRCode from './../../screen/qrcode/Qrcode';
 
@@ -18,6 +21,7 @@ import EditEmailUser from './../../screen/userProfil/EditEmailUser';
 import EditPassUser from './../../screen/userProfil/EditPassUser';
 
 import StudentList from './../../screen/trombinoscope/StudentList';
+
 import StudentProfil from './../../screen/studentProfil/StudentProfil';
 import StudentEdit from './../../screen/studentProfil/StudentEdit';
 import StudentContainer from './../../screen/studentProfil/StudentContainer';
@@ -77,6 +81,8 @@ const DrawerMenu = createDrawerNavigator(
     'ClassList': {screen: ClassList},
     'GameList': {screen: GameList},
     'StudentResultList': {screen: StudentResultList},
+    'TermsOfUse' : {screen: TermsOfUse},
+    'ContactForm' : {screen: ContactForm},
   },
   {
     initialRouteName: 'Loading',

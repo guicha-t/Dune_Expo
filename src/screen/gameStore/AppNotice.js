@@ -30,7 +30,7 @@ export default class AppNotice extends Component {
 
   componentDidMount(){
 
-    fetch('http://176.31.252.134:9001/api/v1/store/avis/', {
+    fetch('http://api.dune-table.com/v1/store/avis/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
