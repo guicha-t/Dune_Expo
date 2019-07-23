@@ -6,7 +6,6 @@ import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
-import Video from "expo/build/av/Video";
 
 @observer
 export default class UserDemands extends Component {
@@ -30,7 +29,7 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
-   fetch('http://api.dune-table.com/v1/notifs/popUpMenu', {
+   fetch('http://api.dune-table.com/api/v1/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -48,7 +47,7 @@ export default class UserDemands extends Component {
 
   renderProfArray = (param) => {
 
-      fetch('http://api.dune-table.com/v1/notifs/getArrayProf/' + param.toString(), {
+      fetch('http://api.dune-table.com/api/v1/notifs/getArrayProf/' + param.toString(), {
           method: 'GET',
           headers: {
               Accept: 'application/json',
@@ -67,7 +66,7 @@ export default class UserDemands extends Component {
   }
 
   readNotification = () => {
-      fetch('http://api.dune-table.com/v1/notifs/read/' + this.state.idNotif.toString(), {
+      fetch('http://api.dune-table.com/api/v1/notifs/read/' + this.state.idNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -83,7 +82,7 @@ export default class UserDemands extends Component {
   }
 
   _confirmDemand = () => {
-    fetch('http://api.dune-table.com/v1/store/validating', {
+    fetch('http://api.dune-table.com/api/v1/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -108,7 +107,7 @@ export default class UserDemands extends Component {
 
 
   _cancelDemand = () => {
-    fetch('http://api.dune-table.com/v1/store/validating', {
+    fetch('http://api.dune-table.com/api/v1/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

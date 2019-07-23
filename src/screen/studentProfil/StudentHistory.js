@@ -38,7 +38,7 @@ export default class StudentHistory extends Component {
   componentDidMount(){
     if (this.props.screenProps.idGameType==='0')
     {
-      fetch('http://api.dune-table.com/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
+      fetch('http://api.dune-table.com/api/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -49,7 +49,7 @@ export default class StudentHistory extends Component {
       .then((responseJson) => {
         this.setState({'Games':responseJson.response})
 
-        fetch('http://api.dune-table.com/v1/eleves/' + this.props.screenProps.idStudent, {
+        fetch('http://api.dune-table.com/api/v1/eleves/' + this.props.screenProps.idStudent, {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -60,7 +60,7 @@ export default class StudentHistory extends Component {
         .then((responseJson) => {
           this.setState({'Student':responseJson.response[0]})
 
-          fetch('http://api.dune-table.com/v1/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
+          fetch('http://api.dune-table.com/api/v1/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -90,7 +90,7 @@ export default class StudentHistory extends Component {
       });
 
     } else {
-      fetch('http://api.dune-table.com/v1/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + this.props.screenProps.idGameType, {
+      fetch('http://api.dune-table.com/api/v1/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + this.props.screenProps.idGameType, {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -104,7 +104,7 @@ export default class StudentHistory extends Component {
         this.setState({'Games':responseJson.response})
         this.setState({'CurrentType':this.props.screenProps.idGameType})
 
-        fetch('http://api.dune-table.com/v1/eleves/' + this.props.screenProps.idStudent, {
+        fetch('http://api.dune-table.com/api/v1/eleves/' + this.props.screenProps.idStudent, {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -115,7 +115,7 @@ export default class StudentHistory extends Component {
         .then((responseJson) => {
           this.setState({'Student':responseJson.response[0]})
 
-          fetch('http://api.dune-table.com/v1/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
+          fetch('http://api.dune-table.com/api/v1/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -149,7 +149,7 @@ export default class StudentHistory extends Component {
   }
 
   _setCurrentCat = async (param) => {
-    fetch('http://api.dune-table.com/v1/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + param.idTypeGame, {
+    fetch('http://api.dune-table.com/api/v1/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + param.idTypeGame, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -170,7 +170,7 @@ export default class StudentHistory extends Component {
   }
 
   _resetCat = async (param) => {
-    fetch('http://api.dune-table.com/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
+    fetch('http://api.dune-table.com/api/v1/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {

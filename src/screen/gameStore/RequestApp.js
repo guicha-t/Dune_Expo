@@ -24,7 +24,7 @@ _cancelDemand = async () => {
         Alert.alert('ATTENTION', 'Veuillez remplir la section \'Commentaire\'.');
         return;
     }
-    fetch('http://api.dune-table.com/v1/store/buyApp', {
+    fetch('http://api.dune-table.com/api/v1/store/buyApp', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

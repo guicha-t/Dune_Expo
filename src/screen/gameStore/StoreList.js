@@ -24,7 +24,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-      fetch('http://api.dune-table.com/v1/store/', {
+      fetch('http://api.dune-table.com/api/v1/store/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -43,7 +43,7 @@ import { Alert, Button, TextInput, View, Text,
         console.error(error);
       });
 
-      fetch('http://api.dune-table.com/v1/store/getAppsEcole', {
+      fetch('http://api.dune-table.com/api/v1/store/getAppsEcole', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -72,7 +72,7 @@ import { Alert, Button, TextInput, View, Text,
     _searchRequest = async () => {
       Keyboard.dismiss()
       if (this.state.Game === null) {
-        fetch('http://api.dune-table.com/v1/store/', {
+        fetch('http://api.dune-table.com/api/v1/store/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -93,7 +93,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://api.dune-table.com/v1/store/getApp', {
+        fetch('http://api.dune-table.com/api/v1/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {

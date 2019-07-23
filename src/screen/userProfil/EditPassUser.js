@@ -25,7 +25,7 @@ export default class EditPassUser extends Component {
   _confirmEdit = async () => {
     if (this.state.newpassword === this.state.newpasswordbis)
     {
-      fetch('http://api.dune-table.com/v1/users/changePassword', {
+      fetch('http://api.dune-table.com/api/v1/users/changePassword', {
         method: 'PUT',
         headers: {
           Accept: 'application/json',

@@ -7,7 +7,6 @@ import GridView from 'react-native-super-grid';
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
-import Video from "expo/build/av/Video";
 
 @observer
 export default class Dashboard extends Component {
@@ -32,7 +31,7 @@ export default class Dashboard extends Component {
   componentWillMount() {
 
         if (Store.TypeUser != 2){
-          fetch('http://api.dune-table.com/v1/notifs/popUpMenu', {
+          fetch('http://api.dune-table.com/api/v1/notifs/popUpMenu', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -59,7 +58,7 @@ export default class Dashboard extends Component {
         }
 
 
-      fetch('http://api.dune-table.com/v1/dashboard/nbEleves', {
+      fetch('http://api.dune-table.com/api/v1/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -70,7 +69,7 @@ export default class Dashboard extends Component {
     .then((responseJson) => {
       this.setState({'Student':JSON.stringify(responseJson.nbEleves)})
 
-      fetch('http://api.dune-table.com/v1/dashboard/nbNotifsNonL', {
+      fetch('http://api.dune-table.com/api/v1/dashboard/nbNotifsNonL', {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -81,7 +80,7 @@ export default class Dashboard extends Component {
       .then((responseJson) => {
         this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
 
-        fetch('http://api.dune-table.com/v1/dashboard/nbAppsStarted', {
+        fetch('http://api.dune-table.com/api/v1/dashboard/nbAppsStarted', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -92,7 +91,7 @@ export default class Dashboard extends Component {
         .then((responseJson) => {
           this.setState({'Result':JSON.stringify(responseJson.nbAppsStarted)})
 
-          fetch('http://api.dune-table.com/v1/games/nbGames', {
+          fetch('http://api.dune-table.com/api/v1/games/nbGames', {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -109,7 +108,7 @@ export default class Dashboard extends Component {
 
             this.setState({Day: date, Month: month, Year: year,});
 
-            fetch('http://api.dune-table.com/v1/users/infos', {
+            fetch('http://api.dune-table.com/api/v1/users/infos', {
               method: 'GET',
               headers: {
                 Accept: 'application/json',
@@ -147,7 +146,7 @@ export default class Dashboard extends Component {
   }
 
   readNotification = () => {
-      fetch('http://api.dune-table.com/v1/notifs/read/' + this.state.idReadNotif.toString(), {
+      fetch('http://api.dune-table.com/api/v1/notifs/read/' + this.state.idReadNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',

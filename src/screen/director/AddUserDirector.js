@@ -21,7 +21,7 @@ export default class AddUserDirector extends Component {
   };
 
   _confirmEdit = async () => {
-    fetch('http://api.dune-table.com/v1/users/add', {
+    fetch('http://api.dune-table.com/api/v1/users/add', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
