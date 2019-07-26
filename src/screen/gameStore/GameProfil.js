@@ -23,7 +23,7 @@ export default class GameProfil extends Component {
 
     Store.setAppId((this.props.id).toString())
 
-    fetch('http://api.dune-table.com/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://51.38.187.216:9000/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -39,7 +39,7 @@ export default class GameProfil extends Component {
          });
 
 
-    fetch('http://api.dune-table.com/api/v1/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://51.38.187.216:9000/api/v1/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -54,7 +54,7 @@ export default class GameProfil extends Component {
            console.error(error);
          });
 
-    fetch('http://api.dune-table.com/api/v1/store/getApp', {
+    fetch('http://51.38.187.216:9000/api/v1/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -79,7 +79,7 @@ export default class GameProfil extends Component {
       return;
     }
     else{
-      fetch('http://api.dune-table.com/api/v1/store/buyAppDirecteur', {
+      fetch('http://51.38.187.216:9000/api/v1/store/buyAppDirecteur', {
           method: 'POST',
           Accept: 'application/json',
           headers: {

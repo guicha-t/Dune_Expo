@@ -21,7 +21,7 @@ export default class RateApp extends Component {
 
   componentDidMount(){
 
-    fetch('http://api.dune-table.com/api/v1/store/getApp', {
+    fetch('http://51.38.187.216:9000/api/v1/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -56,7 +56,7 @@ _cancelDemand = async () => {
     }
 
 
-    fetch('http://api.dune-table.com/api/v1/store/addAvis', {
+    fetch('http://51.38.187.216:9000/api/v1/store/addAvis', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

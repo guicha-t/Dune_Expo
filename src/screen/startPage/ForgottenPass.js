@@ -21,7 +21,7 @@ export default class ForgottenPass extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://api.dune-table.com/api/v1/login/reset', {
+    fetch('http://51.38.187.216:9000/api/v1/login/reset', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

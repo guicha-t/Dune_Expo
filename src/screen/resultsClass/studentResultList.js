@@ -25,7 +25,7 @@ export default class StudentResultList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://api.dune-table.com/api/v1/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
+    fetch('http://51.38.187.216:9000/api/v1/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {

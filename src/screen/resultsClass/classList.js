@@ -18,7 +18,7 @@ export default class ClassList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://api.dune-table.com/api/v1/classes/profs', {
+    fetch('http://51.38.187.216:9000/api/v1/classes/profs', {
       method: 'GET',
       Accept: 'application/json',
       headers: {

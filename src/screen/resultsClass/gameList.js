@@ -22,7 +22,7 @@ export default class GameList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://api.dune-table.com/api/v1/eleves/stats/byClasse/' + this.props.navigation.getParam('idClasse', '0'), {
+    fetch('http://51.38.187.216:9000/api/v1/eleves/stats/byClasse/' + this.props.navigation.getParam('idClasse', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {

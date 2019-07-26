@@ -23,7 +23,7 @@ export default class StudentEdit extends Component {
   };
 
   _confirmEdit = async () => {
-    fetch('http://api.dune-table.com/api/v1/eleves/update', {
+    fetch('http://51.38.187.216:9000/api/v1/eleves/update', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
