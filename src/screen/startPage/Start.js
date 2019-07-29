@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, TouchableOpacity, Image, AsyncStorage, KeyboardAvoidingView} from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, TouchableOpacity, Image, AsyncStorage, KeyboardAvoidingView, Dimensions} from 'react-native';
 import { observer } from 'mobx-react';
+
+import { Button, Icon } from 'react-native-elements';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Fumi } from 'react-native-textinput-effects';
+import AlertPro from "react-native-alert-pro";
+
 
 import Store from './../../global/store/Store'
 
@@ -12,7 +18,7 @@ export default class Start extends Component {
       username: '',
       password: '',
       pwdhide: true,
-      opacity: 1,
+      opacity: 'eye',
     };
   }
 
@@ -69,7 +75,7 @@ export default class Start extends Component {
             this.props.navigation.navigate('Dashboard')
           }
           else {
-            Alert.alert('Nom de compte ou mot de passe incorrect')
+            this.AlertPro.open()
           }
         })
         .catch((error) => {
@@ -85,10 +91,10 @@ export default class Start extends Component {
   _pwdhide = async () => {
     if (this.state.pwdhide === true) {
       this.setState({'pwdhide':false})
-      this.setState({'opacity':0.1})
+      this.setState({'opacity':'eye-slash'})
     } else {
       this.setState({'pwdhide':true})
-      this.setState({'opacity':1})
+      this.setState({'opacity':'eye'})
     }
   };
 
@@ -107,54 +113,124 @@ export default class Start extends Component {
               />
           </View>
 
-
-
           <View style={{flex: 0.4}}>
 
             <View style={{flex: 0.3, flexDirection: 'row'}}>
               <View style={{flex: 0.2}}></View>
               <View style={{flex: 0.6, alignItems: 'center', justifyContent:'flex-end'}}>
-                <TextInput
+                <Fumi
+                  label={'E-mail'}
+                  style={{ width: 220, backgroundColor:'#363453'}}
                   value={this.state.username}
                   onChangeText={(username) => this.setState({ username })}
-                  placeholder={'Nom de compte'}
-                  autoCapitalize = 'none'
-                  style={styles.input}
+                  iconClass={FontAwesomeIcon}
+                  iconName={'at'}
+                  iconColor={'#FFF'}
+                  labelStyle={{ color: '#FFF' }}
+                  iconSize={20}
+                  iconWidth={40}
+                  inputPadding={16}
                   />
               </View>
               <View style={{flex: 0.2}}></View>
             </View>
 
-            <View style={{flex: 0.3, flexDirection: 'row'}}>
+            <View style={{marginTop: 10, flex: 0.3, flexDirection: 'row'}}>
               <View style={{flex: 0.2}}></View>
               <View style={{flex: 0.6, alignItems: 'center', justifyContent:'center'}}>
-                <TextInput
+                <Fumi
+                  label={'Mot de passe'}
+                  style={{ width: 220, backgroundColor:'#363453'}}
                   value={this.state.password}
-                  onChangeText={(password) => this.setState({ password })}
-                  placeholder={'Mot de passe'}
                   secureTextEntry={this.state.pwdhide}
-                  autoCapitalize = 'none'
-                  style={styles.input}
+                  onChangeText={(password) => this.setState({ password })}
+                  iconClass={FontAwesomeIcon}
+                  iconName={'lock'}
+                  iconColor={'#FFF'}
+                  labelStyle={{ color: '#FFF' }}
+                  iconSize={20}
+                  iconWidth={40}
+                  inputPadding={16}
                   />
               </View>
-              <View style={{flex: 0.2}}>
-                <TouchableOpacity onPress={this._pwdhide} style={{flex: 1, justifyContent:'center', marginRight: 10}}>
-                  <Image
-                    style={{flex: 0.4, height: undefined, width: undefined, opacity: this.state.opacity}}
-                    source={require('./../../picture/start/eye.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
+              <View style={{flex: 0.2, alignItems:'flex-end', justifyContent:'center'}}>
+
+                  <Button
+                    onPress={this._pwdhide}
+                    icon={{
+                      name: this.state.opacity,
+                      type: 'font-awesome',
+                      size: 20,
+                      color: '#363453',
+                    }}
+                    iconContainerStyle={{
+                      }}
+                    buttonStyle={{
+                      backgroundColor: 'transparent',
+                      borderColor: 'transparent',
+                      borderWidth: 0,
+                      borderRadius: 0,
+                      width: 80,
+                      alignItems:'center',
+                      justifyContent:'center',
+                      marginLeft: 10,
+                    }}
+                    containerStyle={{ width: 130 }}
+                  />
               </View>
             </View>
-            <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
+
+            <View style={{marginTop: 10, flex: 0.2, flexDirection:'row', justifyContent:'center'}}>
+
               <Button
-                title={'Connexion'}
-                style={styles.ButtonCo}
-                color='#363453'
+                title=""
                 onPress={this.onLogin.bind(this)}
-                />
+                icon={{
+                 type: 'font-awesome',
+                 name: 'check',
+                 size: 15,
+                 color: 'white',
+               }}
+                buttonStyle={{
+                  backgroundColor: '#363453',
+                  borderWidth: 2,
+                  borderColor: 'white',
+                  borderRadius: 30,
+                  width: 60,
+                  alignItems:'center',
+                  paddingLeft: 20,
+                }}
+                containerStyle={{ marginVertical: 10, marginLeft: 40, height: 50, width: 250 }}
+                titleStyle={{ fontWeight: 'bold' }}
+              />
             </View>
+
+            <AlertPro
+               ref={ref => {
+                 this.AlertPro = ref;
+               }}
+               onConfirm={() => this.AlertPro.close()}
+               showCancel={false}
+               title="OUPS !"
+               message="L'email ou le mot de passe est incorrect"
+               textConfirm="REESAYER"
+               closeOnPressMask={true}
+               customStyles={{
+                 mask: {
+                   backgroundColor: "transparent"
+                 },
+                 container: {
+                   borderWidth: 1,
+                   borderColor: "#ea4335",
+                   shadowColor: "#000000",
+                   shadowOpacity: 0.1,
+                   shadowRadius: 10
+                 },
+                 buttonConfirm: {
+                   backgroundColor: "#ea4335"
+                 }
+               }}
+             />
         </View>
 
 
@@ -200,5 +276,35 @@ const styles = StyleSheet.create({
   },
   buttonCase: {
     flex: 1,
+  },
+  triangleLeft: {
+    position: 'absolute',
+    left: -20,
+    bottom: 0,
+    width: 0,
+    height: 0,
+    borderRightWidth: 20,
+    borderRightColor: 'white',
+    borderBottomWidth: 25,
+    borderBottomColor: 'transparent',
+    borderTopWidth: 25,
+    borderTopColor: 'transparent',
+  },
+  triangleRight: {
+    position: 'absolute',
+    right: -20,
+    top: 0,
+    width: 0,
+    height: 0,
+    borderLeftWidth: 20,
+    borderLeftColor: 'white',
+    borderBottomWidth: 25,
+    borderBottomColor: 'transparent',
+    borderTopWidth: 25,
+    borderTopColor: 'transparent',
+  },
+  inputContainerStyle: {
+    marginTop: 16,
+    width: '90%',
   },
 });
