@@ -18,7 +18,7 @@ export default class Start extends Component {
       username: '',
       password: '',
       pwdhide: true,
-      opacity: 'eye',
+      hideIcon: 'eye',
     };
   }
 
@@ -85,16 +85,17 @@ export default class Start extends Component {
 
   _fgtPass = async () => {
         Store.setToken('Unknown Token')
+        //EXPLICATION
         this.props.navigation.navigate('ForgottenPass');
       };
 
   _pwdhide = async () => {
     if (this.state.pwdhide === true) {
       this.setState({'pwdhide':false})
-      this.setState({'opacity':'eye-slash'})
+      this.setState({'hideIcon':'eye-slash'})
     } else {
       this.setState({'pwdhide':true})
-      this.setState({'opacity':'eye'})
+      this.setState({'hideIcon':'eye'})
     }
   };
 
@@ -158,7 +159,7 @@ export default class Start extends Component {
                   <Button
                     onPress={this._pwdhide}
                     icon={{
-                      name: this.state.opacity,
+                      name: this.state.hideIcon,
                       type: 'font-awesome',
                       size: 20,
                       color: '#363453',

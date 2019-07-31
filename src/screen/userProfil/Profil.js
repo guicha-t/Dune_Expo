@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet,
+import { Alert, TextInput, View, Text, StyleSheet,
   ScrollView, Image, TouchableOpacity, AsyncStorage, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
-import Loading from './../../global/loading/Loading';
+import { Avatar, Button, Icon } from 'react-native-elements';
 
+
+import Loading from './../../global/loading/Loading';
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
 
@@ -53,11 +55,11 @@ export default class Profil extends Component {
 
     displayTypeLabel(param) {
         if (param.typeUser === 1) {
-            return <Text style={styles.title}> Professeur</Text>;
+            return <Text style={styles.subtitle}>Professeur</Text>;
         } else if (param.typeUser === 2){
-            return <Text style={styles.title}> Directeur</Text>;
+            return <Text style={styles.subtitle}>Directeur</Text>;
         } else {
-            return <Text style={styles.title}> Poste inconnu </Text>;
+            return <Text style={styles.subtitle}>Poste non renseigné</Text>;
         }
     }
 
@@ -75,41 +77,139 @@ export default class Profil extends Component {
       <View style={{flex:1, backgroundColor: '#fff'}}>
         <Header navigation={this.props.navigation}/>
 
-        <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 6}}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
-            <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-          </TouchableOpacity>
+        <View style={{flex: 0.3, alignItems:'center', justifyContent:'center'}}>
+          <Avatar
+            rounded
+            xlarge
+            source={{
+              uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Profil.picPath
+            }}
+            />
         </View>
 
-        <View style={styles.topBodyPicture}>
-          <Image
-            style={styles.profilPicture}
-            source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Profil.picPath}}
-            resizeMode="contain"
-            />
-            <Text style={styles.title}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
-            {this.displayTypeLabel(this.state.Profil)}
-            <Text style={styles.subtitle}>{this.state.Profil.emailUser}</Text>
+        <View style={{flex: 0.6}}>
+
+          <View style={{flex: 0.2, flexDirection:'row'}}>
+            <View style={{flex: 0.3, justifyContent:'center', alignItems:'flex-end'}}>
+              <Icon
+              raised
+              type='font-awesome'
+              name='id-card'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#363453',
+              }}
+              />
+            </View>
+            <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
+              <Text style={styles.subtitle}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+            </View>
+          </View>
+
+          <View style={{flex: 0.2, flexDirection:'row'}}>
+            <View style={{flex: 0.3, justifyContent:'center', alignItems:'flex-end'}}>
+              <Icon
+              raised
+              type='font-awesome'
+              name='briefcase'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#363453',
+              }}
+              />
+            </View>
+            <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
+              {this.displayTypeLabel(this.state.Profil)}
+            </View>
+
+          </View>
+
+
+          <View style={{flex: 0.2, flexDirection:'row'}}>
+            <View style={{flex: 0.3, justifyContent:'center', alignItems:'flex-end'}}>
+              <Icon
+              raised
+              type='font-awesome'
+              name='at'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#363453',
+              }}
+              />
+            </View>
+            <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
+              <Text style={styles.subtitle}>{this.state.Profil.emailUser}</Text>
+            </View>
+
+          </View>
+          <View style={{flex: 0.4}}></View>
         </View>
 
-        <View style={styles.bodyInfo}>
-          <View style={{paddingBottom: 10}}>
-            <Button
-              title={'Modifier les informations'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={this._goToEditProfil}
-            />
-          </View>
+        <View style={{flex: 0.1, flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>
 
-          <View style={{}}>
-            <Button
-              title={'Déconnexion'}
-              style={styles.ButtonCo}
-              color='#363453'
-              onPress={this._disconnect}
-            />
-          </View>
+          <Button
+            title=""
+            onPress={()=>this.props.navigation.navigate('Dashboard')}
+            icon={{
+             type: 'font-awesome',
+             name: 'arrow-left',
+             size: 15,
+             color: 'white',
+           }}
+            buttonStyle={{
+              backgroundColor: '#363453',
+              borderWidth: 2,
+              borderColor: 'white',
+              borderRadius: 30,
+              width: 60,
+              paddingLeft: 20,
+            }}
+            containerStyle={{ height: 50, width: 250 }}
+            titleStyle={{ fontWeight: 'bold' }}
+          />
+
+          <Button
+            title=""
+            onPress={this._goToEditProfil}
+            icon={{
+             type: 'font-awesome',
+             name: 'mouse-pointer',
+             size: 15,
+             color: 'white',
+           }}
+            buttonStyle={{
+              backgroundColor: '#363453',
+              borderWidth: 2,
+              borderColor: 'white',
+              borderRadius: 0,
+              width: 60,
+              paddingLeft: 20,
+            }}
+            containerStyle={{ height: 50, width: 250 }}
+            titleStyle={{ fontWeight: 'bold' }}
+          />
+
+          <Button
+            title=""
+            onPress={this._disconnect}
+            icon={{
+             type: 'font-awesome',
+             name: 'sign-out',
+             size: 15,
+             color: 'white',
+           }}
+            buttonStyle={{
+              backgroundColor: '#ea4335',
+              borderWidth: 1,
+              borderColor: '#363453',
+              borderRadius: 30,
+              width: 60,
+              paddingLeft: 20,
+            }}
+            containerStyle={{ height: 50, width: 250 }}
+            titleStyle={{ fontWeight: 'bold' }}
+          />
+
         </View>
 
       </View>
@@ -119,16 +219,10 @@ export default class Profil extends Component {
 
 const styles = StyleSheet.create({
   topBodyPicture: {
-    flex: 0.5,
-    paddingTop: 20,
-    paddingBottom: 20,
-    alignItems: 'center',
   },
   profilPicture: {
-    height: 120,
-    width: 120,
+    flex: 1,
     marginBottom: 10,
-    borderRadius: 200,
   },
   bodyInfo: {
     flex: 0.4,

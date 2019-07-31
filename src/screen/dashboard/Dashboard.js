@@ -299,7 +299,7 @@ export default class Dashboard extends Component {
                                                     <View style={{flex: 1, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
-                                                            source={{uri: 'http://176.31.252.134:9001/files/apps/' + item.game_image}}
+                                                            source={{uri: 'http://51.38.187.216:9000/files/apps/' + item.game_image}}
                                                         />
                                                     </View>
                                                 </View>

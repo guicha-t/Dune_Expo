@@ -164,7 +164,7 @@ export default class GameProfil extends Component {
           <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{height: 120, width: 120, marginBottom: 10, borderRadius: 30,}}
-              source={{uri: 'http://176.31.252.134:9001/files/apps/' + this.state.Game.picPath}}
+              source={{uri: 'http://51.38.187.216:9000/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
               <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>

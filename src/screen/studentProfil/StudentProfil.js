@@ -108,7 +108,7 @@ export default class StudentProfil extends Component {
             </View>
             <View style={{flex: 0.4, padding: 10, justifyContent:'center'}}>
               <Image
-                source={{uri: 'http://176.31.252.134:9001/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
+                source={{uri: 'http://51.38.187.216:9000/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
                 style={{flex: 1, borderRadius: 1000}}
                 resizeMode="contain"
                 />

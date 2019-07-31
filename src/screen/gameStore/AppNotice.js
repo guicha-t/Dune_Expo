@@ -81,7 +81,7 @@ render() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Prof1.photo}}
+                source={{uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Prof1.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -100,7 +100,7 @@ render() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Prof2.photo}}
+                source={{uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Prof2.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -119,7 +119,7 @@ render() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Prof3.photo}}
+                source={{uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Prof3.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -138,7 +138,7 @@ render() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Prof4.photo}}
+                source={{uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Prof4.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -157,7 +157,7 @@ render() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://176.31.252.134:9001/files/profs/' + this.state.Prof5.photo}}
+                source={{uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Prof5.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>

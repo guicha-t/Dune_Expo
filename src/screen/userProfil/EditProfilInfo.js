@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, KeyboardAvoidingView} from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, KeyboardAvoidingView} from 'react-native';
 import { observer } from 'mobx-react';
+import {Button, Icon, Divider } from 'react-native-elements';
+import { Fumi } from 'react-native-textinput-effects';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
@@ -122,207 +125,68 @@ export default class EditProfilInfo extends Component {
       <View style={styles.container}>
         <Header navigation={this.props.navigation}/>
         <KeyboardAvoidingView behavior="padding" enabled style={styles.containerBody}>
+          <ScrollView style={{}}>
 
-          <View style={{flex: 0.3, borderBottomWidth: 2}}>
-
-
-            <View style={{flex: 0.2, flexDirection:'row'}}>
-              <View style={{flex: 0.2, justifyContent:'center', paddingLeft: 6}}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
-                  <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-                </TouchableOpacity>
-              </View>
-              <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontWeight: 'bold'}}>INFORMATIONS PERSONNELLES</Text>
-              </View>
-              <View style={{flex: 0.2}}>
-
-              </View>
-
-            </View>
-
-
-            <View style={{flex: 0.6}}>
-              <View style={{flex: 0.5, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Nom</Text>
-                </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                  <TextInput
-                  style={styles.input}
-                  placeholder='Nom'
-                  onChangeText={(lastname) => this.setState({lastname})}
-                  value={this.state.lastname}
+            <View style={{height: 60, paddingTop: 10}}>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
+                  <Icon
+                  raised
+                  onPress={()=>this.props.navigation.navigate('Profil')}
+                  type='font-awesome'
+                  name='arrow-left'
+                  color='#FFF'
+                  containerStyle={{
+                    backgroundColor: '#363453',
+                  }}
                   />
                 </View>
-              </View>
-
-              <View style={{flex: 0.5, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Prénom</Text>
+                <View style={{flex: 0.6, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={{fontWeight:'bold'}}>INFORMATIONS PERSONNELLES</Text>
                 </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                  <TextInput
-                  style={styles.input}
-                  placeholder='Prénom'
-                  onChangeText={(name) => this.setState({name})}
-                  value={this.state.name}
-                  />
-                </View>
+                <View style={{flex: 0.2}}></View>
               </View>
-
             </View>
-            <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
-              <Button
-                title={'Valider'}
-                style={styles.ButtonCo}
-                color='#363453'
-                onPress={this._confirmEditName}
+
+            <View style={{height: 160, justifyContent:'center', alignItems:'center'}}>
+
+              <Fumi
+                label={'Prénom'}
+                style={{ width: 280, backgroundColor:'#363453', borderRadius: 30}}
+                value={this.state.name}
+                onChangeText={(name) => this.setState({ name })}
+                iconClass={FontAwesomeIcon}
+                iconName={'user'}
+                iconColor={'#FFF'}
+                labelStyle={{ color: '#FFF' }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
                 />
-
-            </View>
-
-            </View>
-
-
-          <View style={{flex: 0.3, borderBottomWidth: 2}}>
-            <View style={{flex: 0.2, flexDirection: 'row'}}>
-              <View style={{flex: 0.2}}>
-              </View>
-              <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontWeight: 'bold'}}>EMAIL</Text>
-              </View>
-              <View style={{flex: 0.2}}>
-                <TouchableOpacity onPress={this._pwdhide} style={{flex: 1, justifyContent:'center'}}>
-                  <Image
-                    style={{flex: 0.6, height: undefined, width: undefined}}
-                    source={require('./../../picture/start/eye.png')}
-                    resizeMode="contain"
-                    />
-                </TouchableOpacity>
-              </View>
-
-            </View>
-            <View style={{flex: 0.6}}>
-              <View style={{flex: 0.5, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Nouvel Email</Text>
-                </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                  <TextInput
-                   style={styles.input}
-                   placeholder='Email'
-                   onChangeText={(email) => this.setState({email})}
-                   value={this.state.email}
-                  />
-                </View>
-              </View>
-
-              <View style={{flex: 0.5, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Mot de passe</Text>
-                </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                  <TextInput
-                     style={styles.input}
-                     placeholder='Mot de passe'
-                     onChangeText={(password) => this.setState({password})}
-                     secureTextEntry={this.state.pwdhide}
-                     value={this.state.password}
-                   />
-                </View>
-              </View>
-
-            </View>
-            <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
-              <Button
-                title={'Valider'}
-                style={styles.ButtonCo}
-                color='#363453'
-                onPress={this._confirmEditMail}
+              <Fumi
+                label={'Nom'}
+                style={{ width: 280, backgroundColor:'#363453', marginTop: 10}}
+                value={this.state.lastname}
+                onChangeText={(lastname) => this.setState({ lastname })}
+                iconClass={FontAwesomeIcon}
+                iconName={'user'}
+                iconColor={'#FFF'}
+                labelStyle={{ color: '#FFF' }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
                 />
-
-            </View>
-          </View>
-
-          <View style={{flex: 0.4}}>
-          <View style={{flex: 0.2, flexDirection: 'row'}}>
-            <View style={{flex: 0.2}}>
-            </View>
-            <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
-              <Text style={{fontWeight: 'bold'}}>MOT DE PASSE</Text>
-            </View>
-            <View style={{flex: 0.2}}>
-              <TouchableOpacity onPress={this._pwdhide} style={{flex: 1, justifyContent:'center'}}>
-                <Image
-                  style={{flex: 0.5, height: undefined, width: undefined}}
-                  source={require('./../../picture/start/eye.png')}
-                  resizeMode="contain"
-                  />
-              </TouchableOpacity>
             </View>
 
-          </View>
-
-            <View style={{flex: 0.6}}>
-              <View style={{flex: 0.33, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Ancien</Text>
-                </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                  <TextInput
-                     style={styles.input}
-                     placeholder='Mot de passe'
-                     onChangeText={(oldpassword) => this.setState({oldpassword})}
-                     secureTextEntry={this.state.pwdhide}
-                     value={this.state.oldpassword}
-                   />
-                </View>
-              </View>
-
-              <View style={{flex: 0.33, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Nouveau*</Text>
-                </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                <TextInput
-                   style={styles.input}
-                   placeholder='Mot de passe'
-                   onChangeText={(newpassword) => this.setState({newpassword})}
-                   secureTextEntry={this.state.pwdhide}
-                   value={this.state.newpassword}
-                 />
-                </View>
-              </View>
-
-              <View style={{flex: 0.33, flexDirection:'row'}}>
-                <View style={{flex: 0.3, justifyContent:'center', alignItems:'center', paddingBottom: 10}}>
-                  <Text>Nouveau*</Text>
-                </View>
-                <View style={{flex: 0.7, justifyContent:'center'}}>
-                  <TextInput
-                     style={styles.input}
-                     placeholder='Mot de passe'
-                     onChangeText={(newpasswordbis) => this.setState({newpasswordbis})}
-                     secureTextEntry={this.state.pwdhide}
-                     value={this.state.newpasswordbis}
-                   />
-                </View>
-              </View>
+            <Divider style={{ backgroundColor: '#363453' }} />
 
 
-            </View>
-            <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
-              <Button
-                title={'Valider'}
-                style={styles.ButtonCo}
-                color='#363453'
-                onPress={this._confirmEditPwd}
-                />
 
-            </View>
 
-          </View>
+
+
+
+          </ScrollView>
 
         </KeyboardAvoidingView>
       </View>
@@ -334,27 +198,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     flex: 1
-  },
-  input: {
-    width: 220,
-    height: 38,
-    borderRadius: 50,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 10,
-  },
-  containerBody: {
-    flex: 1,
-  },
-  titleInfo: {
-    color: '#363453',
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
-  containerFooter: {
-    flexDirection: 'row',
-    paddingBottom: 10,
-    justifyContent:'space-around',
   },
 });

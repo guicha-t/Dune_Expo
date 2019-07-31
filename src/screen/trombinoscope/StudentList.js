@@ -299,7 +299,7 @@ import { Alert, Button, TextInput, View, Text,
                     <View style={{flex: 0.7}}>
                       <Image
                         style={{flex: 1}}
-                        source={{uri: 'http://176.31.252.134:9001/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        source={{uri: 'http://51.38.187.216:9000/files/eleves/' + item.idEleve + '-eleve.png'}}
                         resizeMode="contain"
                         />
                     </View>

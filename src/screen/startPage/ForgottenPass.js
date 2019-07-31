@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, TextInput, View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Image} from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, ToastAndroid, TouchableOpacity, KeyboardAvoidingView, Image} from 'react-native';
 import { observer } from 'mobx-react';
 
 import { Button, Icon } from 'react-native-elements';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Fumi } from 'react-native-textinput-effects';
+import AlertPro from "react-native-alert-pro";
 
 import Store from './../../global/store/Store'
 
@@ -39,11 +40,17 @@ static navigationOptions = {
     }).then((response) => response.json())
         .then((responseJson) => {
           if (responseJson.status == 200) {
-	    this.props.navigation.navigate('Start')
-            Alert.alert('E-mail de récupération envoyé')
+              this.props.navigation.navigate('Start')
+              ToastAndroid.showWithGravityAndOffset(
+                'Email envoyé avec succès.',
+                ToastAndroid.LONG,
+                ToastAndroid.BOTTOM,
+                25,
+                50,
+              );
           }
           else {
-            Alert.alert('Adresse E-mail introuvable')
+            this.AlertPro.open()
           }
         })
         .catch((error) => {
@@ -139,6 +146,34 @@ static navigationOptions = {
           </View>
           <View style={{flex: 0.1}}></View>
         </KeyboardAvoidingView>
+
+        <AlertPro
+           ref={ref => {
+             this.AlertPro = ref;
+           }}
+           onConfirm={() => this.AlertPro.close()}
+           showCancel={false}
+           title="OUPS !"
+           message="L'email est introuvable"
+           textConfirm="REESAYER"
+           closeOnPressMask={true}
+           customStyles={{
+             mask: {
+               backgroundColor: "transparent"
+             },
+             container: {
+               borderWidth: 1,
+               borderColor: "#ea4335",
+               shadowColor: "#000000",
+               shadowOpacity: 0.1,
+               shadowRadius: 10
+             },
+             buttonConfirm: {
+               backgroundColor: "#ea4335"
+             }
+           }}
+         />
+
       </View>
         );
       }

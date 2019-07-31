@@ -163,7 +163,7 @@ import { Alert, Button, TextInput, View, Text,
                     <View style={{flex: 0.7, paddingTop: 10}}>
                       <Image
                         style={{flex: 1, borderRadius:10}}
-                        source={{uri: 'http://176.31.252.134:9001/files/apps/' + item.picPath}}
+                        source={{uri: 'http://51.38.187.216:9000/files/apps/' + item.picPath}}
                       />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>

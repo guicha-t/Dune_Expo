@@ -92,7 +92,7 @@ render() {
             <View style={{flex:0.3, width:120, height:120, paddingBottom:20}}>
               <Image
                 style={{flex: 1, borderRadius:10}}
-                source={{uri: 'http://176.31.252.134:9001/files/apps/' + this.state.Game.picPath}}
+                source={{uri: 'http://51.38.187.216:9000/files/apps/' + this.state.Game.picPath}}
               />
             </View>
 
