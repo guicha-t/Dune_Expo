@@ -29,7 +29,7 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
-   fetch('http://51.38.187.216:9000/api/v1/notifs/popUpMenu', {
+   fetch('http://51.38.187.216:9090/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -47,7 +47,7 @@ export default class UserDemands extends Component {
 
   renderProfArray = (param) => {
 
-      fetch('http://51.38.187.216:9000/api/v1/notifs/getArrayProf/' + param.toString(), {
+      fetch('http://51.38.187.216:9090/notifs/getArrayProf/' + param.toString(), {
           method: 'GET',
           headers: {
               Accept: 'application/json',
@@ -66,7 +66,7 @@ export default class UserDemands extends Component {
   }
 
   readNotification = () => {
-      fetch('http://51.38.187.216:9000/api/v1/notifs/read/' + this.state.idNotif.toString(), {
+      fetch('http://51.38.187.216:9090/notifs/read/' + this.state.idNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -82,7 +82,7 @@ export default class UserDemands extends Component {
   }
 
   _confirmDemand = () => {
-    fetch('http://51.38.187.216:9000/api/v1/store/validating', {
+    fetch('http://51.38.187.216:9090/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -107,7 +107,7 @@ export default class UserDemands extends Component {
 
 
   _cancelDemand = () => {
-    fetch('http://51.38.187.216:9000/api/v1/store/validating', {
+    fetch('http://51.38.187.216:9090/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -212,7 +212,7 @@ export default class UserDemands extends Component {
                                                     <View style={{flex: 0.7, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
-                                                            source={{uri: 'http://51.38.187.216:9000/files/profs/' + item.picPath}}
+                                                            source={{uri: 'http://51.38.187.216:9090/files/profs/' + item.picPath}}
                                                         />
                                                     </View>
                                                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>

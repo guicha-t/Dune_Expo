@@ -24,7 +24,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-      fetch('http://51.38.187.216:9000/api/v1/store/', {
+      fetch('http://51.38.187.216:9090/store/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -43,7 +43,7 @@ import { Alert, Button, TextInput, View, Text,
         console.error(error);
       });
 
-      fetch('http://51.38.187.216:9000/api/v1/store/getAppsEcole', {
+      fetch('http://51.38.187.216:9090/store/getAppsEcole', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -72,7 +72,7 @@ import { Alert, Button, TextInput, View, Text,
     _searchRequest = async () => {
       Keyboard.dismiss()
       if (this.state.Game === null) {
-        fetch('http://51.38.187.216:9000/api/v1/store/', {
+        fetch('http://51.38.187.216:9090/store/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -93,7 +93,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://51.38.187.216:9000/api/v1/store/getApp', {
+        fetch('http://51.38.187.216:9090/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {

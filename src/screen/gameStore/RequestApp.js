@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity } from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { observer } from 'mobx-react';
+import AlertPro from "react-native-alert-pro";
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Sae, Fumi } from 'react-native-textinput-effects';
+import { FormLabel, FormInput, FormValidationMessage, Icon, Button } from 'react-native-elements';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
+
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
+
 
 @observer
 export default class RequestApp extends Component {
@@ -24,7 +36,7 @@ _cancelDemand = async () => {
         Alert.alert('ATTENTION', 'Veuillez remplir la section \'Commentaire\'.');
         return;
     }
-    fetch('http://51.38.187.216:9000/api/v1/store/buyApp', {
+    fetch('http://51.38.187.216:9090/store/buyApp', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -37,8 +49,7 @@ _cancelDemand = async () => {
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
-          Alert.alert('DEMANDE ENVOYÉE', 'Votre demande a bien été envoyée et est en attente de traîtement.');
-          this.props.navigation.navigate('GameContainer');
+        this.AlertPro.open()
     })
     .catch((error) => {
       console.error(error);
@@ -49,37 +60,107 @@ _cancelDemand = async () => {
 render() {
     return(
 
+    <DismissKeyboard>
     <View style={styles.container}>
         <Header navigation={this.props.navigation}/>
 
+          <View style={{marginTop:15}}>
+            <Button
+              title=""
+              onPress={()=>this._cancelDemand()}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: '#363453',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+          </View>
+
+       <KeyboardAvoidingView style={styles.container}  behavior="padding" >
+
         <View style={styles.containerBody}>
-            <View style={{flex: 0.1, alignItems: 'center', paddingBottom: 8}}>
-              <Text style={styles.titleInfo}>Pourquoi voulez-vous cette application ?</Text>
-            </View>
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
             <View style={{flex: 0.7}}>
-              <TextInput
-               style={styles.input}
-               placeholder='Commentaire...'
-               onChangeText={(Commentaire) => this.setState({Commentaire})}
-               value={this.state.Commentaire}
+              <Fumi
+                label={'Pourquoi cette application ?'}
+                style={{ width: 270, backgroundColor:'#FFF'}}
+                value={this.state.Commentaire}
+                onChangeText={(Commentaire) => this.setState({ Commentaire })}
+                iconClass={FontAwesomeIcon}
+                iconName={'question'}
+                iconColor={'#363453'}
+                labelStyle={{ color: '#363453' }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
               />
-             </View>
+            </View>
           </View>
           <View style={styles.containerFooter}>
-           <Button
-             title={'Valider'}
-             color='#363453'
-             onPress={this._confirmDemand}
-           />
-           <Button
-             title={'Retour'}
-             color='#363453'
-             onPress={this._cancelDemand}
-           />
+            <Button
+              onPress={this._confirmDemand}
+              title="VALIDER"
+              icon={{
+               type: 'font-awesome',
+               name: 'share',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: '#363453',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 160,
+                height:60,
+                alignItems:'center',
+                paddingLeft: 10,
+              }}
+              containerStyle={{ marginVertical: 10, marginLeft: 40, height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
           </View>
+          <AlertPro
+            ref={ref => {
+              this.AlertPro = ref;
+            }}
+            onConfirm={() => this.props.navigation.navigate('GameContainer')}
+            showCancel={false}
+            title="DEMANDE ENVOYÉE"
+            message="Votre demande a bien été envoyée et est en attente de traîtement."
+            textConfirm="Retour"
+            closeOnPressMask={true}
+            customStyles={{
+              mask: {
+                backgroundColor: "transparent"
+              },
+              container: {
+                borderWidth: 1,
+                borderColor: "#6ED528",
+                shadowColor: "#000000",
+                shadowOpacity: 0.1,
+                shadowRadius: 10
+              },
+              buttonConfirm: {
+                backgroundColor: "#6ED528"
+              }
+            }}
+          />
         </View>
+      </KeyboardAvoidingView>
       </View>
+      </DismissKeyboard>
     );
   }
 }

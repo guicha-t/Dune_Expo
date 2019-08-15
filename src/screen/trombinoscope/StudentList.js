@@ -27,7 +27,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-      fetch('http://51.38.187.216:9000/api/v1/trombi/', {
+      fetch('http://51.38.187.216:9090/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -41,7 +41,7 @@ import { Alert, Button, TextInput, View, Text,
       .then((responseJson) => {
         this.setState({'Trombi':responseJson.response})
 
-        fetch('http://51.38.187.216:9000/api/v1/trombi/classes', {
+        fetch('http://51.38.187.216:9090/trombi/classes', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -73,7 +73,7 @@ import { Alert, Button, TextInput, View, Text,
     };
 
     _setCurrentClass = async (param) => {
-      fetch('http://51.38.187.216:9000/api/v1/trombi/byClasse', {
+      fetch('http://51.38.187.216:9090/trombi/byClasse', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -96,7 +96,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     _resetTrombi = async () => {
-      fetch('http://51.38.187.216:9000/api/v1/trombi/', {
+      fetch('http://51.38.187.216:9090/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -120,7 +120,7 @@ import { Alert, Button, TextInput, View, Text,
     _searchRequest = async () => {
       Keyboard.dismiss()
       if (this.state.Class === 0) {
-        fetch('http://51.38.187.216:9000/api/v1/trombi/', {
+        fetch('http://51.38.187.216:9090/trombi/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -140,7 +140,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://51.38.187.216:9000/api/v1/trombi/byClasse', {
+        fetch('http://51.38.187.216:9090/trombi/byClasse', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -299,7 +299,7 @@ import { Alert, Button, TextInput, View, Text,
                     <View style={{flex: 0.7}}>
                       <Image
                         style={{flex: 1}}
-                        source={{uri: 'http://51.38.187.216:9000/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        source={{uri: 'http://51.38.187.216:9090/files/eleves/' + item.idEleve + '-eleve.png'}}
                         resizeMode="contain"
                         />
                     </View>

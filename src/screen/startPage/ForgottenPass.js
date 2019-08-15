@@ -28,7 +28,7 @@ static navigationOptions = {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://51.38.187.216:9000/api/v1/login/reset', {
+    fetch('http://51.38.187.216:9090/login/reset', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

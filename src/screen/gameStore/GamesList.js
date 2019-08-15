@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text,
-  StyleSheet, AsyncStorage, ListView, TouchableOpacity,
-  Picker, Item, FlatList, Image, Keyboard} from 'react-native';
-  import { observer } from 'mobx-react';
-  import { Avatar } from 'react-native-elements';
+import { Alert, TextInput, View, Text,
+StyleSheet, AsyncStorage, ListView, TouchableOpacity,
+Picker, Item, FlatList, Image, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView} from 'react-native';
+import { observer } from 'mobx-react';
+import { Avatar, Icon, Button } from 'react-native-elements';
+import GridView from 'react-native-super-grid';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Sae, Fumi } from 'react-native-textinput-effects';
 
-  import GridView from 'react-native-super-grid';
 
-  import Header from './../../global/header/Header';
-  import Store from './../../global/store/Store'
+import Header from './../../global/header/Header';
+import Store from './../../global/store/Store';
+
+
+  const DismissKeyboard = ({ children }) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}
+    </TouchableWithoutFeedback>
+  );
+
 
   @observer
   export default class GamesList extends Component {
@@ -22,7 +32,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     componentDidMount(){
-        fetch('http://51.38.187.216:9000/api/v1/store/', {
+        fetch('http://51.38.187.216:9090/store/', {
                 method: 'POST',
                 Accept: 'application/json',
                 headers: {
@@ -49,7 +59,7 @@ import { Alert, Button, TextInput, View, Text,
 
     _setCurrentGame = async (param) => {
     if (param.key === 'Enregistrées'){
-    fetch('http://51.38.187.216:9000/api/v1/store/getAppsEcole', {
+    fetch('http://51.38.187.216:9090/store/getAppsEcole', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -66,7 +76,7 @@ import { Alert, Button, TextInput, View, Text,
       }
 
     else if (param.key === 'Dune Store'){
-    fetch('http://51.38.187.216:9000/api/v1/store/', {
+    fetch('http://51.38.187.216:9090/store/', {
             method: 'POST',
             Accept: 'application/json',
             headers: {
@@ -88,7 +98,7 @@ import { Alert, Button, TextInput, View, Text,
 
     _searchRequest = async () => {
       Keyboard.dismiss()
-              fetch('http://51.38.187.216:9000/api/v1/store/', {
+              fetch('http://51.38.187.216:9090/store/', {
                 method: 'POST',
                 Accept: 'application/json',
                 headers: {
@@ -111,6 +121,7 @@ import { Alert, Button, TextInput, View, Text,
     render() {
 
       return (
+        <DismissKeyboard>
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
           <View style={styles.classContainer}>
@@ -134,17 +145,37 @@ import { Alert, Button, TextInput, View, Text,
         </View>
 
         <View style={styles.searchContainer}>
-          <TextInput
+          <Fumi
+            label={'Chercher un jeu'}
+            style={{ width: 270, backgroundColor:'#FFF'}}
             value={this.state.Search}
             onChangeText={(Search) => this.setState({ Search })}
-            placeholder={'Rechercher'}
-            autoCapitalize = 'none'
-            style={styles.input}
+            iconClass={FontAwesomeIcon}
+            iconName={'puzzle-piece'}
+            iconColor={'#363453'}
+            labelStyle={{ color: '#363453' }}
+            iconSize={20}
+            iconWidth={40}
+            inputPadding={16}
           />
           <Button
-            title={'Go'}
-            style={styles.ButtonSearch}
-            color='#363453'
+            title={''}
+            icon={{
+              type: 'font-awesome',
+              name: 'search',
+              size: 20,
+              color: '#363453',
+            }}
+            buttonStyle={{
+              backgroundColor: 'white',
+              borderColor: 'white',
+              borderRadius: 10,
+              width: 60,
+              height:50,
+              alignItems:'center',
+              paddingLeft: 10,
+              justifyContent:'center',
+            }}
             onPress={() => this._searchRequest()}
           />
         </View>
@@ -163,7 +194,7 @@ import { Alert, Button, TextInput, View, Text,
                     <View style={{flex: 0.7, paddingTop: 10}}>
                       <Image
                         style={{flex: 1, borderRadius:10}}
-                        source={{uri: 'http://51.38.187.216:9000/files/apps/' + item.picPath}}
+                        source={{uri: 'http://51.38.187.216:9090/files/apps/' + item.picPath}}
                       />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
@@ -177,6 +208,7 @@ import { Alert, Button, TextInput, View, Text,
             />
         </View>
       </View>
+      </DismissKeyboard>
      );
   }
 }
@@ -220,10 +252,14 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   ButtonSearch: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: 'black',
-    marginBottom: 10,
+    backgroundColor: '#363453',
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 30,
+    width: 160,
+    height:60,
+    alignItems:'center',
+    paddingLeft: 10,
   },
   allClassContainer: {
     flex:0.2,

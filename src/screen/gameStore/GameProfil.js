@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { observer } from 'mobx-react';
 import Star from 'react-native-star-view';
-import { Divider } from 'react-native-elements';
+import { Divider, Button } from 'react-native-elements';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import AlertPro from "react-native-alert-pro";
+
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -23,7 +26,7 @@ export default class GameProfil extends Component {
 
     Store.setAppId((this.props.id).toString())
 
-    fetch('http://51.38.187.216:9000/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://51.38.187.216:9090/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -39,7 +42,7 @@ export default class GameProfil extends Component {
          });
 
 
-    fetch('http://51.38.187.216:9000/api/v1/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://51.38.187.216:9090/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -54,7 +57,7 @@ export default class GameProfil extends Component {
            console.error(error);
          });
 
-    fetch('http://51.38.187.216:9000/api/v1/store/getApp', {
+    fetch('http://51.38.187.216:9090/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -79,7 +82,7 @@ export default class GameProfil extends Component {
       return;
     }
     else{
-      fetch('http://51.38.187.216:9000/api/v1/store/buyAppDirecteur', {
+      fetch('http://51.38.187.216:9090/store/buyAppDirecteur', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -91,8 +94,7 @@ export default class GameProfil extends Component {
           })
         }).then((response) => response.json())
         .then((responseJson) => {
-            Alert.alert('APPLICATION ENREGISTRE', 'Votre demande a bien été envoyée et l\'application a été ajoutée dans votre bibliothèque.');
-           this.props.navigation.navigate('GameList');
+            this.AlertPro.open()
         })
         .catch((error) => {
           console.error(error);
@@ -115,17 +117,47 @@ export default class GameProfil extends Component {
     return(
       <View style={{paddingBottom: 10}}>
        <View style={{paddingBottom: 10}}>
-        <Button
-          title={'Obtenir cette application'}
-          color='#363453'
-          onPress={() => this._ObtainApp()}
+         <Button
+           title={'TÉLÉCHARGER'}
+           icon={{
+             type: 'font-awesome',
+             name: 'download',
+             size: 15,
+             color: 'white',
+           }}
+           onPress={() => this._ObtainApp()}
+             buttonStyle={{
+               backgroundColor: '#363453',
+               borderColor: 'white',
+               borderRadius: 30,
+               width: 180,
+               height:50,
+               alignItems:'center',
+               paddingLeft: 10,
+               justifyContent:'center',
+             }}
         />
        </View>
 
         <Button
-          title={'Noter cette application'}
-          color='#363453'
+          title={'NOTER'}
+          icon={{
+            type: 'font-awesome',
+            name: 'star',
+            size: 15,
+            color: 'white',
+          }}
           onPress={() => this.props.navigation.navigate('RateApp')}
+            buttonStyle={{
+              backgroundColor: '#363453',
+              borderColor: 'white',
+              borderRadius: 30,
+              width: 180,
+              height:50,
+              alignItems:'center',
+              paddingLeft: 10,
+              justifyContent:'center',
+            }}
         />
       </View>
     );
@@ -134,16 +166,46 @@ export default class GameProfil extends Component {
       <View style={{paddingBottom: 10}}>
        <View style={{paddingBottom: 10}}>
         <Button
-          title={'Demander cette application'}
-          color='#363453'
-          onPress={() => this._checkIfBuyed()}
+          title={'DEMANDER'}
+          icon={{
+            type: 'font-awesome',
+            name: 'download',
+            size: 15,
+            color: 'white',
+          }}
+           onPress={() => this._checkIfBuyed()}
+             buttonStyle={{
+               backgroundColor: '#363453',
+               borderColor: 'white',
+               borderRadius: 30,
+               width: 180,
+               height:50,
+               alignItems:'center',
+               paddingLeft: 10,
+               justifyContent:'center',
+            }}
         />
        </View>
 
         <Button
-          title={'Noter cette application'}
-          color='#363453'
+          title={'NOTER'}
+          icon={{
+            type: 'font-awesome',
+            name: 'star',
+            size: 15,
+            color: 'white',
+          }}
           onPress={() => this.props.navigation.navigate('RateApp')}
+            buttonStyle={{
+              backgroundColor: '#363453',
+              borderColor: 'white',
+              borderRadius: 30,
+              width: 180,
+              height:50,
+              alignItems:'center',
+              paddingLeft: 10,
+              justifyContent:'center',
+            }}
         />
       </View>
     );
@@ -161,10 +223,32 @@ export default class GameProfil extends Component {
 
       return(
         <ScrollView style={{flex:1, backgroundColor: '#fff'}}>
+          <View style={{marginTop:15}}>
+            <Button
+              title=""
+              onPress={()=>this.props.navigation.navigate('GamesList')}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: '#363453',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+          </View>
           <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{height: 120, width: 120, marginBottom: 10, borderRadius: 30,}}
-              source={{uri: 'http://51.38.187.216:9000/files/apps/' + this.state.Game.picPath}}
+              source={{uri: 'http://51.38.187.216:9090/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
               <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
@@ -177,16 +261,37 @@ export default class GameProfil extends Component {
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
-              <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>Prix : {this.state.Game.prix} €</Text>
+              <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>Prix : gratuit</Text>
               <View style={{paddingTop:30}}>
                {this._renderAppRequest()}
-               <Button
-                 title="Retour"
-                 color='#363453'
-                 onPress={() => this.props.navigation.navigate('GamesList')}
-               />
               </View>
           </View>
+          <AlertPro
+            ref={ref => {
+              this.AlertPro = ref;
+            }}
+            onConfirm={() => this.props.navigation.navigate('GamesList')}
+            showCancel={false}
+            title="APPLICATION ENREGISTRÉE"
+            message="Votre demande a bien été envoyée et l\'application a été ajoutée dans votre bibliothèque."
+            textConfirm="Retour"
+            closeOnPressMask={true}
+            customStyles={{
+              mask: {
+                backgroundColor: "transparent"
+              },
+              container: {
+                borderWidth: 1,
+                borderColor: "#6ED528",
+                shadowColor: "#000000",
+                shadowOpacity: 0.1,
+                shadowRadius: 10
+              },
+              buttonConfirm: {
+                backgroundColor: "#6ED528"
+              }
+            }}
+          />
         </ScrollView>
       );
     }

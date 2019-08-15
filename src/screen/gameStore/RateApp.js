@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity, Platform } from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity, Platform, TouchableWithoutFeedback, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { observer } from 'mobx-react';
-
+import AlertPro from "react-native-alert-pro";
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Sae, Fumi } from 'react-native-textinput-effects';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import { Button } from 'react-native-elements';
+
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 @observer
 export default class RateApp extends Component {
@@ -21,7 +31,7 @@ export default class RateApp extends Component {
 
   componentDidMount(){
 
-    fetch('http://51.38.187.216:9000/api/v1/store/getApp', {
+    fetch('http://51.38.187.216:9090/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -56,7 +66,7 @@ _cancelDemand = async () => {
     }
 
 
-    fetch('http://51.38.187.216:9000/api/v1/store/addAvis', {
+    fetch('http://51.38.187.216:9090/store/addAvis', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -70,8 +80,7 @@ _cancelDemand = async () => {
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
-          Alert.alert('AVIS ENVOYÉ', 'Merci pour vos commentaires.');
-          this.props.navigation.navigate('GameContainer');
+          this.AlertPro.open()
     })
     .catch((error) => {
       console.error(error);
@@ -85,14 +94,18 @@ _cancelDemand = async () => {
 
 render() {
     return(
+    <DismissKeyboard>
     <View style={styles.container}>
         <Header navigation={this.props.navigation}/>
+
+       <KeyboardAvoidingView style={styles.container}  behavior="padding" >
+
         <View style={styles.containerBody}>
 
             <View style={{flex:0.3, width:120, height:120, paddingBottom:20}}>
               <Image
                 style={{flex: 1, borderRadius:10}}
-                source={{uri: 'http://51.38.187.216:9000/files/apps/' + this.state.Game.picPath}}
+                source={{uri: 'http://51.38.187.216:9090/files/apps/' + this.state.Game.picPath}}
               />
             </View>
 
@@ -101,11 +114,18 @@ render() {
             </View>
             <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
               <View style={{flex: 0.7}}>
-                <TextInput
-                 style={styles.input}
-                 placeholder='Commentaire...'
-                 onChangeText={(Commentaire) => this.setState({Commentaire})}
-                 value={this.state.Commentaire}
+                <Fumi
+                  label={'Noter cette application'}
+                  style={{ width: 270, backgroundColor:'#FFF'}}
+                  value={this.state.Commentaire}
+                  onChangeText={(Commentaire) => this.setState({ Commentaire })}
+                  iconClass={FontAwesomeIcon}
+                  iconName={'comment'}
+                  iconColor={'#363453'}
+                  labelStyle={{ color: '#363453' }}
+                  iconSize={20}
+                  iconWidth={40}
+                  inputPadding={16}
                 />
                </View>
             </View>
@@ -134,9 +154,37 @@ render() {
                />
              </TouchableOpacity>
           </View>
-
+          <AlertPro
+            ref={ref => {
+              this.AlertPro = ref;
+            }}
+            onConfirm={() => this.props.navigation.navigate('GameContainer')}
+            showCancel={false}
+            title="AVIS ENVOYÉ"
+            message="Merci pour vos commentaires."
+            textConfirm="Retour"
+            closeOnPressMask={true}
+            customStyles={{
+              mask: {
+                backgroundColor: "transparent"
+              },
+              container: {
+                borderWidth: 1,
+                borderColor: "#6ED528",
+                shadowColor: "#000000",
+                shadowOpacity: 0.1,
+                shadowRadius: 10
+              },
+              buttonConfirm: {
+                backgroundColor: "#6ED528"
+              }
+            }}
+          />
         </View>
+        </KeyboardAvoidingView>
       </View>
+      </DismissKeyboard>
+
     );
   }
 }

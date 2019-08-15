@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { observer } from 'mobx-react';
+import { Sae, Fumi } from 'react-native-textinput-effects';
+import AlertPro from "react-native-alert-pro";
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
+
 
 @observer
 export default class AddUserDirector extends Component {
@@ -17,11 +29,17 @@ export default class AddUserDirector extends Component {
   }
 
   _cancelEdit = async () => {
-    this.props.navigation.navigate('Profil');
+    this.props.navigation.navigate('Dashboard');
   };
 
   _confirmEdit = async () => {
-    fetch('http://51.38.187.216:9000/api/v1/users/add', {
+
+    if (this.state.lastname.length == 0 || this.state.name.length == 0 || this.state.email.length == 0){
+        Alert.alert('ERREUR', 'Veuillez remplir tous les champs')
+        return;
+    }
+
+    fetch('http://51.38.187.216:9090/users/add', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -37,18 +55,23 @@ export default class AddUserDirector extends Component {
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
-          //Handle what you want
+          this.AlertPro.open()
+          //this.props.navigation.navigate('Profil');
         })
         .catch((error) => {
           console.error(error);
         });
-    this.props.navigation.navigate('Profil');
   };
 
   render() {
     return(
 
+      <DismissKeyboard>
       <View style={styles.container}>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior="padding"
+        >
         <Header navigation={this.props.navigation}/>
 
 	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
@@ -60,44 +83,56 @@ export default class AddUserDirector extends Component {
         <View style={styles.containerBody}>
 
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
-            <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
-              <Text style={styles.titleInfo}>Nom</Text>
-            </View>
             <View style={{flex: 0.7}}>
-              <TextInput
-               style={styles.input}
-               placeholder='Nom'
-               onChangeText={(lastname) => this.setState({lastname})}
-               value={this.state.lastname}
+              <Fumi
+                label={'Nom'}
+                style={{ width: 300, backgroundColor:'#FFF'}}
+                onChangeText={(lastname) => this.setState({lastname})}
+                value={this.state.lastname}
+                iconClass={FontAwesomeIcon}
+                iconName={'user'}
+                iconColor={'#363453'}
+                labelStyle={{ color: '#363453' }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
               />
              </View>
           </View>
 
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
-            <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
-              <Text style={styles.titleInfo}>Prénom</Text>
-            </View>
             <View style={{flex: 0.7}}>
-              <TextInput
-                 style={styles.input}
-                 placeholder='Prénom'
-                 onChangeText={(name) => this.setState({name})}
-                 value={this.state.name}
-               />
+              <Fumi
+                label={'Prénom'}
+                style={{ width: 300, backgroundColor:'#FFF'}}
+                onChangeText={(name) => this.setState({name})}
+                value={this.state.name}
+                iconClass={FontAwesomeIcon}
+                iconName={'user'}
+                iconColor={'#363453'}
+                labelStyle={{ color: '#363453' }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
+              />
              </View>
           </View>
 
 
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
-            <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
-              <Text style={styles.titleInfo}>E-mail</Text>
-            </View>
             <View style={{flex: 0.7}}>
-              <TextInput
-               style={styles.input}
-               placeholder='Email'
-               onChangeText={(email) => this.setState({email})}
-               value={this.state.email}
+              <Fumi
+                label={'Email'}
+                style={{ width: 300, backgroundColor:'#FFF'}}
+                onChangeText={(email) => this.setState({email})}
+                value={this.state.email}
+                iconClass={FontAwesomeIcon}
+                iconName={'at'}
+                iconColor={'#363453'}
+                labelStyle={{ color: '#363453' }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
               />
              </View>
           </View>
@@ -121,9 +156,40 @@ export default class AddUserDirector extends Component {
                resizeMode="contain"
                />
            </TouchableOpacity>
-
          </View>
+
+
+            <AlertPro
+               ref={ref => {
+                 this.AlertPro = ref;
+               }}
+               onConfirm={() => this.props.navigation.navigate('Dashboard')}
+               showCancel={false}
+               title="SUCCÈS"
+               message="Le professeur a bien été ajouté au trombinoscope"
+               textConfirm="Retour"
+               closeOnPressMask={true}
+               customStyles={{
+                 mask: {
+                   backgroundColor: "transparent"
+                 },
+                 container: {
+                   borderWidth: 1,
+                   borderColor: "#6ED528",
+                   shadowColor: "#000000",
+                   shadowOpacity: 0.1,
+                   shadowRadius: 10
+                 },
+                 buttonConfirm: {
+                   backgroundColor: "#6ED528"
+                 }
+               }}
+             />
+
+
+         </KeyboardAvoidingView>
       </View>
+      </DismissKeyboard>
     );
   }
 }
@@ -153,7 +219,7 @@ const styles = StyleSheet.create({
   },
   containerFooter: {
     flexDirection: 'row',
-    paddingBottom: 10,
+    paddingBottom: 50,
     justifyContent:'space-around',
   },
 });

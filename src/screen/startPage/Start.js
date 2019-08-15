@@ -53,7 +53,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://51.38.187.216:9000/api/v1/login/', {
+    fetch('http://51.38.187.216:9090/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

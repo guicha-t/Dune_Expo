@@ -18,7 +18,7 @@ export default class ClassList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://51.38.187.216:9000/api/v1/classes/profs', {
+    fetch('http://51.38.187.216:9090/classes/profs', {
       method: 'GET',
       Accept: 'application/json',
       headers: {
