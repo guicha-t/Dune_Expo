@@ -261,7 +261,7 @@ export default class GameProfil extends Component {
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
-              <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>Prix : gratuit</Text>
+              <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>€ : gratuit</Text>
               <View style={{paddingTop:30}}>
                {this._renderAppRequest()}
               </View>
