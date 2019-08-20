@@ -29,8 +29,10 @@ export default class AppNotice extends Component {
     Moyenne4:0,
     Prof5:[],
     Moyenne5:0,
-    NextPage:0,
+    NextPage:1,
     PrevPage:0,
+    CurrentRow:1,
+    CurrentPage:1,
     Prof1IsEmpty:0,
     Prof2IsEmpty:0,
     Prof3IsEmpty:0,
@@ -109,14 +111,14 @@ _printFirstNotice() {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.titleInfo}>{this.state.Prof1.nomProf}</Text>
-              <Text style={styles.titleInfo}> {this.state.Prof1.prenomProf}</Text>
+              <Text style={styles.profInfo}>{this.state.Prof1.nomProf}</Text>
+              <Text style={styles.profInfo}> {this.state.Prof1.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne1} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.titleInfo}>{this.state.Prof1.commentaire}</Text>
+              <Text style={styles.commentaire}>{this.state.Prof1.commentaire}</Text>
             </View>
           </View>
    );
@@ -135,14 +137,14 @@ _printSecondNotice() {
                   />
                 </View>
                 <View style={styles.ProfContainer}>
-                  <Text style={styles.titleInfo}>{this.state.Prof2.nomProf}</Text>
-                  <Text style={styles.titleInfo}> {this.state.Prof2.prenomProf}</Text>
+                  <Text style={styles.profInfo}>{this.state.Prof2.nomProf}</Text>
+                  <Text style={styles.profInfo}> {this.state.Prof2.prenomProf}</Text>
                 </View>
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
                   <Star score={this.state.Moyenne2} style={starStyle} />
                 </View>
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-                  <Text style={styles.titleInfo}>{this.state.Prof2.commentaire}</Text>
+                  <Text style={styles.commentaire}>{this.state.Prof2.commentaire}</Text>
                 </View>
               </View>
     );
@@ -161,14 +163,14 @@ _printThirdNotice() {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.titleInfo}>{this.state.Prof3.nomProf}</Text>
-              <Text style={styles.titleInfo}> {this.state.Prof3.prenomProf}</Text>
+              <Text style={styles.profInfo}>{this.state.Prof3.nomProf}</Text>
+              <Text style={styles.profInfo}> {this.state.Prof3.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne3} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.titleInfo}>{this.state.Prof3.commentaire}</Text>
+              <Text style={styles.commentaire}>{this.state.Prof3.commentaire}</Text>
             </View>
           </View>
     );
@@ -187,14 +189,14 @@ _printForthNotice () {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.titleInfo}>{this.state.Prof4.nomProf}</Text>
-              <Text style={styles.titleInfo}> {this.state.Prof4.prenomProf}</Text>
+              <Text style={styles.profInfo}>{this.state.Prof4.nomProf}</Text>
+              <Text style={styles.profInfo}> {this.state.Prof4.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne4} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.titleInfo}>{this.state.Prof4.commentaire}</Text>
+              <Text style={styles.commentaire}>{this.state.Prof4.commentaire}</Text>
             </View>
           </View>
     );
@@ -213,14 +215,14 @@ _printFifthNotice () {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.titleInfo}>{this.state.Prof5.nomProf}</Text>
-              <Text style={styles.titleInfo}> {this.state.Prof5.prenomProf}</Text>
+              <Text style={styles.profInfo}>{this.state.Prof5.nomProf}</Text>
+              <Text style={styles.profInfo}> {this.state.Prof5.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne5} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.titleInfo}>{this.state.Prof5.commentaire}</Text>
+              <Text style={styles.commentaire}>{this.state.Prof5.commentaire}</Text>
             </View>
           </View>
     );
@@ -228,10 +230,98 @@ _printFifthNotice () {
     return;
 }
 
+_printPlusButton (){
+
+    if (this.state.Prof5IsEmpty == 1 || this.state.Prof4IsEmpty == 1 || this.state.Prof3IsEmpty == 1 || this.state.Prof2IsEmpty == 1 || this.state.Prof1IsEmpty == 1)
+      return(
+            <Button
+              title=""
+              buttonStyle={{
+                backgroundColor: 'white',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+      );
+    else{
+      return(
+            <Button
+              title=""
+              onPress={()=>this._addRowplus()}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-right',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: '#363453',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+      );
+    }
+}
+
+_printMenusButton (){
+    if (this.state.CurrentRow == 1)
+      return(
+            <Button
+              title=""
+              buttonStyle={{
+                backgroundColor: 'white',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+      );
+    else{
+      return(
+            <Button
+              title=""
+              onPress={()=>this._addRowmenus()}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: '#363453',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+      );
+    }
+}
+
 _addRowplus () {
 
-
-    this.state.NextPage = this.state.NextPage + 5;
+    this.state.NextPage = this.state.CurrentRow + 5;
+    this.state.CurrentRow = this.state.CurrentRow + 5;
+    this.state.CurrentPage = this.state.CurrentPage + 1;
     fetch('http://51.38.187.216:9090/store/avis/', {
           method: 'POST',
           Accept: 'application/json',
@@ -310,46 +400,9 @@ _addRowplus () {
 
 
           <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
-            <Button
-              title=""
-              onPress={()=>this._addRowmenus()}
-              icon={{
-               type: 'font-awesome',
-               name: 'arrow-left',
-               size: 15,
-               color: 'white',
-             }}
-              buttonStyle={{
-                backgroundColor: '#363453',
-                borderWidth: 2,
-                borderColor: 'white',
-                borderRadius: 30,
-                width: 60,
-                paddingLeft: 20,
-              }}
-              containerStyle={{ height: 50, width: 250 }}
-              titleStyle={{ fontWeight: 'bold' }}
-            />
-            <Button
-              title=""
-              onPress={()=>this._addRowplus()}
-              icon={{
-               type: 'font-awesome',
-               name: 'arrow-right',
-               size: 15,
-               color: 'white',
-             }}
-              buttonStyle={{
-                backgroundColor: '#363453',
-                borderWidth: 2,
-                borderColor: 'white',
-                borderRadius: 30,
-                width: 60,
-                paddingLeft: 20,
-              }}
-              containerStyle={{ height: 50, width: 250 }}
-              titleStyle={{ fontWeight: 'bold' }}
-            />
+            {this._printMenusButton()}
+            <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
+            {this._printPlusButton()}
           </View>
          </ScrollView>
         </View>
@@ -359,6 +412,96 @@ _addRowplus () {
 
 
 _addRowmenus() {
+
+this.state.CurrentPage = this.state.CurrentPage - 1;
+this.state.PrevPage = this.state.CurrentRow - 5;
+this.state.CurrentRow = this.state.CurrentRow - 5;
+    fetch('http://51.38.187.216:9090/store/avis/', {
+          method: 'POST',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+          body: JSON.stringify({
+            idApp: Store.AppId,
+            depart:this.state.PrevPage,
+            nbRes:5,
+          })
+        }).then((response) => response.json())
+        .then((responseJson) => {
+          if (JSON.stringify(responseJson.response[0]) == null){
+            this.setState({'Prof1IsEmpty': 1})
+          }
+          else{
+            this.setState({'Prof1':responseJson.response[0]})
+            this.setState({'Moyenne1':this.state.Prof1.note})
+            this.setState({'Prof1IsEmpty': 0})
+          }
+          if (JSON.stringify(responseJson.response[1]) == null){
+            this.setState({'Prof2IsEmpty': 1})
+          }
+          else{
+            this.setState({'Prof2':responseJson.response[1]})
+            this.setState({'Moyenne2':this.state.Prof2.note})
+            this.setState({'Prof2IsEmpty': 0})
+          }
+          if (JSON.stringify(responseJson.response[2]) == null){
+            this.setState({'Prof3IsEmpty': 1})
+          }
+          else{
+            this.setState({'Prof3':responseJson.response[2]})
+            this.setState({'Moyenne3':this.state.Prof3.note})
+            this.setState({'Prof3IsEmpty': 0})
+          }
+          if (JSON.stringify(responseJson.response[3]) == null){
+            this.setState({'Prof4IsEmpty': 1})
+          }
+          else{
+            this.setState({'Prof4':responseJson.response[3]})
+            this.setState({'Moyenne4':this.state.Prof4.note})
+            this.setState({'Prof4IsEmpty': 0})
+          }
+          if (JSON.stringify(responseJson.response[4]) == null){
+            this.setState({'Prof5IsEmpty': 1})
+          }
+          else{
+            this.setState({'Prof5':responseJson.response[4]})
+            this.setState({'Moyenne5':this.state.Prof5.note})
+            this.setState({'Prof5IsEmpty': 0})
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+  return(
+    <View style={styles.MainContainer}>
+        <Header navigation={this.props.navigation}/>
+    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
+          <Text style={{fontSize:20,}}>
+             Avis Professeurs
+          </Text>
+        </View>
+        <View style={styles.containerBody}>
+          <ScrollView showsVerticalScrollIndicator={false} >
+
+          {this._printFirstNotice()}
+          {this._printSecondNotice()}
+          {this._printThirdNotice()}
+          {this._printForthNotice()}
+          {this._printFifthNotice()}
+
+
+          <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
+            {this._printMenusButton()}
+            <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
+            {this._printPlusButton()}
+          </View>
+         </ScrollView>
+        </View>
+      </View>
+  );
 
 }
 
@@ -383,47 +526,9 @@ render() {
           {this._printFifthNotice()}
 
           <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
-            <Button
-              title=""
-              onPress={()=>this._addRowmenus()}
-              icon={{
-               type: 'font-awesome',
-               name: 'arrow-left',
-               size: 15,
-               color: 'white',
-             }}
-              buttonStyle={{
-                backgroundColor: '#363453',
-                borderWidth: 2,
-                borderColor: 'white',
-                borderRadius: 30,
-                width: 60,
-                paddingLeft: 20,
-              }}
-              containerStyle={{ height: 50, width: 250 }}
-              titleStyle={{ fontWeight: 'bold' }}
-            />
-
-            <Button
-              title=""
-              onPress={()=>this._addRowplus()}
-              icon={{
-               type: 'font-awesome',
-               name: 'arrow-right',
-               size: 15,
-               color: 'white',
-             }}
-              buttonStyle={{
-                backgroundColor: '#363453',
-                borderWidth: 2,
-                borderColor: 'white',
-                borderRadius: 30,
-                width: 60,
-                paddingLeft: 20,
-              }}
-              containerStyle={{ height: 50, width: 250 }}
-              titleStyle={{ fontWeight: 'bold' }}
-            />
+            {this._printMenusButton()}
+            <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
+            {this._printPlusButton()}
           </View>
          </ScrollView>
         </View>
@@ -452,10 +557,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  titleInfo: {
+  profInfo: {
     color: '#363453',
     fontWeight: 'bold',
     fontSize: 14,
+  },
+  commentaire:{
+    color: '#363453',
+    fontWeight: 'normal',
+    fontSize: 12,
   },
   containerFooter: {
       marginTop:10,
