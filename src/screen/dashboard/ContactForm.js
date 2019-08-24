@@ -64,6 +64,7 @@ return(
 
           <View style={{flex: 0.7}}>
 
+
             <View style={{marginTop: 80, flex: 0.3, flexDirection: 'row'}}>
               <View style={{flex: 0.2}}></View>
               <View style={{flex: 0.6, alignItems: 'center', justifyContent:'flex-end'}}>
