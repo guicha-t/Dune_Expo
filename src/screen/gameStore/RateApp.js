@@ -24,7 +24,9 @@ export default class RateApp extends Component {
     this.state = {
       Commentaire:'',
       position:'',
+      Status:0,
       Game:[],
+      Notice:[],
     }
     this.starPos = this.starPos.bind (this);
   }
@@ -48,6 +50,33 @@ export default class RateApp extends Component {
         .catch((error) => {
           console.error(error);
         });
+
+
+
+
+   fetch('http://51.38.187.216:9090/store/getUserAvis/' + Store.AppId, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          if (JSON.stringify(responseJson.status) == 200){
+            this.setState({'Notice':responseJson.response[0]})
+            this.setState({'Commentaire': this.state.Notice.commentaire})
+            this.setState({'position': this.state.Notice.note})
+            this.setState({'Status': 1})
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+
+
+
   }
 
 
@@ -66,6 +95,7 @@ _cancelDemand = async () => {
     }
 
 
+    if (this.state.Status == 0){
     fetch('http://51.38.187.216:9090/store/addAvis', {
       method: 'POST',
       headers: {
@@ -85,6 +115,32 @@ _cancelDemand = async () => {
     .catch((error) => {
       console.error(error);
     });
+  }
+
+    else {
+    fetch('http://51.38.187.216:9090/store/updateUserAvis', {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: Store.Token,
+      },
+      body: JSON.stringify({
+        idApp: Store.AppId,
+        note:this.state.position,
+        commentaire:this.state.Commentaire,
+      }),
+    }).then((response) => response.json())
+        .then((responseJson) => {
+          this.AlertPro.open()
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+
+
   };
 
 
@@ -133,7 +189,7 @@ render() {
           <AirbnbRating
             count={5}
             reviews={["Echec", "Insuffisant", "Moyen", "Satisfaisant", "Très satisfaisant"]}
-            defaultRating={0}
+            defaultRating={this.state.position}
             size={30}
             onFinishRating={this.starPos}
           />

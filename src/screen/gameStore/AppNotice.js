@@ -53,7 +53,7 @@ export default class AppNotice extends Component {
           },
           body: JSON.stringify({
             idApp: Store.AppId,
-            depart:1,
+            depart:0,
             nbRes:5,
           })
         }).then((response) => response.json())
