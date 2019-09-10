@@ -7,26 +7,6 @@ import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
 
 export default class App extends Component {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     state = {
       hasCameraPermission: null,
       scanned: false,
@@ -63,7 +43,7 @@ export default class App extends Component {
           />
 
           {scanned && (
-            <Button title={'Tap to Scan Again'} onPress={() => this.setState({ scanned: false })} />
+            <Button title={'Cliquez pour scanner de nouveau'} onPress={() => this.setState({ scanned: false })} />
           )}
 
 
@@ -88,31 +68,18 @@ export default class App extends Component {
             }),
           }).then((response) => response.json())
               .then((responseJson) => {
-               Alert.alert('lol')
-
                 if (responseJson.status == 200) {
       	           this.props.navigation.navigate('Profil')
                    Alert.alert('Table connectée')
                 }
                 else {
-                  Alert.alert('ça marche pas')
+                  Alert.alert('Token invalide')
                 }
               })
               .catch((error) => {
                 console.error(error);
               });
     };
-
-
-
-
-
-
-
-
-
-
-
 }
 
 const styles = StyleSheet.create({
