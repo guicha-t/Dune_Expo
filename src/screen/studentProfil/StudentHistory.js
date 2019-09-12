@@ -8,6 +8,7 @@ import Moment from 'moment';
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
 import Loading from './../../global/loading/Loading';
+import * as cfg from "./../../Config";
 
 @observer
 export default class StudentHistory extends Component {
@@ -38,7 +39,7 @@ export default class StudentHistory extends Component {
   componentDidMount(){
     if (this.props.screenProps.idGameType==='0')
     {
-      fetch('http://51.38.187.216:9090/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
+      fetch(cfg.API_URL + '/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -49,7 +50,7 @@ export default class StudentHistory extends Component {
       .then((responseJson) => {
         this.setState({'Games':responseJson.response})
 
-        fetch('http://51.38.187.216:9090/eleves/' + this.props.screenProps.idStudent, {
+        fetch(cfg.API_URL + '/eleves/' + this.props.screenProps.idStudent, {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -60,7 +61,7 @@ export default class StudentHistory extends Component {
         .then((responseJson) => {
           this.setState({'Student':responseJson.response[0]})
 
-          fetch('http://51.38.187.216:9090/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
+          fetch(cfg.API_URL + '/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -90,7 +91,7 @@ export default class StudentHistory extends Component {
       });
 
     } else {
-      fetch('http://51.38.187.216:9090/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + this.props.screenProps.idGameType, {
+      fetch(cfg.API_URL + '/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + this.props.screenProps.idGameType, {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -104,7 +105,7 @@ export default class StudentHistory extends Component {
         this.setState({'Games':responseJson.response})
         this.setState({'CurrentType':this.props.screenProps.idGameType})
 
-        fetch('http://51.38.187.216:9090/eleves/' + this.props.screenProps.idStudent, {
+        fetch(cfg.API_URL + '/eleves/' + this.props.screenProps.idStudent, {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -115,7 +116,7 @@ export default class StudentHistory extends Component {
         .then((responseJson) => {
           this.setState({'Student':responseJson.response[0]})
 
-          fetch('http://51.38.187.216:9090/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
+          fetch(cfg.API_URL + '/eleves/stats/getMat/' + this.props.screenProps.idStudent, {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -149,7 +150,7 @@ export default class StudentHistory extends Component {
   }
 
   _setCurrentCat = async (param) => {
-    fetch('http://51.38.187.216:9090/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + param.idTypeGame, {
+    fetch(cfg.API_URL + '/eleves/stats/getGamesByMatEleve/' + this.props.screenProps.idStudent + '/' + param.idTypeGame, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -170,7 +171,7 @@ export default class StudentHistory extends Component {
   }
 
   _resetCat = async (param) => {
-    fetch('http://51.38.187.216:9090/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
+    fetch(cfg.API_URL + '/eleves/stats/gamesPlayed/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {

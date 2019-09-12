@@ -3,6 +3,7 @@ import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StyleSheet, To
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
+import * as cfg from "./../../Config";
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
 
@@ -56,7 +57,7 @@ export default class App extends Component {
 
     handleBarCodeScanned = ({ type, data }) => {
           this.setState({ scanned: true });
-          fetch('http://51.38.187.216:9090/cnxTable2/useToken', {
+          fetch(cfg.API_URL + '/cnxTable2/useToken', {
             method: 'POST',
             headers: {
               Accept: 'application/json',

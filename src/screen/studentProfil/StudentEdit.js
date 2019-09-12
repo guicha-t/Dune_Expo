@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 @observer
 export default class StudentEdit extends Component {
@@ -23,7 +24,7 @@ export default class StudentEdit extends Component {
   };
 
   _confirmEdit = async () => {
-    fetch('http://51.38.187.216:9090/eleves/update', {
+    fetch(cfg.API_URL + '/eleves/update', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',

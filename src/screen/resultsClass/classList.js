@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 @observer
 export default class ClassList extends Component {
@@ -18,7 +19,7 @@ export default class ClassList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://51.38.187.216:9090/classes/profs', {
+    fetch(cfg.API_URL + '/classes/profs', {
       method: 'GET',
       Accept: 'application/json',
       headers: {

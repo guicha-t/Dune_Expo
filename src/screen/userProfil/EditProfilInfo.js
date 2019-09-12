@@ -7,6 +7,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 @observer
 export default class EditProfilInfo extends Component {
@@ -30,7 +31,7 @@ export default class EditProfilInfo extends Component {
   };
 
   _confirmEditName = async () => {
-    fetch('http://51.38.187.216:9090/users/update', {
+    fetch(cfg.API_URL + '/users/update', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -52,7 +53,7 @@ export default class EditProfilInfo extends Component {
   };
 
   _confirmEditMail = async () => {
-    fetch('http://51.38.187.216:9090/users/changeEmail', {
+    fetch(cfg.API_URL + '/users/changeEmail', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -79,7 +80,7 @@ export default class EditProfilInfo extends Component {
   _confirmEditPwd = async () => {
     if (this.state.newpassword === this.state.newpasswordbis)
     {
-      fetch('http://51.38.187.216:9090/users/changePassword', {
+      fetch(cfg.API_URL + '/users/changePassword', {
         method: 'PUT',
         headers: {
           Accept: 'application/json',

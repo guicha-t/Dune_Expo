@@ -6,6 +6,7 @@ import GridView from 'react-native-super-grid';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 @observer
 export default class UserDemands extends Component {
@@ -29,7 +30,7 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
-   fetch('http://51.38.187.216:9090/notifs/popUpMenu', {
+   fetch(cfg.API_URL + '/notifs/popUpMenu', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -47,7 +48,7 @@ export default class UserDemands extends Component {
 
   renderProfArray = (param) => {
 
-      fetch('http://51.38.187.216:9090/notifs/getArrayProf/' + param.toString(), {
+      fetch(cfg.API_URL + '/notifs/getArrayProf/' + param.toString(), {
           method: 'GET',
           headers: {
               Accept: 'application/json',
@@ -66,7 +67,7 @@ export default class UserDemands extends Component {
   }
 
   readNotification = () => {
-      fetch('http://51.38.187.216:9090/notifs/read/' + this.state.idNotif.toString(), {
+      fetch(cfg.API_URL + '/notifs/read/' + this.state.idNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -82,7 +83,7 @@ export default class UserDemands extends Component {
   }
 
   _confirmDemand = () => {
-    fetch('http://51.38.187.216:9090/store/validating', {
+    fetch(cfg.API_URL + '/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -107,7 +108,7 @@ export default class UserDemands extends Component {
 
 
   _cancelDemand = () => {
-    fetch('http://51.38.187.216:9090/store/validating', {
+    fetch(cfg.API_URL + '/store/validating', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -212,7 +213,7 @@ export default class UserDemands extends Component {
                                                     <View style={{flex: 0.7, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
-                                                            source={{uri: 'http://51.38.187.216:9090/files/profs/' + item.picPath}}
+                                                            source={{uri: cfg.API_URL + '/files/profs/' + item.picPath}}
                                                         />
                                                     </View>
                                                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>

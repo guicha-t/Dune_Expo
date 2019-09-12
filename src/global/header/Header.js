@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Menu, Platform,
   Image, Button, FlatList, TouchableOpacity, AsyncStorage, Alert} from 'react-native';
 
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 export default class Header extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class Header extends Component {
   }
 
   checkIsLogToken = async () => {
-    fetch('http://51.38.187.216:9090/tokens/verifyToken', {
+    fetch(cfg.API_URL + '/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',
       headers: {

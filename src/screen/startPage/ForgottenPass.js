@@ -8,6 +8,7 @@ import { Fumi } from 'react-native-textinput-effects';
 import AlertPro from "react-native-alert-pro";
 
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 @observer
 export default class ForgottenPass extends Component {
@@ -28,7 +29,7 @@ static navigationOptions = {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://51.38.187.216:9090/login/reset', {
+    fetch(cfg.API_URL + '/login/reset', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

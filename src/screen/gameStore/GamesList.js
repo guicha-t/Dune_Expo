@@ -11,6 +11,7 @@ import { Sae, Fumi } from 'react-native-textinput-effects';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 
   const DismissKeyboard = ({ children }) => (
@@ -32,7 +33,7 @@ import Store from './../../global/store/Store';
     }
 
     componentDidMount(){
-        fetch('http://51.38.187.216:9090/store/', {
+        fetch(cfg.API_URL + '/store/', {
                 method: 'POST',
                 Accept: 'application/json',
                 headers: {
@@ -59,7 +60,7 @@ import Store from './../../global/store/Store';
 
     _setCurrentGame = async (param) => {
     if (param.key === 'Enregistrées'){
-    fetch('http://51.38.187.216:9090/store/getAppsEcole', {
+    fetch(cfg.API_URL + '/store/getAppsEcole', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -76,7 +77,7 @@ import Store from './../../global/store/Store';
       }
 
     else if (param.key === 'Dune Store'){
-    fetch('http://51.38.187.216:9090/store/', {
+    fetch(cfg.API_URL + '/store/', {
             method: 'POST',
             Accept: 'application/json',
             headers: {
@@ -98,7 +99,7 @@ import Store from './../../global/store/Store';
 
     _searchRequest = async () => {
       Keyboard.dismiss()
-              fetch('http://51.38.187.216:9090/store/', {
+              fetch(cfg.API_URL + '/store/', {
                 method: 'POST',
                 Accept: 'application/json',
                 headers: {
@@ -194,7 +195,7 @@ import Store from './../../global/store/Store';
                     <View style={{flex: 0.7, paddingTop: 10}}>
                       <Image
                         style={{flex: 1, borderRadius:10}}
-                        source={{uri: 'http://51.38.187.216:9090/files/apps/' + item.picPath}}
+                        source={{uri: cfg.API_URL + '/files/apps/' + item.picPath}}
                       />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>

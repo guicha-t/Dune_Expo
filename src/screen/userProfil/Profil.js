@@ -8,6 +8,7 @@ import { Avatar, Button, Icon } from 'react-native-elements';
 import Loading from './../../global/loading/Loading';
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 @observer
 export default class Profil extends Component {
@@ -20,7 +21,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://51.38.187.216:9090/users/infos', {
+    fetch(cfg.API_URL + '/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -82,7 +83,7 @@ export default class Profil extends Component {
             rounded
             xlarge
             source={{
-              uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Profil.picPath
+              uri: cfg.API_URL + '/files/profs/' + this.state.Profil.picPath
             }}
             />
         </View>

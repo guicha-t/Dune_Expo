@@ -10,6 +10,7 @@ import { Button } from 'react-native-elements';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -33,7 +34,7 @@ export default class RateApp extends Component {
 
   componentDidMount(){
 
-    fetch('http://51.38.187.216:9090/store/getApp', {
+    fetch(cfg.API_URL + '/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -54,7 +55,7 @@ export default class RateApp extends Component {
 
 
 
-   fetch('http://51.38.187.216:9090/store/getUserAvis/' + Store.AppId, {
+   fetch(cfg.API_URL + '/store/getUserAvis/' + Store.AppId, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -96,7 +97,7 @@ _cancelDemand = async () => {
 
 
     if (this.state.Status == 0){
-    fetch('http://51.38.187.216:9090/store/addAvis', {
+    fetch(cfg.API_URL + '/store/addAvis', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -118,7 +119,7 @@ _cancelDemand = async () => {
   }
 
     else {
-    fetch('http://51.38.187.216:9090/store/updateUserAvis', {
+    fetch(cfg.API_URL + '/store/updateUserAvis', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -161,7 +162,7 @@ render() {
             <View style={{flex:0.3, width:120, height:120, paddingBottom:20}}>
               <Image
                 style={{flex: 1, borderRadius:10}}
-                source={{uri: 'http://51.38.187.216:9090/files/apps/' + this.state.Game.picPath}}
+                source={{uri: cfg.API_URL + '/files/apps/' + this.state.Game.picPath}}
               />
             </View>
 

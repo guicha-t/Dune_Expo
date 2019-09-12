@@ -8,6 +8,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 const starStyle = {
   width: 100,
@@ -44,7 +45,7 @@ export default class AppNotice extends Component {
 
   componentDidMount(){
 
-    fetch('http://51.38.187.216:9090/store/avis/', {
+    fetch(cfg.API_URL + '/store/avis/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -107,7 +108,7 @@ _printFirstNotice() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Prof1.photo}}
+                source={{uri: cfg.API_URL + '/files/profs/' + this.state.Prof1.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -133,7 +134,7 @@ _printSecondNotice() {
                 <View style={{width:80, height:80}}>
                   <Image
                     style={{flex: 1, borderRadius:50}}
-                    source={{uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Prof2.photo}}
+                    source={{uri: cfg.API_URL + '/files/profs/' + this.state.Prof2.photo}}
                   />
                 </View>
                 <View style={styles.ProfContainer}>
@@ -159,7 +160,7 @@ _printThirdNotice() {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Prof3.photo}}
+                source={{uri: cfg.API_URL + '/files/profs/' + this.state.Prof3.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -185,7 +186,7 @@ _printForthNotice () {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Prof4.photo}}
+                source={{uri: cfg.API_URL + '/files/profs/' + this.state.Prof4.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -211,7 +212,7 @@ _printFifthNotice () {
             <View style={{width:80, height:80}}>
               <Image
                 style={{flex: 1, borderRadius:50}}
-                source={{uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Prof5.photo}}
+                source={{uri: cfg.API_URL + '/files/profs/' + this.state.Prof5.photo}}
               />
             </View>
             <View style={styles.ProfContainer}>
@@ -322,7 +323,7 @@ _addRowplus () {
     this.state.NextPage = this.state.CurrentRow + 5;
     this.state.CurrentRow = this.state.CurrentRow + 5;
     this.state.CurrentPage = this.state.CurrentPage + 1;
-    fetch('http://51.38.187.216:9090/store/avis/', {
+    fetch(cfg.API_URL + '/store/avis/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -416,7 +417,7 @@ _addRowmenus() {
 this.state.CurrentPage = this.state.CurrentPage - 1;
 this.state.PrevPage = this.state.CurrentRow - 5;
 this.state.CurrentRow = this.state.CurrentRow - 5;
-    fetch('http://51.38.187.216:9090/store/avis/', {
+    fetch(cfg.API_URL + '/store/avis/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {

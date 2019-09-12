@@ -7,6 +7,7 @@ import Moment from 'moment';
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 @observer
 export default class StudentResultList extends Component {
@@ -25,7 +26,7 @@ export default class StudentResultList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://51.38.187.216:9090/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
+    fetch(cfg.API_URL + '/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {

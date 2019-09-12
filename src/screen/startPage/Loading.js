@@ -22,6 +22,7 @@ import {
 
 import Store from './../../global/store/Store'
 import Header from './../../global/header/Header';
+import * as cfg from "./../../Config";
 
 export default class AuthLoadingScreen extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class AuthLoadingScreen extends Component {
     const localToken = await AsyncStorage.getItem('localToken');
     const localType = await AsyncStorage.getItem('localType');
 
-    fetch('http://51.38.187.216:9090/tokens/verifyToken', {
+    fetch(cfg.API_URL + '/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',
       headers: {

@@ -7,6 +7,7 @@ import Moment from 'moment';
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
 import Loading from './../../global/loading/Loading';
+import * as cfg from "./../../Config";
 
 
 @observer
@@ -22,7 +23,7 @@ export default class GameList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://51.38.187.216:9090/eleves/stats/byClasse/' + this.props.navigation.getParam('idClasse', '0'), {
+    fetch(cfg.API_URL + '/eleves/stats/byClasse/' + this.props.navigation.getParam('idClasse', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {

@@ -8,6 +8,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 
 const DismissKeyboard = ({ children }) => (
@@ -39,7 +40,7 @@ export default class AddUserDirector extends Component {
         return;
     }
 
-    fetch('http://51.38.187.216:9090/users/add', {
+    fetch(cfg.API_URL + '/users/add', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

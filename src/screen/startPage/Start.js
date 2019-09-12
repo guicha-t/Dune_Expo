@@ -9,6 +9,7 @@ import AlertPro from "react-native-alert-pro";
 
 
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 @observer
 export default class Start extends Component {
@@ -53,7 +54,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://51.38.187.216:9090/login/', {
+    fetch(cfg.API_URL + '/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

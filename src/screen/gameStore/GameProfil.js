@@ -6,10 +6,9 @@ import { Divider, Button } from 'react-native-elements';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import AlertPro from "react-native-alert-pro";
 
-
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
-
+import * as cfg from "./../../Config";
 
 @observer
 export default class GameProfil extends Component {
@@ -26,7 +25,7 @@ export default class GameProfil extends Component {
 
     Store.setAppId((this.props.id).toString())
 
-    fetch('http://51.38.187.216:9090/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch(cfg.API_URL + '/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -42,7 +41,7 @@ export default class GameProfil extends Component {
          });
 
 
-    fetch('http://51.38.187.216:9090/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch(cfg.API_URL + '/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -57,7 +56,7 @@ export default class GameProfil extends Component {
            console.error(error);
          });
 
-    fetch('http://51.38.187.216:9090/store/getApp', {
+    fetch(cfg.API_URL + '/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -82,7 +81,7 @@ export default class GameProfil extends Component {
       return;
     }
     else{
-      fetch('http://51.38.187.216:9090/store/buyAppDirecteur', {
+      fetch(cfg.API_URL + '/store/buyAppDirecteur', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -248,7 +247,7 @@ export default class GameProfil extends Component {
           <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{height: 120, width: 120, marginBottom: 10, borderRadius: 30,}}
-              source={{uri: 'http://51.38.187.216:9090/files/apps/' + this.state.Game.picPath}}
+              source={{uri: cfg.API_URL + '/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
               <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>

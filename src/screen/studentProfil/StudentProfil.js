@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store'
+import * as cfg from "./../../Config";
 
 @observer
 export default class StudentProfil extends Component {
@@ -28,7 +29,7 @@ export default class StudentProfil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://51.38.187.216:9090/eleves/' + this.props.screenProps.idStudent, {
+    fetch(cfg.API_URL + '/eleves/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -39,7 +40,7 @@ export default class StudentProfil extends Component {
     .then((responseJson) => {
       this.setState({'Student':responseJson.response[0]})
 
-      fetch('http://51.38.187.216:9090/eleves/stats/bulletin/' + this.props.screenProps.idStudent, {
+      fetch(cfg.API_URL + '/eleves/stats/bulletin/' + this.props.screenProps.idStudent, {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -108,7 +109,7 @@ export default class StudentProfil extends Component {
             </View>
             <View style={{flex: 0.4, padding: 10, justifyContent:'center'}}>
               <Image
-                source={{uri: 'http://51.38.187.216:9090/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
+                source={{uri: cfg.API_URL + '/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
                 style={{flex: 1, borderRadius: 1000}}
                 resizeMode="contain"
                 />

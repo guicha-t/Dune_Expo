@@ -7,7 +7,8 @@ import { Sae, Fumi } from 'react-native-textinput-effects';
 import { FormLabel, FormInput, FormValidationMessage, Icon, Button } from 'react-native-elements';
 
 import Header from './../../global/header/Header';
-import Store from './../../global/store/Store'
+import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 
 const DismissKeyboard = ({ children }) => (
@@ -36,7 +37,7 @@ _cancelDemand = async () => {
         Alert.alert('ATTENTION', 'Veuillez remplir la section \'Commentaire\'.');
         return;
     }
-    fetch('http://51.38.187.216:9090/store/buyApp', {
+    fetch(cfg.API_URL + '/store/buyApp', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

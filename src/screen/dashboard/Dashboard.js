@@ -7,6 +7,7 @@ import GridView from 'react-native-super-grid';
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 @observer
 export default class Dashboard extends Component {
@@ -31,7 +32,7 @@ export default class Dashboard extends Component {
   componentWillMount() {
 
         if (Store.TypeUser != 2){
-          fetch('http://51.38.187.216:9090/notifs/popUpMenu', {
+          fetch(cfg.API_URL + '/notifs/popUpMenu', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -58,7 +59,7 @@ export default class Dashboard extends Component {
         }
 
 
-      fetch('http://51.38.187.216:9090/dashboard/nbEleves', {
+      fetch(cfg.API_URL + '/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -69,7 +70,7 @@ export default class Dashboard extends Component {
     .then((responseJson) => {
       this.setState({'Student':JSON.stringify(responseJson.nbEleves)})
 
-      fetch('http://51.38.187.216:9090/dashboard/nbNotifsNonL', {
+      fetch(cfg.API_URL + '/dashboard/nbNotifsNonL', {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -80,7 +81,7 @@ export default class Dashboard extends Component {
       .then((responseJson) => {
         this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
 
-        fetch('http://51.38.187.216:9090/dashboard/nbAppsStarted', {
+        fetch(cfg.API_URL + '/dashboard/nbAppsStarted', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -91,7 +92,7 @@ export default class Dashboard extends Component {
         .then((responseJson) => {
           this.setState({'Result':JSON.stringify(responseJson.nbAppsStarted)})
 
-          fetch('http://51.38.187.216:9090/games/nbGames', {
+          fetch(cfg.API_URL + '/games/nbGames', {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -108,7 +109,7 @@ export default class Dashboard extends Component {
 
             this.setState({Day: date, Month: month, Year: year,});
 
-            fetch('http://51.38.187.216:9090/users/infos', {
+            fetch(cfg.API_URL + '/users/infos', {
               method: 'GET',
               headers: {
                 Accept: 'application/json',
@@ -146,7 +147,7 @@ export default class Dashboard extends Component {
   }
 
   readNotification = () => {
-      fetch('http://51.38.187.216:9090/notifs/read/' + this.state.idReadNotif.toString(), {
+      fetch(cfg.API_URL + '/notifs/read/' + this.state.idReadNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -299,7 +300,7 @@ export default class Dashboard extends Component {
                                                     <View style={{flex: 1, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
-                                                            source={{uri: 'http://51.38.187.216:9090/files/apps/' + item.game_image}}
+                                                            source={{uri: cfg.API_URL + '/files/apps/' + item.game_image}}
                                                         />
                                                     </View>
                                                 </View>
