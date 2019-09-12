@@ -23,7 +23,6 @@ export default class GameContainer extends Component {
         <View style={{flex: 1}}>
           <Header navigation={this.props.navigation}/>
           <GameProfil id={this.state.id} navigation={this.props.navigation}/>
-          <Text>{this.state.id}</Text>
         </View>
       );
     }
