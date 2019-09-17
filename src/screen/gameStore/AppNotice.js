@@ -509,8 +509,30 @@ this.state.CurrentRow = this.state.CurrentRow - 5;
 render() {
 
   return(
-    <View style={styles.MainContainer}>
+    <View style={{flex:1}}>
         <Header navigation={this.props.navigation}/>
+        <View style={{marginTop:15}}>
+          <Button
+            title=""
+            onPress={()=>this.props.navigation.navigate('GameContainer')}
+            icon={{
+             type: 'font-awesome',
+             name: 'arrow-left',
+             size: 15,
+             color: 'white',
+           }}
+            buttonStyle={{
+              backgroundColor: '#363453',
+              borderWidth: 2,
+              borderColor: 'white',
+              borderRadius: 30,
+              width: 60,
+              paddingLeft: 20,
+            }}
+            containerStyle={{ height: 50, width: 250 }}
+            titleStyle={{ fontWeight: 'bold' }}
+          />
+        </View>
     	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
           <Text style={{fontSize:20,}}>
              Avis Professeurs

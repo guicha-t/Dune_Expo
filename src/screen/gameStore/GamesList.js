@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, TextInput, View, Text,
 StyleSheet, AsyncStorage, ListView, TouchableOpacity,
-Picker, Item, FlatList, Image, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView} from 'react-native';
+Picker, Item, FlatList, Image, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions} from 'react-native';
 import { observer } from 'mobx-react';
 import { Avatar, Icon, Button } from 'react-native-elements';
 import GridView from 'react-native-super-grid';
@@ -133,7 +133,7 @@ import * as cfg from "./../../Config";
                 data={[{key: 'Enregistrées'}, {key: 'Dune Store'}]}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
-                <View style={{width: 178}}>
+                <View style={{flex:1}}>
                   <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame(item)}>
                     <View style={styles.buttonClass}>
                         <Text style={styles.textClass}>{item.key}</Text>
@@ -288,11 +288,11 @@ const styles = StyleSheet.create({
     margin:2,
   },
   buttonClass: {
-    width:178,
     flex: 1,
+    width: Math.round(Dimensions.get('window').width) / 2,
+    margin:2,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 2,
     backgroundColor: '#FEE599',
     borderRadius:10,
   },

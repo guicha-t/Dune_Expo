@@ -210,15 +210,21 @@ export default class GameProfil extends Component {
     );
   }
 
+  _goToNotice() {
+
+  if (this.state.Rating.nbAvis > 0)
+    this.props.navigation.navigate('AppNotice')
+
+  }
+
   render() {
       const starStyle = {
         width: 100,
         height: 20,
         marginBottom: 20,
       };
-      //const { navigation, id, screenProps } = { ...this.props };
 
-      const count = parseFloat(this.state.Rating.moyenne, 10) //1234
+      const count = parseFloat(this.state.Rating.moyenne, 10)
 
       return(
         <ScrollView style={{flex:1, backgroundColor: '#fff'}}>
@@ -255,7 +261,7 @@ export default class GameProfil extends Component {
 
               <Star score={count} style={starStyle} />
 
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('AppNotice')} >
+              <TouchableOpacity onPress={() => this._goToNotice()} >
                 <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
