@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet,
   AsyncStorage, ListView, Image, TouchableOpacity, ActivityIndicator,
   FlatList} from 'react-native';
+import { Icon } from 'react-native-elements';
 import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
@@ -28,7 +29,7 @@ export default class StudentProfil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://51.38.187.216:9000/api/v1/eleves/' + this.props.screenProps.idStudent, {
+    fetch('http://51.38.187.216:9090/eleves/' + this.props.screenProps.idStudent, {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -39,7 +40,7 @@ export default class StudentProfil extends Component {
     .then((responseJson) => {
       this.setState({'Student':responseJson.response[0]})
 
-      fetch('http://51.38.187.216:9000/api/v1/eleves/stats/bulletin/' + this.props.screenProps.idStudent, {
+      fetch('http://51.38.187.216:9090/eleves/stats/bulletin/' + this.props.screenProps.idStudent, {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -101,32 +102,45 @@ export default class StudentProfil extends Component {
 
           <View style={{flex: 0.2, flexDirection:'row'}}>
 
-            <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 10}}>
-              <TouchableOpacity onPress={() => this._goBackAccordingId(screenProps)}>
-                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-              </TouchableOpacity>
+            <View style={{width: 60, justifyContent:'center'}}>
+              <Icon
+                raised
+                onPress={() => this._goBackAccordingId(screenProps)}
+                type='font-awesome'
+                name='arrow-left'
+                color='#FFF'
+                containerStyle={{
+                  backgroundColor: '#363453',
+                }}
+                />
             </View>
-            <View style={{flex: 0.4, padding: 10, justifyContent:'center'}}>
+            <View style={{flex: 0.5, padding: 10, justifyContent:'center'}}>
               <Image
-                source={{uri: 'http://51.38.187.216:9000/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
+                source={{uri: 'http://51.38.187.216:9090/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
                 style={{flex: 1, borderRadius: 1000}}
                 resizeMode="contain"
                 />
             </View>
 
-            <View style={{flex: 0.4, justifyContent:'center'}}>
+            <View style={{flex: 0.5, justifyContent:'center'}}>
               <Text style={styles.primetextblue}>{this.state.Student.nomEleve.toUpperCase()}</Text>
               <Text style={styles.primetextblue}>{this.state.Student.prenomEleve}</Text>
             </View>
 
-            <View style={{flex: 0.1, justifyContent:'center', paddingRight: 10}}>
-              <TouchableOpacity
+            <View style={{width: 70, justifyContent:'center'}}>
+              <Icon
+                raised
                 onPress={() => screenProps.navigation.navigate('StudentEdit', {
                   Nom: this.state.Student.nomEleve,
                   Prenom: this.state.Student.prenomEleve,
-                  Id: this.state.Student.idEleve,})}>
-                <Image source={require('./../../picture/profil/edit1.png')} style={{width:22, height: 22}}/>
-              </TouchableOpacity>
+                  Id: this.state.Student.idEleve,})}
+                type='font-awesome'
+                name='edit'
+                color='#FFF'
+                containerStyle={{
+                  backgroundColor: '#363453',
+                }}
+                />
             </View>
 
 
@@ -200,7 +214,7 @@ export default class StudentProfil extends Component {
     },
     primetextblue: {
       fontSize: 20,
-      color: '#363453',
+      color: 'black',
       fontWeight:'bold'
     },
     gridtextwhite: {

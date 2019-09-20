@@ -23,7 +23,7 @@ export default class GameProfil extends Component {
 
     Store.setAppId((this.props.id).toString())
 
-    fetch('http://51.38.187.216:9000/api/v1/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://51.38.187.216:9090/store/getAppStatus/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -39,7 +39,7 @@ export default class GameProfil extends Component {
          });
 
 
-    fetch('http://51.38.187.216:9000/api/v1/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+    fetch('http://51.38.187.216:9090/store/nbAvis/' + this.props.navigation.getParam('id', this.props.id).toString(), {
        method: 'GET',
        headers: {
          Accept: 'application/json',
@@ -54,7 +54,7 @@ export default class GameProfil extends Component {
            console.error(error);
          });
 
-    fetch('http://51.38.187.216:9000/api/v1/store/getApp', {
+    fetch('http://51.38.187.216:9090/store/getApp', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -79,7 +79,7 @@ export default class GameProfil extends Component {
       return;
     }
     else{
-      fetch('http://51.38.187.216:9000/api/v1/store/buyAppDirecteur', {
+      fetch('http://51.38.187.216:9090/store/buyAppDirecteur', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -164,7 +164,7 @@ export default class GameProfil extends Component {
           <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{height: 120, width: 120, marginBottom: 10, borderRadius: 30,}}
-              source={{uri: 'http://51.38.187.216:9000/files/apps/' + this.state.Game.picPath}}
+              source={{uri: 'http://51.38.187.216:9090/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
               <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>

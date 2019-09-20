@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage,
   Image, TouchableOpacity, TouchableHighlight, FlatList, ActivityIndicator} from 'react-native';
+import { Icon } from 'react-native-elements';
 import { observer } from 'mobx-react';
 import Moment from 'moment';
 
@@ -25,7 +26,7 @@ export default class StudentResultList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://51.38.187.216:9000/api/v1/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
+    fetch('http://51.38.187.216:9090/eleves/stats/bySession/' + this.props.navigation.getParam('idGame', '0'), {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -108,9 +109,16 @@ export default class StudentResultList extends Component {
           <View style={{flex: 0.2, flexDirection:'row'}}>
 
             <View style={{flex: 0.2, justifyContent: 'center', paddingLeft: 6}}>
-              <TouchableOpacity onPress={() => this.backAccordingId(this.state.idBack)}>
-                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-              </TouchableOpacity>
+              <Icon
+              raised
+              onPress={()=>this.backAccordingId(this.state.idBack)}
+              type='font-awesome'
+              name='arrow-left'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#363453',
+              }}
+              />
             </View>
 
             <View style={{flex: 0.6, alignItems:'center', justifyContent:'center'}}>
@@ -123,15 +131,32 @@ export default class StudentResultList extends Component {
             <View style={{flex: 0.2, padding: 5}}>
 
               <View style={{flex: 0.5, justifyContent:'center', alignItems:'center'}}>
-                <TouchableOpacity onPress={() => this.setAlpha()}>
-                  <Image source={require('./../../picture/profil/orderAlpha.png')} style={{width:30, height: 30, opacity: this.state.alphaOpacity}}/>
-                </TouchableOpacity>
+                <Icon
+                raised
+                onPress={()=>this.setAlpha()}
+                type='font-awesome'
+                name='sort-alpha-asc'
+                color='#FFF'
+                containerStyle={{
+                  backgroundColor: '#363453',
+                  opacity: this.state.alphaOpacity,
+                }}
+                />
+
               </View>
 
               <View style={{flex: 0.5, justifyContent:'center', alignItems:'center'}}>
-                <TouchableOpacity onPress={() => this.setNote()}>
-                  <Image source={require('./../../picture/profil/orderNum.png')} style={{width:30, height: 30, opacity: this.state.numOpacity}}/>
-                </TouchableOpacity>
+                <Icon
+                raised
+                onPress={()=>this.setNote()}
+                type='font-awesome'
+                name='sort-numeric-desc'
+                color='#FFF'
+                containerStyle={{
+                  backgroundColor: '#363453',
+                  opacity: this.state.numOpacity,
+                }}
+                />
               </View>
 
             </View>

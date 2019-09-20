@@ -31,7 +31,7 @@ export default class Dashboard extends Component {
   componentWillMount() {
 
         if (Store.TypeUser != 2){
-          fetch('http://51.38.187.216:9000/api/v1/notifs/popUpMenu', {
+          fetch('http://51.38.187.216:9090/notifs/popUpMenu', {
           method: 'GET',
           headers: {
             Accept: 'application/json',
@@ -58,7 +58,7 @@ export default class Dashboard extends Component {
         }
 
 
-      fetch('http://51.38.187.216:9000/api/v1/dashboard/nbEleves', {
+      fetch('http://51.38.187.216:9090/dashboard/nbEleves', {
       method: 'GET',
       Accept: 'application/json',
       headers: {
@@ -69,7 +69,7 @@ export default class Dashboard extends Component {
     .then((responseJson) => {
       this.setState({'Student':JSON.stringify(responseJson.nbEleves)})
 
-      fetch('http://51.38.187.216:9000/api/v1/dashboard/nbNotifsNonL', {
+      fetch('http://51.38.187.216:9090/dashboard/nbNotifsNonL', {
         method: 'GET',
         Accept: 'application/json',
         headers: {
@@ -80,7 +80,7 @@ export default class Dashboard extends Component {
       .then((responseJson) => {
         this.setState({'Notif':JSON.stringify(responseJson.nbNotifsNonL)})
 
-        fetch('http://51.38.187.216:9000/api/v1/dashboard/nbAppsStarted', {
+        fetch('http://51.38.187.216:9090/dashboard/nbAppsStarted', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -91,7 +91,7 @@ export default class Dashboard extends Component {
         .then((responseJson) => {
           this.setState({'Result':JSON.stringify(responseJson.nbAppsStarted)})
 
-          fetch('http://51.38.187.216:9000/api/v1/games/nbGames', {
+          fetch('http://51.38.187.216:9090/games/nbGames', {
             method: 'GET',
             Accept: 'application/json',
             headers: {
@@ -108,7 +108,7 @@ export default class Dashboard extends Component {
 
             this.setState({Day: date, Month: month, Year: year,});
 
-            fetch('http://51.38.187.216:9000/api/v1/users/infos', {
+            fetch('http://51.38.187.216:9090/users/infos', {
               method: 'GET',
               headers: {
                 Accept: 'application/json',
@@ -146,7 +146,7 @@ export default class Dashboard extends Component {
   }
 
   readNotification = () => {
-      fetch('http://51.38.187.216:9000/api/v1/notifs/read/' + this.state.idReadNotif.toString(), {
+      fetch('http://51.38.187.216:9090/notifs/read/' + this.state.idReadNotif.toString(), {
           method: 'PUT',
           headers: {
               Accept: 'application/json',
@@ -299,7 +299,7 @@ export default class Dashboard extends Component {
                                                     <View style={{flex: 1, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
-                                                            source={{uri: 'http://51.38.187.216:9000/files/apps/' + item.game_image}}
+                                                            source={{uri: 'http://51.38.187.216:9090/files/apps/' + item.game_image}}
                                                         />
                                                     </View>
                                                 </View>

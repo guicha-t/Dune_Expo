@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text,
   StyleSheet, AsyncStorage, ListView, TouchableOpacity,
-  Picker, Item, FlatList, Image, Keyboard, ActivityIndicator} from 'react-native';
+  Picker, Item, FlatList, Image, Keyboard, ActivityIndicator, Dimensions} from 'react-native';
   import { observer } from 'mobx-react';
-  import { Avatar } from 'react-native-elements';
+  import { SearchBar, Icon } from 'react-native-elements';
 
   import GridView from 'react-native-super-grid';
 
@@ -13,6 +13,8 @@ import { Alert, Button, TextInput, View, Text,
   import Header from './../../global/header/Header';
   import Store from './../../global/store/Store'
 
+  var {height, width} = Dimensions.get('window');
+
   @observer
   export default class StudentList extends Component {
     constructor(props){
@@ -20,14 +22,14 @@ import { Alert, Button, TextInput, View, Text,
       this.state = {
         Trombi: [],
         Classes: [],
-        Class: 0,
         Search: '',
+        Class: 0,
         loading: true,
       }
     }
 
     componentDidMount(){
-      fetch('http://51.38.187.216:9000/api/v1/trombi/', {
+      fetch('http://51.38.187.216:9090/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -41,7 +43,7 @@ import { Alert, Button, TextInput, View, Text,
       .then((responseJson) => {
         this.setState({'Trombi':responseJson.response})
 
-        fetch('http://51.38.187.216:9000/api/v1/trombi/classes', {
+        fetch('http://51.38.187.216:9090/trombi/classes', {
           method: 'GET',
           Accept: 'application/json',
           headers: {
@@ -73,7 +75,7 @@ import { Alert, Button, TextInput, View, Text,
     };
 
     _setCurrentClass = async (param) => {
-      fetch('http://51.38.187.216:9000/api/v1/trombi/byClasse', {
+      fetch('http://51.38.187.216:9090/trombi/byClasse', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -96,7 +98,7 @@ import { Alert, Button, TextInput, View, Text,
     }
 
     _resetTrombi = async () => {
-      fetch('http://51.38.187.216:9000/api/v1/trombi/', {
+      fetch('http://51.38.187.216:9090/trombi/', {
         method: 'POST',
         Accept: 'application/json',
         headers: {
@@ -120,7 +122,7 @@ import { Alert, Button, TextInput, View, Text,
     _searchRequest = async () => {
       Keyboard.dismiss()
       if (this.state.Class === 0) {
-        fetch('http://51.38.187.216:9000/api/v1/trombi/', {
+        fetch('http://51.38.187.216:9090/trombi/', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -140,7 +142,7 @@ import { Alert, Button, TextInput, View, Text,
         });
       }
       else {
-        fetch('http://51.38.187.216:9000/api/v1/trombi/byClasse', {
+        fetch('http://51.38.187.216:9090/trombi/byClasse', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -232,10 +234,17 @@ import { Alert, Button, TextInput, View, Text,
 
           <View style={styles.classContainer}>
 
-            <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 10, paddingRight: 10}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
-                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-              </TouchableOpacity>
+            <View style={{width: 60, justifyContent:'center', alignItems:'center'}}>
+              <Icon
+              raised
+              onPress={()=>this.props.navigation.navigate('Dashboard')}
+              type='font-awesome'
+              name='arrow-left'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#363453',
+              }}
+              />
             </View>
 
 
@@ -270,13 +279,27 @@ import { Alert, Button, TextInput, View, Text,
         </View>
 
         <View style={styles.searchContainer}>
-          <TextInput
-            value={this.state.Search}
-            onChangeText={(Search) => this.setState({ Search })}
-            placeholder={'Rechercher'}
-            autoCapitalize = 'none'
-            style={styles.input}
-          />
+
+          <SearchBar
+             placeholder="Rechercher"
+             onChangeText={(Search) => this.setState({ Search })}
+             value={this.state.search}
+             containerStyle={{
+               backgroundColor:'#fff',
+               borderColor: '#FFF',
+               borderWidth: 0,
+               backgroundColor: 'white',
+               borderWidth: 0, //no effect
+               shadowColor: 'white', //no effect
+               borderBottomColor: 'transparent',
+               borderTopColor: 'transparent',
+               width: width-50
+             }}
+             inputContainerStyle={{backgroundColor:'#FFF'}}
+             inputStyle={{color: 'black', backgroundColor:'#e5e4ea'}}
+
+           />
+
 
           <Button
             title={'Go'}
@@ -299,7 +322,7 @@ import { Alert, Button, TextInput, View, Text,
                     <View style={{flex: 0.7}}>
                       <Image
                         style={{flex: 1}}
-                        source={{uri: 'http://51.38.187.216:9000/files/eleves/' + item.idEleve + '-eleve.png'}}
+                        source={{uri: 'http://51.38.187.216:9090/files/eleves/' + item.idEleve + '-eleve.png'}}
                         resizeMode="contain"
                         />
                     </View>
@@ -336,7 +359,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
   },
   searchContainer: {
-    flex: 0.05,
+    height: 50,
     flexDirection: 'row',
     paddingTop: 5,
     paddingBottom: 5,

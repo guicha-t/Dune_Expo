@@ -20,7 +20,7 @@ export default class Profil extends Component {
   }
 
   componentDidMount(){
-    fetch('http://51.38.187.216:9000/api/v1/users/infos', {
+    fetch('http://51.38.187.216:9090/users/infos', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -42,6 +42,7 @@ export default class Profil extends Component {
         id: this.state.Profil.idUser,
         name: this.state.Profil.prenomUser,
         lastname: this.state.Profil.nomUser,
+        email: this.state.Profil.emailUser,
       });
     };
 
@@ -82,7 +83,7 @@ export default class Profil extends Component {
             rounded
             xlarge
             source={{
-              uri: 'http://51.38.187.216:9000/files/profs/' + this.state.Profil.picPath
+              uri: 'http://51.38.187.216:9090/files/profs/' + this.state.Profil.picPath
             }}
             />
         </View>

@@ -10,6 +10,8 @@ import AlertPro from "react-native-alert-pro";
 
 import Store from './../../global/store/Store'
 
+var {height, width} = Dimensions.get('window');
+
 @observer
 export default class Start extends Component {
   constructor(props) {
@@ -53,7 +55,7 @@ export default class Start extends Component {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://51.38.187.216:9000/api/v1/login/', {
+    fetch('http://51.38.187.216:9090/login/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -114,97 +116,81 @@ export default class Start extends Component {
               />
           </View>
 
-          <View style={{flex: 0.4}}>
+          <View style={{flex: 0.4, alignItems:'center', justifyContent:'center'}}>
 
-            <View style={{flex: 0.3, flexDirection: 'row'}}>
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.6, alignItems: 'center', justifyContent:'flex-end'}}>
-                <Fumi
-                  label={'E-mail'}
-                  style={{ width: 220, backgroundColor:'#363453'}}
-                  value={this.state.username}
-                  onChangeText={(username) => this.setState({ username })}
-                  iconClass={FontAwesomeIcon}
-                  iconName={'at'}
-                  iconColor={'#FFF'}
-                  labelStyle={{ color: '#FFF' }}
-                  iconSize={20}
-                  iconWidth={40}
-                  inputPadding={16}
-                  />
-              </View>
-              <View style={{flex: 0.2}}></View>
-            </View>
-
-            <View style={{marginTop: 10, flex: 0.3, flexDirection: 'row'}}>
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.6, alignItems: 'center', justifyContent:'center'}}>
-                <Fumi
-                  label={'Mot de passe'}
-                  style={{ width: 220, backgroundColor:'#363453'}}
-                  value={this.state.password}
-                  secureTextEntry={this.state.pwdhide}
-                  onChangeText={(password) => this.setState({ password })}
-                  iconClass={FontAwesomeIcon}
-                  iconName={'lock'}
-                  iconColor={'#FFF'}
-                  labelStyle={{ color: '#FFF' }}
-                  iconSize={20}
-                  iconWidth={40}
-                  inputPadding={16}
-                  />
-              </View>
-              <View style={{flex: 0.2, alignItems:'flex-end', justifyContent:'center'}}>
-
-                  <Button
-                    onPress={this._pwdhide}
-                    icon={{
-                      name: this.state.hideIcon,
-                      type: 'font-awesome',
-                      size: 20,
-                      color: '#363453',
-                    }}
-                    iconContainerStyle={{
-                      }}
-                    buttonStyle={{
-                      backgroundColor: 'transparent',
-                      borderColor: 'transparent',
-                      borderWidth: 0,
-                      borderRadius: 0,
-                      width: 80,
-                      alignItems:'center',
-                      justifyContent:'center',
-                      marginLeft: 10,
-                    }}
-                    containerStyle={{ width: 130 }}
-                  />
-              </View>
-            </View>
-
-            <View style={{marginTop: 10, flex: 0.2, flexDirection:'row', justifyContent:'center'}}>
-
-              <Button
-                title=""
-                onPress={this.onLogin.bind(this)}
-                icon={{
-                 type: 'font-awesome',
-                 name: 'check',
-                 size: 15,
-                 color: 'white',
-               }}
-                buttonStyle={{
-                  backgroundColor: '#363453',
-                  borderWidth: 2,
-                  borderColor: 'white',
-                  borderRadius: 30,
-                  width: 60,
-                  alignItems:'center',
-                  paddingLeft: 20,
-                }}
-                containerStyle={{ marginVertical: 10, marginLeft: 40, height: 50, width: 250 }}
-                titleStyle={{ fontWeight: 'bold' }}
+            <Fumi
+              label={'E-mail'}
+              style={{ width: width-40, backgroundColor:'#363453'}}
+              value={this.state.username}
+              onChangeText={(username) => this.setState({ username })}
+              iconClass={FontAwesomeIcon}
+              iconName={'at'}
+              iconColor={'#FFF'}
+              labelStyle={{ color: '#FFF' }}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
               />
-            </View>
+
+            <Fumi
+              label={'Mot de passe'}
+              style={{ width: width-40, backgroundColor:'#363453', marginTop:10}}
+              value={this.state.password}
+              secureTextEntry={this.state.pwdhide}
+              onChangeText={(password) => this.setState({ password })}
+              iconClass={FontAwesomeIcon}
+              iconName={'lock'}
+              iconColor={'#FFF'}
+              labelStyle={{ color: '#FFF' }}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
+              />
+
+            <Button
+              onPress={this._pwdhide}
+              icon={{
+                name: this.state.hideIcon,
+                type: 'font-awesome',
+                size: 20,
+                color: '#363453',
+              }}
+              iconContainerStyle={{
+                }}
+              buttonStyle={{
+                backgroundColor: 'transparent',
+                borderColor: 'transparent',
+                borderWidth: 0,
+                borderRadius: 0,
+                width: 80,
+                alignItems:'center',
+                justifyContent:'center',
+                marginLeft: 10,
+              }}
+              containerStyle={{ width: 130 }}
+            />
+
+            <Button
+              title=""
+              onPress={this.onLogin.bind(this)}
+              icon={{
+               type: 'font-awesome',
+               name: 'check',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: '#363453',
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                alignItems:'center',
+                paddingLeft: 20,
+              }}
+              containerStyle={{ marginVertical: 10, marginLeft: 40, height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
 
             <AlertPro
                ref={ref => {

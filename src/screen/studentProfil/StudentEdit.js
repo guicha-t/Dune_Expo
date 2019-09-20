@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity } from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { observer } from 'mobx-react';
+import { Fumi } from 'react-native-textinput-effects';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Icon } from 'react-native-elements';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store'
+
+var {height, width} = Dimensions.get('window');
 
 @observer
 export default class StudentEdit extends Component {
@@ -23,7 +28,7 @@ export default class StudentEdit extends Component {
   };
 
   _confirmEdit = async () => {
-    fetch('http://51.38.187.216:9000/api/v1/eleves/update', {
+    fetch('http://51.38.187.216:9090/eleves/update', {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -50,49 +55,66 @@ export default class StudentEdit extends Component {
       return (
         <View style={{flex:1, backgroundColor: '#fff'}}>
           <Header navigation={this.props.navigation}/>
-          <View style={styles.containerBody}>
-            <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
-              <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
-                <Text style={styles.titleInfo}>Nom</Text>
-              </View>
-              <View style={{flex: 0.7}}>
-                <TextInput
-                 style={styles.input}
-                 placeholder='Nom'
-                 onChangeText={(Nom) => this.setState({Nom})}
-                 value={this.state.Nom}
-                />
-               </View>
-            </View>
 
-            <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
-              <View style={{flex: 0.3, alignItems: 'center', paddingBottom: 8}}>
-                <Text style={styles.titleInfo}>Prénom</Text>
-              </View>
-              <View style={{flex: 0.7}}>
-                <TextInput
-                   style={styles.input}
-                   placeholder='Prénom'
-                   onChangeText={(Prenom) => this.setState({Prenom})}
-                   value={this.state.Prenom}
-                 />
-               </View>
-            </View>
+          <View style={{flex: 0.2,}}></View>
+          <View style={{flex: 0.2,}}>
+            <Image
+              source={{uri: 'http://51.38.187.216:9090/files/eleves/' + this.state.Id + '-eleve.png'}}
+              style={{flex: 1, borderRadius: 1000}}
+              resizeMode="contain"
+              />
+          </View>
+          <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>
+            <Fumi
+              label={'Nom'}
+              style={{ width: width-40, backgroundColor:'#363453'}}
+              value={this.state.Nom}
+              onChangeText={(Nom) => this.setState({ Nom })}
+              iconClass={FontAwesomeIcon}
+              iconName={'user'}
+              iconColor={'#FFF'}
+              labelStyle={{ color: '#FFF' }}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
+              />
+            <Fumi
+              label={'Prénom'}
+              style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+              value={this.state.Prenom}
+              onChangeText={(Prenom) => this.setState({ Prenom })}
+              iconClass={FontAwesomeIcon}
+              iconName={'user'}
+              iconColor={'#FFF'}
+              labelStyle={{ color: '#FFF' }}
+              iconSize={20}
+              iconWidth={40}
+              inputPadding={16}
+              />
           </View>
 
-          <View style={styles.containerFooter}>
-            <Button
-              title={'Retour'}
-              style={styles.ButtonCo}
-              color='#363453'
+          <View style={{flex: 0.1, flexDirection:'row', justifyContent:'space-around'}}>
+
+            <Icon
+              raised
               onPress={this._cancelEdit}
-            />
-            <Button
-              title={'Valider'}
-              style={styles.ButtonCo}
-              color='#363453'
+              type='font-awesome'
+              name='ban'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#ea4335',
+              }}
+              />
+            <Icon
+              raised
               onPress={this._confirmEdit}
-            />
+              type='font-awesome'
+              name='check'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#4caf50',
+              }}
+              />
           </View>
 
 
@@ -125,6 +147,7 @@ export default class StudentEdit extends Component {
       fontSize: 14,
     },
     containerFooter: {
+      flex: 0.1,
       flexDirection: 'row',
       paddingBottom: 10,
       justifyContent:'space-around',

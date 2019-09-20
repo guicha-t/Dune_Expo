@@ -24,7 +24,7 @@ _cancelDemand = async () => {
         Alert.alert('ATTENTION', 'Veuillez remplir la section \'Commentaire\'.');
         return;
     }
-    fetch('http://51.38.187.216:9000/api/v1/store/buyApp', {
+    fetch('http://51.38.187.216:9090/store/buyApp', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

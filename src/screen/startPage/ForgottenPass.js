@@ -28,7 +28,7 @@ static navigationOptions = {
   onLogin() {
     const { username, password } = this.state;
 
-    fetch('http://51.38.187.216:9000/api/v1/login/reset', {
+    fetch('http://51.38.187.216:9090/login/reset', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -103,7 +103,7 @@ static navigationOptions = {
                    color: 'white',
                  }}
                   buttonStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: '#ea4335',
                     borderWidth: 2,
                     borderColor: 'white',
                     borderRadius: 30,
@@ -129,7 +129,7 @@ static navigationOptions = {
                    color: 'white',
                  }}
                   buttonStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: '#4caf50',
                     borderWidth: 2,
                     borderColor: 'white',
                     borderRadius: 30,

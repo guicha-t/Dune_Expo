@@ -11,7 +11,7 @@ export default class Header extends Component {
   }
 
   checkIsLogToken = async () => {
-    fetch('http://51.38.187.216:9000/api/v1/tokens/verifyToken', {
+    fetch('http://51.38.187.216:9090/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',
       headers: {
