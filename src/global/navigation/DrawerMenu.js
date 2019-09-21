@@ -38,6 +38,8 @@ import RequestApp from './../../screen/gameStore/RequestApp';
 import RateApp from './../../screen/gameStore/RateApp';
 import AppNotice from './../../screen/gameStore/AppNotice';
 
+import UserManual from './../../screen/userManual/userManual';
+
 
 import AddUserDirector from './../../screen/director/AddUserDirector';
 
@@ -48,8 +50,6 @@ const CustomDrawerContentComponent = (props) => (
       resizeMode="contain"/>
     <View style={styles.ListItems}>
       <CustomDrawerItems navigation={props.navigation}/>
-    </View>
-    <View style={styles.drawerFooter}>
     </View>
   </View>
 )
@@ -77,6 +77,8 @@ const DrawerMenu = createDrawerNavigator(
     'RequestApp': {screen: RequestApp},
     'RateApp': {screen: RateApp},
     'AppNotice': {screen: AppNotice},
+
+    'UserManual' : {screen: UserManual},
 
     'ClassList': {screen: ClassList},
     'GameList': {screen: GameList},

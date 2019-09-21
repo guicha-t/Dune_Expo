@@ -169,26 +169,17 @@ export default class Profil extends Component {
             titleStyle={{ fontWeight: 'bold' }}
           />
 
-          <Button
-            title=""
+          <Icon
+            raised
             onPress={this._goToEditProfil}
-            icon={{
-             type: 'font-awesome',
-             name: 'mouse-pointer',
-             size: 15,
-             color: 'white',
-           }}
-            buttonStyle={{
+            type='font-awesome'
+            name='edit'
+            color='#FFF'
+            containerStyle={{
               backgroundColor: '#363453',
-              borderWidth: 2,
-              borderColor: 'white',
-              borderRadius: 0,
-              width: 60,
-              paddingLeft: 20,
             }}
-            containerStyle={{ height: 50, width: 250 }}
-            titleStyle={{ fontWeight: 'bold' }}
-          />
+            />
+
 
           <Button
             title=""
