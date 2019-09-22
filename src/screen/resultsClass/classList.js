@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage,
   Image, TouchableOpacity, TouchableHighlight, FlatList, ActivityIndicator} from 'react-native';
 import { observer } from 'mobx-react';
+import { Icon } from 'react-native-elements';
 
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
@@ -95,9 +96,16 @@ export default class ClassList extends Component {
           <View style={{flex: 0.1, flexDirection: 'row'}}>
 
             <View style={{flex: 0.2, justifyContent:'center', paddingLeft: 6}}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
-                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-              </TouchableOpacity>
+              <Icon
+              raised
+              onPress={()=>this.props.navigation.navigate('Dashboard')}
+              type='font-awesome'
+              name='arrow-left'
+              color='#FFF'
+              containerStyle={{
+                backgroundColor: '#363453',
+              }}
+              />
             </View>
 
             <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>

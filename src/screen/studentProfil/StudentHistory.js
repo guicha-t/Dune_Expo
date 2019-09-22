@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text, StyleSheet,
   AsyncStorage, ListView, Image, FlatList, TouchableOpacity} from 'react-native';
 import { observer } from 'mobx-react';
+import { Icon } from 'react-native-elements';
 
 import Moment from 'moment';
 
@@ -258,11 +259,18 @@ export default class StudentHistory extends Component {
         <View style={{flex:1, backgroundColor: '#fff', padding: 4}}>
 
           <View style={{flex: 0.1, flexDirection:'row'}}>
-            <View style={{flex: 0.1, justifyContent:'center', paddingLeft: 6, paddingRight: 10}}>
-              <TouchableOpacity onPress={() => this._goBackAccordingId(screenProps)}>
-                <Image source={require('./../../picture/global/back.png')} style={{width:30, height: 30}}/>
-              </TouchableOpacity>
-            </View>
+              <View style={{width: 60, justifyContent:'center', alignItems:'center'}}>
+                <Icon
+                  raised
+                  onPress={() => this._goBackAccordingId(screenProps)}
+                  type='font-awesome'
+                  name='arrow-left'
+                  color='#FFF'
+                  containerStyle={{
+                    backgroundColor: '#363453',
+                  }}
+                  />
+              </View>
 
             <TouchableOpacity style={{flex: 0.2}} onPress={() => this._resetCat(screenProps)}>
               <View style={[styles.buttonClass, this.setColorFocused('0')]}>

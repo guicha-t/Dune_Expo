@@ -196,7 +196,8 @@ import * as cfg from "./../../Config";
                       <Image
                         style={{flex: 1, borderRadius:10}}
                         source={{uri: cfg.API_URL + '/files/apps/' + item.picPath}}
-                      />
+    style={{flex:0.6, height: undefined, width: undefined}}
+      resizeMode="contain"                  />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
                       <Text style={styles.itemName}>{item.nomApp}</Text>

@@ -104,7 +104,7 @@ static navigationOptions = {
                    color: 'white',
                  }}
                   buttonStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: '#ea4335',
                     borderWidth: 2,
                     borderColor: 'white',
                     borderRadius: 30,
@@ -130,7 +130,7 @@ static navigationOptions = {
                    color: 'white',
                  }}
                   buttonStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: '#4caf50',
                     borderWidth: 2,
                     borderColor: 'white',
                     borderRadius: 30,

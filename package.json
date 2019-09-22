@@ -23,6 +23,7 @@
     "react-bell-icon": "^1.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-alert-pro": "^1.1.0",
+    "react-native-app-intro-slider": "^3.0.0",
     "react-native-elements": "^0.19.1",
     "react-native-flat-grid-view": "^1.0.4",
     "react-native-indicators": "^0.13.0",
