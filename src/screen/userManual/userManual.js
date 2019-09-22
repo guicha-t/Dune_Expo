@@ -34,20 +34,29 @@ const styles = StyleSheet.create({
 const slides = [
   {
     key: 'help1',
-    image: require('./../../picture/userManual/UM_historique.png'),
+    image: require('./../../picture/userManual/DB_Notif.png'),
   },
   {
     key: 'help2',
-    image: require('./../../picture/userManual/UM_trombi.png'),
+    image: require('./../../picture/userManual/DB_Historique.png'),
   },
   {
     key: 'help3',
-    image: require('./../../picture/userManual/UM_qrcode.png'),
+    image: require('./../../picture/userManual/DB_Trombi.png'),
   },
   {
     key: 'help4',
-    image: require('./../../picture/userManual/UM_profil.png'),
+    image: require('./../../picture/userManual/DB_Store.png'),
   },
+  {
+    key: 'help5',
+    image: require('./../../picture/userManual/DB_QRCode.png'),
+  },
+  {
+    key: 'help6',
+    image: require('./../../picture/userManual/DB_User.png'),
+  },
+
 
 ];
 
