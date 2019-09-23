@@ -111,8 +111,7 @@ export default class GameProfil extends Component {
   }
 
   _checkPriceApp(){
-
-  if (this.state.Game.prix == 0)
+  if (this.state.Game.prix == 0 || this.state.Game.prix == null)
     return(
          <Button
            title={'TÉLÉCHARGER'}
@@ -251,6 +250,15 @@ export default class GameProfil extends Component {
 
   }
 
+  _printPrice(){
+
+  if (this.state.Game.prix != null)
+    return (this.state.Game.prix)
+  else
+    return ('gratuit')
+
+  }
+
   render() {
       const starStyle = {
         width: 100,
@@ -284,7 +292,7 @@ export default class GameProfil extends Component {
               titleStyle={{ fontWeight: 'bold' }}
             />
           </View>
-          <View style={{flex: 0.5, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{flex: 1, paddingTop: 30, paddingBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{height: 120, width: 120, marginBottom: 10, borderRadius: 30,}}
               source={{uri: cfg.API_URL + '/files/apps/' + this.state.Game.picPath}}
@@ -300,7 +308,7 @@ export default class GameProfil extends Component {
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
               <Text style={{color:'#363453', fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
-              <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>€ : gratuit</Text>
+              <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>€ : {this._printPrice()}</Text>
               <View style={{paddingTop:30}}>
                {this._renderAppRequest()}
               </View>
@@ -312,7 +320,7 @@ export default class GameProfil extends Component {
             onConfirm={() => this.props.navigation.navigate('GamesList')}
             showCancel={false}
             title="APPLICATION ENREGISTRÉE"
-            message="Votre demande a bien été envoyée et l\'application a été ajoutée dans votre bibliothèque."
+            message="Votre demande a bien été envoyée et l'application a été ajoutée dans votre bibliothèque."
             textConfirm="Retour"
             closeOnPressMask={true}
             customStyles={{

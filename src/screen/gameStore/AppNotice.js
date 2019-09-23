@@ -124,7 +124,7 @@ _printFirstNotice() {
               <Text style={styles.commentaire}>{this.state.Prof1.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof1.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire}>{moment(this.state.Prof1.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
    );
@@ -153,7 +153,7 @@ _printSecondNotice() {
                   <Text style={styles.commentaire}>{this.state.Prof2.commentaire}</Text>
                 </View>
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-                  <Text style={styles.commentaire}>{moment(this.state.Prof2.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+                  <Text style={styles.commentaire}>{moment(this.state.Prof2.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
                 </View>
               </View>
     );
@@ -182,7 +182,7 @@ _printThirdNotice() {
               <Text style={styles.commentaire}>{this.state.Prof3.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof3.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire}>{moment(this.state.Prof3.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -211,7 +211,7 @@ _printForthNotice () {
               <Text style={styles.commentaire}>{this.state.Prof4.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof4.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire}>{moment(this.state.Prof4.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -240,7 +240,7 @@ _printFifthNotice () {
               <Text style={styles.commentaire}>{this.state.Prof5.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof5.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire}>{moment(this.state.Prof5.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
