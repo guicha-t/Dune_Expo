@@ -110,12 +110,10 @@ export default class GameProfil extends Component {
       this.props.navigation.navigate('RequestApp')
   }
 
-  _renderAppRequest(){
+  _checkPriceApp(){
 
-  if (Store.TypeUser == 2)
+  if (this.state.Game.prix == 0)
     return(
-      <View style={{paddingBottom: 10}}>
-       <View style={{paddingBottom: 10}}>
          <Button
            title={'TÉLÉCHARGER'}
            icon={{
@@ -135,7 +133,43 @@ export default class GameProfil extends Component {
                paddingLeft: 10,
                justifyContent:'center',
              }}
-        />
+         />
+    )
+
+  else
+    return(
+         <Button
+           title={'ACHETER'}
+           icon={{
+             type: 'font-awesome',
+             name: 'download',
+             size: 15,
+             color: 'white',
+           }}
+           onPress={() => this._ObtainApp()}
+             buttonStyle={{
+               backgroundColor: '#363453',
+               borderColor: 'white',
+               borderRadius: 30,
+               width: 180,
+               height:50,
+               alignItems:'center',
+               paddingLeft: 10,
+               justifyContent:'center',
+             }}
+         />
+    )
+  }
+
+  _renderAppRequest(){
+
+  if (Store.TypeUser == 2)
+    return(
+      <View style={{paddingBottom: 10}}>
+       <View style={{paddingBottom: 10}}>
+
+        {this._checkPriceApp()}
+
        </View>
 
         <Button

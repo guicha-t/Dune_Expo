@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import { View, Text, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Dimensions, TouchableOpacity, AsyncStorage } from 'react-native';
 
 import Header from './../../global/header/Header';
 
@@ -15,6 +15,10 @@ class TermsAndConditions extends Component{
   state = {
       accepted: false
   }
+
+_tosAcceptation = async loginKey => {
+  this.props.navigation.navigate('Dashboard')
+};
 
   render(){
     return (
@@ -90,7 +94,7 @@ class TermsAndConditions extends Component{
 
                     </ScrollView>
 
-                    <TouchableOpacity disabled={ !this.state.accepted } onPress={ ()=>alert("Terms and conditions accepted") } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>Accepter</Text></TouchableOpacity>
+                    <TouchableOpacity disabled={ !this.state.accepted } onPress={ ()=>this._tosAcceptation() } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>Accepter</Text></TouchableOpacity>
              </View>
 
       </View>

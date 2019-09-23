@@ -3,6 +3,9 @@ import { Alert, TextInput, View, Text, StyleSheet, AsyncStorage, ListView, Image
 import { observer } from 'mobx-react';
 import Star from 'react-native-star-view';
 import { Divider, Button } from 'react-native-elements';
+import moment from "moment";
+import 'moment/locale/fr'
+moment.locale('fr')
 
 import { Rating, AirbnbRating } from 'react-native-ratings';
 
@@ -101,7 +104,6 @@ export default class AppNotice extends Component {
   }
 
 _printFirstNotice() {
-
    if (this.state.Prof1IsEmpty == 0)
    return(
           <View style={{paddingTop:10, paddingBottom:30, justifyContent:'center', alignItems:'center'}}>
@@ -120,6 +122,9 @@ _printFirstNotice() {
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Text style={styles.commentaire}>{this.state.Prof1.commentaire}</Text>
+            </View>
+            <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
+              <Text style={styles.commentaire}>{moment(this.state.Prof1.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
    );
@@ -147,6 +152,9 @@ _printSecondNotice() {
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
                   <Text style={styles.commentaire}>{this.state.Prof2.commentaire}</Text>
                 </View>
+                <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
+                  <Text style={styles.commentaire}>{moment(this.state.Prof2.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+                </View>
               </View>
     );
     else
@@ -172,6 +180,9 @@ _printThirdNotice() {
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Text style={styles.commentaire}>{this.state.Prof3.commentaire}</Text>
+            </View>
+            <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
+              <Text style={styles.commentaire}>{moment(this.state.Prof3.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -199,6 +210,9 @@ _printForthNotice () {
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Text style={styles.commentaire}>{this.state.Prof4.commentaire}</Text>
             </View>
+            <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
+              <Text style={styles.commentaire}>{moment(this.state.Prof4.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+            </View>
           </View>
     );
     else
@@ -224,6 +238,9 @@ _printFifthNotice () {
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Text style={styles.commentaire}>{this.state.Prof5.commentaire}</Text>
+            </View>
+            <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
+              <Text style={styles.commentaire}>{moment(this.state.Prof5.dateDemande).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -589,6 +606,7 @@ const styles = StyleSheet.create({
     color: '#363453',
     fontWeight: 'normal',
     fontSize: 12,
+    fontStyle: 'italic',
   },
   containerFooter: {
       marginTop:10,
