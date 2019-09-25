@@ -60,12 +60,8 @@ export default class Profil extends Component {
 
 
     _disconnect = async () => {
-      const localToken = await AsyncStorage.getItem('localToken');
-      const localType = await AsyncStorage.getItem('localType');
-
-      this._removeItemValue(localToken)
-      this._removeItemValue(localType)
-
+      this._removeItemValue("localToken")
+      this._removeItemValue("localType")
       Store.setToken('')
       Store.setTypeUser('')
       Store.setIsLog(false)
