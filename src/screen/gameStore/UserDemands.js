@@ -3,6 +3,10 @@ import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, To
 import { observer } from 'mobx-react';
 import { List, ListItem } from "react-native-elements";
 import GridView from 'react-native-super-grid';
+import moment from "moment";
+import 'moment/locale/fr'
+moment.locale('fr')
+
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -207,7 +211,7 @@ export default class UserDemands extends Component {
                                         <View style={styles.itemContainer}>
                                             <Text>{item.length}</Text>
                                             <TouchableOpacity style={{flex: 1}} onPress={() => {
-                                                Alert.alert(item.dateDemande, item.commentaire);
+                                                Alert.alert(moment(item.dateDemande).format("DD-MM-YYYY à HH:mm:ss"), item.commentaire);
                                             }}>
                                                 <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
                                                     <View style={{flex: 0.7, paddingTop: 10}}>

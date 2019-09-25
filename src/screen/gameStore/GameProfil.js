@@ -114,7 +114,7 @@ export default class GameProfil extends Component {
   if (this.state.Game.prix == 0 || this.state.Game.prix == null)
     return(
          <Button
-           title={'TÉLÉCHARGER'}
+           title={'ENREGISTRER'}
            icon={{
              type: 'font-awesome',
              name: 'download',
