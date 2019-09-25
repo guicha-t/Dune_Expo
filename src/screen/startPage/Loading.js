@@ -60,8 +60,8 @@ export default class AuthLoadingScreen extends Component {
     .then((responseJson) => {
       if ((responseJson.response != 'Token valid') && (localToken))
       {
-        this._removeItemValue(localToken)
-        this._removeItemValue(localType)
+        this._removeItemValue("localToken")
+        this._removeItemValue("localType")
         Store.setToken('');
         Store.setTypeUser('')
         Store.setIsLog(false);

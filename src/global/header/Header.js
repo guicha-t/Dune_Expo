@@ -11,6 +11,18 @@ export default class Header extends Component {
     this.checkIsLogToken();
   }
 
+
+  async _removeItemValue(key) {
+    try {
+      await AsyncStorage.removeItem(key);
+      return true;
+    }
+    catch(exception) {
+      return false;
+    }
+  }
+
+
   checkIsLogToken = async () => {
     fetch(cfg.API_URL + '/tokens/verifyToken', {
       method: 'POST',
@@ -25,7 +37,8 @@ export default class Header extends Component {
     }).then((response) => response.json())
     .then((responseJson) => {
       if (responseJson.response != 'Token valid') {
-        AsyncStorage.clear();
+        this._removeItemValue("localToken")
+        this._removeItemValue("localType")
         Store.setToken('');
         Store.setTypeUser('')
         Store.setIsLog(false);
