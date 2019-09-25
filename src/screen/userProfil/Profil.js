@@ -47,8 +47,25 @@ export default class Profil extends Component {
       });
     };
 
+
+  async _removeItemValue(key) {
+    try {
+      await AsyncStorage.removeItem(key);
+      return true;
+    }
+    catch(exception) {
+      return false;
+    }
+  }
+
+
     _disconnect = async () => {
-      await AsyncStorage.clear();
+      const localToken = await AsyncStorage.getItem('localToken');
+      const localType = await AsyncStorage.getItem('localType');
+
+      this._removeItemValue(localToken)
+      this._removeItemValue(localType)
+
       Store.setToken('')
       Store.setTypeUser('')
       Store.setIsLog(false)

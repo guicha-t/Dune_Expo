@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import AlertPro from "react-native-alert-pro";
 
 import * as cfg from "./../../Config";
 import Header from './../../global/header/Header';
@@ -22,14 +23,43 @@ export default class App extends Component {
       this.setState({ hasCameraPermission: status === 'granted' });
     };
 
+
+    handleBarCodeScanned = ({ type, data }) => {
+          this.setState({ scanned: true });
+          fetch(cfg.API_URL + '/cnxTable2/useToken', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              token: Store.Token,
+            },
+            body: JSON.stringify({
+              tokenTable: data,
+            }),
+          }).then((response) => response.json())
+              .then((responseJson) => {
+                if (responseJson.status == 200) {
+                   this.AlertPro.open()
+                }
+                else {
+                  Alert.alert('Token invalide')
+                }
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+    };
+
+
+
     render() {
       const { hasCameraPermission, scanned } = this.state;
 
       if (hasCameraPermission === null) {
-        return <Text>Requesting for camera permission</Text>;
+        return <Text>Demande d'autorisation de caméra</Text>;
       }
       if (hasCameraPermission === false) {
-        return <Text>No access to camera</Text>;
+        return <Text>Pas d'accès à la caméra</Text>;
       }
       return (
 
@@ -37,6 +67,37 @@ export default class App extends Component {
 
       <View style={styles.container}>
         <Header navigation={this.props.navigation}/>
+
+
+          <AlertPro
+            ref={ref => {
+              this.AlertPro = ref;
+            }}
+            onConfirm={() => this.props.navigation.navigate('Dashboard')}
+            showCancel={false}
+            title="TABLE CONNECTÉE"
+            message="Vous pouvez désormais utiliser les fonctionnalités de la table."
+            textConfirm="Compris"
+            closeOnPressMask={true}
+            customStyles={{
+              mask: {
+                backgroundColor: "transparent"
+              },
+              container: {
+                borderWidth: 1,
+                borderColor: "#6ED528",
+                shadowColor: "#000000",
+                shadowOpacity: 0.1,
+                shadowRadius: 10
+              },
+              buttonConfirm: {
+                backgroundColor: "#6ED528"
+              }
+            }}
+          />
+
+
+
 
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
@@ -54,33 +115,6 @@ export default class App extends Component {
       </View>
       );
     }
-
-    handleBarCodeScanned = ({ type, data }) => {
-          this.setState({ scanned: true });
-          fetch(cfg.API_URL + '/cnxTable2/useToken', {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              token: Store.Token,
-            },
-            body: JSON.stringify({
-              tokenTable: data,
-            }),
-          }).then((response) => response.json())
-              .then((responseJson) => {
-                if (responseJson.status == 200) {
-      	           this.props.navigation.navigate('Profil')
-                   Alert.alert('Table connectée')
-                }
-                else {
-                  Alert.alert('Token invalide')
-                }
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-    };
 }
 
 const styles = StyleSheet.create({

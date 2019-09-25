@@ -30,6 +30,17 @@ export default class AuthLoadingScreen extends Component {
     this._bootstrapAsync();
   }
 
+  async _removeItemValue(key) {
+    try {
+      await AsyncStorage.removeItem(key);
+      return true;
+    }
+    catch(exception) {
+      return false;
+    }
+  }
+
+
   _bootstrapAsync = async () => {
     const localId = await AsyncStorage.getItem('localId');
     const localToken = await AsyncStorage.getItem('localToken');
@@ -49,7 +60,8 @@ export default class AuthLoadingScreen extends Component {
     .then((responseJson) => {
       if ((responseJson.response != 'Token valid') && (localToken))
       {
-        AsyncStorage.clear();
+        this._removeItemValue(localToken)
+        this._removeItemValue(localType)
         Store.setToken('');
         Store.setTypeUser('')
         Store.setIsLog(false);
