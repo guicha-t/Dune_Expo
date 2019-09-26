@@ -183,13 +183,13 @@ import { Alert, Button, TextInput, View, Text,
         } else if (param.level === 8){
             return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> CM2-{param.num} </Text>;
         } else if (param.level === 9){
-            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '6e'-{param.num} </Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> 6e-{param.num} </Text>;
         } else if (param.level === 10){
-            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '5e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> 5e-{param.num}</Text>;
         } else if (param.level === 11){
-            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '4e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> 4e-{param.num}</Text>;
         } else if (param.level === 12){
-            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> '3e'-{param.num}</Text>;
+            return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> 3e-{param.num}</Text>;
         } else {
             return <Text style={[styles.textClass, this.setColorTextFocused(param.idClasse)]}> Autre </Text>;
         }

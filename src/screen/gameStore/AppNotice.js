@@ -526,7 +526,7 @@ this.state.CurrentRow = this.state.CurrentRow - 5;
 render() {
 
   return(
-    <View style={{flex:1}}>
+    <View style={{flex:1, backgroundColor: '#F5FCFF'}}>
         <Header navigation={this.props.navigation}/>
         <View style={{marginTop:15}}>
           <Button
@@ -550,7 +550,7 @@ render() {
             titleStyle={{ fontWeight: 'bold' }}
           />
         </View>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
+    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center'}}>
           <Text style={{fontSize:20,}}>
              Avis Professeurs
           </Text>
