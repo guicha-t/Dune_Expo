@@ -23,7 +23,7 @@ _tosAcceptation = async loginKey => {
 
   render(){
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor: "#F5FCFF"}}>
          <Header navigation={this.props.navigation}/>
 
              <View style={styles.container}>
