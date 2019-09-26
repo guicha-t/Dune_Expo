@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, TouchableHighlight, Modal, ActivityIndicator} from 'react-native';
+import { Alert, Button, TextInput, View, Text, StyleSheet,
+  AsyncStorage, Image, TouchableOpacity, TouchableHighlight,
+  Modal, ActivityIndicator, Dimensions} from 'react-native';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import GridView from 'react-native-super-grid';
@@ -8,6 +10,7 @@ import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
 import Store from './../../global/store/Store';
 import * as cfg from "./../../Config";
+
 
 @observer
 export default class Dashboard extends Component {
@@ -28,6 +31,7 @@ export default class Dashboard extends Component {
     idReadNotif:0,
     ModalVisibleStatus: false,
   }
+
 
   componentWillMount() {
 
@@ -481,6 +485,9 @@ export default class Dashboard extends Component {
   }
 }
 
+const width = Dimensions.get('window').width;
+
+
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
@@ -568,7 +575,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   subtext: {
-    fontSize: 20,
+    fontSize: 0.05*width,
     color: '#363453',
   },
   buttonCase: {
