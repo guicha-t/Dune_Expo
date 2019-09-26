@@ -100,7 +100,7 @@ _firstLogin = async () => {
             this._storeToken(responseJson.token)
             this._storeType(JSON.stringify(responseJson.typeUser))
             this._firstLogin()
-            /*this._removeItemValue("firstLogin")*/
+            //this._removeItemValue("firstLogin")
           }
           else {
             this.AlertPro.open()

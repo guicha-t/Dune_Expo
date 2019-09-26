@@ -18,7 +18,7 @@ class TermsAndConditions extends Component{
 
 _tosAcceptation = async loginKey => {
   await AsyncStorage.setItem('firstLogin', '1')
-  this.props.navigation.navigate('Dashboard')
+  this.props.navigation.navigate('UserManual')
 };
 
   render(){
