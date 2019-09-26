@@ -9,18 +9,22 @@ import Store from './src/global/store/Store';
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={{flex: 1, paddingTop: StatusBar.currentHeight}}>
-        <StatusBar
-           barStyle="dark-content"
-           backgroundColor="#F5FCFF"
-           />
-        <Provider Store={Store}>
+      <View style={{flex: 1, paddingTop: STATUSBAR_HEIGHT}}>
+          <StatusBar
+          barStyle="dark-content"
+          backgroundColor="#F5FCFF"
+          />
+         <Provider Store={Store}>
           <DrawerMenu />
         </Provider>
       </View>
     );
   }
 }
+
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+
 
 const styles = StyleSheet.create({
   container: {
