@@ -182,7 +182,7 @@ import * as cfg from "./../../Config";
         </View>
 
 
-        <View style={{flex: 0.8}}>
+        <View style={{flex: 0.8, width:Math.round(Dimensions.get('window').width)}}>
           <GridView
             itemDimension={100}
             spacing={1}
@@ -240,6 +240,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flex: 0.1,
+    width: Math.round(Dimensions.get('window').width),
     flexDirection: 'row',
     paddingTop: 2,
     alignItems: 'center',
