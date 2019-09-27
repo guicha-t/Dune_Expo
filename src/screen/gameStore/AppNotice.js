@@ -255,9 +255,9 @@ _printPlusButton (){
             <Button
               title=""
               buttonStyle={{
-                backgroundColor: 'white',
+                backgroundColor: '#F9F9F9',
                 borderWidth: 2,
-                borderColor: 'white',
+                borderColor: '#F9F9F9',
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -275,12 +275,12 @@ _printPlusButton (){
                type: 'font-awesome',
                name: 'arrow-right',
                size: 15,
-               color: 'white',
+               color: '#F9F9F9',
              }}
               buttonStyle={{
                 backgroundColor: '#363453',
                 borderWidth: 2,
-                borderColor: 'white',
+                borderColor: '#F9F9F9',
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -298,9 +298,9 @@ _printMenusButton (){
             <Button
               title=""
               buttonStyle={{
-                backgroundColor: 'white',
+                backgroundColor: '#F9F9F9',
                 borderWidth: 2,
-                borderColor: 'white',
+                borderColor: '#F9F9F9',
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -318,12 +318,12 @@ _printMenusButton (){
                type: 'font-awesome',
                name: 'arrow-left',
                size: 15,
-               color: 'white',
+               color: '#F9F9F9',
              }}
               buttonStyle={{
                 backgroundColor: '#363453',
                 borderWidth: 2,
-                borderColor: 'white',
+                borderColor: '#F9F9F9',
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -526,7 +526,7 @@ this.state.CurrentRow = this.state.CurrentRow - 5;
 render() {
 
   return(
-    <View style={{flex:1, backgroundColor: '#F5FCFF'}}>
+    <View style={{flex:1, backgroundColor: '#F9F9F9'}}>
         <Header navigation={this.props.navigation}/>
         <View style={{marginTop:15}}>
           <Button
@@ -536,12 +536,12 @@ render() {
              type: 'font-awesome',
              name: 'arrow-left',
              size: 15,
-             color: 'white',
+             color: '#F9F9F9',
            }}
             buttonStyle={{
               backgroundColor: '#363453',
               borderWidth: 2,
-              borderColor: 'white',
+              borderColor: '#F9F9F9',
               borderRadius: 30,
               width: 60,
               paddingLeft: 20,

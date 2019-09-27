@@ -23,10 +23,32 @@ export default class CustomDrawerItems extends Component {
       <View style={styles.container}>
         <ScrollView>
 
+        <View style={{height: 40, borderBottomWidth: 1, borderColor: '#363453', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
+          <Text style={{color: "#363453", fontSize:16}}>
+            ACCUEIL
+          </Text>
+        </View>
+
+
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
                 <Text style={styles.label}>Dashboard</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: '#363453', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
+            <Text style={{color: "#363453", fontSize:16}}>
+              STATISTIQUES
+            </Text>
+          </View>
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('ClassList')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Historique</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -39,6 +61,14 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
+
+
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: '#363453', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
+            <Text style={{color: "#363453", fontSize:16}}>
+              APPLICATIONS
+            </Text>
+          </View>
+
           <TouchableOpacity onPress={() => this.props.navigation.navigate('GamesList')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
@@ -50,26 +80,42 @@ export default class CustomDrawerItems extends Component {
           <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
-                <Text style={styles.label}>Notification</Text>
+                <Text style={styles.label}>Notifications</Text>
               </View>
             </View>
           </TouchableOpacity>
 
-
-          {this.renderElement() }
-
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
-            <View style={styles.button}>
-              <View style={styles.labelContainer}>
-                <Text style={styles.label}>Profil</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: '#363453', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
+            <Text style={{color: "#363453", fontSize:16}}>
+              TABLE
+            </Text>
+          </View>
 
           <TouchableOpacity onPress={() => this.props.navigation.navigate('QRCode')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
                 <Text style={styles.label}>Scan QR-Code</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+
+
+
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: '#363453', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
+            <Text style={{color: "#363453", fontSize:16}}>
+              DIVERS
+            </Text>
+          </View>
+
+
+          {this.renderElement() }
+
+
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Profil</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -97,6 +143,10 @@ export default class CustomDrawerItems extends Component {
               </View>
             </View>
           </TouchableOpacity>
+
+          <View style={{height: 40}}>
+          </View>
+
 
         </ScrollView>
       </View>
