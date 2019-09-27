@@ -103,7 +103,6 @@ export default class Profil extends Component {
         </View>
 
         <View style={{flex: 0.6}}>
-
           <View style={{flex: 0.2, flexDirection:'row'}}>
             <View style={{flex: 0.3, justifyContent:'center', alignItems:'flex-end'}}>
               <Icon
@@ -136,7 +135,6 @@ export default class Profil extends Component {
             <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
               {this.displayTypeLabel(this.state.Profil)}
             </View>
-
           </View>
 
 
@@ -157,7 +155,10 @@ export default class Profil extends Component {
             </View>
 
           </View>
-          <View style={{flex: 0.4}}></View>
+
+          <View style={{flex: 0.4}}>
+          </View>
+
         </View>
 
         <View style={{flex: 0.1, flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>

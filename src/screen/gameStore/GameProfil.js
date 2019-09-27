@@ -16,8 +16,9 @@ export default class GameProfil extends Component {
     super(props);
     this.state = {
       Game: [],
-      Status:'',
-      Rating:[]
+      Status: '',
+      Rating:[],
+      Disabled: false,
     }
   }
 
@@ -35,6 +36,11 @@ export default class GameProfil extends Component {
      }).then((response) => response.json())
          .then((responseJson) => {
            this.setState({'Status':JSON.stringify(responseJson.appStatus)})
+          if (this.state.Status === "\"0\"") {
+            this.setState({'Disabled': false})
+           } else {
+             this.setState({'Disabled': true})
+           }
          })
          .catch((error) => {
            console.error(error);
@@ -161,7 +167,6 @@ export default class GameProfil extends Component {
   }
 
   _renderAppRequest(){
-
   if (Store.TypeUser == 2)
     return(
       <View style={{paddingBottom: 10}}>
@@ -199,6 +204,7 @@ export default class GameProfil extends Component {
        <View style={{paddingBottom: 10}}>
         <Button
           title={'DEMANDER'}
+          disabled={this.state.Disabled}
           icon={{
             type: 'font-awesome',
             name: 'download',
