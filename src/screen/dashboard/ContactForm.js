@@ -4,6 +4,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Sae, Fumi } from 'react-native-textinput-effects';
 import { FormLabel, FormInput, FormValidationMessage, Icon, Button } from 'react-native-elements';
 import AlertPro from "react-native-alert-pro";
+import * as cfg from "./../../Config";
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -21,7 +22,7 @@ export default class ContactForm extends Component {
     this.state = {
       email: '',
       problem: '',
-      typeofpb:'',
+      typeofpb:'JEU',
     };
   }
 
@@ -32,7 +33,7 @@ sendEmail_ = () =>{
      return;
    }
 
-   fetch('http://51.38.187.216:9090/help/contact', {
+   fetch(cfg.API_URL + '/help/contact', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -41,7 +42,7 @@ sendEmail_ = () =>{
       },
       body: JSON.stringify({
         pbType: this.state.typeofpb,
-        pbDetail: this.state.problem.problem,
+        pbDetail: this.state.problem,
       }),
     }).then((response) => response.json())
        .then((responseJson) => {

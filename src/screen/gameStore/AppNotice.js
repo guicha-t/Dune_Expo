@@ -398,34 +398,6 @@ _addRowplus () {
         .catch((error) => {
           console.error(error);
         });
-
-  return(
-    <View style={styles.MainContainer}>
-        <Header navigation={this.props.navigation}/>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
-          <Text style={{fontSize:20,}}>
-             Avis Professeurs
-          </Text>
-        </View>
-        <View style={styles.containerBody}>
-          <ScrollView showsVerticalScrollIndicator={false} >
-
-          {this._printFirstNotice()}
-          {this._printSecondNotice()}
-          {this._printThirdNotice()}
-          {this._printForthNotice()}
-          {this._printFifthNotice()}
-
-
-          <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
-            {this._printMenusButton()}
-            <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
-            {this._printPlusButton()}
-          </View>
-         </ScrollView>
-        </View>
-      </View>
-  );
 }
 
 
@@ -493,34 +465,6 @@ this.state.CurrentRow = this.state.CurrentRow - 5;
           console.error(error);
         });
 
-  return(
-    <View style={styles.MainContainer}>
-        <Header navigation={this.props.navigation}/>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
-          <Text style={{fontSize:20,}}>
-             Avis Professeurs
-          </Text>
-        </View>
-        <View style={styles.containerBody}>
-          <ScrollView showsVerticalScrollIndicator={false} >
-
-          {this._printFirstNotice()}
-          {this._printSecondNotice()}
-          {this._printThirdNotice()}
-          {this._printForthNotice()}
-          {this._printFifthNotice()}
-
-
-          <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
-            {this._printMenusButton()}
-            <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
-            {this._printPlusButton()}
-          </View>
-         </ScrollView>
-        </View>
-      </View>
-  );
-
 }
 
 render() {
@@ -550,11 +494,6 @@ render() {
             titleStyle={{ fontWeight: 'bold' }}
           />
         </View>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center'}}>
-          <Text style={{fontSize:20,}}>
-             Avis Professeurs
-          </Text>
-        </View>
         <View style={styles.containerBody}>
           <ScrollView showsVerticalScrollIndicator={false} >
 
@@ -565,13 +504,15 @@ render() {
           {this._printForthNotice()}
           {this._printFifthNotice()}
 
+         </ScrollView>
+        </View>
           <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
             {this._printMenusButton()}
             <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
             {this._printPlusButton()}
           </View>
-         </ScrollView>
-        </View>
+
+
       </View>
       );
   }
@@ -592,7 +533,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   containerBody: {
-    flex: 0.7,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
