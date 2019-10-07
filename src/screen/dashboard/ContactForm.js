@@ -20,7 +20,6 @@ export default class ContactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
       problem: '',
       typeofpb:'JEU',
     };
@@ -28,7 +27,7 @@ export default class ContactForm extends Component {
 
 sendEmail_ = () =>{
 
-   if (this.state.email.length == 0 || this.state.problem.length == 0){
+   if (this.state.problem.length == 0){
      Alert.alert('ERREUR', 'Veuillez remplir tous les champs')
      return;
    }
@@ -66,27 +65,6 @@ return(
           <View style={{flex: 0.7}}>
 
 
-            <View style={{marginTop: 80, flex: 0.3, flexDirection: 'row'}}>
-              <View style={{flex: 0.2}}></View>
-              <View style={{flex: 0.6, alignItems: 'center', justifyContent:'flex-end'}}>
-                <Fumi
-                  label={'E-mail'}
-                  style={{ width: 300, backgroundColor:'#FFF'}}
-                  value={this.state.email}
-                  onChangeText={(email) => this.setState({ email })}
-                  iconClass={FontAwesomeIcon}
-                  iconName={'at'}
-                  iconColor={'#363453'}
-                  labelStyle={{ color: '#363453' }}
-                  iconSize={20}
-                  iconWidth={40}
-                  inputPadding={16}
-                  />
-              </View>
-              </View>
-              <View style={{flex: 0.2}}></View>
-
-
               <View style={{marginTop: 80, flex: 0.3, flexDirection: 'row'}}>
                 <View style={{flex: 0.2}}></View>
                   <View style={{flex: 0.6,  alignItems: 'center', justifyContent:'center'}}>
@@ -101,8 +79,7 @@ return(
               <View style={{flex: 0.2}}></View>
 
 
-
-              <View style={{marginTop:80, flex: 0.3, flexDirection:'row'}}>
+              <View style={{marginTop:60, flex: 0.3, flexDirection:'row'}}>
                 <View style={{flex: 0.2}}></View>
                   <View style={{flex: 0.6,  alignItems: 'center', justifyContent:'center'}}>
                     <Fumi
