@@ -136,13 +136,13 @@ export default class EditPassUser extends Component {
            <Button
              title={'Retour'}
              style={styles.ButtonCo}
-             color='#363453'
+             color={cfg.SECONDARY}
              onPress={this._cancelEdit}
            />
            <Button
              title={'Valider'}
              style={styles.ButtonCo}
-             color='#363453'
+             color={cfg.SECONDARY}
              onPress={this._confirmEdit}
            />
          </View>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   titleInfo: {
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold',
     fontSize: 14,
   },

@@ -239,7 +239,6 @@ export default class Dashboard extends Component {
     }
     return null;
   }
-
   renderAlertsText(){
     if (Store.TypeUser == 2){
       if (this.state.Notif != 0)
@@ -312,7 +311,7 @@ export default class Dashboard extends Component {
                                         </View>
                                     )}
                                 />
-                                <Button title={'Retour'} color='#363453' onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                                <Button title={'Retour'} color={cfg.SECONDARY} onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
                             </View>
                         </View>
                     </Modal>
@@ -328,14 +327,14 @@ export default class Dashboard extends Component {
             <View style={styles.topbody}>
               <View style={[styles.leftcase, styles.topleftcase]}>
                 <View style={styles.caseTopRight}>
-                  <Text style={styles.datetext}>{this.state.Day}</Text>
-                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
-                  <Text style={styles.datetext}>{this.state.Year}</Text>
-                </View>
-                <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
                   <Text style={styles.datetext}>Bonjour</Text>
                   <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
                   <Text style={styles.datetext}>{this.state.Profil.nomUser}</Text>
+                </View>
+                <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
+                  <Text style={styles.datetext}>{this.state.Day}</Text>
+                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+                  <Text style={styles.datetext}>{this.state.Year}</Text>
                 </View>
               </View>
               <View style={[styles.rightcase, styles.topleftcase]}>
@@ -529,10 +528,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFF',
   },
   ModalInsideView:{
-
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor : "#363453",
+      backgroundColor : cfg.SECONDARY,
       height: 450 ,
       width: '90%',
       borderRadius:10,
@@ -553,7 +551,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   topleftcase: {
-    backgroundColor: '#363453',
+    backgroundColor: cfg.SECONDARY,
   },
   datacase: {
     alignItems: 'center',
@@ -566,7 +564,7 @@ const styles = StyleSheet.create({
   },
   primetext: {
     fontSize: 60,
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold',
   },
   primetextwhite: {
@@ -576,11 +574,11 @@ const styles = StyleSheet.create({
   },
   subtext: {
     fontSize: 0.05*width,
-    color: '#363453',
+    color: cfg.SECONDARY,
   },
   buttonCase: {
     flex: 0.4,
-    backgroundColor: '#363453',
+    backgroundColor: cfg.SECONDARY,
     borderRadius: 200,
     padding: 7,
     borderBottomColor: 'black',

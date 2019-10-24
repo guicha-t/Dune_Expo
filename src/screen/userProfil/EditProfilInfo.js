@@ -141,7 +141,7 @@ export default class EditProfilInfo extends Component {
                   name='arrow-left'
                   color='#FFF'
                   containerStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: cfg.SECONDARY,
                   }}
                   />
                 </View>
@@ -155,7 +155,7 @@ export default class EditProfilInfo extends Component {
             <View style={{height: 220, justifyContent:'center', alignItems:'center'}}>
               <Fumi
                 label={'Prénom'}
-                style={{ width: width-40, backgroundColor:'#363453', borderRadius: 0}}
+                style={{ width: width-40, backgroundColor:cfg.SECONDARY, borderRadius: 0}}
                 value={this.state.name}
                 onChangeText={(name) => this.setState({ name })}
                 iconClass={FontAwesomeIcon}
@@ -168,7 +168,7 @@ export default class EditProfilInfo extends Component {
                 />
               <Fumi
                 label={'Nom'}
-                style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+                style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
                 value={this.state.lastname}
                 onChangeText={(lastname) => this.setState({ lastname })}
                 iconClass={FontAwesomeIcon}
@@ -189,11 +189,11 @@ export default class EditProfilInfo extends Component {
               containerStyle={{
                 backgroundColor: '#4caf50',
                 borderWidth: 1,
-                borderColor:'#363453'
+                borderColor:cfg.SECONDARY
               }}
               />
             </View>
-            <Divider style={{ backgroundColor: '#363453' }} />
+            <Divider style={{ backgroundColor: cfg.SECONDARY }} />
 
 
 
@@ -203,7 +203,7 @@ export default class EditProfilInfo extends Component {
             <View style={{height: 220, justifyContent:'center', alignItems:'center'}}>
               <Fumi
                 label={'E-mail'}
-                style={{ width: width-40, backgroundColor:'#363453', borderRadius: 0}}
+                style={{ width: width-40, backgroundColor:cfg.SECONDARY, borderRadius: 0}}
                 value={this.state.email}
                 onChangeText={(email) => this.setState({ email })}
                 iconClass={FontAwesomeIcon}
@@ -216,7 +216,7 @@ export default class EditProfilInfo extends Component {
                 />
               <Fumi
                 label={'Mot de passe'}
-                style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+                style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
                 secureTextEntry={this.state.pwdhide}
                 value={this.state.password}
                 onChangeText={(password) => this.setState({ password })}
@@ -240,7 +240,7 @@ export default class EditProfilInfo extends Component {
                   containerStyle={{
                     backgroundColor: '#4caf50',
                     borderWidth: 1,
-                    borderColor:'#363453'
+                    borderColor:cfg.SECONDARY
                   }}
                   />
                 </View>
@@ -252,15 +252,15 @@ export default class EditProfilInfo extends Component {
                   name={this.state.hideIcon}
                   color='#FFF'
                   containerStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: cfg.SECONDARY,
                     borderWidth: 1,
-                    borderColor:'#363453'
+                    borderColor:cfg.SECONDARY
                   }}
                   />
                 </View>
               </View>
             </View>
-            <Divider style={{ backgroundColor: '#363453' }} />
+            <Divider style={{ backgroundColor: cfg.SECONDARY }} />
 
 
 
@@ -271,7 +271,7 @@ export default class EditProfilInfo extends Component {
             <View style={{height: 300, justifyContent:'center', alignItems:'center'}}>
             <Fumi
               label={'Ancien mot de passe'}
-              style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
               secureTextEntry={this.state.pwdhide}
               value={this.state.oldPassword}
               onChangeText={(oldPassword) => this.setState({ oldPassword })}
@@ -285,7 +285,7 @@ export default class EditProfilInfo extends Component {
               />
             <Fumi
               label={'Nouveau mot de passe'}
-              style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
               secureTextEntry={this.state.pwdhide}
               value={this.state.newpassword}
               onChangeText={(newpassword) => this.setState({ newpassword })}
@@ -299,7 +299,7 @@ export default class EditProfilInfo extends Component {
               />
             <Fumi
               label={'Nouveau mot de passe'}
-              style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
               secureTextEntry={this.state.pwdhide}
               value={this.state.newpasswordbis}
               onChangeText={(newpasswordbis) => this.setState({ newpasswordbis })}
@@ -322,7 +322,7 @@ export default class EditProfilInfo extends Component {
                   containerStyle={{
                     backgroundColor: '#4caf50',
                     borderWidth: 1,
-                    borderColor:'#363453'
+                    borderColor:cfg.SECONDARY
                   }}
                   />
                 </View>
@@ -334,15 +334,15 @@ export default class EditProfilInfo extends Component {
                   name={this.state.hideIcon}
                   color='#FFF'
                   containerStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: cfg.SECONDARY,
                     borderWidth: 1,
-                    borderColor:'#363453'
+                    borderColor:cfg.SECONDARY
                   }}
                   />
                 </View>
               </View>
             </View>
-            <Divider style={{ backgroundColor: '#363453' }} />
+            <Divider style={{ backgroundColor: cfg.SECONDARY }} />
 
             <View style={{height: 220, justifyContent:'center', alignItems:'center'}}>
             </View>

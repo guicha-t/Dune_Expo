@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, View, Text, Image, I18nManager } from 'react-native';
 import { LinearGradient } from 'expo';
 import AppIntroSlider from 'react-native-app-intro-slider';
+import * as cfg from "./../../Config";
 
 I18nManager.forceRTL(false);
 

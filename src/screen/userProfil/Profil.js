@@ -111,7 +111,7 @@ export default class Profil extends Component {
               name='id-card'
               color='#FFF'
               containerStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
               }}
               />
             </View>
@@ -128,7 +128,7 @@ export default class Profil extends Component {
               name='briefcase'
               color='#FFF'
               containerStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
               }}
               />
             </View>
@@ -146,7 +146,7 @@ export default class Profil extends Component {
               name='at'
               color='#FFF'
               containerStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
               }}
               />
             </View>
@@ -173,7 +173,7 @@ export default class Profil extends Component {
              color: 'white',
            }}
             buttonStyle={{
-              backgroundColor: '#363453',
+              backgroundColor: cfg.SECONDARY,
               borderWidth: 2,
               borderColor: 'white',
               borderRadius: 30,
@@ -191,7 +191,7 @@ export default class Profil extends Component {
             name='edit'
             color='#FFF'
             containerStyle={{
-              backgroundColor: '#363453',
+              backgroundColor: cfg.SECONDARY,
             }}
             />
 
@@ -208,7 +208,7 @@ export default class Profil extends Component {
             buttonStyle={{
               backgroundColor: '#ea4335',
               borderWidth: 1,
-              borderColor: '#363453',
+              borderColor: cfg.SECONDARY,
               borderRadius: 30,
               width: 60,
               paddingLeft: 20,

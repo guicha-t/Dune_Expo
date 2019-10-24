@@ -278,7 +278,7 @@ _printPlusButton (){
                color: '#F9F9F9',
              }}
               buttonStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
                 borderColor: '#F9F9F9',
                 borderRadius: 30,
@@ -321,7 +321,7 @@ _printMenusButton (){
                color: '#F9F9F9',
              }}
               buttonStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
                 borderColor: '#F9F9F9',
                 borderRadius: 30,
@@ -483,7 +483,7 @@ render() {
              color: '#F9F9F9',
            }}
             buttonStyle={{
-              backgroundColor: '#363453',
+              backgroundColor: cfg.SECONDARY,
               borderWidth: 2,
               borderColor: '#F9F9F9',
               borderRadius: 30,
@@ -539,12 +539,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profInfo: {
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold',
     fontSize: 14,
   },
   commentaire:{
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'normal',
     fontSize: 12,
     fontStyle: 'italic',

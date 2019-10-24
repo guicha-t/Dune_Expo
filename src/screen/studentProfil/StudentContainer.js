@@ -8,6 +8,8 @@ import Store from './../../global/store/Store';
 
 import StudentProfil from './StudentProfil';
 import StudentHistory from './StudentHistory';
+import * as cfg from "./../../Config";
+
 
 const Tabs = createBottomTabNavigator({
   'Historique': StudentHistory,
@@ -16,7 +18,7 @@ const Tabs = createBottomTabNavigator({
   initialRouteName: 'Historique',
   tabBarOptions: {
     activeBackgroundColor: '#e5c35c',
-    inactiveBackgroundColor:'#FEE599',
+    inactiveBackgroundColor:cfg.PRIMARY,
     showIcon: true,
     showLabel: false,
   }

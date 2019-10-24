@@ -2,6 +2,7 @@ import React , {Component} from 'react';
 import { View, Text, ScrollView, Dimensions, TouchableOpacity, AsyncStorage } from 'react-native';
 
 import Header from './../../global/header/Header';
+import * as cfg from "./../../Config";
 
 
 const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
@@ -141,7 +142,7 @@ const styles = {
   },
 
   button:{
-      backgroundColor: '#363453',
+      backgroundColor: cfg.SECONDARY,
       borderRadius: 5,
       padding: 10
   },

@@ -3,6 +3,7 @@ import { View, StatusBar, Text, Image, StyleSheet, TouchableOpacity, Linking, As
 import {createDrawerNavigator, DrawerItems} from 'react-navigation';
 
 import CustomDrawerItems from './CustomDrawerItem'
+import * as cfg from "./../../Config";
 
 
 import Loading from './../../screen/startPage/Loading';
@@ -96,7 +97,7 @@ const DrawerMenu = createDrawerNavigator(
 
 const styles = StyleSheet.create({
   drawerContainer: {
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
     flex: 1,
     paddingTop: 24,
   },

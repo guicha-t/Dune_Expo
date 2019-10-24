@@ -16,6 +16,7 @@ import { observer } from 'mobx-react';
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
+import * as cfg from "./../../Config";
 
 @observer
 export default class Dashboard extends Component {
@@ -23,7 +24,7 @@ export default class Dashboard extends Component {
     return(
       <View style={{flex:1}}>
         <View style={styles.loadingContainer}>
-          <BarIndicator color='#363453'/>
+          <BarIndicator color={cfg.SECONDARY}/>
         </View>
       </View>
     );

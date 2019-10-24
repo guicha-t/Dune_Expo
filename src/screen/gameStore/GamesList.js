@@ -153,8 +153,8 @@ import * as cfg from "./../../Config";
             onChangeText={(Search) => this.setState({ Search })}
             iconClass={FontAwesomeIcon}
             iconName={'puzzle-piece'}
-            iconColor={'#363453'}
-            labelStyle={{ color: '#363453' }}
+            iconColor={cfg.SECONDARY}
+            labelStyle={{ color: cfg.SECONDARY }}
             iconSize={20}
             iconWidth={40}
             inputPadding={16}
@@ -165,7 +165,7 @@ import * as cfg from "./../../Config";
               type: 'font-awesome',
               name: 'search',
               size: 20,
-              color: '#363453',
+              color: cfg.SECONDARY,
             }}
             buttonStyle={{
               backgroundColor: 'white',
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   ButtonSearch: {
-    backgroundColor: '#363453',
+    backgroundColor: cfg.SECONDARY,
     borderWidth: 2,
     borderColor: 'white',
     borderRadius: 30,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
     margin:2,
   },
   buttonClass: {

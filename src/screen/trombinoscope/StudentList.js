@@ -198,11 +198,11 @@ import { Alert, Button, TextInput, View, Text,
      setColorFocused = function(param) {
        if (this.state.Class === param) {
          return {
-           backgroundColor: '#363453',
+           backgroundColor: cfg.SECONDARY,
          }
        } else {
          return {
-           backgroundColor:'#FEE599',
+           backgroundColor:cfg.PRIMARY,
          }
        }
       }
@@ -214,7 +214,7 @@ import { Alert, Button, TextInput, View, Text,
         }
       } else {
         return {
-          color:'#363453',
+          color:cfg.SECONDARY,
         }
       }
      }
@@ -243,7 +243,7 @@ import { Alert, Button, TextInput, View, Text,
               name='arrow-left'
               color='#FFF'
               containerStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
               }}
               />
             </View>
@@ -305,7 +305,7 @@ import { Alert, Button, TextInput, View, Text,
           <Button
             title={'Go'}
             style={styles.ButtonSearch}
-            color='#363453'
+            color={cfg.SECONDARY}
             onPress={() => this._searchRequest()}
           />
         </View>
@@ -318,7 +318,7 @@ import { Alert, Button, TextInput, View, Text,
             style={styles.GridView}
             renderItem={item => (
               <View style={styles.itemContainer}>
-                <TouchableOpacity style={{flex: 1, backgroundColor:'#FFF', padding: 4, borderWidth: 2, borderColor:'#363453'}} onPress={() => this._goToStudentProfil(item.idEleve)}>
+                <TouchableOpacity style={{flex: 1, backgroundColor:'#FFF', padding: 4, borderWidth: 2, borderColor:cfg.SECONDARY}} onPress={() => this._goToStudentProfil(item.idEleve)}>
 
                     <View style={{flex: 0.7}}>
                       <Image
@@ -389,15 +389,15 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     height: 160,
-    backgroundColor: '#363453',
+    backgroundColor: cfg.SECONDARY,
   },
   itemName: {
     fontSize: 14,
-    color: '#363453',
+    color: cfg.SECONDARY,
   },
   itemNameBold: {
     fontSize: 14,
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight:'bold',
   },
   buttonClassAll: {

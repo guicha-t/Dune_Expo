@@ -146,7 +146,7 @@ _firstLogin = async () => {
 
             <Fumi
               label={'E-mail'}
-              style={{ width: width-40, backgroundColor:'#363453'}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY}}
               value={this.state.username}
               onChangeText={(username) => this.setState({ username })}
               iconClass={FontAwesomeIcon}
@@ -160,7 +160,7 @@ _firstLogin = async () => {
 
             <Fumi
               label={'Mot de passe'}
-              style={{ width: width-40, backgroundColor:'#363453', marginTop:10}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop:10}}
               value={this.state.password}
               secureTextEntry={this.state.pwdhide}
               onChangeText={(password) => this.setState({ password })}
@@ -179,7 +179,7 @@ _firstLogin = async () => {
                 name: this.state.hideIcon,
                 type: 'font-awesome',
                 size: 20,
-                color: '#363453',
+                color: cfg.SECONDARY,
               }}
               iconContainerStyle={{
                 }}
@@ -206,7 +206,7 @@ _firstLogin = async () => {
                color: 'white',
              }}
               buttonStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
                 borderColor: 'white',
                 borderRadius: 30,
@@ -266,19 +266,19 @@ _firstLogin = async () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
   },
   input: {
     width: 220,
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#363453',
+    borderColor: cfg.SECONDARY,
   },
   ButtonCo: {
     padding: 10,
     borderWidth: 1,
-    borderColor: '#363453',
+    borderColor: cfg.SECONDARY,
     marginBottom: 10,
   },
   ButtonHide: {

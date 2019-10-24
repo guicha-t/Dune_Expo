@@ -223,11 +223,11 @@ export default class StudentHistory extends Component {
    setColorFocused = function(param) {
      if (this.state.CurrentType.toString() === param.toString()) {
        return {
-         backgroundColor: '#363453',
+         backgroundColor: cfg.SECONDARY,
        }
      } else {
        return {
-         backgroundColor:'#FEE599',
+         backgroundColor: cfg.PRIMARY,
        }
      }
     }
@@ -239,7 +239,7 @@ export default class StudentHistory extends Component {
        }
      } else {
        return {
-         color:'#363453',
+         color:cfg.SECONDARY,
        }
      }
     }
@@ -267,7 +267,7 @@ export default class StudentHistory extends Component {
                   name='arrow-left'
                   color='#FFF'
                   containerStyle={{
-                    backgroundColor: '#363453',
+                    backgroundColor: cfg.SECONDARY,
                   }}
                   />
               </View>
@@ -346,12 +346,12 @@ export default class StudentHistory extends Component {
     },
     primetextblue: {
       fontSize: 20,
-      color: '#363453',
+      color: cfg.SECONDARY,
       fontWeight:'bold'
     },
     subtextblue: {
       fontSize: 20,
-      color: '#363453',
+      color: cfg.SECONDARY,
     },
     buttonClass: {
       flex: 1,
@@ -366,7 +366,7 @@ export default class StudentHistory extends Component {
       flex: 1,
       marginBottom: 6,
       padding: 5,
-      backgroundColor: '#363453',
+      backgroundColor: cfg.SECONDARY,
       flexDirection:'row',
       justifyContent:'center',
     },
@@ -378,7 +378,7 @@ export default class StudentHistory extends Component {
     },
     textClass: {
       fontSize: 14,
-      color: '#363453',
+      color: cfg.SECONDARY,
       fontWeight: '600',
     },
 

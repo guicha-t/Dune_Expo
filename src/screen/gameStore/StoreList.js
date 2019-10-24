@@ -162,7 +162,7 @@ import { Alert, Button, TextInput, View, Text,
           <Button
             title={'Go'}
             style={styles.ButtonSearch}
-            color='#363453'
+            color=cfg.SECONDARY
             onPress={() => this._searchRequest()}
           />
         </View>
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
     margin:2,
   },
   buttonClass: {

@@ -101,7 +101,8 @@ export default class App extends Component {
 
           <BarCodeScanner
             onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-            style={StyleSheet.absoluteFillObject}
+            style={styles.ScannerContainer}
+            //StyleSheet.absoluteFillObject
           />
 
           {scanned && (
@@ -148,4 +149,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.8)',
     fontSize: 18,
   },
+  ScannerContainer: {
+    flex: 1,
+  }
 });

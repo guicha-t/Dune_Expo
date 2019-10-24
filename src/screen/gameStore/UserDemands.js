@@ -244,7 +244,7 @@ export default class UserDemands extends Component {
                                         />
                                     </TouchableOpacity>
                                 </View>
-                                <Button title={'Retour'} color='#363453' onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                                <Button title={'Retour'} color={cfg.SECONDARY} onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
                             </View>
                         </View>
                     </Modal>
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
     margin:2,
   },
   buttonClass: {
@@ -355,7 +355,7 @@ const styles = StyleSheet.create({
 
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor : "#363453",
+        backgroundColor : cfg.SECONDARY,
         height: 450 ,
         width: '90%',
         borderRadius:10,

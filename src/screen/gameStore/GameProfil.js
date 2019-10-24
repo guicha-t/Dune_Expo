@@ -129,7 +129,7 @@ export default class GameProfil extends Component {
            }}
            onPress={() => this._ObtainApp()}
              buttonStyle={{
-               backgroundColor: '#363453',
+               backgroundColor: cfg.SECONDARY,
                borderColor: 'white',
                borderRadius: 30,
                width: 180,
@@ -153,7 +153,7 @@ export default class GameProfil extends Component {
            }}
            onPress={() => this._ObtainApp()}
              buttonStyle={{
-               backgroundColor: '#363453',
+               backgroundColor: cfg.SECONDARY,
                borderColor: 'white',
                borderRadius: 30,
                width: 180,
@@ -186,7 +186,7 @@ export default class GameProfil extends Component {
           }}
           onPress={() => this.props.navigation.navigate('RateApp')}
             buttonStyle={{
-              backgroundColor: '#363453',
+              backgroundColor: cfg.SECONDARY,
               borderColor: 'white',
               borderRadius: 30,
               width: 180,
@@ -213,7 +213,7 @@ export default class GameProfil extends Component {
           }}
            onPress={() => this._checkIfBuyed()}
              buttonStyle={{
-               backgroundColor: '#363453',
+               backgroundColor: cfg.SECONDARY,
                borderColor: 'white',
                borderRadius: 30,
                width: 180,
@@ -235,7 +235,7 @@ export default class GameProfil extends Component {
           }}
           onPress={() => this.props.navigation.navigate('RateApp')}
             buttonStyle={{
-              backgroundColor: '#363453',
+              backgroundColor: cfg.SECONDARY,
               borderColor: 'white',
               borderRadius: 30,
               width: 180,
@@ -287,7 +287,7 @@ export default class GameProfil extends Component {
                color: 'white',
              }}
               buttonStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
                 borderColor: 'white',
                 borderRadius: 30,
@@ -304,16 +304,16 @@ export default class GameProfil extends Component {
               source={{uri: cfg.API_URL + '/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
-              <Text style={{color:'#363453', fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
-              <Text style={{color:'#363453', fontSize:18, paddingTop:10, paddingBottom:15}}>{this.state.Game.nomCreator}</Text>
+              <Text style={{color:cfg.SECONDARY, fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
+              <Text style={{color:cfg.SECONDARY, fontSize:18, paddingTop:10, paddingBottom:15}}>{this.state.Game.nomCreator}</Text>
 
               <Star score={count} style={starStyle} />
 
               <TouchableOpacity onPress={() => this._goToNotice()} >
                 <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
               </TouchableOpacity>
-              <Text style={{marginLeft:10, marginRight:10, color:'#363453', fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
-              <Text style={{color:'#363453', fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
+              <Text style={{marginLeft:10, marginRight:10, color:cfg.SECONDARY, fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
+              <Text style={{color:cfg.SECONDARY, fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
               <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>€ : {this._printPrice()}</Text>
               <View style={{paddingTop:30}}>
                {this._renderAppRequest()}
@@ -352,7 +352,7 @@ export default class GameProfil extends Component {
 
   const styles = StyleSheet.create({
   titleInfo: {
-      color: '#363453',
+      color: cfg.SECONDARY,
       fontWeight: 'bold',
       fontSize: 16,
       paddingTop:20,

@@ -92,8 +92,8 @@ export default class AddUserDirector extends Component {
                 value={this.state.lastname}
                 iconClass={FontAwesomeIcon}
                 iconName={'user'}
-                iconColor={'#363453'}
-                labelStyle={{ color: '#363453' }}
+                iconColor={cfg.SECONDARY}
+                labelStyle={{ color: cfg.SECONDARY }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
@@ -110,8 +110,8 @@ export default class AddUserDirector extends Component {
                 value={this.state.name}
                 iconClass={FontAwesomeIcon}
                 iconName={'user'}
-                iconColor={'#363453'}
-                labelStyle={{ color: '#363453' }}
+                iconColor={cfg.SECONDARY}
+                labelStyle={{ color: cfg.SECONDARY }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
@@ -129,8 +129,8 @@ export default class AddUserDirector extends Component {
                 value={this.state.email}
                 iconClass={FontAwesomeIcon}
                 iconName={'at'}
-                iconColor={'#363453'}
-                labelStyle={{ color: '#363453' }}
+                iconColor={cfg.SECONDARY}
+                labelStyle={{ color: cfg.SECONDARY }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleInfo: {
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold',
     fontSize: 14,
   },

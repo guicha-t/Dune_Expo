@@ -76,7 +76,7 @@ render() {
                color: 'white',
              }}
               buttonStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
                 borderColor: 'white',
                 borderRadius: 30,
@@ -100,8 +100,8 @@ render() {
                 onChangeText={(Commentaire) => this.setState({ Commentaire })}
                 iconClass={FontAwesomeIcon}
                 iconName={'question'}
-                iconColor={'#363453'}
-                labelStyle={{ color: '#363453' }}
+                iconColor={cfg.SECONDARY}
+                labelStyle={{ color: cfg.SECONDARY }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
@@ -119,7 +119,7 @@ render() {
                color: 'white',
              }}
               buttonStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
                 borderColor: 'white',
                 borderRadius: 30,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleInfo: {
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold',
     fontSize: 14,
   },

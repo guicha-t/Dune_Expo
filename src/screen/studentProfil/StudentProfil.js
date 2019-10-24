@@ -111,7 +111,7 @@ export default class StudentProfil extends Component {
                 name='arrow-left'
                 color='#FFF'
                 containerStyle={{
-                  backgroundColor: '#363453',
+                  backgroundColor: cfg.SECONDARY,
                 }}
                 />
             </View>
@@ -139,7 +139,7 @@ export default class StudentProfil extends Component {
                 name='edit'
                 color='#FFF'
                 containerStyle={{
-                  backgroundColor: '#363453',
+                  backgroundColor: cfg.SECONDARY,
                 }}
                 />
             </View>
@@ -149,7 +149,7 @@ export default class StudentProfil extends Component {
 
           <View style={{flex: 0.8}}>
 
-            <View style={{backgroundColor: '#363453', height: 60, flexDirection: 'row', paddingLeft: 10}}>
+            <View style={{backgroundColor: cfg.SECONDARY, height: 60, flexDirection: 'row', paddingLeft: 10}}>
               <View style={{flex: 0.6, justifyContent:'center', borderRightWidth: 1, borderColor: '#fff'}}>
                 <Text style={styles.gridtextwhite}>MATIÈRE /</Text>
                 <Text style={styles.gridtextwhite}>NOMBRE SESSION</Text>
@@ -170,12 +170,12 @@ export default class StudentProfil extends Component {
                 data={this.state.Gradebook}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item}) =>
-                <View style={{backgroundColor: '#FFF', height: 60, flexDirection: 'row', paddingLeft: 10, borderBottomWidth: 1, borderColor: '#363453'}}>
-                  <View style={{flex: 0.6, justifyContent:'center', borderRightWidth: 1, borderColor: '#363453'}}>
+                <View style={{backgroundColor: '#FFF', height: 60, flexDirection: 'row', paddingLeft: 10, borderBottomWidth: 1, borderColor: cfg.SECONDARY}}>
+                  <View style={{flex: 0.6, justifyContent:'center', borderRightWidth: 1, borderColor: cfg.SECONDARY}}>
                     <Text style={styles.gridtextblue}>{item.labeltype}</Text>
                     <Text style={styles.gridtextblue}>{item.nbPlayed} résultat{this.addplural(item.nbPlayed.toString())}</Text>
                   </View>
-                  <View style={{flex: 0.2, justifyContent:'center', alignItems:'center', borderRightWidth: 1, borderColor: '#363453'}}>
+                  <View style={{flex: 0.2, justifyContent:'center', alignItems:'center', borderRightWidth: 1, borderColor: cfg.SECONDARY}}>
                     <Text style={styles.gridtextblue}>{item.moyenne.toFixed(2)}</Text>
                   </View>
                   <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
@@ -187,7 +187,7 @@ export default class StudentProfil extends Component {
               />
             </View>
 
-            <View style={{backgroundColor: '#363453', height: 60, flexDirection: 'row', paddingLeft: 10, borderBottomWidth: 1, borderColor: '#363453'}}>
+            <View style={{backgroundColor: cfg.SECONDARY, height: 60, flexDirection: 'row', paddingLeft: 10, borderBottomWidth: 1, borderColor: cfg.SECONDARY}}>
               <View style={{flex: 0.6, justifyContent:'center', borderRightWidth: 1, borderColor: '#FFF'}}>
                 <Text style={styles.gridtextwhite}>GÉNÉRALE</Text>
               </View>
@@ -225,14 +225,14 @@ export default class StudentProfil extends Component {
     },
     gridtextblue: {
       fontSize: 16,
-      color: '#363453',
+      color: cfg.SECONDARY,
       fontWeight:'bold'
     },
     containerFlatList: {
       flex: 1,
       marginBottom: 6,
       padding: 5,
-      backgroundColor: '#363453',
+      backgroundColor: cfg.SECONDARY,
       flexDirection:'row',
       justifyContent:'center',
     },

@@ -77,7 +77,7 @@ export default class GameList extends Component {
               name='arrow-left'
               color='#FFF'
               containerStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
               }}
               />
 
@@ -102,7 +102,7 @@ export default class GameList extends Component {
               renderItem={({item}) =>
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('StudentResultList', {idGame: item.idGP, Game: item, idBack: '0'})}
-                style={{flex: 1, backgroundColor: '#363453', marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
+                style={{flex: 1, backgroundColor: cfg.SECONDARY, marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
 
                 <View style={{flex: 0.5, paddingLeft: 10}}>
                   <View style={{flex: 0.5, justifyContent:'center'}}>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   primetextblue: {
     fontSize: 20,
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight:'bold'
   },
 });

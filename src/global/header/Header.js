@@ -81,10 +81,6 @@ export default class Header extends Component {
               />
           </TouchableOpacity>
         </View>
-
-
-
-
       </View>
 
     );
@@ -96,7 +92,7 @@ const styles = StyleSheet.create({
     height: 56,
     flexDirection: 'row',
     elevation: 5,
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
     borderBottomColor: 'black',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

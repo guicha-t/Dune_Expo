@@ -78,7 +78,7 @@ static navigationOptions = {
             <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
               <Fumi
                 label={'E-mail'}
-                style={{ width: 220, backgroundColor:'#363453'}}
+                style={{ width: 220, backgroundColor:cfg.SECONDARY}}
                 value={this.state.username}
                 onChangeText={(username) => this.setState({ username })}
                 iconClass={FontAwesomeIcon}
@@ -183,18 +183,18 @@ static navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
   },
   input: {
     width: 220,
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#363453',
+    borderColor: cfg.SECONDARY,
   },
   primetextblue: {
     fontSize: 20,
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold'
   },
 

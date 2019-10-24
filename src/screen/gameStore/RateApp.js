@@ -178,8 +178,8 @@ render() {
                   onChangeText={(Commentaire) => this.setState({ Commentaire })}
                   iconClass={FontAwesomeIcon}
                   iconName={'comment'}
-                  iconColor={'#363453'}
-                  labelStyle={{ color: '#363453' }}
+                  iconColor={cfg.SECONDARY}
+                  labelStyle={{ color: cfg.SECONDARY }}
                   iconSize={20}
                   iconWidth={40}
                   inputPadding={16}
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titleInfo: {
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight: 'bold',
     fontSize: 14,
   },

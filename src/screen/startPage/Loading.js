@@ -85,7 +85,7 @@ export default class AuthLoadingScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <BarIndicator color='#363453'/>
+        <BarIndicator color={cfg.SECONDARY}/>
         <StatusBar barStyle="default" />
       </View>
     );

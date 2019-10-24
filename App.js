@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, StatusBar} from 'react-native';
 import { Provider} from 'mobx-react';
+import * as cfg from "./src/Config";
 
 
 import DrawerMenu from './src/global/navigation/DrawerMenu';
@@ -9,7 +10,7 @@ import Store from './src/global/store/Store';
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={{flex: 1, paddingTop: STATUSBAR_HEIGHT, backgroundColor: "#FEE599"}}>
+      <View style={{flex: 1, paddingTop: STATUSBAR_HEIGHT, backgroundColor: cfg.PRIMARY}}>
           <StatusBar
           barStyle="dark-content"
           />

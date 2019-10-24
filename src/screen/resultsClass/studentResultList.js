@@ -117,7 +117,7 @@ export default class StudentResultList extends Component {
               name='arrow-left'
               color='#FFF'
               containerStyle={{
-                backgroundColor: '#363453',
+                backgroundColor: cfg.SECONDARY,
               }}
               />
             </View>
@@ -139,7 +139,7 @@ export default class StudentResultList extends Component {
                 name='sort-alpha-asc'
                 color='#FFF'
                 containerStyle={{
-                  backgroundColor: '#363453',
+                  backgroundColor: cfg.SECONDARY,
                   opacity: this.state.alphaOpacity,
                 }}
                 />
@@ -154,7 +154,7 @@ export default class StudentResultList extends Component {
                 name='sort-numeric-desc'
                 color='#FFF'
                 containerStyle={{
-                  backgroundColor: '#363453',
+                  backgroundColor: cfg.SECONDARY,
                   opacity: this.state.numOpacity,
                 }}
                 />
@@ -217,18 +217,18 @@ const styles = StyleSheet.create({
   },
   primetextblue: {
     fontSize: 20,
-    color: '#363453',
+    color: cfg.SECONDARY,
     fontWeight:'bold'
   },
   subtextblue: {
     fontSize: 20,
-    color: '#363453',
+    color: cfg.SECONDARY,
   },
   containerFlatList: {
     flex: 1,
     marginBottom: 6,
     padding: 5,
-    backgroundColor: '#363453',
+    backgroundColor: cfg.SECONDARY,
     flexDirection:'row',
     justifyContent:'center',
   },

@@ -68,7 +68,7 @@ export default class StudentEdit extends Component {
           <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>
             <Fumi
               label={'Nom'}
-              style={{ width: width-40, backgroundColor:'#363453'}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY}}
               value={this.state.Nom}
               onChangeText={(Nom) => this.setState({ Nom })}
               iconClass={FontAwesomeIcon}
@@ -81,7 +81,7 @@ export default class StudentEdit extends Component {
               />
             <Fumi
               label={'Prénom'}
-              style={{ width: width-40, backgroundColor:'#363453', marginTop: 10}}
+              style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
               value={this.state.Prenom}
               onChangeText={(Prenom) => this.setState({ Prenom })}
               iconClass={FontAwesomeIcon}
@@ -143,7 +143,7 @@ export default class StudentEdit extends Component {
       justifyContent: 'center',
     },
     titleInfo: {
-      color: '#363453',
+      color: cfg.SECONDARY,
       fontWeight: 'bold',
       fontSize: 14,
     },

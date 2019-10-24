@@ -69,7 +69,7 @@ return(
               <View style={{marginTop: 80, flex: 0.3, flexDirection: 'row'}}>
                 <View style={{flex: 0.2}}></View>
                   <View style={{flex: 0.6,  alignItems: 'center', justifyContent:'center'}}>
-                    <Text style={{fontWeight: 'bold', color:'#363453', width:200}}>Votre problème est lié à...</Text>
+                    <Text style={{fontWeight: 'bold', color:cfg.SECONDARY, width:200}}>Votre problème est lié à...</Text>
                     <Picker selectedValue={this.state.typeofpb} style={{ height: 50, width: 155 }} onValueChange={(itemValue, itemIndex) => this.setState({typeofpb: itemValue})}>
                       <Picker.Item label='Un jeu' value='JEU' />
                       <Picker.Item label='La table' value='TABLE' />
@@ -88,7 +88,7 @@ return(
                        numberOfLines={6}
                        value={this.state.problem}
                        onChangeText={(problem) => this.setState({ problem })}
-                       style={{width:200, height:80, borderBottomColor:'#363453',borderBottomWidth:1}}
+                       style={{width:200, height:80, borderBottomColor:cfg.SECONDARY,borderBottomWidth:1}}
                        textAlign={'center'}
                    />
                   </View>
@@ -108,7 +108,7 @@ return(
                  color: 'white',
                }}
                 buttonStyle={{
-                  backgroundColor: '#363453',
+                  backgroundColor: cfg.SECONDARY,
                   borderWidth: 2,
                   borderColor: 'white',
                   borderRadius: 30,

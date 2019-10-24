@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
 import GameProfil from './GameProfil';
+import * as cfg from "./../../Config";
 
 @observer
 export default class GameContainer extends Component {
