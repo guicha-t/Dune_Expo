@@ -209,6 +209,26 @@ import * as cfg from "./../../Config";
             )}
             />
         </View>
+        <Button
+          title=""
+          onPress={()=>this.props.navigation.navigate('Dashboard')}
+          icon={{
+           type: 'font-awesome',
+           name: 'arrow-left',
+           size: 15,
+           color: 'white',
+         }}
+          buttonStyle={{
+            backgroundColor: '#363453',
+            borderWidth: 2,
+            borderColor: 'white',
+            borderRadius: 30,
+            width: 60,
+            paddingLeft: 20,
+          }}
+          containerStyle={{ height: 50, width: 250 }}
+          titleStyle={{ fontWeight: 'bold' }}
+        />
       </View>
       </DismissKeyboard>
      );

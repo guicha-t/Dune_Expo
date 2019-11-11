@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Text, Image, StyleSheet, TouchableOpacity, Linking, AsyncStorage} from 'react-native';
+import { View, StatusBar, Text, Image, StyleSheet, TouchableOpacity, Linking, AsyncStorage, ImageBackground} from 'react-native';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation';
 
 import CustomDrawerItems from './CustomDrawerItem'
@@ -46,12 +46,16 @@ import AddUserDirector from './../../screen/director/AddUserDirector';
 
 const CustomDrawerContentComponent = (props) => (
   <View style={styles.drawerContainer}>
+    <ImageBackground source={require('./../../picture/global/imagedunerose.png')} style={{width: '100%', height: '100%'}}>
+    <View style={{flex:0.8, justifyContent:'center', alignItems:'center'}}>
     <Image source={require('./../../picture/header/dunelogo.png')}
-      style={{flex:0.6, height: undefined, width: undefined}}
+      style={{flex:0.6, height: '60%', width: '60%', justifyContent: 'center', alignItems: 'center'}}
       resizeMode="contain"/>
+    </View>
     <View style={styles.ListItems}>
       <CustomDrawerItems navigation={props.navigation}/>
     </View>
+    </ImageBackground>
   </View>
 )
 
@@ -99,7 +103,8 @@ const styles = StyleSheet.create({
   drawerContainer: {
     backgroundColor: cfg.PRIMARY,
     flex: 1,
-    paddingTop: 24,
+    alignItems:'center',
+    justifyContent:'center',
   },
   ListItems: {
     flex: 1,

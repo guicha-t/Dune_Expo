@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {ScrollView, Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, ImageBackground} from 'react-native';
 
 import Store from './../store/Store'
 import * as cfg from "./../../Config";
@@ -24,8 +24,8 @@ export default class CustomDrawerItems extends Component {
       <View style={styles.container}>
         <ScrollView>
 
-        <View style={{height: 40, borderBottomWidth: 1, borderColor: cfg.SECONDARY, justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
-          <Text style={{color: cfg.SECONDARY, fontSize:16}}>
+        <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
+          <Text style={{color: 'white', fontSize:16, fontWeight:'bold',}}>
             ACCUEIL
           </Text>
         </View>
@@ -40,8 +40,8 @@ export default class CustomDrawerItems extends Component {
           </TouchableOpacity>
 
 
-          <View style={{height: 40, borderBottomWidth: 1, borderColor: cfg.SECONDARY, justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
-            <Text style={{color: cfg.SECONDARY, fontSize:16}}>
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
+            <Text style={{color: 'white', fontSize:16, fontWeight:'bold',}}>
               STATISTIQUES
             </Text>
           </View>
@@ -64,8 +64,8 @@ export default class CustomDrawerItems extends Component {
 
 
 
-          <View style={{height: 40, borderBottomWidth: 1, borderColor: cfg.SECONDARY, justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
-            <Text style={{color: cfg.SECONDARY, fontSize:16}}>
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
+            <Text style={{color: 'white', fontSize:16, fontWeight:'bold',}}>
               APPLICATIONS
             </Text>
           </View>
@@ -86,8 +86,8 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
-          <View style={{height: 40, borderBottomWidth: 1, borderColor: cfg.SECONDARY, justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
-            <Text style={{color: cfg.SECONDARY, fontSize:16}}>
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
+            <Text style={{color: 'white', fontSize:16, fontWeight:'bold',}}>
               TABLE
             </Text>
           </View>
@@ -103,8 +103,8 @@ export default class CustomDrawerItems extends Component {
 
 
 
-          <View style={{height: 40, borderBottomWidth: 1, borderColor: cfg.SECONDARY, justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity: 0.4}}>
-            <Text style={{color: cfg.SECONDARY, fontSize:16}}>
+          <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
+            <Text style={{color: 'white', fontSize:16, fontWeight:'bold'}}>
               DIVERS
             </Text>
           </View>
@@ -161,7 +161,7 @@ CustomDrawerItems.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1
+      flex: 1,
     },
     button: {
       flexDirection: 'row',
@@ -180,8 +180,9 @@ const styles = StyleSheet.create({
       paddingTop: 5,
     },
     label: {
-      color:cfg.SECONDARY,
+      color:'white',
       fontSize: 16,
+      fontWeight:'bold',
     },
 
 });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Menu, Platform,
-  Image, Button, FlatList, TouchableOpacity, AsyncStorage, Alert} from 'react-native';
+  Image, Button, FlatList, TouchableOpacity, AsyncStorage, Alert, ImageBackground, AppRegistry} from 'react-native';
 
 import Store from './../../global/store/Store'
 import * as cfg from "./../../Config";
@@ -55,14 +55,13 @@ export default class Header extends Component {
   render() {
     return (
       <View style={styles.container}>
-
         <View style={{flex: 0.3, justifyContent:'center', paddingLeft: 10}}>
           <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
             <Image source={require('./../../picture/header/openDrawer.png')} style={{width:24, height:24}}/>
           </TouchableOpacity>
         </View>
 
-        <View style={{flex: 0.4}}>
+        <View style={{flex: 0.3}}>
           <TouchableOpacity style={styles.containerLogo} onPress={() => this.props.navigation.navigate('Dashboard')}>
             <Image
               style={{flex: 1, height: undefined, width: undefined}}
@@ -82,7 +81,6 @@ export default class Header extends Component {
           </TouchableOpacity>
         </View>
       </View>
-
     );
   }
 }
