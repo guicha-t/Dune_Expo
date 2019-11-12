@@ -78,7 +78,6 @@ export default class Profil extends Component {
         }
     }
 
-
   render() {
 
     if (this.state.loading) {
@@ -153,12 +152,10 @@ export default class Profil extends Component {
             <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
               <Text style={styles.subtitle}>{this.state.Profil.emailUser}</Text>
             </View>
-
           </View>
 
           <View style={{flex: 0.4}}>
           </View>
-
         </View>
 
         <View style={{flex: 0.1, flexDirection:'row', justifyContent:'space-around', alignItems:'center'}}>
@@ -216,9 +213,7 @@ export default class Profil extends Component {
             containerStyle={{ height: 50, width: 250 }}
             titleStyle={{ fontWeight: 'bold' }}
           />
-
         </View>
-
       </View>
     );
   }

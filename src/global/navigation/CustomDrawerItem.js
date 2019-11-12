@@ -100,18 +100,13 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
-
-
-
           <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
             <Text style={{color: 'white', fontSize:16, fontWeight:'bold'}}>
               DIVERS
             </Text>
           </View>
 
-
           {this.renderElement() }
-
 
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
             <View style={styles.button}>

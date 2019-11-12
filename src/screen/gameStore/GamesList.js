@@ -196,8 +196,9 @@ import * as cfg from "./../../Config";
                       <Image
                         style={{flex: 1, borderRadius:10}}
                         source={{uri: cfg.API_URL + '/files/apps/' + item.picPath}}
-    style={{flex:0.6, height: undefined, width: undefined}}
-      resizeMode="contain"                  />
+                        style={{flex:0.6, height: undefined, width: undefined}}
+                        resizeMode="contain"
+                      />
                     </View>
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
                       <Text style={styles.itemName}>{item.nomApp}</Text>
@@ -219,7 +220,7 @@ import * as cfg from "./../../Config";
            color: 'white',
          }}
           buttonStyle={{
-            backgroundColor: '#363453',
+            backgroundColor: cfg.SECONDARY,
             borderWidth: 2,
             borderColor: 'white',
             borderRadius: 30,
@@ -315,7 +316,7 @@ const styles = StyleSheet.create({
     margin:2,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FEE599',
+    backgroundColor: cfg.PRIMARY,
     borderRadius:10,
   },
   textClass: {

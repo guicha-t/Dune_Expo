@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, AsyncStorage, Image, TouchableOpacity, ScrollView, Modal, FlatList, Dimensions} from 'react-native';
 import { observer } from 'mobx-react';
 import Star from 'react-native-star-view';
 import { Divider, Button } from 'react-native-elements';
@@ -18,7 +18,10 @@ export default class GameProfil extends Component {
       Game: [],
       Status: '',
       Rating:[],
+      Skills:[],
       Disabled: false,
+      ModalVisibleStatus: false,
+
     }
   }
 
@@ -79,6 +82,22 @@ export default class GameProfil extends Component {
         .catch((error) => {
           console.error(error);
         });
+
+    fetch(cfg.API_URL + '/competences/getAppComps/' + this.props.navigation.getParam('id', this.props.id).toString(), {
+       method: 'GET',
+       headers: {
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+         token: Store.Token,
+       },
+     }).then((response) => response.json())
+         .then((responseJson) => {
+           this.setState({'Skills': responseJson.response[0]})
+         })
+         .catch((error) => {
+           console.error(error);
+         });
+
   }
 
   _ObtainApp(){
@@ -265,6 +284,35 @@ export default class GameProfil extends Component {
 
   }
 
+  ShowModalFunction = (visible) => {
+    this.setState({'ModalVisibleStatus': visible});
+  }
+
+
+  _printArraySkills(){
+    if ((Object.keys(this.state.Skills).length.toString()) < 3){
+        return(
+          <Text style={{textAlign:'center', fontWeight:'bold', color:'red', fontSize:20}}>- {this.state.Skills.libelleComp}</Text>
+        );
+    }
+    else{
+        return(
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              data={this.state.Skills}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item}) =>
+                <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
+                  <Text style={{textAlign:'center', fontWeight:'bold', color:'red', fontSize:20}}>- item.libelleComp</Text>
+                </View>
+            }
+            keyExtractor={item => item.idClasse.toString()}
+            />
+        );
+    }
+  }
+
+
   render() {
       const starStyle = {
         width: 100,
@@ -313,6 +361,65 @@ export default class GameProfil extends Component {
                 <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
               </TouchableOpacity>
               <Text style={{marginLeft:10, marginRight:10, color:cfg.SECONDARY, fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
+
+
+
+
+                <View>
+                    <Modal
+                        transparent={true}
+
+                        animationType={"slide"}
+
+                        visible={this.state.ModalVisibleStatus}
+
+                        onRequestClose={() => {
+                          Alert.alert('Modal has been closed.');
+                        }}>
+
+                        <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
+                            <View style={styles.ModalInsideView}>
+                                <Text style={styles.TextStyle}>
+                                   Voici la liste des compétences que vos élèves pourront acquérir en utilisant cette application :
+                                </Text>
+
+                                <View style={{flex: 0.8, width:Math.round(Dimensions.get('window').width), alignItems:'center', justifyContent:'center'}}>
+                                  <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
+                                    {this._printArraySkills()}
+                                  </View>
+                                </View>
+
+                                <Button
+                                  title={'RETOUR'}
+                                  icon={{
+                                    type: 'font-awesome',
+                                    name: 'arrow-left',
+                                    size: 15,
+                                    color: 'white',
+                                  }}
+                                   onPress={() => {this.ShowModalFunction(!this.state.ModalVisibleStatus)}}
+                                     buttonStyle={{
+                                       backgroundColor: cfg.SECONDARY,
+                                       borderColor: 'white',
+                                       borderRadius: 30,
+                                       width: 180,
+                                       height:50,
+                                       alignItems:'center',
+                                       paddingLeft: 10,
+                                       justifyContent:'center',
+                                    }}
+                                />
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+
+
+
+
+              <TouchableOpacity onPress={() => {this.ShowModalFunction(true);}} >
+                <Text style={{textDecorationLine:'underline', color:cfg.SECONDARY, fontSize: 18, paddingTop:10}}>compétences associées</Text>
+              </TouchableOpacity>
               <Text style={{color:cfg.SECONDARY, fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
               <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>€ : {this._printPrice()}</Text>
               <View style={{paddingTop:30}}>
@@ -357,4 +464,21 @@ export default class GameProfil extends Component {
       fontSize: 16,
       paddingTop:20,
     },
+  ModalInsideView:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor : cfg.SECONDARY,
+      height: 450 ,
+      width: '90%',
+      borderRadius:10,
+      borderWidth: 1,
+      borderColor: '#fff'
+
+  },
+  TextStyle:{
+      fontSize: 20,
+      color: "#fff",
+      textAlign: 'center'
+  },
+
   });
