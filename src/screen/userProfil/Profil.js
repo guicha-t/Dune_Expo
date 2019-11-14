@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, TextInput, View, Text, StyleSheet,
-  ScrollView, Image, TouchableOpacity, AsyncStorage, ActivityIndicator} from 'react-native';
+  ScrollView, Image, TouchableOpacity, AsyncStorage, ActivityIndicator, Switch} from 'react-native';
 import { observer } from 'mobx-react';
 import { Avatar, Button, Icon } from 'react-native-elements';
 
@@ -17,6 +17,7 @@ export default class Profil extends Component {
     this.state = {
       Profil: [],
       loading: true,
+      SwitchOnValueHolder :  false
     }
   }
 
@@ -70,12 +71,22 @@ export default class Profil extends Component {
 
     displayTypeLabel(param) {
         if (param.typeUser === 1) {
-            return <Text style={styles.subtitle}>Professeur</Text>;
+            return <Text style={{fontSize: 18, color: Store.Text1}}>Professeur</Text>;
         } else if (param.typeUser === 2){
-            return <Text style={styles.subtitle}>Directeur</Text>;
+            return <Text style={{fontSize: 18, color: Store.Text1}}>Directeur</Text>;
         } else {
-            return <Text style={styles.subtitle}>Poste non renseigné</Text>;
+            return <Text style={{fontSize: 18, color: Store.Text1}}>Poste non renseigné</Text>;
         }
+    }
+
+    ToggleSwitch = (value) =>{
+
+      this.setState({
+        SwitchOnValueHolder: value
+      })
+
+      Store.EnableDarkTheme(value);
+
     }
 
   render() {
@@ -88,7 +99,7 @@ export default class Profil extends Component {
 
 
     return(
-      <View style={{flex:1, backgroundColor: '#fff'}}>
+      <View style={{flex:1, backgroundColor: Store.Back}}>
         <Header navigation={this.props.navigation}/>
 
         <View style={{flex: 0.3, alignItems:'center', justifyContent:'center'}}>
@@ -115,7 +126,7 @@ export default class Profil extends Component {
               />
             </View>
             <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
-              <Text style={styles.subtitle}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+              <Text style={{fontSize: 18, color: Store.Text1}}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
             </View>
           </View>
 
@@ -150,11 +161,21 @@ export default class Profil extends Component {
               />
             </View>
             <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
-              <Text style={styles.subtitle}>{this.state.Profil.emailUser}</Text>
+              <Text style={{fontSize: 18, color: Store.Text1}}>{this.state.Profil.emailUser}</Text>
             </View>
           </View>
 
           <View style={{flex: 0.4}}>
+            <Text style={{color: Store.Text1}}>{this.state.SwitchOnValueHolder ? 'on' :'off'}</Text>
+
+            <Switch
+              onValueChange={(value) => this.ToggleSwitch(value)}
+              style={{marginBottom: 10}}
+              value={this.state.SwitchOnValueHolder} />
+
+
+
+
           </View>
         </View>
 
@@ -204,8 +225,8 @@ export default class Profil extends Component {
            }}
             buttonStyle={{
               backgroundColor: '#ea4335',
-              borderWidth: 1,
-              borderColor: cfg.SECONDARY,
+              borderWidth: 2,
+              borderColor: 'white',
               borderRadius: 30,
               width: 60,
               paddingLeft: 20,
@@ -240,5 +261,6 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 18,
+    color: Store.Text1
   },
 });

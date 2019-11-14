@@ -6,5 +6,8 @@ export const API_URL = "https://api.dune-table.com";
 
 //COLOR THEME
 
-export const PRIMARY = "#f7b2c7";
+//export const PRIMARY = "#f9d3d0";
+export const PRIMARY = "#f6c6d2";
+//export const PRIMARY = "#f0ceb2";
+
 export const SECONDARY = "#2A5E85";

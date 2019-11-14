@@ -279,12 +279,9 @@ export default class Dashboard extends Component {
                 <View>
                     <Modal
                         transparent={true}
-
                         animationType={"slide"}
-
                         visible={this.state.ModalVisibleStatus}
-
-                          onRequestClose={() => {
+                        onRequestClose={() => {
                             Alert.alert('Modal has been closed.');
                           }}>
                         <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
@@ -304,7 +301,7 @@ export default class Dashboard extends Component {
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
                                                             source={{uri: cfg.API_URL + '/files/apps/' + item.game_image}}
-                                                        />
+                                                    bonjour    />
                                                     </View>
                                                 </View>
                                                 {this.renderTextNotifProf(item.textNotif)}
@@ -325,43 +322,66 @@ export default class Dashboard extends Component {
         if (Store.TypeUser.toString() === '2')
           return (
             <View style={styles.topbody}>
-              <View style={[styles.leftcase, styles.topleftcase]}>
-                <View style={styles.caseTopRight}>
-                  <Text style={styles.datetext}>Bonjour</Text>
-                  <Text style={styles.datetext}>{this.state.Profil.prenomUser}</Text>
-                  <Text style={styles.datetext}>{this.state.Profil.nomUser}</Text>
+              <View style={{flex: 0.6, backgroundColor: cfg.SECONDARY}}>
+                <View style={{flex: 0.5, alignItems:'center', justifyContent:'flex-end', paddingBottom: 20}}>
+                  <Text style={styles.datetext}>Bonjour {this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
                 </View>
-                <View style={{flex: 0.5, alignItems:'center', justifyContent: 'center'}}>
-                  <Text style={styles.datetext}>{this.state.Day}</Text>
-                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
-                  <Text style={styles.datetext}>{this.state.Year}</Text>
+                <View style={{flex: 0.5, alignItems:'center'}}>
+                  <Text style={{fontSize: 16, color: cfg.PRIMARY}}>{this.state.Day} {this.getCurrentMonth(this.state.Month.toString())} {this.state.Year}</Text>
                 </View>
+
               </View>
-              <View style={[styles.rightcase, styles.topleftcase]}>
-                {this.renderAlertsText()}
-                {this.renderAlertsDir()}
+              <View style={{flex: 0.4, backgroundColor: "#FFF", borderTopWidth: 5, borderColor: "#F9F9F9", flexDirection: 'row'}}>
+                <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>
+                  <Text style={styles.subtext}>NOTIFICATION</Text>
+                </View>
+
+                <View style={{flex: 0.5, flexDirection:'row', padding: 5}}>
+                  <View style={{flex: 0.3}}></View>
+                  <View style={{flex: 0.4}}>
+                    <View style={{flex: 0.25}}></View>
+                    <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
+                      <Image
+                        style={{flex: 1, height: undefined, width: undefined}}
+                        source={require('./../../picture/dashboard/notification.png')}
+                        resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                    <View style={{flex: 0.25}}></View>
+                  </View>
+                  <View style={{flex: 0.3}}></View>
+
+                </View>
+
               </View>
             </View>
           );
         else
           return (
-            <View style={styles.topbody}>
-              <View style={[styles.leftcase, styles.topleftcase]}>
-                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
-                  <Text style={styles.datetext}>{this.state.Day}</Text>
-                  <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
-                  <Text style={styles.datetext}>{this.state.Year}</Text>
-                </View>
+            <View style={{flex: 1, backgroundColor:cfg.SECONDARY}}>
+              <View style={{flex: 0.5, alignItems:'center', justifyContent:'flex-end'}}>
+                <Text style={styles.datetext}>Bonjour {this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
               </View>
-
-              <View style={[styles.rightcase, styles.topleftcase]}>
-                <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
-                  <Text style={styles.datetext}>Bonjour</Text>
-                  <Text style={styles.datetext}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
-                </View>
+              <View style={{flex: 0.5, alignItems:'center', paddingTop: 20}}>
+                <Text style={{fontSize: 16, color: cfg.PRIMARY}}>{this.state.Day} {this.getCurrentMonth(this.state.Month.toString())} {this.state.Year}</Text>
               </View>
             </View>
-
+            // <View style={styles.topbody}>
+            //   <View style={[styles.leftcase, styles.topleftcase]}>
+            //     <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+            //       <Text style={styles.datetext}>{this.state.Day}</Text>
+            //       <Text style={styles.datetext}>{this.getCurrentMonth(this.state.Month.toString())}</Text>
+            //       <Text style={styles.datetext}>{this.state.Year}</Text>
+            //     </View>
+            //   </View>
+            //
+            //   <View style={[styles.rightcase, styles.topleftcase]}>
+            //     <View style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+            //       <Text style={styles.datetext}>Bonjour</Text>
+            //       <Text style={styles.datetext}>{this.state.Profil.prenomUser} {this.state.Profil.nomUser}</Text>
+            //     </View>
+            //   </View>
+            // </View>
           );
       }
 
@@ -496,11 +516,11 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
+   backgroundColor: "#F9F9F9",
+//    backgroundColor: cfg.PRIMARY
   },
   topbody: {
     flex: 1,
-    flexDirection: 'row',
     paddingBottom: 2,
   },
   itemContainer: {
@@ -573,7 +593,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   subtext: {
-    fontSize: 0.05*width,
+    fontSize: 0.04*width,
     color: cfg.SECONDARY,
   },
   buttonCase: {

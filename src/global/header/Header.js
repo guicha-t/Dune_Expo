@@ -61,7 +61,7 @@ export default class Header extends Component {
           </TouchableOpacity>
         </View>
 
-        <View style={{flex: 0.3}}>
+        <View style={{flex: 0.4}}>
           <TouchableOpacity style={styles.containerLogo} onPress={() => this.props.navigation.navigate('Dashboard')}>
             <Image
               style={{flex: 1, height: undefined, width: undefined}}
