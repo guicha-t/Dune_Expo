@@ -21,7 +21,6 @@ export default class GameProfil extends Component {
       Skills:[],
       Disabled: false,
       ModalVisibleStatus: false,
-
     }
   }
 
@@ -92,7 +91,8 @@ export default class GameProfil extends Component {
        },
      }).then((response) => response.json())
          .then((responseJson) => {
-           this.setState({'Skills': responseJson.response[0]})
+           this.setState({'Skills': responseJson.response})
+           //Alert.alert("lol", JSON.stringify(this.state.Skills))
          })
          .catch((error) => {
            console.error(error);
@@ -290,26 +290,19 @@ export default class GameProfil extends Component {
 
 
   _printArraySkills(){
-    if ((Object.keys(this.state.Skills).length.toString()) < 3){
-        return(
-          <Text style={{textAlign:'center', fontWeight:'bold', color:'red', fontSize:20}}>- {this.state.Skills.libelleComp}</Text>
-        );
-    }
-    else{
         return(
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Skills}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-                <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
-                  <Text style={{textAlign:'center', fontWeight:'bold', color:'red', fontSize:20}}>- item.libelleComp</Text>
+                <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{textAlign:'center', justifyContent:'center', alignItems:'center', fontWeight:'bold', color:'red', fontSize:20}}>- {item.libelleComp}</Text>
                 </View>
             }
-            keyExtractor={item => item.idClasse.toString()}
+            keyExtractor={item => item.idComp.toString()}
             />
         );
-    }
   }
 
 
@@ -323,7 +316,7 @@ export default class GameProfil extends Component {
       const count = parseFloat(this.state.Rating.moyenne, 10)
 
       return(
-        <ScrollView style={{flex:1, backgroundColor: '#fff'}}>
+        <ScrollView style={{flex:1, backgroundColor: Store.Back}}>
           <View style={{marginTop:15}}>
             <Button
               title=""
@@ -352,15 +345,15 @@ export default class GameProfil extends Component {
               source={{uri: cfg.API_URL + '/files/apps/' + this.state.Game.picPath}}
               resizeMode="contain"
               />
-              <Text style={{color:cfg.SECONDARY, fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
-              <Text style={{color:cfg.SECONDARY, fontSize:18, paddingTop:10, paddingBottom:15}}>{this.state.Game.nomCreator}</Text>
+              <Text style={{color:Store.Text2, fontWeight: 'bold', fontSize: 18, paddingTop:10}}>{this.state.Game.nomApp}</Text>
+              <Text style={{color:Store.Text2, fontSize:18, paddingTop:10, paddingBottom:15}}>{this.state.Game.nomCreator}</Text>
 
               <Star score={count} style={starStyle} />
 
               <TouchableOpacity onPress={() => this._goToNotice()} >
-                <Text style={{textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
+                <Text style={{color:Store.Text2, textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
               </TouchableOpacity>
-              <Text style={{marginLeft:10, marginRight:10, color:cfg.SECONDARY, fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
+              <Text style={{color:Store.Text2, marginLeft:10, marginRight:10, fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
 
 
 
@@ -418,9 +411,9 @@ export default class GameProfil extends Component {
 
 
               <TouchableOpacity onPress={() => {this.ShowModalFunction(true);}} >
-                <Text style={{textDecorationLine:'underline', color:cfg.SECONDARY, fontSize: 18, paddingTop:10}}>compétences associées</Text>
+                <Text style={{textDecorationLine:'underline', color:Store.Text2, fontSize: 18, paddingTop:10}}>compétences associées</Text>
               </TouchableOpacity>
-              <Text style={{color:cfg.SECONDARY, fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
+              <Text style={{color:Store.Text2, fontSize:18, paddingTop:15, paddingBottom:15}}>Version : {this.state.Game.current_version}</Text>
               <Text style={{color:'#32C532', fontSize:18, fontWeight:'bold', paddingTop:15}}>€ : {this._printPrice()}</Text>
               <View style={{paddingTop:30}}>
                {this._renderAppRequest()}

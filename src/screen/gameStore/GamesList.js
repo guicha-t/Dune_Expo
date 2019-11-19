@@ -126,7 +126,7 @@ import * as cfg from "./../../Config";
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
           <View style={styles.classContainer}>
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, backgroundColor:Store.Back}}>
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -148,41 +148,42 @@ import * as cfg from "./../../Config";
         <View style={styles.searchContainer}>
           <Fumi
             label={'Chercher un jeu'}
-            style={{ width: 270, backgroundColor:'#FFF'}}
+            style={{ width: 270, backgroundColor:Store.Back, color:Store.Back}}
             value={this.state.Search}
             onChangeText={(Search) => this.setState({ Search })}
             iconClass={FontAwesomeIcon}
             iconName={'puzzle-piece'}
-            iconColor={cfg.SECONDARY}
-            labelStyle={{ color: cfg.SECONDARY }}
+            iconColor={Store.Text2}
+            labelStyle={{ color: Store.Text2 }}
             iconSize={20}
             iconWidth={40}
             inputPadding={16}
           />
+          <View style={{ backgroundColor:Store.Back }}>
           <Button
             title={''}
             icon={{
               type: 'font-awesome',
               name: 'search',
               size: 20,
-              color: cfg.SECONDARY,
+              color: Store.Text2,
             }}
             buttonStyle={{
-              backgroundColor: 'white',
-              borderColor: 'white',
+              backgroundColor: Store.Back,
               borderRadius: 10,
               width: 60,
-              height:50,
+              height:61,
               alignItems:'center',
               paddingLeft: 10,
               justifyContent:'center',
             }}
             onPress={() => this._searchRequest()}
           />
+          </View>
         </View>
 
 
-        <View style={{flex: 0.8, width:Math.round(Dimensions.get('window').width)}}>
+        <View style={{flex: 0.8, width:Math.round(Dimensions.get('window').width), backgroundColor: Store.Back}}>
           <GridView
             itemDimension={100}
             spacing={1}
@@ -190,9 +191,9 @@ import * as cfg from "./../../Config";
             style={styles.GridView}
             renderItem={item => (
               <View style={styles.itemContainer}>
-                <TouchableOpacity style={{flex: 1}} onPress={() => this._goToGameProfil(item.id)}>
-                  <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-                    <View style={{flex: 0.7, paddingTop: 10}}>
+                <TouchableOpacity style={{flex: 1, backgroundColor: Store.Back}} onPress={() => this._goToGameProfil(item.id)}>
+                  <View style={{flex: 1, marginLeft: 10, marginRight: 10, backgroundColor: Store.Back}}>
+                    <View style={{flex: 0.7, paddingTop: 10, backgroundColor: Store.Back}}>
                       <Image
                         style={{flex: 1, borderRadius:10}}
                         source={{uri: cfg.API_URL + '/files/apps/' + item.picPath}}
@@ -200,9 +201,9 @@ import * as cfg from "./../../Config";
                         resizeMode="contain"
                       />
                     </View>
-                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={styles.itemName}>{item.nomApp}</Text>
-                      <Text style={styles.itemName}>{item.nomCreator}</Text>
+                    <View style={{flex: 0.1, justifyContent: 'center', alignItems: 'center', backgroundColor: Store.Back}}>
+                      <Text style={{fontSize: 12, color: Store.Text2, fontWeight: '600'}}>{item.nomApp}</Text>
+                      <Text style={{fontSize: 12, color: Store.Text2, fontWeight: '600'}}>{item.nomCreator}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -210,6 +211,7 @@ import * as cfg from "./../../Config";
             )}
             />
         </View>
+        <View style={{backgroundColor:Store.Back}}>
         <Button
           title=""
           onPress={()=>this.props.navigation.navigate('Dashboard')}
@@ -230,6 +232,7 @@ import * as cfg from "./../../Config";
           containerStyle={{ height: 50, width: 250 }}
           titleStyle={{ fontWeight: 'bold' }}
         />
+        </View>
       </View>
       </DismissKeyboard>
      );
@@ -252,20 +255,21 @@ const styles = StyleSheet.create({
 
   mainContainer: {
     flex:1,
-    backgroundColor: '#fff',
+    backgroundColor: Store.Back,
   },
   classContainer: {
     flex: 0.1,
     flexDirection: 'row',
     paddingTop: 2,
+    backgroundColor: Store.Back,
   },
   searchContainer: {
+    backgroundColor: Store.Back,
     flex: 0.1,
     width: Math.round(Dimensions.get('window').width),
     flexDirection: 'row',
-    paddingTop: 2,
+    paddingTop: 5,
     alignItems: 'center',
-    margin: 5,
   },
   input: {
     flex: 1,
@@ -276,7 +280,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   ButtonSearch: {
-    backgroundColor: cfg.SECONDARY,
+    backgroundColor: Store.Back,
     borderWidth: 2,
     borderColor: 'white',
     borderRadius: 30,
@@ -295,12 +299,12 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     height: 160,
-    backgroundColor: '#FFF',
+    backgroundColor: Store.Back,
     borderRadius:10,
   },
   itemName: {
     fontSize: 12,
-    color: '#434B77',
+    color: Store.Text2,
     fontWeight: '600',
   },
   buttonClassAll: {
@@ -321,7 +325,7 @@ const styles = StyleSheet.create({
   },
   textClass: {
     fontSize: 14,
-    color: '#434B77',
+    color: Store.Text2,
     fontWeight: '600',
   },
 });

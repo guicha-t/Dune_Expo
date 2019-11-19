@@ -62,7 +62,7 @@ render() {
     return(
 
     <DismissKeyboard>
-    <View style={styles.container}>
+    <View style={{backgroundColor: Store.Back, flex: 1}}>
         <Header navigation={this.props.navigation}/>
 
           <View style={{marginTop:15}}>
@@ -90,18 +90,18 @@ render() {
 
        <KeyboardAvoidingView style={styles.container}  behavior="padding" >
 
-        <View style={styles.containerBody}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Store.Back}}>
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
             <View style={{flex: 0.7}}>
               <Fumi
                 label={'Pourquoi cette application ?'}
-                style={{ width: 270, backgroundColor:'#FFF'}}
+                style={{ width: 270, backgroundColor:Store.Back}}
                 value={this.state.Commentaire}
                 onChangeText={(Commentaire) => this.setState({ Commentaire })}
                 iconClass={FontAwesomeIcon}
                 iconName={'question'}
-                iconColor={cfg.SECONDARY}
-                labelStyle={{ color: cfg.SECONDARY }}
+                iconColor={Store.Text2}
+                labelStyle={{ color: Store.Text2 }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}

@@ -157,7 +157,7 @@ render() {
 
        <KeyboardAvoidingView style={styles.container}  behavior="padding" >
 
-        <View style={styles.containerBody}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: Store.Back}}>
 
             <View style={{flex:0.3, width:120, height:120, paddingBottom:20}}>
               <Image
@@ -167,19 +167,19 @@ render() {
             </View>
 
             <View style={{flex: 0.1, alignItems: 'center', paddingBottom: 8}}>
-              <Text style={styles.titleInfo}>Que pensez-vous cette application ?</Text>
+              <Text style={{color: Store.Text2, fontWeight: 'bold', fontSize: 14,}}>Que pensez-vous cette application ?</Text>
             </View>
             <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
               <View style={{flex: 0.7}}>
                 <Fumi
                   label={'Noter cette application'}
-                  style={{ width: 270, backgroundColor:'#FFF'}}
+                  style={{ width: 270, backgroundColor:Store.Back}}
                   value={this.state.Commentaire}
                   onChangeText={(Commentaire) => this.setState({ Commentaire })}
                   iconClass={FontAwesomeIcon}
                   iconName={'comment'}
-                  iconColor={cfg.SECONDARY}
-                  labelStyle={{ color: cfg.SECONDARY }}
+                  iconColor={Store.Text2}
+                  labelStyle={{ color: Store.Text2 }}
                   iconSize={20}
                   iconWidth={40}
                   inputPadding={16}
@@ -196,19 +196,52 @@ render() {
           />
 
           <View style={{flex: 0.30, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity style={{ flex: 0.20 }} onPress={this._cancelDemand}>
-              <Image
-                style={{height: 42, width: 42}}
-                source={require('./../../picture/profil/error.png')}
-                resizeMode="contain"
+            <TouchableOpacity style={{ flex: 0.40 }} onPress={this._cancelDemand}>
+              <Button
+                title=""
+                onPress={()=>this.props.navigation.navigate('Dashboard')}
+                icon={{
+                 type: 'font-awesome',
+                 name: 'times',
+                 size: 15,
+                 color: 'white',
+               }}
+                buttonStyle={{
+                  backgroundColor: cfg.SECONDARY,
+                  borderWidth: 2,
+                  borderColor: 'white',
+                  borderRadius: 30,
+                  width: 60,
+                  height:60,
+                  paddingLeft: 20,
+                }}
+                containerStyle={{ height: 50, width: 250 }}
+                titleStyle={{ fontWeight: 'bold' }}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={{ flex: 0.12 }} onPress={this._confirmDemand}>
-              <Image
-                style={{height: 42, width: 42}}
-                source={require('./../../picture/profil/success.png')}
-                resizeMode="contain"
-               />
+
+            <TouchableOpacity style={{ flex: 0.20 }} onPress={this._confirmDemand}>
+              <Button
+                title=""
+                onPress={()=>this.props.navigation.navigate('Dashboard')}
+                icon={{
+                 type: 'font-awesome',
+                 name: 'check',
+                 size: 15,
+                 color: 'white',
+               }}
+                buttonStyle={{
+                  backgroundColor: cfg.SECONDARY,
+                  borderWidth: 2,
+                  borderColor: 'white',
+                  borderRadius: 30,
+                  width: 60,
+                  height:60,
+                  paddingLeft: 20,
+                }}
+                containerStyle={{ height: 50, width: 250 }}
+                titleStyle={{ fontWeight: 'bold' }}
+              />
              </TouchableOpacity>
           </View>
           <AlertPro
@@ -239,8 +272,8 @@ render() {
           />
         </View>
         </KeyboardAvoidingView>
-      </View>
-      </DismissKeyboard>
+    </View>
+    </DismissKeyboard>
 
     );
   }

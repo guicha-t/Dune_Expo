@@ -114,17 +114,17 @@ _printFirstNotice() {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.profInfo}>{this.state.Prof1.nomProf}</Text>
-              <Text style={styles.profInfo}> {this.state.Prof1.prenomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}>{this.state.Prof1.nomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}> {this.state.Prof1.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne1} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{this.state.Prof1.commentaire}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{this.state.Prof1.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof1.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{moment(this.state.Prof1.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
    );
@@ -143,17 +143,17 @@ _printSecondNotice() {
                   />
                 </View>
                 <View style={styles.ProfContainer}>
-                  <Text style={styles.profInfo}>{this.state.Prof2.nomProf}</Text>
-                  <Text style={styles.profInfo}> {this.state.Prof2.prenomProf}</Text>
+                  <Text style={styles.profInfo, {color:Store.Text2}}>{this.state.Prof2.nomProf}</Text>
+                  <Text style={styles.profInfo, {color:Store.Text2}}> {this.state.Prof2.prenomProf}</Text>
                 </View>
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
                   <Star score={this.state.Moyenne2} style={starStyle} />
                 </View>
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-                  <Text style={styles.commentaire}>{this.state.Prof2.commentaire}</Text>
+                  <Text style={styles.commentaire, {color:Store.Text2}}>{this.state.Prof2.commentaire}</Text>
                 </View>
                 <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-                  <Text style={styles.commentaire}>{moment(this.state.Prof2.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+                  <Text style={styles.commentaire, {color:Store.Text2}}>{moment(this.state.Prof2.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
                 </View>
               </View>
     );
@@ -172,17 +172,17 @@ _printThirdNotice() {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.profInfo}>{this.state.Prof3.nomProf}</Text>
-              <Text style={styles.profInfo}> {this.state.Prof3.prenomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}>{this.state.Prof3.nomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}> {this.state.Prof3.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne3} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{this.state.Prof3.commentaire}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{this.state.Prof3.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof3.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{moment(this.state.Prof3.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -201,17 +201,17 @@ _printForthNotice () {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.profInfo}>{this.state.Prof4.nomProf}</Text>
-              <Text style={styles.profInfo}> {this.state.Prof4.prenomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}>{this.state.Prof4.nomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}> {this.state.Prof4.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne4} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{this.state.Prof4.commentaire}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{this.state.Prof4.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof4.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{moment(this.state.Prof4.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -230,17 +230,17 @@ _printFifthNotice () {
               />
             </View>
             <View style={styles.ProfContainer}>
-              <Text style={styles.profInfo}>{this.state.Prof5.nomProf}</Text>
-              <Text style={styles.profInfo}> {this.state.Prof5.prenomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}>{this.state.Prof5.nomProf}</Text>
+              <Text style={styles.profInfo, {color:Store.Text2}}> {this.state.Prof5.prenomProf}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
               <Star score={this.state.Moyenne5} style={starStyle} />
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{this.state.Prof5.commentaire}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{this.state.Prof5.commentaire}</Text>
             </View>
             <View style={{justifyContent:'center', alignItems:'center', paddingTop:10}}>
-              <Text style={styles.commentaire}>{moment(this.state.Prof5.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
+              <Text style={styles.commentaire, {color:Store.Text2}}>{moment(this.state.Prof5.date).format("DD-MM-YYYY à HH:mm:ss")}</Text>
             </View>
           </View>
     );
@@ -255,9 +255,9 @@ _printPlusButton (){
             <Button
               title=""
               buttonStyle={{
-                backgroundColor: '#F9F9F9',
+                backgroundColor: Store.Back,
                 borderWidth: 2,
-                borderColor: '#F9F9F9',
+                borderColor: Store.Back,
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -275,12 +275,12 @@ _printPlusButton (){
                type: 'font-awesome',
                name: 'arrow-right',
                size: 15,
-               color: '#F9F9F9',
+               color: 'white',
              }}
               buttonStyle={{
                 backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
-                borderColor: '#F9F9F9',
+                borderColor: Store.Back,
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -298,9 +298,9 @@ _printMenusButton (){
             <Button
               title=""
               buttonStyle={{
-                backgroundColor: '#F9F9F9',
+                backgroundColor: Store.Back,
                 borderWidth: 2,
-                borderColor: '#F9F9F9',
+                borderColor: Store.Back,
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -318,12 +318,12 @@ _printMenusButton (){
                type: 'font-awesome',
                name: 'arrow-left',
                size: 15,
-               color: '#F9F9F9',
+               color: 'white',
              }}
               buttonStyle={{
                 backgroundColor: cfg.SECONDARY,
                 borderWidth: 2,
-                borderColor: '#F9F9F9',
+                borderColor: Store.Back,
                 borderRadius: 30,
                 width: 60,
                 paddingLeft: 20,
@@ -470,7 +470,7 @@ this.state.CurrentRow = this.state.CurrentRow - 5;
 render() {
 
   return(
-    <View style={{flex:1, backgroundColor: '#F9F9F9'}}>
+    <View style={{flex:1, backgroundColor:Store.Back}}>
         <Header navigation={this.props.navigation}/>
         <View style={{marginTop:15}}>
           <Button
@@ -508,7 +508,7 @@ render() {
         </View>
           <View style={{justifyContent:'center', alignItems:'center', flexDirection: 'row'}}>
             {this._printMenusButton()}
-            <Text style={{textDecorationLine:'underline'}}>{this.state.CurrentPage}</Text>
+            <Text style={{textDecorationLine:'underline', color:Store.Text2}}>{this.state.CurrentPage}</Text>
             {this._printPlusButton()}
           </View>
 
@@ -539,12 +539,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   profInfo: {
-    color: cfg.SECONDARY,
+    color:Store.Text2,
     fontWeight: 'bold',
     fontSize: 14,
   },
   commentaire:{
-    color: cfg.SECONDARY,
+    color:Store.Text2,
     fontWeight: 'normal',
     fontSize: 12,
     fontStyle: 'italic',
