@@ -340,7 +340,7 @@ export default class Dashboard extends Component {
                   <View style={{flex: 0.3}}></View>
                   <View style={{flex: 0.4}}>
                     <View style={{flex: 0.25}}></View>
-                    <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
+                    <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('UserDemands')}>
                       <Image
                         style={{flex: 1, height: undefined, width: undefined}}
                         source={require('./../../picture/dashboard/notification.png')}

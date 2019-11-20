@@ -167,19 +167,21 @@ export default class UserDemands extends Component {
     return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center',}}>
-          <Text style={{fontSize:20,}}>
+    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
+          <Text style={{fontSize:20, color:Store.Text2}}>
              Application(s) demandée(s)
           </Text>
         </View>
-            <View style={{flex: 0.8}}>
+            <View style={{flex: 0.8, backgroundColor:Store.Back}}>
                 <List>
                     <FlatList
                         data={this.state.GamesRequested}
                         extraData={this.state}
                         rightIcon={'../../picture/profil/eye.png'}
+                        style={{backgroundColor:Store.Back}}
                         renderItem={({ item }) => (
                             <ListItem
+                                titleStyle={{color:Store.Text2}}
                                 title={`${ item.nomApp }`}
                                 onPress={() => this.ShowProfInModal(true, item)}
                             />
