@@ -17,8 +17,9 @@ const Tabs = createBottomTabNavigator({
 }, {
   initialRouteName: 'Historique',
   tabBarOptions: {
-    activeBackgroundColor: '#e5c35c',
-    inactiveBackgroundColor:cfg.PRIMARY,
+    activeBackgroundColor: '#f2b88c',
+
+    inactiveBackgroundColor:"#fcc296",
     showIcon: true,
     showLabel: false,
   }
@@ -46,7 +47,7 @@ export default class StudentContainer extends Component {
 
       return (
         <View style={{flex: 1}}>
-          <Header navigation={this.props.navigation}/>
+          <Header navigation={this.props.navigation} colorTheme={"#fcc296"}/>
           <Tabs screenProps={screenProps}/>
         </View>
       );

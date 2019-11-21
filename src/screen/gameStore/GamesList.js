@@ -59,7 +59,7 @@ import * as cfg from "./../../Config";
     };
 
     _setCurrentGame = async (param) => {
-    if (param.key === 'Enregistrées'){
+    if (param === 'Enregistrées'){
     fetch(cfg.API_URL + '/store/getAppsEcole', {
           method: 'GET',
           headers: {
@@ -76,7 +76,7 @@ import * as cfg from "./../../Config";
             });
       }
 
-    else if (param.key === 'Dune Store'){
+    else if (param === 'Dune Store'){
     fetch(cfg.API_URL + '/store/', {
             method: 'POST',
             Accept: 'application/json',
@@ -124,25 +124,18 @@ import * as cfg from "./../../Config";
       return (
         <DismissKeyboard>
         <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation}/>
+          <Header navigation={this.props.navigation} colorTheme={"#fcebb5"}/>
           <View style={styles.classContainer}>
-            <View style={{flex: 1, backgroundColor:Store.Back}}>
-              <FlatList
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                data={[{key: 'Enregistrées'}, {key: 'Dune Store'}]}
-                showsVerticalScrollIndicator={false}
-                renderItem={({item}) =>
-                <View style={{flex:1}}>
-                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame(item)}>
-                    <View style={styles.buttonClass}>
-                        <Text style={styles.textClass}>{item.key}</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              }
-              />
-          </View>
+            <View style={{flex: 0.5, padding: 10}}>
+              <TouchableOpacity style={styles.buttonClass} onPress={() => this._setCurrentGame("Enregistrées")}>
+                <Text>Enregistrées</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 0.5, padding: 10}}>
+              <TouchableOpacity style={styles.buttonClass} onPress={() => this._setCurrentGame("Dune Store")}>
+                <Text>Dune Store</Text>
+              </TouchableOpacity>
+            </View>
         </View>
 
         <View style={styles.searchContainer}>
@@ -266,10 +259,10 @@ const styles = StyleSheet.create({
   searchContainer: {
     backgroundColor: Store.Back,
     flex: 0.1,
-    width: Math.round(Dimensions.get('window').width),
     flexDirection: 'row',
     paddingTop: 5,
     alignItems: 'center',
+    justifyContent:'center',
   },
   input: {
     flex: 1,
@@ -316,11 +309,10 @@ const styles = StyleSheet.create({
   },
   buttonClass: {
     flex: 1,
-    width: Math.round(Dimensions.get('window').width) / 2,
     margin:2,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: cfg.PRIMARY,
+    backgroundColor: "#fcebb5",
     borderRadius:10,
   },
   textClass: {

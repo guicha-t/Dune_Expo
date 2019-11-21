@@ -90,7 +90,7 @@ export default class ClassList extends Component {
 
     return(
       <View style={{flex:1}}>
-        <Header navigation={this.props.navigation}/>
+        <Header navigation={this.props.navigation} colorTheme={'#b1ebf6'}/>
         <View style={styles.body}>
 
           <View style={{flex: 0.1, flexDirection: 'row'}}>

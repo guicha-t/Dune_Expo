@@ -166,7 +166,7 @@ export default class UserDemands extends Component {
     render() {
     return (
         <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation}/>
+          <Header navigation={this.props.navigation} colorTheme={"#caf5de"}/>
     	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
           <Text style={{fontSize:20, color:Store.Text2}}>
              Application(s) demandée(s)

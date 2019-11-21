@@ -104,11 +104,9 @@ export default class StudentResultList extends Component {
 
     return(
       <View style={{flex:1}}>
-        <Header navigation={this.props.navigation}/>
+        <Header navigation={this.props.navigation} colorTheme={"#b1ebf6"}/>
         <View style={styles.body}>
-
           <View style={{flex: 0.2, flexDirection:'row'}}>
-
             <View style={{flex: 0.2, justifyContent: 'center', paddingLeft: 6}}>
               <Icon
               raised

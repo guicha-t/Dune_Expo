@@ -173,9 +173,6 @@ export default class Profil extends Component {
               style={{marginBottom: 10}}
               value={this.state.SwitchOnValueHolder} />
 
-
-
-
           </View>
         </View>
 

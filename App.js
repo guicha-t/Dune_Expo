@@ -10,9 +10,9 @@ import Store from './src/global/store/Store';
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={{flex: 1, paddingTop: STATUSBAR_HEIGHT, backgroundColor: cfg.PRIMARY}}>
+      <View style={{flex: 1, paddingTop: STATUSBAR_HEIGHT, backgroundColor: "black"}}>
           <StatusBar
-          barStyle="dark-content"
+          barStyle="light-content"
           />
          <Provider Store={Store}>
           <DrawerMenu />
