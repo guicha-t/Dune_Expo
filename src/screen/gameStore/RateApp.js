@@ -199,7 +199,7 @@ render() {
             <TouchableOpacity style={{ flex: 0.40 }} onPress={this._cancelDemand}>
               <Button
                 title=""
-                onPress={()=>this.props.navigation.navigate('Dashboard')}
+                onPress={()=>this.props.navigation.navigate('GamesList')}
                 icon={{
                  type: 'font-awesome',
                  name: 'times',
@@ -223,7 +223,7 @@ render() {
             <TouchableOpacity style={{ flex: 0.20 }} onPress={this._confirmDemand}>
               <Button
                 title=""
-                onPress={()=>this.props.navigation.navigate('Dashboard')}
+                onPress={()=>this.props.navigation.navigate('GamesList')}
                 icon={{
                  type: 'font-awesome',
                  name: 'check',

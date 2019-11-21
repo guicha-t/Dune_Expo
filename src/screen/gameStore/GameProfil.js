@@ -297,7 +297,7 @@ export default class GameProfil extends Component {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
                 <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', justifyContent:'center', alignItems:'center', fontWeight:'bold', color:'red', fontSize:20}}>- {item.libelleComp}</Text>
+                  <Text style={{textAlign:'center', justifyContent:'center', alignItems:'center', fontWeight:'bold', color:Store.TRose, fontSize:20}}>- {item.libelleComp}</Text>
                 </View>
             }
             keyExtractor={item => item.idComp.toString()}
