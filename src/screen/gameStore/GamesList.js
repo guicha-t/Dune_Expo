@@ -119,70 +119,10 @@ import * as cfg from "./../../Config";
               });
     }
 
-    render() {
+    _printGamesList(){
 
-      return (
-        <DismissKeyboard>
-        <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation}/>
-          <View style={styles.classContainer}>
-            <View style={{flex: 1, backgroundColor:Store.Back}}>
-              <FlatList
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                data={[{key: 'Enregistrées'}, {key: 'Dune Store'}]}
-                showsVerticalScrollIndicator={false}
-                renderItem={({item}) =>
-                <View style={{flex:1}}>
-                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame(item)}>
-                    <View style={styles.buttonClass}>
-                        <Text style={styles.textClass}>{item.key}</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              }
-              />
-          </View>
-        </View>
-
-        <View style={styles.searchContainer}>
-          <Fumi
-            label={'Chercher un jeu'}
-            style={{ width: 270, backgroundColor:Store.Back, color:Store.Back}}
-            value={this.state.Search}
-            onChangeText={(Search) => this.setState({ Search })}
-            iconClass={FontAwesomeIcon}
-            iconName={'puzzle-piece'}
-            iconColor={Store.Text2}
-            labelStyle={{ color: Store.Text2 }}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <View style={{ backgroundColor:Store.Back }}>
-          <Button
-            title={''}
-            icon={{
-              type: 'font-awesome',
-              name: 'search',
-              size: 20,
-              color: Store.Text2,
-            }}
-            buttonStyle={{
-              backgroundColor: Store.Back,
-              borderRadius: 10,
-              width: 60,
-              height:61,
-              alignItems:'center',
-              paddingLeft: 10,
-              justifyContent:'center',
-            }}
-            onPress={() => this._searchRequest()}
-          />
-          </View>
-        </View>
-
-
+    if ((Object.keys(this.state.GameList).length) > 0){
+      return(
         <View style={{flex: 0.8, width:Math.round(Dimensions.get('window').width), backgroundColor: Store.Back}}>
           <GridView
             itemDimension={100}
@@ -209,30 +149,106 @@ import * as cfg from "./../../Config";
                 </TouchableOpacity>
               </View>
             )}
+          />
+        </View>
+      );
+    }
+    else{
+      return(
+        <View style={{flex: 0.8, width:Math.round(Dimensions.get('window').width), backgroundColor: Store.Back, alignItems:'center', justifyContent:'center'}}>
+           <Text style={{color:Store.Text2, fontSize:20}}>Aucune application</Text>
+        </View>
+      );
+    }
+
+    }
+
+
+    render() {
+
+      return (
+        <DismissKeyboard>
+        <View style={styles.mainContainer}>
+          <Header navigation={this.props.navigation}/>
+          <View style={styles.classContainer}>
+          <View style={{width: 60, justifyContent:'center', alignItems:'center', backgroundColor:Store.Back}}>
+            <Button
+              title=""
+              onPress={()=>this.props.navigation.navigate('Dashboard')}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: cfg.SECONDARY,
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
             />
+          </View>
+
+
+            <View style={{flex: 1, backgroundColor:Store.Back}}>
+                <View style={{flex:1, flexDirection:'row'}}>
+                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame('Enregistrées')}>
+                    <View style={styles.buttonClass}>
+                        <Text style={styles.textClass}>Enregistrées</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame('Dune Store')}>
+                    <View style={styles.buttonClass}>
+                        <Text style={styles.textClass}>Dune Store</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+            </View>
         </View>
-        <View style={{backgroundColor:Store.Back}}>
-        <Button
-          title=""
-          onPress={()=>this.props.navigation.navigate('Dashboard')}
-          icon={{
-           type: 'font-awesome',
-           name: 'arrow-left',
-           size: 15,
-           color: 'white',
-         }}
-          buttonStyle={{
-            backgroundColor: cfg.SECONDARY,
-            borderWidth: 2,
-            borderColor: 'white',
-            borderRadius: 30,
-            width: 60,
-            paddingLeft: 20,
-          }}
-          containerStyle={{ height: 50, width: 250 }}
-          titleStyle={{ fontWeight: 'bold' }}
-        />
+
+        <View style={{flex: 0.15, width: Math.round(Dimensions.get('window').width), flexDirection: 'row', alignItems: 'center', backgroundColor:Store.Back}}>
+          <Fumi
+            label={'Chercher un jeu'}
+            style={{ width: Math.round(Dimensions.get('window').width) - 70, backgroundColor:Store.Back, color:Store.Back}}
+            value={this.state.Search}
+            onChangeText={(Search) => this.setState({ Search })}
+            iconClass={FontAwesomeIcon}
+            iconName={'puzzle-piece'}
+            iconColor={Store.Text2}
+            labelStyle={{ color: Store.Text2 }}
+            iconSize={20}
+            iconWidth={40}
+          />
+          <View style={{ backgroundColor:Store.Back }}>
+          <Button
+            title={''}
+            icon={{
+              type: 'font-awesome',
+              name: 'search',
+              size: 20,
+              color: Store.Text2,
+            }}
+            buttonStyle={{
+              backgroundColor: Store.Back,
+              borderRadius: 10,
+              width: 60,
+              height:60,
+              alignItems:'center',
+              paddingLeft: 10,
+              justifyContent:'center',
+            }}
+            onPress={() => this._searchRequest()}
+          />
+          </View>
         </View>
+
+        {this._printGamesList()}
+
       </View>
       </DismissKeyboard>
      );
@@ -261,14 +277,12 @@ const styles = StyleSheet.create({
     flex: 0.1,
     flexDirection: 'row',
     paddingTop: 2,
-    backgroundColor: Store.Back,
+    backgroundColor:Store.Back
   },
   searchContainer: {
-    backgroundColor: Store.Back,
-    flex: 0.1,
+    flex: 0.15,
     width: Math.round(Dimensions.get('window').width),
     flexDirection: 'row',
-    paddingTop: 5,
     alignItems: 'center',
   },
   input: {
@@ -316,7 +330,7 @@ const styles = StyleSheet.create({
   },
   buttonClass: {
     flex: 1,
-    width: Math.round(Dimensions.get('window').width) / 2,
+    width: Math.round(Dimensions.get('window').width) / 2.5,
     margin:2,
     alignItems: 'center',
     justifyContent: 'center',

@@ -333,7 +333,7 @@ export default class Dashboard extends Component {
               </View>
               <View style={{flex: 0.4, backgroundColor: "#FFF", borderTopWidth: 5, borderColor: "#F9F9F9", flexDirection: 'row'}}>
                 <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>
-                  <Text style={styles.subtext}>NOTIFICATION</Text>
+                  <Text style={styles.subtext}>{this.state.Notif} NOTIFICATION(S)</Text>
                 </View>
 
                 <View style={{flex: 0.5, flexDirection:'row', padding: 5}}>

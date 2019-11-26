@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { observer } from 'mobx-react';
 import { Sae, Fumi } from 'react-native-textinput-effects';
+import {Button} from 'react-native-elements'
 import AlertPro from "react-native-alert-pro";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
@@ -57,7 +58,6 @@ export default class AddUserDirector extends Component {
     }).then((response) => response.json())
         .then((responseJson) => {
           this.AlertPro.open()
-          //this.props.navigation.navigate('Profil');
         })
         .catch((error) => {
           console.error(error);
@@ -69,16 +69,30 @@ export default class AddUserDirector extends Component {
 
       <DismissKeyboard>
       <View style={styles.container}>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior="padding"
-        >
         <Header navigation={this.props.navigation}/>
 
-	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
-          <Text style={{fontSize:20,}}>
-             Ajouter un professeur
-          </Text>
+        <View style={{flex: 1, backgroundColor:Store.Back}}>
+        <View style={{backgroundColor:Store.Back, marginTop:15}}>
+            <Button
+              title=""
+              onPress={()=>this.props.navigation.navigate('Dashboard')}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: cfg.SECONDARY,
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
         </View>
 
         <View style={styles.containerBody}>
@@ -87,36 +101,36 @@ export default class AddUserDirector extends Component {
             <View style={{flex: 0.7}}>
               <Fumi
                 label={'Nom'}
-                style={{ width: 300, backgroundColor:'#FFF'}}
+                style={{ width: 300, backgroundColor:Store.Back}}
                 onChangeText={(lastname) => this.setState({lastname})}
                 value={this.state.lastname}
                 iconClass={FontAwesomeIcon}
                 iconName={'user'}
-                iconColor={cfg.SECONDARY}
-                labelStyle={{ color: cfg.SECONDARY }}
+                iconColor={Store.Text2}
+                labelStyle={{ color: Store.Text2 }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
               />
-             </View>
+            </View>
           </View>
 
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
             <View style={{flex: 0.7}}>
               <Fumi
                 label={'Prénom'}
-                style={{ width: 300, backgroundColor:'#FFF'}}
+                style={{ width: 300, backgroundColor:Store.Back}}
                 onChangeText={(name) => this.setState({name})}
                 value={this.state.name}
                 iconClass={FontAwesomeIcon}
                 iconName={'user'}
-                iconColor={cfg.SECONDARY}
-                labelStyle={{ color: cfg.SECONDARY }}
+                iconColor={Store.Text2}
+                labelStyle={{ color: Store.Text2 }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
               />
-             </View>
+            </View>
           </View>
 
 
@@ -124,39 +138,44 @@ export default class AddUserDirector extends Component {
             <View style={{flex: 0.7}}>
               <Fumi
                 label={'Email'}
-                style={{ width: 300, backgroundColor:'#FFF'}}
+                style={{ width: 300, backgroundColor:Store.Back}}
                 onChangeText={(email) => this.setState({email})}
                 value={this.state.email}
                 iconClass={FontAwesomeIcon}
                 iconName={'at'}
-                iconColor={cfg.SECONDARY}
-                labelStyle={{ color: cfg.SECONDARY }}
+                iconColor={Store.Text2}
+                labelStyle={{ color: Store.Text2 }}
                 iconSize={20}
                 iconWidth={40}
                 inputPadding={16}
               />
-             </View>
+            </View>
           </View>
-
-
-         </View>
+        </View>
 
          <View style={styles.containerFooter}>
-           <TouchableOpacity onPress={this._cancelEdit}>
-             <Image
-               style={{height: 42, width: 42}}
-               source={require('./../../picture/profil/error.png')}
-               resizeMode="contain"
-               />
-           </TouchableOpacity>
-
-           <TouchableOpacity onPress={this._confirmEdit}>
-             <Image
-               style={{height: 42, width: 42}}
-               source={require('./../../picture/profil/success.png')}
-               resizeMode="contain"
-               />
-           </TouchableOpacity>
+              <Button
+                onPress={this._confirmEdit}
+                title="VALIDER"
+                icon={{
+                 type: 'font-awesome',
+                 name: 'check',
+                 size: 15,
+                 color: 'white',
+               }}
+                buttonStyle={{
+                  backgroundColor: cfg.SECONDARY,
+                  borderWidth: 2,
+                  borderColor: 'white',
+                  borderRadius: 30,
+                  width: 160,
+                  height:60,
+                  alignItems:'center',
+                  paddingLeft: 10,
+                }}
+                containerStyle={{ marginVertical: 10, marginLeft: 40, height: 50, width: 250 }}
+                titleStyle={{ fontWeight: 'bold' }}
+              />
          </View>
 
 
@@ -185,10 +204,8 @@ export default class AddUserDirector extends Component {
                    backgroundColor: "#6ED528"
                  }
                }}
-             />
-
-
-         </KeyboardAvoidingView>
+            />
+         </View>
       </View>
       </DismissKeyboard>
     );
@@ -197,7 +214,7 @@ export default class AddUserDirector extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
+    backgroundColor: Store.Back,
     flex: 1
   },
   input: {
@@ -210,17 +227,19 @@ const styles = StyleSheet.create({
   },
   containerBody: {
     flex: 1,
+    paddingBottom:90,
     alignItems: 'center',
     justifyContent: 'center',
   },
   titleInfo: {
-    color: cfg.SECONDARY,
+    color: Store.Text2,
     fontWeight: 'bold',
     fontSize: 14,
   },
   containerFooter: {
     flexDirection: 'row',
-    paddingBottom: 50,
-    justifyContent:'space-around',
+    paddingBottom: 100,
+    justifyContent:'center',
+    alignItems:'center'
   },
 });

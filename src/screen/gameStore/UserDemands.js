@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, TouchableHighlight, Modal} from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, TouchableHighlight, Modal} from 'react-native';
 import { observer } from 'mobx-react';
 import { List, ListItem } from "react-native-elements";
+import { Avatar, Icon, Button } from 'react-native-elements';
 import GridView from 'react-native-super-grid';
 import moment from "moment";
 import 'moment/locale/fr'
 moment.locale('fr')
-
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -162,33 +162,71 @@ export default class UserDemands extends Component {
 
     }
 
+    RenderUserDemands(){
+
+    if (Object.keys(this.state.GamesRequested).length > 0)
+      return(
+        <List>
+            <FlatList
+                data={this.state.GamesRequested}
+                extraData={this.state}
+                rightIcon={'../../picture/profil/eye.png'}
+                style={{backgroundColor:Store.Back}}
+                renderItem={({ item }) => (
+                    <ListItem
+                        titleStyle={{color:Store.Text2}}
+                        title={`${ item.nomApp }`}
+                        onPress={() => this.ShowProfInModal(true, item)}
+                    />
+                    )}
+                keyExtractor={item => item.idNotif.toString()}
+            />
+        </List>
+      );
+    else
+      return(
+        <Text style={{fontSize:20, color:Store.Text2, textAlign:'center'}}> Aucune notification </Text>
+      );
+
+    }
+
 
     render() {
     return (
         <View style={styles.mainContainer}>
           <Header navigation={this.props.navigation}/>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
-          <Text style={{fontSize:20, color:Store.Text2}}>
-             Application(s) demandée(s)
-          </Text>
-        </View>
+          <View style={{flex:1, backgroundColor:Store.Back}}>
+          <View style={{marginTop:15, backgroundColor:Store.Back}}>
+            <Button
+              title=""
+              onPress={()=>this.props.navigation.navigate('GamesList')}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: cfg.SECONDARY,
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+          </View>
+            <View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
+              <Text style={{fontSize:20, color:Store.Text2}}>
+                 Application(s) demandée(s)
+              </Text>
+            </View>
             <View style={{flex: 0.8, backgroundColor:Store.Back}}>
-                <List>
-                    <FlatList
-                        data={this.state.GamesRequested}
-                        extraData={this.state}
-                        rightIcon={'../../picture/profil/eye.png'}
-                        style={{backgroundColor:Store.Back}}
-                        renderItem={({ item }) => (
-                            <ListItem
-                                titleStyle={{color:Store.Text2}}
-                                title={`${ item.nomApp }`}
-                                onPress={() => this.ShowProfInModal(true, item)}
-                            />
-                            )}
-                        keyExtractor={item => item.idNotif.toString()}
-                    />
-                </List>
+
+                {this.RenderUserDemands()}
+
                 <View>
                     <Modal
                         transparent={true}
@@ -200,7 +238,7 @@ export default class UserDemands extends Component {
                                     <Text style={styles.TextStyle}> Vous avez une demande sur l'application
                                             { " " + this.state.nomAppModal }.
                                     </Text>
-                                <Text onPress={() => this.props.navigation.navigate('GameContainer', {id: this.state.idAppModal})}  style={{textDecorationLine: 'underline',fontSize: 20, color: "#fff", textAlign: 'center'}}>
+                                <Text onPress={() => this.props.navigation.navigate('GameContainer', {id: this.state.idAppModal})}  style={{textDecorationLine: 'underline',fontSize: 20, color: Store.TRose, textAlign: 'center'}}>
                                     Voir l'application
                                 </Text>
                                 <Text  style={styles.TextProfStyle}> Cette demande a été faite par:</Text>
@@ -252,6 +290,7 @@ export default class UserDemands extends Component {
                     </Modal>
                 </View>
             </View>
+          </View>
       </View>
     );
   }
@@ -273,7 +312,7 @@ const styles = StyleSheet.create({
 
   mainContainer: {
     flex:1,
-    backgroundColor: '#fff',
+    backgroundColor: Store.Back,
   },
   classContainer: {
     flex: 0.1,

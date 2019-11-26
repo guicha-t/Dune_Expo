@@ -54,7 +54,6 @@ export default class RateApp extends Component {
 
 
 
-
    fetch(cfg.API_URL + '/store/getUserAvis/' + Store.AppId, {
       method: 'GET',
       headers: {
