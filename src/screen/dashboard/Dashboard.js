@@ -331,9 +331,9 @@ export default class Dashboard extends Component {
                 </View>
 
               </View>
-              <View style={{flex: 0.4, backgroundColor: "#FFF", borderTopWidth: 5, borderColor: "#F9F9F9", flexDirection: 'row'}}>
+              <View style={{flex: 0.4, backgroundColor: Store.Back, borderTopWidth: 5, borderColor: Store.Back === "#FFF" ? "#F9F9F9" : "#444444" , flexDirection: 'row'}}>
                 <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>
-                  <Text style={styles.subtext}>NOTIFICATION</Text>
+                  <Text style={[styles.subtext, {color: Store.Text2}]}>NOTIFICATION</Text>
                 </View>
 
                 <View style={{flex: 0.5, flexDirection:'row', padding: 5}}>
@@ -396,7 +396,7 @@ export default class Dashboard extends Component {
     return(
       <View style={{flex:1}}>
          <Header navigation={this.props.navigation}/>
-         <View style={styles.body}>
+         <View style={[styles.body, { backgroundColor: Store.Back === "#FFF" ? "#F9F9F9" : "#444444" }]}>
 
 
          <View>
@@ -406,11 +406,11 @@ export default class Dashboard extends Component {
      {this.renderTopBody()}
 
      <View style={styles.midbody}>
-       <View style={{flex: 1, backgroundColor: '#FFF', marginRight: 2, padding: 10}}>
+       <View style={{flex: 1, backgroundColor: Store.Back, marginRight: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-           <Text style={styles.subtext}>HISTORIQUE</Text>
-           <Text style={styles.subtext}>DES SESSIONS</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>HISTORIQUE</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>DES SESSIONS</Text>
          </View>
          <View style={{flex: 0.1}}></View>
          <View style={{flex: 0.2, flexDirection: 'row'}}>
@@ -427,11 +427,11 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
        </View>
 
-       <View style={{flex: 1, backgroundColor: '#FFF', marginLeft: 2, padding: 10}}>
+       <View style={{flex: 1, backgroundColor: Store.Back, marginLeft: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-           <Text style={styles.subtext}>TROMBINOSCOPE</Text>
-           <Text style={styles.subtext}>DES ÉTUDIANTS</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>TROMBINOSCOPE</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>DES ÉTUDIANTS</Text>
          </View>
          <View style={{flex: 0.1}}></View>
          <View style={{flex: 0.2, flexDirection: 'row'}}>
@@ -451,11 +451,11 @@ export default class Dashboard extends Component {
 
      <View style={styles.botbody}>
 
-     <View style={{flex: 1, backgroundColor: '#FFF', marginRight: 2, padding: 10}}>
+     <View style={{flex: 1, backgroundColor: Store.Back, marginRight: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-           <Text style={styles.subtext}>LOGITHÈQUE /</Text>
-           <Text style={styles.subtext}>STORE</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>LOGITHÈQUE /</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>STORE</Text>
          </View>
          <View style={{flex: 0.1}}></View>
          <View style={{flex: 0.2, flexDirection: 'row'}}>
@@ -472,11 +472,11 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
        </View>
 
-       <View style={{flex: 1, backgroundColor: '#FFF', marginLeft: 2, padding: 10}}>
+       <View style={{flex: 1, backgroundColor: Store.Back, marginLeft: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-           <Text style={styles.subtext}>SCANNER</Text>
-           <Text style={styles.subtext}>UN QR-CODE</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>SCANNER</Text>
+           <Text style={[styles.subtext, {color: Store.Text2}]}>UN QR-CODE</Text>
          </View>
          <View style={{flex: 0.1}}></View>
 
@@ -514,7 +514,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-   backgroundColor: "#F9F9F9",
+    backgroundColor: "#F9F9F9",
 //    backgroundColor: cfg.PRIMARY
   },
   topbody: {
@@ -592,7 +592,7 @@ const styles = StyleSheet.create({
   },
   subtext: {
     fontSize: 0.04*width,
-    color: cfg.SECONDARY,
+    color: Store.Text2,
   },
   buttonCase: {
     flex: 0.4,

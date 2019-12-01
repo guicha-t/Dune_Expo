@@ -230,7 +230,7 @@ import { Alert, Button, TextInput, View, Text,
         }
 
       return (
-        <View style={styles.mainContainer}>
+        <View style={[styles.mainContainer, {backgroundColor: Store.Back}]}>
           <Header navigation={this.props.navigation} colorTheme={'#fcc296'}/>
 
           <View style={styles.classContainer}>
@@ -286,10 +286,9 @@ import { Alert, Button, TextInput, View, Text,
              onChangeText={(Search) => this.setState({ Search })}
              value={this.state.search}
              containerStyle={{
-               backgroundColor:'#fff',
-               borderColor: '#FFF',
+               backgroundColor:Store.Back,
+               borderColor: Store.Back,
                borderWidth: 0,
-               backgroundColor: 'white',
                borderWidth: 0, //no effect
                shadowColor: 'white', //no effect
                borderBottomColor: 'transparent',
@@ -310,7 +309,7 @@ import { Alert, Button, TextInput, View, Text,
           />
         </View>
 
-        <View style={{flex: 1, backgroundColor: '#F9F9F9'}}>
+        <View style={{flex: 1}}>
           <GridView
             itemDimension={100}
             spacing={5}
@@ -318,7 +317,7 @@ import { Alert, Button, TextInput, View, Text,
             style={styles.GridView}
             renderItem={item => (
               <View style={styles.itemContainer}>
-                <TouchableOpacity style={{flex: 1, backgroundColor:'#FFF', padding: 4, borderWidth: 2, borderColor:cfg.SECONDARY}} onPress={() => this._goToStudentProfil(item.idEleve)}>
+                <TouchableOpacity style={{flex: 1, backgroundColor: Store.DarkEnable === true ? "#444444" : "#FFF" , padding: 4, borderWidth: 2, borderColor:cfg.SECONDARY}} onPress={() => this._goToStudentProfil(item.idEleve)}>
 
                     <View style={{flex: 0.7}}>
                       <Image
@@ -329,8 +328,8 @@ import { Alert, Button, TextInput, View, Text,
                     </View>
 
                     <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={styles.itemName}>{item.nomEleve.toUpperCase()}</Text>
-                      <Text style={styles.itemName}>{item.prenomEleve}</Text>
+                      <Text style={[styles.itemName, {color: Store.Text2}]}>{item.nomEleve.toUpperCase()}</Text>
+                      <Text style={[styles.itemName, {color: Store.Text2}]}>{item.prenomEleve}</Text>
                     </View>
 
                 </TouchableOpacity>

@@ -68,20 +68,17 @@ export default class AddUserDirector extends Component {
     return(
 
       <DismissKeyboard>
-      <View style={styles.container}>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior="padding"
-        >
+      <View style={[styles.container, {backgroundColor: Store.Back}]}>
+        <KeyboardAvoidingView  style={[styles.container ,{backgroundColor: Store.Back}]} behavior="padding">
         <Header navigation={this.props.navigation}/>
 
-	<View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
-          <Text style={{fontSize:20,}}>
+	       <View style={{flex:0.4, alignItems: 'center', justifyContent:'center',}}>
+          <Text style={{fontSize:20, color:Store.Text1}}>
              Ajouter un professeur
           </Text>
         </View>
 
-        <View style={styles.containerBody}>
+        <View style={[styles.containerBody, {backgroundColor:Store.Back}]}>
 
           <View style={{height: 30, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20}}>
             <View style={{flex: 0.7}}>

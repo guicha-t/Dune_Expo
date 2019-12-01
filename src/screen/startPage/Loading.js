@@ -45,6 +45,7 @@ export default class AuthLoadingScreen extends Component {
     const localId = await AsyncStorage.getItem('localId');
     const localToken = await AsyncStorage.getItem('localToken');
     const localType = await AsyncStorage.getItem('localType');
+    const localDarkMode = await AsyncStorage.getItem('darkMode')
 
     fetch(cfg.API_URL + '/tokens/verifyToken', {
       method: 'POST',
@@ -58,6 +59,12 @@ export default class AuthLoadingScreen extends Component {
       }),
     }).then((response) => response.json())
     .then((responseJson) => {
+      if (localDarkMode === "true"){
+        Store.EnableDarkTheme(true)
+      } else {
+        Store.EnableDarkTheme(false)
+
+      }
       if ((responseJson.response != 'Token valid') && (localToken))
       {
         this._removeItemValue("localToken")
@@ -73,7 +80,7 @@ export default class AuthLoadingScreen extends Component {
           Store.setToken(localToken)
           Store.setTypeUser(localType)
         }
-        this.props.navigation.navigate(localToken ? 'Dashboard' : 'Start');
+        this.props.navigation.navigate(localToken ? 'StudentList' : 'Start');
       }
 
       })

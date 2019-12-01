@@ -66,7 +66,7 @@ export default class GameList extends Component {
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation} colorTheme={"#b1ebf6"}/>
-        <View style={styles.body}>
+        <View style={[styles.body, {backgroundColor: Store.Back}]}>
 
           <View style={{flex: 0.1, flexDirection: 'row'}}>
             <View style={{flex: 0.2, justifyContent:'center', paddingLeft: 6}}>
@@ -84,12 +84,11 @@ export default class GameList extends Component {
             </View>
 
             <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
-              <Text style={styles.primetextblue}>{this.state.labelClasse}</Text>
-              <Text style={styles.primetextblue}>HISTORIQUE</Text>
+              <Text style={[styles.primetextblue, {color: Store.Text2}]}>{this.state.labelClasse}</Text>
+              <Text style={[styles.primetextblue, {color: Store.Text2}]}>HISTORIQUE</Text>
             </View>
 
             <View style={{flex: 0.2}}>
-
             </View>
           </View>
 

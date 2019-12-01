@@ -123,9 +123,9 @@ import * as cfg from "./../../Config";
 
       return (
         <DismissKeyboard>
-        <View style={styles.mainContainer}>
+        <View style={[styles.mainContainer, {backgroundColor: Store.Back}]}>
           <Header navigation={this.props.navigation} colorTheme={"#fcebb5"}/>
-          <View style={styles.classContainer}>
+          <View style={[styles.classContainer, {backgroundColor: Store.Back}]}>
             <View style={{flex: 0.5, padding: 10}}>
               <TouchableOpacity style={styles.buttonClass} onPress={() => this._setCurrentGame("Enregistrées")}>
                 <Text>Enregistrées</Text>
@@ -138,7 +138,7 @@ import * as cfg from "./../../Config";
             </View>
         </View>
 
-        <View style={styles.searchContainer}>
+        <View style={[styles.searchContainer, {backgroundColor: Store.Back}]}>
           <Fumi
             label={'Chercher un jeu'}
             style={{ width: 270, backgroundColor:Store.Back, color:Store.Back}}

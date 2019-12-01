@@ -7,18 +7,19 @@ import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
 
 import StudentProfil from './StudentProfil';
+import StudentSkills from './StudentSkills';
 import StudentHistory from './StudentHistory';
 import * as cfg from "./../../Config";
 
 
 const Tabs = createBottomTabNavigator({
   'Historique': StudentHistory,
+  'Competences': StudentSkills,
   'Profil': StudentProfil,
 }, {
-  initialRouteName: 'Historique',
+  initialRouteName: 'Competences',
   tabBarOptions: {
     activeBackgroundColor: '#f2b88c',
-
     inactiveBackgroundColor:"#fcc296",
     showIcon: true,
     showLabel: false,

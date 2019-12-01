@@ -23,8 +23,8 @@ export default class Dashboard extends Component {
   render() {
     return(
       <View style={{flex:1}}>
-        <View style={styles.loadingContainer}>
-          <BarIndicator color={cfg.SECONDARY}/>
+        <View style={[styles.loadingContainer, {backgroundColor: Store.Back}]}>
+          <BarIndicator color={Store.Text2}/>
         </View>
       </View>
     );
@@ -34,7 +34,6 @@ export default class Dashboard extends Component {
 const styles = StyleSheet.create({
   loadingContainer: {
     flex: 1,
-    backgroundColor: '#F9F9F9',
     justifyContent: 'center',
     alignItems: 'center',
   },

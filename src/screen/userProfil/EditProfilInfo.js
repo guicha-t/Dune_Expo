@@ -126,7 +126,7 @@ export default class EditProfilInfo extends Component {
   render() {
     return(
 
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: Store.Back}]}>
         <Header navigation={this.props.navigation}/>
         <KeyboardAvoidingView behavior="padding" enabled style={styles.containerBody}>
           <ScrollView style={{}}>
@@ -146,7 +146,7 @@ export default class EditProfilInfo extends Component {
                   />
                 </View>
                 <View style={{flex: 0.6, alignItems:'center', justifyContent:'center'}}>
-                  <Text style={{fontWeight:'bold'}}>INFORMATIONS PERSONNELLES</Text>
+                  <Text style={{fontWeight:'bold', color: Store.Text1}}>INFORMATIONS PERSONNELLES</Text>
                 </View>
                 <View style={{flex: 0.2}}></View>
               </View>
@@ -198,7 +198,7 @@ export default class EditProfilInfo extends Component {
 
 
             <View style={{height: 60, paddingTop: 10, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{fontWeight:'bold'}}>E-MAIL</Text>
+              <Text style={{fontWeight:'bold', color: Store.Text1}}>E-MAIL</Text>
             </View>
             <View style={{height: 220, justifyContent:'center', alignItems:'center'}}>
               <Fumi
@@ -266,7 +266,7 @@ export default class EditProfilInfo extends Component {
 
 
             <View style={{height: 60, paddingTop: 10, alignItems:'center', justifyContent:'center'}}>
-              <Text style={{fontWeight:'bold'}}>MOT DE PASSE</Text>
+              <Text style={{fontWeight:'bold', color: Store.Text1}}>MOT DE PASSE</Text>
             </View>
             <View style={{height: 300, justifyContent:'center', alignItems:'center'}}>
             <Fumi
@@ -360,7 +360,6 @@ export default class EditProfilInfo extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
     flex: 1
   },
 });

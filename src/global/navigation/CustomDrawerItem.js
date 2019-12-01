@@ -30,7 +30,6 @@ export default class CustomDrawerItems extends Component {
           </Text>
         </View>
 
-
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Dashboard')}>
             <View style={styles.button}>
               <View style={styles.labelContainer}>
@@ -38,7 +37,6 @@ export default class CustomDrawerItems extends Component {
               </View>
             </View>
           </TouchableOpacity>
-
 
           <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
             <Text style={{color: 'white', fontSize:16, fontWeight:'bold',}}>
@@ -142,7 +140,6 @@ export default class CustomDrawerItems extends Component {
 
           <View style={{height: 40}}>
           </View>
-
 
         </ScrollView>
       </View>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Text, Image, StyleSheet, TouchableOpacity, Linking, AsyncStorage, ImageBackground} from 'react-native';
+import { View, StatusBar, Text, Image, StyleSheet, TouchableOpacity, Linking,
+  AsyncStorage, ImageBackground, Switch} from 'react-native';
 import {createDrawerNavigator, DrawerItems} from 'react-navigation';
 
 import CustomDrawerItems from './CustomDrawerItem'
@@ -43,6 +44,8 @@ import UserManual from './../../screen/userManual/userManual';
 
 
 import AddUserDirector from './../../screen/director/AddUserDirector';
+
+
 
 const CustomDrawerContentComponent = (props) => (
   <View style={styles.drawerContainer}>

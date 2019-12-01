@@ -99,7 +99,7 @@ export default class StudentProfil extends Component {
         }
 
       return (
-        <View style={{flex:1, backgroundColor: '#fff'}}>
+        <View style={{flex:1, backgroundColor: Store.Back}}>
 
           <View style={{flex: 0.2, flexDirection:'row'}}>
 
@@ -124,8 +124,8 @@ export default class StudentProfil extends Component {
             </View>
 
             <View style={{flex: 0.5, justifyContent:'center'}}>
-              <Text style={styles.primetextblue}>{this.state.Student.nomEleve.toUpperCase()}</Text>
-              <Text style={styles.primetextblue}>{this.state.Student.prenomEleve}</Text>
+              <Text style={[styles.primetextblue, {color: Store.Text1}]}>{this.state.Student.nomEleve.toUpperCase()}</Text>
+              <Text style={[styles.primetextblue, {color: Store.Text1}]}>{this.state.Student.prenomEleve}</Text>
             </View>
 
             <View style={{width: 70, justifyContent:'center'}}>

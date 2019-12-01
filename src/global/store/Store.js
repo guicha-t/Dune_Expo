@@ -8,7 +8,7 @@ class Store {
 
   @observable DarkEnable = false;
 
-  @observable Back = "#fff";
+  @observable Back = "#FFF";
 
   @observable Text1 = "#161616";
   @observable Text2 = "#2A5E85";

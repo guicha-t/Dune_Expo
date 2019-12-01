@@ -17,7 +17,7 @@ export default class Profil extends Component {
     this.state = {
       Profil: [],
       loading: true,
-      SwitchOnValueHolder :  false
+      SwitchOnValueHolder : Store.DarkEnable
     }
   }
 
@@ -38,6 +38,14 @@ export default class Profil extends Component {
           console.error(error);
         });
     }
+
+    _storeDarkMode = async (param) => {
+    try {
+      await AsyncStorage.setItem('darkmode', param);
+    } catch (error) {
+      // Error saving data
+    }
+  }
 
     _goToEditProfil = async () => {
       this.props.navigation.navigate('EditProfilInfo', {
@@ -79,24 +87,24 @@ export default class Profil extends Component {
         }
     }
 
-    ToggleSwitch = (value) =>{
-
+    ToggleSwitch = async (value) =>{
       this.setState({
         SwitchOnValueHolder: value
       })
-
+      try {
+        await AsyncStorage.setItem('darkMode', value.toString());
+      } catch (error) {
+        // Error saving data
+      }
       Store.EnableDarkTheme(value);
-
     }
 
   render() {
-
     if (this.state.loading) {
         return (
           <Loading navigation={this.props.navigation}/>
         )
       }
-
 
     return(
       <View style={{flex:1, backgroundColor: Store.Back}}>
@@ -165,13 +173,21 @@ export default class Profil extends Component {
             </View>
           </View>
 
-          <View style={{flex: 0.4}}>
-            <Text style={{color: Store.Text1}}>{this.state.SwitchOnValueHolder ? 'on' :'off'}</Text>
+          <View style={{flex: 0.2, flexDirection: 'row'}}>
 
-            <Switch
+            <View style={{flex: 0.3, justifyContent:'center', alignItems:'flex-end'}}>
+              <Switch
               onValueChange={(value) => this.ToggleSwitch(value)}
-              style={{marginBottom: 10}}
+              style={{marginRight: 8}}
               value={this.state.SwitchOnValueHolder} />
+            </View>
+            <View style={{flex: 0.7, justifyContent:'center', paddingLeft: 20}}>
+              <Text style={{fontSize: 18, color: Store.Text1}}>Thème sombre </Text>
+            </View>
+
+
+          </View>
+          <View style={{flex: 0.2}}>
 
           </View>
         </View>

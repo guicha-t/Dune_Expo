@@ -91,7 +91,7 @@ export default class ClassList extends Component {
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation} colorTheme={'#b1ebf6'}/>
-        <View style={styles.body}>
+        <View style={[styles.body, {backgroundColor: Store.Back}]}>
 
           <View style={{flex: 0.1, flexDirection: 'row'}}>
 
@@ -109,7 +109,7 @@ export default class ClassList extends Component {
             </View>
 
             <View style={{flex: 0.6, justifyContent:'center', alignItems:'center'}}>
-              <Text style={styles.primetextblue}>LISTE DES CLASSES</Text>
+              <Text style={[styles.primetextblue, {color: Store.Text2}]}>LISTE DES CLASSES</Text>
             </View>
             <View style={{flex: 0.2}}>
 

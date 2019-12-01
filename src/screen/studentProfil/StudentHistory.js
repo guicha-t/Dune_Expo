@@ -256,7 +256,7 @@ export default class StudentHistory extends Component {
 
 
       return (
-        <View style={{flex:1, backgroundColor: '#fff', padding: 4}}>
+        <View style={{flex:1, backgroundColor: Store.Back, padding: 4}}>
 
           <View style={{flex: 0.1, flexDirection:'row'}}>
               <View style={{width: 60, justifyContent:'center', alignItems:'center'}}>

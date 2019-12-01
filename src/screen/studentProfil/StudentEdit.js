@@ -54,7 +54,7 @@ export default class StudentEdit extends Component {
 
   render() {
       return (
-        <View style={{flex:1, backgroundColor: '#fff'}}>
+        <View style={{flex:1, backgroundColor: Store.Back}}>
           <Header navigation={this.props.navigation}/>
 
           <View style={{flex: 0.2,}}></View>
