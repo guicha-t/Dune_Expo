@@ -35,18 +35,37 @@ export default class AppNotice extends Component {
     Moyenne5:0,
     NextPage:1,
     PrevPage:0,
-    CurrentRow:1,
+    CurrentRow:0,
     CurrentPage:1,
     Prof1IsEmpty:0,
     Prof2IsEmpty:0,
     Prof3IsEmpty:0,
     Prof4IsEmpty:0,
     Prof5IsEmpty:0,
+    Rating:[],
     }
   }
 
 
   componentDidMount(){
+
+
+    fetch(cfg.API_URL + '/store/nbAvis/' + Store.AppId, {
+       method: 'GET',
+       headers: {
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+         token: Store.Token,
+       },
+     }).then((response) => response.json())
+         .then((responseJson) => {
+           this.setState({'Rating':responseJson.response[0]})
+         })
+         .catch((error) => {
+           console.error(error);
+         });
+
+
 
     fetch(cfg.API_URL + '/store/avis/', {
           method: 'POST',
@@ -250,7 +269,7 @@ _printFifthNotice () {
 
 _printPlusButton (){
 
-    if (this.state.Prof5IsEmpty == 1 || this.state.Prof4IsEmpty == 1 || this.state.Prof3IsEmpty == 1 || this.state.Prof2IsEmpty == 1 || this.state.Prof1IsEmpty == 1)
+    if (this.state.Prof5IsEmpty == 1 || this.state.Prof4IsEmpty == 1 || this.state.Prof3IsEmpty == 1 || this.state.Prof2IsEmpty == 1 || this.state.Prof1IsEmpty == 1  || ((this.state.CurrentPage * 5) == this.state.Rating.nbAvis))
       return(
             <Button
               title=""
@@ -293,7 +312,7 @@ _printPlusButton (){
 }
 
 _printMenusButton (){
-    if (this.state.CurrentRow == 1)
+    if (this.state.CurrentRow == 0)
       return(
             <Button
               title=""

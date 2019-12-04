@@ -21,6 +21,7 @@ export default class GameProfil extends Component {
       Skills:[],
       Disabled: false,
       ModalVisibleStatus: false,
+      TokenLeft: 0,
     }
   }
 
@@ -38,6 +39,8 @@ export default class GameProfil extends Component {
      }).then((response) => response.json())
          .then((responseJson) => {
            this.setState({'Status':JSON.stringify(responseJson.appStatus)})
+           if (JSON.stringify(responseJson.apps_left) != null)
+             this.setState({'TokenLeft':JSON.stringify(responseJson.apps_left)})
           if (this.state.Status === "\"0\"") {
             this.setState({'Disabled': false})
            } else {
@@ -92,7 +95,6 @@ export default class GameProfil extends Component {
      }).then((response) => response.json())
          .then((responseJson) => {
            this.setState({'Skills': responseJson.response})
-           //Alert.alert("lol", JSON.stringify(this.state.Skills))
          })
          .catch((error) => {
            console.error(error);
@@ -101,8 +103,8 @@ export default class GameProfil extends Component {
   }
 
   _ObtainApp(){
-    if (this.state.Status === "\"1\""){
-      Alert.alert('ERREUR', 'Vous possédez déjà cette application');
+    if (this.state.TokenLeft === 0){
+      Alert.alert('ERREUR', "Vous n'avez pas assez de token. Rendez-vous sur l\'application web pour procéder à l'achat.");
       return;
     }
     else{
@@ -118,7 +120,8 @@ export default class GameProfil extends Component {
           })
         }).then((response) => response.json())
         .then((responseJson) => {
-            this.AlertPro.open()
+            Alert.alert("APPLICATION ENREGISTRÉE", "Le jeu viens d'être ajouté à votre bibliothèque.")
+            this.props.navigation.navigate('GamesList')
         })
         .catch((error) => {
           console.error(error);
@@ -135,11 +138,56 @@ export default class GameProfil extends Component {
       this.props.navigation.navigate('RequestApp')
   }
 
+
+  _checkNbTokens(){
+    if (this.state.TokenLeft > 0)
+      return(this.state.disabled = false);
+    else
+      return(this.state.disabled = true);
+  }
+
+
+  _printNbTokens(){
+    if (this.state.TokenLeft <= 0)
+      return ("0")
+    else
+      return(this.state.TokenLeft)
+  }
+
+
   _checkPriceApp(){
-  if (this.state.Game.prix == 0 || this.state.Game.prix == null)
+
+  if (this.state.Status == "\"1\""){
+      return(
+       <Button
+         title={'POSSÉDÉ'}
+         disabled={this.state.Disabled}
+         icon={{
+           type: 'font-awesome',
+           name: 'download',
+           size: 15,
+           color: 'white',
+         }}
+         onPress={() => this.AlertPro.open()}
+           buttonStyle={{
+             backgroundColor: cfg.SECONDARY,
+             borderColor: 'white',
+             borderRadius: 30,
+             width: 180,
+             height:50,
+             alignItems:'center',
+             paddingLeft: 10,
+             justifyContent:'center',
+           }}
+       />
+      )
+  }
+  else{
+    if (this.state.Game.prix == 0 || this.state.Game.prix == null)
     return(
          <Button
            title={'ENREGISTRER'}
+           disabled={this.state.Disabled}
            icon={{
              type: 'font-awesome',
              name: 'download',
@@ -159,18 +207,18 @@ export default class GameProfil extends Component {
              }}
          />
     )
-
-  else
+    else
     return(
          <Button
-           title={'ACHETER'}
+           title={'ACHETER ' + '(' + this._printNbTokens() + ')'}
+           disabled={this._checkNbTokens()}
            icon={{
              type: 'font-awesome',
              name: 'download',
              size: 15,
              color: 'white',
            }}
-           onPress={() => this._ObtainApp()}
+           onPress={() => this.AlertPro.open()}
              buttonStyle={{
                backgroundColor: cfg.SECONDARY,
                borderColor: 'white',
@@ -183,6 +231,7 @@ export default class GameProfil extends Component {
              }}
          />
     )
+    }
   }
 
   _renderAppRequest(){
@@ -277,7 +326,7 @@ export default class GameProfil extends Component {
 
   _printPrice(){
 
-  if (this.state.Game.prix != null)
+  if (this.state.Game.prix != null && this.state.Game.prix > 0)
     return (this.state.Game.prix)
   else
     return ('gratuit')
@@ -296,7 +345,7 @@ export default class GameProfil extends Component {
               data={this.state.Skills}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-                <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
                   <Text style={{textAlign:'center', justifyContent:'center', alignItems:'center', fontWeight:'bold', color:Store.TRose, fontSize:20}}>- {item.libelleComp}</Text>
                 </View>
             }
@@ -423,25 +472,34 @@ export default class GameProfil extends Component {
             ref={ref => {
               this.AlertPro = ref;
             }}
-            onConfirm={() => this.props.navigation.navigate('GamesList')}
-            showCancel={false}
-            title="APPLICATION ENREGISTRÉE"
-            message="Votre demande a bien été envoyée et l'application a été ajoutée dans votre bibliothèque."
-            textConfirm="Retour"
+            onConfirm={() => this._ObtainApp()}
+            onCancel={() => this.AlertPro.close()}
+            textCancel="RETOUR"
+            showCancel={true}
+            title="ATTENTION"
+            message={"Vous êtes sur le point d'acheter l'application avec l'un de vos " + this.state.TokenLeft + " tokens restants, si vous souhaitez continuer, cliquez sur 'VALIDER'. Autrement rendez-vous sur l'application web pour choisir un autre mode de paiement."}
+            textConfirm="VALIDER"
             closeOnPressMask={true}
             customStyles={{
               mask: {
                 backgroundColor: "transparent"
               },
               container: {
+                color: Store.Text2,
                 borderWidth: 1,
-                borderColor: "#6ED528",
+                borderColor: Store.Text2,
                 shadowColor: "#000000",
                 shadowOpacity: 0.1,
                 shadowRadius: 10
               },
+              title: {
+                color: 'red'
+              },
               buttonConfirm: {
                 backgroundColor: "#6ED528"
+              },
+              message: {
+                color: Store.Text2,
               }
             }}
           />

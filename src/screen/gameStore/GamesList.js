@@ -59,7 +59,7 @@ import * as cfg from "./../../Config";
     };
 
     _setCurrentGame = async (param) => {
-    if (param.key === 'Enregistrées'){
+    if (param === 'Enregistrées'){
     fetch(cfg.API_URL + '/store/getAppsEcole', {
           method: 'GET',
           headers: {
@@ -76,7 +76,7 @@ import * as cfg from "./../../Config";
             });
       }
 
-    else if (param.key === 'Dune Store'){
+    else if (param === 'Dune Store'){
     fetch(cfg.API_URL + '/store/', {
             method: 'POST',
             Accept: 'application/json',
@@ -197,12 +197,12 @@ import * as cfg from "./../../Config";
 
             <View style={{flex: 1, backgroundColor:Store.Back}}>
                 <View style={{flex:1, flexDirection:'row'}}>
-                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame('Enregistrées')}>
+                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame("Enregistrées")}>
                     <View style={styles.buttonClass}>
                         <Text style={styles.textClass}>Enregistrées</Text>
                     </View>
                   </TouchableOpacity>
-                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame('Dune Store')}>
+                  <TouchableOpacity style={{ flex: 1 }} onPress={() => this._setCurrentGame("Dune Store")}>
                     <View style={styles.buttonClass}>
                         <Text style={styles.textClass}>Dune Store</Text>
                     </View>

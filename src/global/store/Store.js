@@ -5,6 +5,7 @@ class Store {
   @observable IsLog = false;
   @observable TypeUser = false;
   @observable AppId = false;
+  @observable Flog = '0';
 
   @observable DarkEnable = false;
 
@@ -40,6 +41,10 @@ class Store {
       this.Text1 = this.TBlack;
       this.Text2 = this.TBlue;
     }
+  }
+
+  @action setFirstLog(param){
+    this.Flog = param;
   }
 
   @action setToken(param) {
