@@ -5,7 +5,7 @@ class Store {
   @observable IsLog = false;
   @observable TypeUser = false;
   @observable AppId = false;
-  @observable Flog = '0';
+  @observable Flog = 0;
 
   @observable DarkEnable = false;
 

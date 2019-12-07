@@ -28,9 +28,25 @@ class TermsAndConditions extends Component{
 
 
 _tosAcceptation = async loginKey => {
-  await AsyncStorage.setItem('firstLogin', '1')
-  Store.setFirstLog('1')
-  this.props.navigation.navigate('Dashboard')
+
+    fetch(cfg.API_URL + '/users/acceptCgu', {
+          method: 'GET',
+          Accept: 'application/json',
+          headers: {
+            'Content-Type': 'application/json',
+            token: Store.Token,
+          },
+        }).then((response) => response.json())
+        .then((responseJson) => {
+          this.props.navigation.navigate('Dashboard')
+          Store.setFirstLog(1)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  //await AsyncStorage.setItem('firstLogin', '1')
+  //Store.setFirstLog('1')
+  //this.props.navigation.navigate('Dashboard')
 };
 
 /*_printButton = async () => {
@@ -47,7 +63,7 @@ _tosAcceptation = async loginKey => {
 }*/
 
 _firstLogin () {
-    if (Store.Flog == '0')
+    if (Store.Flog == 0)
       return(<View><TouchableOpacity disabled={ !this.state.accepted } onPress={ ()=>this._tosAcceptation() } style={ this.state.accepted ? styles.button : styles.buttonDisabled }><Text style={styles.buttonLabel}>Accepter</Text></TouchableOpacity></View>);
     else{
       return;

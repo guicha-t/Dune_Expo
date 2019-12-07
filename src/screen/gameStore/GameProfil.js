@@ -108,7 +108,7 @@ export default class GameProfil extends Component {
       return;
     }
     else{
-      fetch(cfg.API_URL + '/store/buyAppDirecteur', {
+      fetch(cfg.API_URL + '/store/buyAppFree', {
           method: 'POST',
           Accept: 'application/json',
           headers: {
@@ -346,7 +346,7 @@ export default class GameProfil extends Component {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
                 <View style={{flex: 1, flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
-                  <Text style={{textAlign:'center', justifyContent:'center', alignItems:'center', fontWeight:'bold', color:Store.TRose, fontSize:20}}>- {item.libelleComp}</Text>
+                  <Text style={{flex:0.7 ,textAlign:'center', justifyContent:'center', alignItems:'center', fontWeight:'bold', color:Store.TRose, fontSize:20}}>- {item.libelleComp}</Text>
                 </View>
             }
             keyExtractor={item => item.idComp.toString()}
@@ -402,7 +402,7 @@ export default class GameProfil extends Component {
               <TouchableOpacity onPress={() => this._goToNotice()} >
                 <Text style={{color:Store.Text2, textDecorationLine:'underline'}}>{this.state.Rating.nbAvis} Avis</Text>
               </TouchableOpacity>
-              <Text style={{color:Store.Text2, marginLeft:10, marginRight:10, fontSize:18, fontWeight:'bold', paddingTop:50}}>{this.state.Game.description}</Text>
+              <Text style={{color:Store.Text2, marginLeft:10, marginRight:10, fontSize:18, fontWeight:'bold', paddingTop:50, textAlign:'center'}}>{this.state.Game.description}</Text>
 
 
 
@@ -477,7 +477,7 @@ export default class GameProfil extends Component {
             textCancel="RETOUR"
             showCancel={true}
             title="ATTENTION"
-            message={"Vous êtes sur le point d'acheter l'application avec l'un de vos " + this.state.TokenLeft + " tokens restants, si vous souhaitez continuer, cliquez sur 'VALIDER'. Autrement rendez-vous sur l'application web pour choisir un autre mode de paiement."}
+            message={"Vous êtes sur le point d'acheter l'application avec l'un de vos " + this.state.TokenLeft + " crédit(s) gratuit(s) restant(s), si vous souhaitez continuer, cliquez sur 'VALIDER'. Autrement rendez-vous sur l'application web pour choisir un autre mode de paiement."}
             textConfirm="VALIDER"
             closeOnPressMask={true}
             customStyles={{

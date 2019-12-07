@@ -25,7 +25,8 @@ export default class UserDemands extends Component {
         dateDemandeModal: null,
         commentaireModal: null,
         idToNotify: null,
-        idNotif: null
+        idNotif: null,
+        TokenLeft: 0,
     }
 
     this.ts = new Date();
@@ -34,6 +35,26 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
+
+
+    fetch(cfg.API_URL + '/store/getAppStatus/' + Store.AppId, {
+       method: 'GET',
+       headers: {
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+         token: Store.Token,
+       },
+     }).then((response) => response.json())
+         .then((responseJson) => {
+           if (JSON.stringify(responseJson.apps_left) != null)
+             this.setState({'TokenLeft':JSON.stringify(responseJson.apps_left)})
+         })
+         .catch((error) => {
+           console.error(error);
+         });
+
+
+
    fetch(cfg.API_URL + '/notifs/popUpMenu', {
       method: 'GET',
       headers: {
@@ -87,25 +108,44 @@ export default class UserDemands extends Component {
   }
 
   _confirmDemand = () => {
-    fetch(cfg.API_URL + '/store/validating', {
+
+  fetch(cfg.API_URL + '/store/buyAppFree', {
       method: 'POST',
+      Accept: 'application/json',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
         token: Store.Token,
       },
       body: JSON.stringify({
-        idDemande: this.state.idToNotify,
-        validate: 1,
-      }),
+       idApp: this.state.idAppModal.toString(),
+      })
     }).then((response) => response.json())
-        .then((responseJson) => {
-            this.readNotification();
-            this.ShowModalFunction(!this.state.ModalVisibleStatus);
-            this.props.navigation.navigate('Dashboard');
+    .then((responseJson) => {
+        if (responseJson.status === 200){
+            fetch(cfg.API_URL + '/store/validating', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: Store.Token,
+              },
+              body: JSON.stringify({
+                idDemande: this.state.idToNotify,
+                validate: 1,
+              }),
+            }).then((response) => response.json())
+                .then((responseJson) => {
+                    this.readNotification();
+                    this.ShowModalFunction(!this.state.ModalVisibleStatus);
+                    this.props.navigation.navigate('Dashboard');
+            })
+            .catch((error) => {
+                Alert.alert("ERROR", error);
+              console.error(error);
+            });
+        }
     })
     .catch((error) => {
-        Alert.alert("ERROR", error);
       console.error(error);
     });
   }
@@ -219,8 +259,8 @@ export default class UserDemands extends Component {
             />
           </View>
             <View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
-              <Text style={{fontSize:20, color:Store.Text2}}>
-                 Application(s) demandée(s)
+              <Text style={{fontSize:20, color:Store.Text2, textAlign:'center'}}>
+                 Accepter une demande d'application vous fera utiliser l'un de vos {this.state.TokenLeft.toString()} crédit(s) gratuit(s).
               </Text>
             </View>
             <View style={{flex: 0.8, backgroundColor:Store.Back}}>
@@ -254,7 +294,7 @@ export default class UserDemands extends Component {
                                                 Alert.alert(moment(item.dateDemande).format("DD-MM-YYYY à HH:mm:ss"), item.commentaire);
                                             }}>
                                                 <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-                                                    <View style={{flex: 0.7, paddingTop: 10}}>
+                                                    <View style={{flex: 1, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
                                                             source={{uri: cfg.API_URL + '/files/profs/' + item.picPath}}
@@ -284,7 +324,26 @@ export default class UserDemands extends Component {
                                         />
                                     </TouchableOpacity>
                                 </View>
-                                <Button title={'Retour'} color={cfg.SECONDARY} onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                                <Button
+                                  title={'RETOUR'}
+                                  icon={{
+                                    type: 'font-awesome',
+                                    name: 'arrow-left',
+                                    size: 15,
+                                    color: 'white',
+                                  }}
+                                   onPress={() => {this.ShowModalFunction(!this.state.ModalVisibleStatus)}}
+                                     buttonStyle={{
+                                       backgroundColor: cfg.SECONDARY,
+                                       borderColor: 'white',
+                                       borderRadius: 30,
+                                       width: 180,
+                                       height:50,
+                                       alignItems:'center',
+                                       paddingLeft: 10,
+                                       justifyContent:'center',
+                                    }}
+                                />
                             </View>
                         </View>
                     </Modal>

@@ -138,9 +138,6 @@ _cancelDemand = async () => {
       console.error(error);
     });
   }
-
-
-
   };
 
 
@@ -222,7 +219,7 @@ render() {
             <TouchableOpacity style={{ flex: 0.20 }} onPress={this._confirmDemand}>
               <Button
                 title=""
-                onPress={()=>this.props.navigation.navigate('GamesList')}
+                onPress={()=>this.props.navigation.navigate('Dashboard')}
                 icon={{
                  type: 'font-awesome',
                  name: 'check',

@@ -2,7 +2,12 @@
 //export const API_URL = "http://51.38.187.216:9090";
 
 //PROD MODE
-export const API_URL = "https://api.dune-table.com";
+//export const API_URL = "https://api.dune-table.com";
+
+//NEW API
+
+export const API_URL = "http://api.dune-table.com:81";
+
 
 //COLOR THEME
 
