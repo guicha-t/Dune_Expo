@@ -360,7 +360,7 @@ export default class Dashboard extends Component {
                   <View style={{flex: 0.3}}></View>
                   <View style={{flex: 0.4}}>
                     <View style={{flex: 0.25}}></View>
-                    <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('UserDemands')}>
+                    <TouchableOpacity style={[styles.buttonCase, {backgroundColor:'#caf5de'}]} onPress={() => this.props.navigation.navigate('UserDemands')}>
                       <Image
                         style={{flex: 1, height: undefined, width: undefined}}
                         source={require('./../../picture/dashboard/notification.png')}
@@ -426,8 +426,7 @@ export default class Dashboard extends Component {
      {this.renderTopBody()}
 
      <View style={styles.midbody}>
-       <View style={styles.leftcase}>
-
+       <View style={{flex: 1, backgroundColor: '#FFF', marginRight: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
            <Text style={styles.subtext}>HISTORIQUE</Text>
@@ -436,7 +435,7 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
          <View style={{flex: 0.2, flexDirection: 'row'}}>
            <View style={{flex: 0.3}}></View>
-           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('ClassList')}>
+           <TouchableOpacity style={[styles.buttonCase, {backgroundColor:'#b1ebf6'}]} onPress={() => this.props.navigation.navigate('ClassList')}>
              <Image
                style={{flex: 1, height: undefined, width: undefined}}
                source={require('./../../picture/dashboard/class.png')}
@@ -448,7 +447,7 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
        </View>
 
-       <View style={styles.rightcase}>
+       <View style={{flex: 1, backgroundColor: '#FFF', marginLeft: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
            <Text style={styles.subtext}>TROMBINOSCOPE</Text>
@@ -457,7 +456,7 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
          <View style={{flex: 0.2, flexDirection: 'row'}}>
            <View style={{flex: 0.3}}></View>
-           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('StudentList')}>
+           <TouchableOpacity style={[styles.buttonCase, {backgroundColor:'#fcc296'}]} onPress={() => this.props.navigation.navigate('StudentList')}>
              <Image
                style={{flex: 1, height: undefined, width: undefined}}
                source={require('./../../picture/dashboard/student.png')}
@@ -471,8 +470,8 @@ export default class Dashboard extends Component {
      </View>
 
      <View style={styles.botbody}>
-       <View style={styles.leftcase}>
 
+     <View style={{flex: 1, backgroundColor: '#FFF', marginRight: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
            <Text style={styles.subtext}>LOGITHÈQUE /</Text>
@@ -481,7 +480,7 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
          <View style={{flex: 0.2, flexDirection: 'row'}}>
            <View style={{flex: 0.3}}></View>
-           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('GamesList')}>
+           <TouchableOpacity style={[styles.buttonCase, {backgroundColor:'#fcebb5'}]} onPress={() => this.props.navigation.navigate('GamesList')}>
              <Image
                style={{flex: 1, height: undefined, width: undefined}}
                source={require('./../../picture/dashboard/store.png')}
@@ -493,8 +492,7 @@ export default class Dashboard extends Component {
          <View style={{flex: 0.1}}></View>
        </View>
 
-       <View style={styles.rightcase}>
-
+       <View style={{flex: 1, backgroundColor: '#FFF', marginLeft: 2, padding: 10}}>
          <View style={{flex: 0.2}}></View>
          <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
            <Text style={styles.subtext}>SCANNER</Text>
@@ -504,7 +502,7 @@ export default class Dashboard extends Component {
 
          <View style={{flex: 0.2, flexDirection: 'row'}}>
            <View style={{flex: 0.3}}></View>
-           <TouchableOpacity style={styles.buttonCase} onPress={() => this.props.navigation.navigate('QRCode')}>
+           <TouchableOpacity style={[styles.buttonCase, {backgroundColor:'#f5bfcd'}]} onPress={() => this.props.navigation.navigate('QRCode')}>
              <Image
                style={{flex: 1, height: undefined, width: undefined}}
                source={require('./../../picture/dashboard/table.png')}
@@ -618,7 +616,7 @@ const styles = StyleSheet.create({
   },
   buttonCase: {
     flex: 0.4,
-    backgroundColor: cfg.SECONDARY,
+    backgroundColor: '#caf5de',
     borderRadius: 200,
     padding: 7,
     borderBottomColor: 'black',

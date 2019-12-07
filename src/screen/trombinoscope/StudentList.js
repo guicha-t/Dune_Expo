@@ -202,7 +202,7 @@ import { Alert, Button, TextInput, View, Text,
          }
        } else {
          return {
-           backgroundColor:cfg.PRIMARY,
+           backgroundColor:"#fcc296",
          }
        }
       }
@@ -231,7 +231,7 @@ import { Alert, Button, TextInput, View, Text,
 
       return (
         <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation}/>
+          <Header navigation={this.props.navigation} colorTheme={'#fcc296'}/>
 
           <View style={styles.classContainer}>
 

@@ -169,7 +169,7 @@ import * as cfg from "./../../Config";
       return (
         <DismissKeyboard>
         <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation}/>
+          <Header navigation={this.props.navigation} colorTheme={"#fcebb5"}/>
           <View style={styles.classContainer}>
           <View style={{width: 60, justifyContent:'center', alignItems:'center', backgroundColor:Store.Back}}>
             <Button
@@ -284,6 +284,7 @@ const styles = StyleSheet.create({
     width: Math.round(Dimensions.get('window').width),
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent:'center',
   },
   input: {
     flex: 1,
@@ -334,7 +335,7 @@ const styles = StyleSheet.create({
     margin:2,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: cfg.PRIMARY,
+    backgroundColor: "#fcebb5",
     borderRadius:10,
   },
   textClass: {

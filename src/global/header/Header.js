@@ -66,7 +66,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: !this.props.colorTheme ? cfg.PRIMARY : this.props.colorTheme}]}>
         <View style={{flex: 0.3, justifyContent:'center', paddingLeft: 10}}>
           <TouchableOpacity onPress={() => this._checkToUMenu(1)}>
             <Image source={require('./../../picture/header/openDrawer.png')} style={{width:24, height:24}}/>
@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
     height: 56,
     flexDirection: 'row',
     elevation: 5,
-    backgroundColor: cfg.PRIMARY,
     borderBottomColor: 'black',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

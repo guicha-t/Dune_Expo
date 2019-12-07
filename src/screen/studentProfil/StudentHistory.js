@@ -227,7 +227,7 @@ export default class StudentHistory extends Component {
        }
      } else {
        return {
-         backgroundColor: cfg.PRIMARY,
+         backgroundColor: "#fcc296",
        }
      }
     }
