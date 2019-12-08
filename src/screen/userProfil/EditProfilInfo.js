@@ -102,6 +102,7 @@ export default class EditProfilInfo extends Component {
           token: Store.Token,
         },
         body: JSON.stringify({
+          idUser: this.state.id,
           oldPassword: this.state.oldpassword,
           newPassword: this.state.newpassword,
         }),
@@ -110,7 +111,7 @@ export default class EditProfilInfo extends Component {
             if (responseJson.status === 200) {
               this.props.navigation.navigate('Profil');
             } else {
-              Alert.alert('Information érronée')
+              Alert.alert(JSON.stringify(responseJson.error))
             }
       })
       .catch((error) => {
@@ -294,8 +295,8 @@ export default class EditProfilInfo extends Component {
               label={'Ancien mot de passe'}
               style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
               secureTextEntry={this.state.pwdhide}
-              value={this.state.oldPassword}
-              onChangeText={(oldPassword) => this.setState({ oldPassword })}
+              value={this.state.oldpassword}
+              onChangeText={(oldpassword) => this.setState({ oldpassword })}
               iconClass={FontAwesomeIcon}
               iconName={'lock'}
               iconColor={'#FFF'}
@@ -367,10 +368,6 @@ export default class EditProfilInfo extends Component {
 
             <View style={{height: 220, justifyContent:'center', alignItems:'center'}}>
             </View>
-
-
-
-
           </ScrollView>
 
         </KeyboardAvoidingView>

@@ -54,7 +54,6 @@ export default class RateApp extends Component {
 
 
 
-
    fetch(cfg.API_URL + '/store/getUserAvis/' + Store.AppId, {
       method: 'GET',
       headers: {
@@ -139,9 +138,6 @@ _cancelDemand = async () => {
       console.error(error);
     });
   }
-
-
-
   };
 
 
@@ -199,7 +195,7 @@ render() {
             <TouchableOpacity style={{ flex: 0.40 }} onPress={this._cancelDemand}>
               <Button
                 title=""
-                onPress={()=>this.props.navigation.navigate('Dashboard')}
+                onPress={()=>this.props.navigation.navigate('GamesList')}
                 icon={{
                  type: 'font-awesome',
                  name: 'times',

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, TouchableHighlight, Modal} from 'react-native';
+import { Alert, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, AsyncStorage, FlatList, TouchableHighlight, Modal} from 'react-native';
 import { observer } from 'mobx-react';
 import { List, ListItem } from "react-native-elements";
+import { Avatar, Icon, Button } from 'react-native-elements';
+import AlertPro from "react-native-alert-pro";
 import GridView from 'react-native-super-grid';
 import moment from "moment";
 import 'moment/locale/fr'
 moment.locale('fr')
-
 
 import Header from './../../global/header/Header';
 import Store from './../../global/store/Store';
@@ -25,7 +26,8 @@ export default class UserDemands extends Component {
         dateDemandeModal: null,
         commentaireModal: null,
         idToNotify: null,
-        idNotif: null
+        idNotif: null,
+        TokenLeft: 0,
     }
 
     this.ts = new Date();
@@ -34,6 +36,26 @@ export default class UserDemands extends Component {
   }
 
   componentDidMount(){
+
+
+    fetch(cfg.API_URL + '/store/getAppStatus/' + Store.AppId, {
+       method: 'GET',
+       headers: {
+         Accept: 'application/json',
+         'Content-Type': 'application/json',
+         token: Store.Token,
+       },
+     }).then((response) => response.json())
+         .then((responseJson) => {
+           if (JSON.stringify(responseJson.apps_left) != null)
+             this.setState({'TokenLeft':JSON.stringify(responseJson.apps_left)})
+         })
+         .catch((error) => {
+           console.error(error);
+         });
+
+
+
    fetch(cfg.API_URL + '/notifs/popUpMenu', {
       method: 'GET',
       headers: {
@@ -87,27 +109,51 @@ export default class UserDemands extends Component {
   }
 
   _confirmDemand = () => {
-    fetch(cfg.API_URL + '/store/validating', {
+
+  if (this.state.TokenLeft <= 0){
+    this.AlertPro.open()
+  }
+  else{
+  fetch(cfg.API_URL + '/store/buyAppFree', {
       method: 'POST',
+      Accept: 'application/json',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
         token: Store.Token,
       },
       body: JSON.stringify({
-        idDemande: this.state.idToNotify,
-        validate: 1,
-      }),
+       idApp: this.state.idAppModal.toString(),
+      })
     }).then((response) => response.json())
-        .then((responseJson) => {
-            this.readNotification();
-            this.ShowModalFunction(!this.state.ModalVisibleStatus);
-            this.props.navigation.navigate('Dashboard');
+    .then((responseJson) => {
+        if (responseJson.status === 200){
+            fetch(cfg.API_URL + '/store/validating', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                token: Store.Token,
+              },
+              body: JSON.stringify({
+                idDemande: this.state.idToNotify,
+                validate: 1,
+              }),
+            }).then((response) => response.json())
+                .then((responseJson) => {
+                    this.readNotification();
+                    this.ShowModalFunction(!this.state.ModalVisibleStatus);
+                    this.props.navigation.navigate('Dashboard');
+            })
+            .catch((error) => {
+                Alert.alert("ERROR", error);
+              console.error(error);
+            });
+        }
     })
     .catch((error) => {
-        Alert.alert("ERROR", error);
       console.error(error);
     });
+    }
   }
 
 
@@ -162,33 +208,71 @@ export default class UserDemands extends Component {
 
     }
 
+    RenderUserDemands(){
+
+    if (Object.keys(this.state.GamesRequested).length > 0)
+      return(
+        <List>
+            <FlatList
+                data={this.state.GamesRequested}
+                extraData={this.state}
+                rightIcon={'../../picture/profil/eye.png'}
+                style={{backgroundColor:Store.Back}}
+                renderItem={({ item }) => (
+                    <ListItem
+                        titleStyle={{color:Store.Text2}}
+                        title={`${ item.nomApp }`}
+                        onPress={() => this.ShowProfInModal(true, item)}
+                    />
+                    )}
+                keyExtractor={item => item.idNotif.toString()}
+            />
+        </List>
+      );
+    else
+      return(
+        <Text style={{fontSize:20, color:Store.Text2, textAlign:'center', paddingTop:80}}> Aucune notification. </Text>
+      );
+
+    }
+
 
     render() {
     return (
         <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation} colorTheme={"#caf5de"}/>
-    	<View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
-          <Text style={{fontSize:20, color:Store.Text2}}>
-             Application(s) demandée(s)
-          </Text>
-        </View>
+          <Header navigation={this.props.navigation}/>
+          <View style={{flex:1, backgroundColor:Store.Back}}>
+          <View style={{marginTop:15, backgroundColor:Store.Back}}>
+            <Button
+              title=""
+              onPress={()=>this.props.navigation.navigate('GamesList')}
+              icon={{
+               type: 'font-awesome',
+               name: 'arrow-left',
+               size: 15,
+               color: 'white',
+             }}
+              buttonStyle={{
+                backgroundColor: cfg.SECONDARY,
+                borderWidth: 2,
+                borderColor: 'white',
+                borderRadius: 30,
+                width: 60,
+                paddingLeft: 20,
+              }}
+              containerStyle={{ height: 50, width: 250 }}
+              titleStyle={{ fontWeight: 'bold' }}
+            />
+          </View>
+            <View style={{flex:0.2, alignItems: 'center', justifyContent:'center', backgroundColor: Store.Back}}>
+              <Text style={{fontSize:20, color:Store.Text2, textAlign:'center'}}>
+                 Accepter une demande d'application vous fera utiliser l'un de vos {this.state.TokenLeft.toString()} crédit(s) gratuit(s).
+              </Text>
+            </View>
             <View style={{flex: 0.8, backgroundColor:Store.Back}}>
-                <List>
-                    <FlatList
-                        data={this.state.GamesRequested}
-                        extraData={this.state}
-                        rightIcon={'../../picture/profil/eye.png'}
-                        style={{backgroundColor:Store.Back}}
-                        renderItem={({ item }) => (
-                            <ListItem
-                                titleStyle={{color:Store.Text2}}
-                                title={`${ item.nomApp }`}
-                                onPress={() => this.ShowProfInModal(true, item)}
-                            />
-                            )}
-                        keyExtractor={item => item.idNotif.toString()}
-                    />
-                </List>
+
+                {this.RenderUserDemands()}
+
                 <View>
                     <Modal
                         transparent={true}
@@ -200,7 +284,7 @@ export default class UserDemands extends Component {
                                     <Text style={styles.TextStyle}> Vous avez une demande sur l'application
                                             { " " + this.state.nomAppModal }.
                                     </Text>
-                                <Text onPress={() => this.props.navigation.navigate('GameContainer', {id: this.state.idAppModal})}  style={{textDecorationLine: 'underline',fontSize: 20, color: "#fff", textAlign: 'center'}}>
+                                <Text onPress={() => this.props.navigation.navigate('GameContainer', {id: this.state.idAppModal})}  style={{textDecorationLine: 'underline',fontSize: 20, color: Store.TRose, textAlign: 'center'}}>
                                     Voir l'application
                                 </Text>
                                 <Text  style={styles.TextProfStyle}> Cette demande a été faite par:</Text>
@@ -216,7 +300,7 @@ export default class UserDemands extends Component {
                                                 Alert.alert(moment(item.dateDemande).format("DD-MM-YYYY à HH:mm:ss"), item.commentaire);
                                             }}>
                                                 <View style={{flex: 1, marginLeft: 10, marginRight: 10}}>
-                                                    <View style={{flex: 0.7, paddingTop: 10}}>
+                                                    <View style={{flex: 1, paddingTop: 10}}>
                                                         <Image
                                                             style={{flex: 1, borderRadius: 10}}
                                                             source={{uri: cfg.API_URL + '/files/profs/' + item.picPath}}
@@ -246,12 +330,65 @@ export default class UserDemands extends Component {
                                         />
                                     </TouchableOpacity>
                                 </View>
-                                <Button title={'Retour'} color={cfg.SECONDARY} onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                                <Button
+                                  title={'RETOUR'}
+                                  icon={{
+                                    type: 'font-awesome',
+                                    name: 'arrow-left',
+                                    size: 15,
+                                    color: 'white',
+                                  }}
+                                   onPress={() => {this.ShowModalFunction(!this.state.ModalVisibleStatus)}}
+                                     buttonStyle={{
+                                       backgroundColor: cfg.SECONDARY,
+                                       borderColor: 'white',
+                                       borderRadius: 30,
+                                       width: 180,
+                                       height:50,
+                                       alignItems:'center',
+                                       paddingLeft: 10,
+                                       justifyContent:'center',
+                                    }}
+                                />
                             </View>
                         </View>
                     </Modal>
                 </View>
             </View>
+          </View>
+          <AlertPro
+            ref={ref => {
+              this.AlertPro = ref;
+            }}
+            onConfirm={() => this.AlertPro.close()}
+            title="ATTENTION"
+            message={"Vous n'avez plus assez de crédit gratuit, pour acheter cette application, rendez-vous sur l'application web pour choisir un autre moyen de paiement."}
+            textConfirm="RETOUR"
+            closeOnPressMask={true}
+            showCancel={false}
+            customStyles={{
+              mask: {
+                backgroundColor: "transparent"
+              },
+              container: {
+                color: Store.Text2,
+                borderWidth: 1,
+                borderColor: Store.Text2,
+                shadowColor: "#000000",
+                shadowOpacity: 0.1,
+                shadowRadius: 10
+              },
+              title: {
+                color: 'red'
+              },
+              buttonConfirm: {
+                backgroundColor: Store.Text2
+              },
+              message: {
+                color: Store.Text2
+              }
+            }}
+          />
       </View>
     );
   }
@@ -273,7 +410,7 @@ const styles = StyleSheet.create({
 
   mainContainer: {
     flex:1,
-    backgroundColor: '#fff',
+    backgroundColor: Store.Back,
   },
   classContainer: {
     flex: 0.1,

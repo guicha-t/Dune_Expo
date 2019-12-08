@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, View, Text, StyleSheet,
+import { Alert, TextInput, View, Text, StyleSheet,
   AsyncStorage, Image, TouchableOpacity, TouchableHighlight,
   Modal, ActivityIndicator, Dimensions} from 'react-native';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import GridView from 'react-native-super-grid';
+import { Avatar, Icon, Button } from 'react-native-elements';
 
 import Header from './../../global/header/Header';
 import Loading from './../../global/loading/Loading';
@@ -308,7 +309,26 @@ export default class Dashboard extends Component {
                                         </View>
                                     )}
                                 />
-                                <Button title={'Retour'} color={cfg.SECONDARY} onPress={() => { this.ShowModalFunction(!this.state.ModalVisibleStatus)} } />
+                                <Button
+                                  title={'RETOUR'}
+                                  icon={{
+                                    type: 'font-awesome',
+                                    name: 'arrow-left',
+                                    size: 15,
+                                    color: 'white',
+                                  }}
+                                   onPress={() => {this.ShowModalFunction(!this.state.ModalVisibleStatus)}}
+                                     buttonStyle={{
+                                       backgroundColor: cfg.SECONDARY,
+                                       borderColor: 'white',
+                                       borderRadius: 30,
+                                       width: 180,
+                                       height:50,
+                                       alignItems:'center',
+                                       paddingLeft: 10,
+                                       justifyContent:'center',
+                                    }}
+                                />
                             </View>
                         </View>
                     </Modal>
@@ -333,7 +353,7 @@ export default class Dashboard extends Component {
               </View>
               <View style={{flex: 0.4, backgroundColor: Store.Back, borderTopWidth: 5, borderColor: Store.Back === "#FFF" ? "#F9F9F9" : "#444444" , flexDirection: 'row'}}>
                 <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>
-                  <Text style={[styles.subtext, {color: Store.Text2}]}>NOTIFICATION</Text>
+                  <Text style={[styles.subtext, {color: Store.Text2}]}>{this.state.Notif} NOTIFICATION{this.addplural(this.state.Notif)}</Text>
                 </View>
 
                 <View style={{flex: 0.5, flexDirection:'row', padding: 5}}>

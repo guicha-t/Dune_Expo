@@ -89,7 +89,7 @@ export default class StudentProfil extends Component {
   }
 
   showNoResult(param) {
-    if (this.state.Gradebook == null) {
+    if (this.state.Gradebook == "") {
         return (
           <View style={{flex: 1, alignItems: 'center', paddingTop: 60}}>
             <Text style={{color: Store.Text2}}>Aucun résultat à afficher</Text>
