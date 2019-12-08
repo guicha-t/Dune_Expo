@@ -331,7 +331,7 @@ import { Alert, Button, TextInput, View, Text,
             renderItem={item => (
               <View style={styles.itemContainer}>
                 <TouchableOpacity style={{flex: 1, backgroundColor: Store.DarkEnable === true ? "#444444" : "#FFF" , padding: 4, borderWidth: 2, borderColor:cfg.SECONDARY}} onPress={() => this._goToStudentProfil(item.idEleve)}>
-                  <ImageBackground source={require('./../../picture/trombinoscope/defaultStudent.png')} imageStyle={{resizeMode: 'contain'}} style={{flex: 0.7}}>
+                  <ImageBackground source={require('./../../picture/header/dunelogo.png')} imageStyle={{resizeMode: 'contain'}} style={{flex: 0.7}}>
                     <Image
                       style={{flex: 1}}
                       source={{uri: cfg.API_URL + '/files/eleves/' + item.idEleve + '-eleve.png'}}
