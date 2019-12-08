@@ -55,6 +55,17 @@ export default class GameList extends Component {
       }
   }
 
+
+  showNoResult(param) {
+    if (this.state.Games == '') {
+        return (
+          <View style={{flex: 1, alignItems: 'center', paddingTop: 60}}>
+            <Text style={{color: Store.Text2}}>Aucun résultat à afficher</Text>
+          </View>
+        )
+      }
+  }
+
   render() {
 
     if (this.state.loading) {
@@ -94,6 +105,7 @@ export default class GameList extends Component {
 
 
           <View style={{flex: 0.9}}>
+            {this.showNoResult()}
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Games}
@@ -118,7 +130,6 @@ export default class GameList extends Component {
                   </View>
 
                   <View style={{flex: 0.4}}>
-                    <Text style={styles.subtextwhite}>Moyenne: {item.moyenne.toFixed(2)}</Text>
                   </View>
 
                   <View style={{flex: 0.3}}>
@@ -131,7 +142,6 @@ export default class GameList extends Component {
             keyExtractor={item => item.idGP.toString()}
             />
           </View>
-
         </View>
       </View>
     );

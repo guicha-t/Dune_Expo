@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, Text,
   StyleSheet, AsyncStorage, ListView, TouchableOpacity,
-  Picker, Item, FlatList, Image, Keyboard, ActivityIndicator, Dimensions} from 'react-native';
+  Picker, Item, FlatList, Image, Keyboard, ActivityIndicator,
+  Dimensions, ImageBackground, TouchableHighlight} from 'react-native';
   import { observer } from 'mobx-react';
   import { SearchBar, Icon } from 'react-native-elements';
 
@@ -26,6 +27,7 @@ import { Alert, Button, TextInput, View, Text,
         Search: '',
         Class: 0,
         loading: true,
+        Images: [],
       }
     }
 
@@ -207,6 +209,17 @@ import { Alert, Button, TextInput, View, Text,
        }
       }
 
+    showNoResult(param) {
+      if (this.state.Trombi == '') {
+          return (
+            <View style={{flex: 1, alignItems: 'center', paddingTop: 60}}>
+              <Text style={{color: Store.Text2}}>Aucun résultat à afficher</Text>
+            </View>
+          )
+        }
+    }
+
+
     setColorTextFocused = function(param) {
       if (this.state.Class === param) {
         return {
@@ -218,8 +231,6 @@ import { Alert, Button, TextInput, View, Text,
         }
       }
      }
-
-
 
     render() {
 
@@ -258,6 +269,7 @@ import { Alert, Button, TextInput, View, Text,
             </View>
 
             <View style={{flex: 0.8}}>
+
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -310,6 +322,7 @@ import { Alert, Button, TextInput, View, Text,
         </View>
 
         <View style={{flex: 1}}>
+          {this.showNoResult()}
           <GridView
             itemDimension={100}
             spacing={5}
@@ -318,24 +331,22 @@ import { Alert, Button, TextInput, View, Text,
             renderItem={item => (
               <View style={styles.itemContainer}>
                 <TouchableOpacity style={{flex: 1, backgroundColor: Store.DarkEnable === true ? "#444444" : "#FFF" , padding: 4, borderWidth: 2, borderColor:cfg.SECONDARY}} onPress={() => this._goToStudentProfil(item.idEleve)}>
-
-                    <View style={{flex: 0.7}}>
-                      <Image
-                        style={{flex: 1}}
-                        source={{uri: cfg.API_URL + '/files/eleves/' + item.idEleve + '-eleve.png'}}
-                        resizeMode="contain"
-                        />
-                    </View>
-
-                    <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-                      <Text style={[styles.itemName, {color: Store.Text2}]}>{item.nomEleve.toUpperCase()}</Text>
-                      <Text style={[styles.itemName, {color: Store.Text2}]}>{item.prenomEleve}</Text>
-                    </View>
-
+                  <ImageBackground source={require('./../../picture/trombinoscope/defaultStudent.png')} imageStyle={{resizeMode: 'contain'}} style={{flex: 0.7}}>
+                    <Image
+                      style={{flex: 1, borderRadius: 200}}
+                      source={{uri: cfg.API_URL + '/files/eleves/' + item.idEleve + '-eleve.png'}}
+                      resizeMode="contain"
+                      />
+                  </ImageBackground>
+                  <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={[styles.itemName, {color: Store.Text2}]}>{item.nomEleve.toUpperCase()}</Text>
+                    <Text style={[styles.itemName, {color: Store.Text2}]}>{item.prenomEleve}</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
             )}
             />
+            <Text>{JSON.stringify(this.state.Images)}</Text>
         </View>
       </View>
     );

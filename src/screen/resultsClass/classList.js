@@ -67,6 +67,16 @@ export default class ClassList extends Component {
       }
   }
 
+  showNoResult(param) {
+    if (this.state.Classes == '') {
+        return (
+          <View style={{flex: 1, alignItems: 'center', paddingTop: 60}}>
+            <Text style={{color: Store.Text2}}>Aucun résultat à afficher</Text>
+          </View>
+        )
+      }
+  }
+
   addplural(param) {
       if (param === '') {
           return;
@@ -119,6 +129,7 @@ export default class ClassList extends Component {
           </View>
 
           <View style={{flex: 0.9}}>
+            {this.showNoResult()}
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Classes}

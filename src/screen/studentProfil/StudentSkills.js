@@ -79,7 +79,25 @@ export default class StudentSkills extends Component {
     }
   };
 
+  showNoResult(param) {
+    var i = 0;
+    var j = 0;
 
+    while (this.state.studentSkill[i])
+    {
+      if (this.state.studentSkill[i].valide != 0) {
+        j = 1;
+      }
+      i++;
+    }
+    if (j == 0) {
+        return (
+          <View style={{flex: 1, alignItems: 'center', paddingTop: 60}}>
+            <Text style={{color: Store.Text2}}>Aucun résultat à afficher</Text>
+          </View>
+        )
+      }
+  }
 
   _addSkill = async (param) => {
     fetch(cfg.API_URL + '/competences/validateCompStud', {
@@ -153,7 +171,6 @@ export default class StudentSkills extends Component {
             console.error(error);
           });
 
-          console.warn(JSON.stringify(responseJson))
     })
     .catch((error) => {
       console.error(error);
@@ -221,6 +238,12 @@ export default class StudentSkills extends Component {
                       />
                   </View>
                 </View>
+                <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
+                  <Text style={{color: Store.Text2, fontSize: 20, fontWeight: 'bold'}}>
+                    VALIDATION
+                  </Text>
+                </View>
+                <View style={{flex: 0.3}}></View>
               </View>
 
                <View style={{flex: 0.9}}>
@@ -231,7 +254,7 @@ export default class StudentSkills extends Component {
                    renderItem={({item}) =>
                    <TouchableOpacity
                      onPress={() => this._confirmSelection(item)}
-                     style={{flex: 1, backgroundColor: cfg.SECONDARY, marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
+                     style={{flex: 1, backgroundColor: cfg.SECONDARY, marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center', marginLeft: 20, marginRight: 20}}>
                      <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
                        <Text style={{fontSize: 20, color: '#FFF'}}>{item.libelleComp}</Text>
                      </View>
@@ -287,19 +310,22 @@ export default class StudentSkills extends Component {
           </View>
 
           <View style={{flex: 0.8}}>
-
+            {this.showNoResult()}
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.studentSkill}
               showsVerticalScrollIndicator={false}
-              renderItem={({item}) =>
-              <TouchableOpacity
-                onLongPress={() => this._confirmDeletion(item)}
-                style={{flex: 1, backgroundColor: cfg.SECONDARY, marginBottom: 6, padding: 5, flexDirection:'row', justifyContent:'center'}}>
-                <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
-                  <Text style={{fontSize: 20, color: '#FFF'}}>{item.libelleComp}</Text>
-                </View>
-              </TouchableOpacity>
+              renderItem={({item}) => {
+                if (item.valide == "1") {
+                return <TouchableOpacity
+                  onLongPress={() => this._confirmDeletion(item)}
+                  style={{flex: 1, backgroundColor: cfg.SECONDARY, marginBottom: 6, padding: 5, marginLeft: 20, marginRight: 20, flexDirection:'row', justifyContent:'center'}}>
+                  <View style={{flex: 1, paddingLeft: 10, flexDirection: 'row'}}>
+                    <Text style={{fontSize: 20, color: '#FFF'}}>{item.libelleComp}</Text>
+                  </View>
+                </TouchableOpacity>
+              }
+            }
             }
             keyExtractor={item => item.idComp.toString()}
             />

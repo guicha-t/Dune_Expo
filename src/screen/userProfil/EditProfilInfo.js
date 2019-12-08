@@ -27,6 +27,7 @@ export default class EditProfilInfo extends Component {
       newpasswordbis: '',
       pwdhide: true,
       hideIcon: 'eye',
+      focusEmail: false,
     }
   }
 
@@ -57,28 +58,37 @@ export default class EditProfilInfo extends Component {
   };
 
   _confirmEditMail = async () => {
-    fetch(cfg.API_URL + '/users/changeEmail', {
-      method: 'PUT',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: Store.Token,
-      },
-      body: JSON.stringify({
-        password: this.state.password,
-        newEmail: this.state.email,
-      }),
-    }).then((response) => response.json())
-        .then((responseJson) => {
-          if (responseJson.status === 200) {
-            this.props.navigation.navigate('Profil');
-          } else {
-            Alert.alert('information érronée')
-          }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+    if (this.state.focusEmail == false) {
+      this.setState({'focusEmail':true})
+    } else {
+      fetch(cfg.API_URL + '/users/changeEmail', {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          token: Store.Token,
+        },
+        body: JSON.stringify({
+          password: this.state.password,
+          newEmail: this.state.email,
+        }),
+      }).then((response) => response.json())
+          .then((responseJson) => {
+            if (responseJson.status === 200) {
+              this.setState({'focusEmail':false})
+              this.props.navigation.navigate('Profil');
+            } else {
+              Alert.alert('information érronée')
+            }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+
+    }
+
   };
 
   _confirmEditPwd = async () => {
@@ -122,6 +132,30 @@ export default class EditProfilInfo extends Component {
       this.setState({'hideIcon':'eye'})
     }
   };
+
+
+  confirmEmailWithPwd(param) {
+    if (this.state.focusEmail) {
+        return (
+          <Fumi
+                label={'Mot de passe'}
+                style={{ width: width-40, backgroundColor:cfg.PRIMARY, marginTop: 10}}
+                secureTextEntry={this.state.pwdhide}
+                value={this.state.password}
+                onChangeText={(password) => this.setState({ password })}
+                iconClass={FontAwesomeIcon}
+                iconName={'lock'}
+                iconColor={cfg.SECONDARY}
+                labelStyle={{ color: cfg.SECONDARY }}
+                iconSize={20}
+                iconWidth={40}
+                inputPadding={16}
+                />
+        )
+      }
+  }
+
+
 
   render() {
     return(
@@ -214,20 +248,7 @@ export default class EditProfilInfo extends Component {
                 iconWidth={40}
                 inputPadding={16}
                 />
-              <Fumi
-                label={'Mot de passe'}
-                style={{ width: width-40, backgroundColor:cfg.SECONDARY, marginTop: 10}}
-                secureTextEntry={this.state.pwdhide}
-                value={this.state.password}
-                onChangeText={(password) => this.setState({ password })}
-                iconClass={FontAwesomeIcon}
-                iconName={'lock'}
-                iconColor={'#FFF'}
-                labelStyle={{ color: '#FFF' }}
-                iconSize={20}
-                iconWidth={40}
-                inputPadding={16}
-                />
+                {this.confirmEmailWithPwd()}
 
               <View style={{flex: 1, flexDirection:'row'}}>
                 <View style={{flex: 0.5, alignItems:'center', justifyContent:'center'}}>

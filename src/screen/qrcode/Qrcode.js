@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Linking, Dimensions, LayoutAnimation, Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { Alert, Linking, Dimensions, LayoutAnimation, Text,
+  View, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import AlertPro from "react-native-alert-pro";

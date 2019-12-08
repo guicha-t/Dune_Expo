@@ -3,10 +3,10 @@
 
 
 //DEV MODE
-//export const API_URL = "http://api.dune-table.com:81/";
+export const API_URL = "http://api.dune-table.com:81";
 
 //PROD MODE
-export const API_URL = "https://api.dune-table.com";
+//export const API_URL = "https://api.dune-table.com";
 
 //COLOR THEME
 

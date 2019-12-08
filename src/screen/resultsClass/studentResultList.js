@@ -94,6 +94,7 @@ export default class StudentResultList extends Component {
     }
    }
 
+
   render() {
     if (this.state.loading) {
         return (
@@ -105,7 +106,7 @@ export default class StudentResultList extends Component {
     return(
       <View style={{flex:1}}>
         <Header navigation={this.props.navigation} colorTheme={"#b1ebf6"}/>
-        <View style={styles.body}>
+        <View style={[styles.body, {backgroundColor: Store.Back}]}>
           <View style={{flex: 0.2, flexDirection:'row'}}>
             <View style={{flex: 0.2, justifyContent: 'center', paddingLeft: 6}}>
               <Icon
@@ -121,10 +122,8 @@ export default class StudentResultList extends Component {
             </View>
 
             <View style={{flex: 0.6, alignItems:'center', justifyContent:'center'}}>
-              <Text style={styles.primetextblue}>{this.state.Game.nameGame.toUpperCase()}</Text>
-              <Text style={styles.subtextblue}>{this.state.Game.matiere}</Text>
-              <Text style={styles.subtextblue}>{Moment(this.state.Game.date).locale('fr').format('DD/MM/YYYY HH:mm')}</Text>
-              <Text style={styles.subtextblue}>Moyenne: {this.state.Game.moyenne.toFixed(2)}</Text>
+              <Text style={[styles.primetextblue, {color:Store.Text2}]}>{this.state.Game.nameGame.toUpperCase()}</Text>
+              <Text style={[styles.subtextblue, {color:Store.Text2}]}>{Moment(this.state.Game.date).locale('fr').format('DD/MM/YYYY HH:mm')}</Text>
             </View>
 
             <View style={{flex: 0.2, padding: 5}}>
@@ -163,28 +162,43 @@ export default class StudentResultList extends Component {
 
 
           <View style={{flex: 0.8}}>
+
+
             <FlatList
               showsHorizontalScrollIndicator={false}
               data={this.state.Student}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) =>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('StudentContainer', {idStudent: item.idEleve, idBack: '1', idGameType: this.state.Game.idMatiere})}
-                style={[styles.containerFlatList]}>
 
-                <View style={{flex: 0.8, paddingLeft: 10, justifyContent:'center'}}>
-                    <Text style={styles.primetextwhite}>{item.nom.toUpperCase()}</Text>
-                    <Text style={styles.subtextwhite}>{item.prenom}</Text>
+              <View style={{flex: 1}}>
+                <View style={[styles.containerFlatList]}>
+                  <Text style={styles.primetextwhite}>{item.libelleComp}</Text>
                 </View>
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  data={item.notes}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({item}) =>
+                    <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('StudentContainer', {idStudent: item.idEleve, idBack: '1', idGameType: item.idComp})}
+                    style={{flex: 1, backgroundColor: '#b1ebf6', height: 60, padding: 5, borderBottomWidth: 1, borderColor: cfg.SECONDARY, borderLeftWidth: 1, borderRightWidth: 1, flexDirection: 'row'}}>
+                      <View style={{flex: 0.8, justifyContent:'center'}}>
+                        <Text style={styles.subtextblue}>{item.prenomEleve} {item.nomEleve}</Text>
+                      </View>
+                      <View style={[styles.caseScore, this.setColorAccordingNote(item.score)]}>
+                        <Text style={styles.primetextwhite}>{item.score}</Text>
+                      </View>
+                    </TouchableOpacity>
+              }
+              keyExtractor={item => item.idEleve.toString()}
+              />
 
-                <View style={[styles.containerNoteFlatList, this.setColorAccordingNote(item.note)]}>
-                  <Text style={styles.primetextwhite}>{item.note}</Text>
-                </View>
+            </View>
 
-              </TouchableOpacity>
             }
-            keyExtractor={item => item.idEleve.toString()}
+            keyExtractor={item => item.idComp.toString()}
             />
+
           </View>
         </View>
       </View>
@@ -213,6 +227,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FFF',
   },
+  caseScore: {
+    flex: 0.2,
+    justifyContent:'center',
+    alignItems:'center',
+  },
   primetextblue: {
     fontSize: 20,
     color: cfg.SECONDARY,
@@ -224,10 +243,9 @@ const styles = StyleSheet.create({
   },
   containerFlatList: {
     flex: 1,
-    marginBottom: 6,
+    marginTop: 10,
     padding: 5,
     backgroundColor: cfg.SECONDARY,
-    flexDirection:'row',
     justifyContent:'center',
   },
   containerNoteFlatList: {

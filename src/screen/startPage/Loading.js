@@ -63,7 +63,6 @@ export default class AuthLoadingScreen extends Component {
         Store.EnableDarkTheme(true)
       } else {
         Store.EnableDarkTheme(false)
-
       }
       if ((responseJson.response != 'Token valid') && (localToken))
       {
@@ -80,7 +79,7 @@ export default class AuthLoadingScreen extends Component {
           Store.setToken(localToken)
           Store.setTypeUser(localType)
         }
-        this.props.navigation.navigate(localToken ? 'StudentList' : 'Start');
+        this.props.navigation.navigate(localToken ? 'Dashboard' : 'Start');
       }
 
       })

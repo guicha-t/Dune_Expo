@@ -66,18 +66,6 @@ _firstLogin = async () => {
   }
 };
 
-
-  /*async _removeItemValue(key) {
-    try {
-      await AsyncStorage.removeItem(key);
-      return true;
-    }
-    catch(exception) {
-      return false;
-    }
-  }*/
-
-
   onLogin() {
     const { username, password } = this.state;
 

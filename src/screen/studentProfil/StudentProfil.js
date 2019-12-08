@@ -88,6 +88,15 @@ export default class StudentProfil extends Component {
       }
   }
 
+  showNoResult(param) {
+    if (this.state.Gradebook == null) {
+        return (
+          <View style={{flex: 1, alignItems: 'center', paddingTop: 60}}>
+            <Text style={{color: Store.Text2}}>Aucun résultat à afficher</Text>
+          </View>
+        )
+      }
+  }
 
   render() {
       const { navigation, idStudent, screenProps } = { ...this.props };
@@ -165,6 +174,7 @@ export default class StudentProfil extends Component {
             </View>
 
             <View style={{flex: 1}}>
+              {this.showNoResult()}
               <FlatList
                 showsHorizontalScrollIndicator={false}
                 data={this.state.Gradebook}
@@ -176,10 +186,10 @@ export default class StudentProfil extends Component {
                     <Text style={styles.gridtextblue}>{item.nbPlayed} résultat{this.addplural(item.nbPlayed.toString())}</Text>
                   </View>
                   <View style={{flex: 0.2, justifyContent:'center', alignItems:'center', borderRightWidth: 1, borderColor: cfg.SECONDARY}}>
-                    <Text style={styles.gridtextblue}>{item.moyenne.toFixed(2)}</Text>
+                    <Text style={styles.gridtextblue}>{parseFloat(item.moyenne, 10).toFixed(2)}</Text>
                   </View>
                   <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
-                    <Text style={styles.gridtextblue}>{item.moyenneClasse.toFixed(2)}</Text>
+                    <Text style={styles.gridtextblue}>{parseFloat(item.moyenneClasse, 10).toFixed(2)}</Text>
                   </View>
                 </View>
               }

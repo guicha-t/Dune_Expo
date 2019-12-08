@@ -17,7 +17,7 @@ const Tabs = createBottomTabNavigator({
   'Competences': StudentSkills,
   'Profil': StudentProfil,
 }, {
-  initialRouteName: 'Competences',
+  initialRouteName: 'Historique',
   tabBarOptions: {
     activeBackgroundColor: '#f2b88c',
     inactiveBackgroundColor:"#fcc296",
@@ -33,7 +33,7 @@ export default class StudentContainer extends Component {
     this.state = {
       idStudent: this.props.navigation.getParam('idStudent', 'Unknown'),
       idBack: this.props.navigation.getParam('idBack', 'Unknown'),
-      idGameType: this.props.navigation.getParam('ididGameType', 'Unknown'),
+      idGameType: this.props.navigation.getParam('idGameType', 'Unknown'),
 
     }
   }
