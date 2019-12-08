@@ -36,6 +36,8 @@ export default class Dashboard extends Component {
 
   componentWillMount() {
 
+        Store.Flog = 1;
+
         if (Store.TypeUser != 2){
           fetch(cfg.API_URL + '/notifs/popUpMenu', {
           method: 'GET',

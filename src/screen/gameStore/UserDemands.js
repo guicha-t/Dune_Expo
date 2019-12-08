@@ -3,6 +3,7 @@ import { Alert, TextInput, View, Text, StyleSheet, ScrollView, Image, TouchableO
 import { observer } from 'mobx-react';
 import { List, ListItem } from "react-native-elements";
 import { Avatar, Icon, Button } from 'react-native-elements';
+import AlertPro from "react-native-alert-pro";
 import GridView from 'react-native-super-grid';
 import moment from "moment";
 import 'moment/locale/fr'
@@ -109,6 +110,10 @@ export default class UserDemands extends Component {
 
   _confirmDemand = () => {
 
+  if (this.state.TokenLeft <= 0){
+    this.AlertPro.open()
+  }
+  else{
   fetch(cfg.API_URL + '/store/buyAppFree', {
       method: 'POST',
       Accept: 'application/json',
@@ -148,6 +153,7 @@ export default class UserDemands extends Component {
     .catch((error) => {
       console.error(error);
     });
+    }
   }
 
 
@@ -225,7 +231,7 @@ export default class UserDemands extends Component {
       );
     else
       return(
-        <Text style={{fontSize:20, color:Store.Text2, textAlign:'center'}}> Aucune notification </Text>
+        <Text style={{fontSize:20, color:Store.Text2, textAlign:'center', paddingTop:80}}> Aucune notification. </Text>
       );
 
     }
@@ -350,6 +356,39 @@ export default class UserDemands extends Component {
                 </View>
             </View>
           </View>
+          <AlertPro
+            ref={ref => {
+              this.AlertPro = ref;
+            }}
+            onConfirm={() => this.AlertPro.close()}
+            title="ATTENTION"
+            message={"Vous n'avez plus assez de crédit gratuit, pour acheter cette application, rendez-vous sur l'application web pour choisir un autre moyen de paiement."}
+            textConfirm="RETOUR"
+            closeOnPressMask={true}
+            showCancel={false}
+            customStyles={{
+              mask: {
+                backgroundColor: "transparent"
+              },
+              container: {
+                color: Store.Text2,
+                borderWidth: 1,
+                borderColor: Store.Text2,
+                shadowColor: "#000000",
+                shadowOpacity: 0.1,
+                shadowRadius: 10
+              },
+              title: {
+                color: 'red'
+              },
+              buttonConfirm: {
+                backgroundColor: Store.Text2
+              },
+              message: {
+                color: Store.Text2
+              }
+            }}
+          />
       </View>
     );
   }
