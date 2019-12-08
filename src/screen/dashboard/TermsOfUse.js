@@ -4,7 +4,6 @@ import { View, Text, ScrollView, Dimensions, TouchableOpacity, AsyncStorage, Ale
 import Store from './../../global/store/Store'
 import Header from './../../global/header/Header';
 import * as cfg from "./../../Config";
-import Store from './../../global/store/Store';
 
 const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 20;
