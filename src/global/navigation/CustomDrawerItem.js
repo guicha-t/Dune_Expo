@@ -7,7 +7,7 @@ import * as cfg from "./../../Config";
 
 export default class CustomDrawerItems extends Component {
 
-  renderElement(){
+  RenderElement(){
    if(Store.TypeUser == 2)
         return <TouchableOpacity onPress={() => this.props.navigation.navigate('AddUserDirector')}>
           <View style={styles.button}>
@@ -17,6 +17,21 @@ export default class CustomDrawerItems extends Component {
           </View>
         </TouchableOpacity>;
    return null;
+  }
+
+  RenderNotification(){
+    if (Store.TypeUser == 2){
+      return(
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
+            <View style={styles.button}>
+              <View style={styles.labelContainer}>
+                <Text style={styles.label}>Notifications</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+      );
+    }
+
   }
 
   render () {
@@ -76,13 +91,7 @@ export default class CustomDrawerItems extends Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDemands')}>
-            <View style={styles.button}>
-              <View style={styles.labelContainer}>
-                <Text style={styles.label}>Notifications</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+          {this.RenderNotification()}
 
           <View style={{height: 40, borderBottomWidth: 1, borderColor: 'white', justifyContent:'flex-end', alignItems: 'flex-end',paddingRight: 20, opacity:0.5}}>
             <Text style={{color: 'white', fontSize:16, fontWeight:'bold',}}>
@@ -104,7 +113,7 @@ export default class CustomDrawerItems extends Component {
             </Text>
           </View>
 
-          {this.renderElement() }
+          {this.RenderElement() }
 
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profil')}>
             <View style={styles.button}>

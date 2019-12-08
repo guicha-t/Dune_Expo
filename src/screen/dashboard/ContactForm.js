@@ -56,31 +56,53 @@ render(){
 return(
 
  <DismissKeyboard>
- <View style={styles.container}>
+ <ScrollView style={styles.container, {backgroundColor:Store.Back}}>
 
 
    <Header navigation={this.props.navigation}/>
 
-          <View style={{flex: 0.7}}>
+          <ScrollView style={{flex: 0.7, backgroundColor:Store.Back}}>
 
-              <KeyboardAvoidingView style={styles.container}  behavior="padding" >
+             <KeyboardAvoidingView style={styles.container, {backgroundColor:Store.Back}}  behavior="padding" >
 
+              <View style={{marginTop:15, backgroundColor:Store.Back}}>
+                <Button
+                  title=""
+                  onPress={()=>this.props.navigation.navigate('GamesList')}
+                  icon={{
+                   type: 'font-awesome',
+                   name: 'arrow-left',
+                   size: 15,
+                   color: 'white',
+                 }}
+                  buttonStyle={{
+                    backgroundColor: cfg.SECONDARY,
+                    borderWidth: 2,
+                    borderColor: 'white',
+                    borderRadius: 30,
+                    width: 60,
+                    paddingLeft: 20,
+                  }}
+                  containerStyle={{ height: 50, width: 250 }}
+                  titleStyle={{ fontWeight: 'bold' }}
+                />
+              </View>
 
-              <View style={{marginTop: 80, flex: 0.3, flexDirection: 'row'}}>
+              <View style={{marginTop: 80, flex: 0.3, flexDirection: 'row', backgroundColor:Store.Back}}>
                 <View style={{flex: 0.2}}></View>
                   <View style={{flex: 0.6,  alignItems: 'center', justifyContent:'center'}}>
-                    <Text style={{fontWeight: 'bold', color:cfg.SECONDARY, width:200}}>Votre problème est lié à...</Text>
+                    <Text style={{fontWeight: 'bold', color:Store.Text2, width:200}}>Votre problème est lié à...</Text>
                     <Picker selectedValue={this.state.typeofpb} style={{ height: 50, width: 155 }} onValueChange={(itemValue, itemIndex) => this.setState({typeofpb: itemValue})}>
-                      <Picker.Item label='Un jeu' value='JEU' />
-                      <Picker.Item label='La table' value='TABLE' />
-                      <Picker.Item label='Application mobile' value='MOBILE' />
+                      <Picker.Item color={Store.TRose} label='Un jeu' value='JEU' />
+                      <Picker.Item color={Store.TRose} label='La table' value='TABLE' />
+                      <Picker.Item color={Store.TRose} label='Application mobile' value='MOBILE' />
                   </Picker>
                </View>
               </View>
-              <View style={{flex: 0.2}}></View>
+              <View style={{flex: 0.2, backgroundColor:Store.Back}}></View>
 
 
-              <View style={{marginTop:60, flex: 0.3, flexDirection:'row'}}>
+              <View style={{marginTop:60, flex: 0.3, flexDirection:'row', backgroundColor:Store.Back}}>
                 <View style={{flex: 0.2}}></View>
                   <View style={{flex: 0.6,  alignItems: 'center', justifyContent:'center'}}>
                    <TextInput
@@ -88,7 +110,7 @@ return(
                        numberOfLines={6}
                        value={this.state.problem}
                        onChangeText={(problem) => this.setState({ problem })}
-                       style={{width:200, height:80, borderBottomColor:cfg.SECONDARY,borderBottomWidth:1}}
+                       style={{width:200, height:80, borderBottomColor:cfg.SECONDARY, borderBottomWidth:1, color:Store.Text2}}
                        textAlign={'center'}
                    />
                   </View>
@@ -96,7 +118,7 @@ return(
 
               </KeyboardAvoidingView>
 
-            <View style={{marginTop: 70, flex: 0.2, flexDirection:'row', justifyContent:'center'}}>
+            <View style={{marginTop: 100, flex: 0.2, flexDirection:'row', justifyContent:'center', backgroundColor:Store.Back}}>
 
               <Button
                 onPress={this.sendEmail_}
@@ -121,6 +143,8 @@ return(
                 titleStyle={{ fontWeight: 'bold' }}
               />
             </View>
+
+            <View style={{flex:1, paddingTop:170}}></View>
 
             <AlertPro
                ref={ref => {
@@ -147,10 +171,9 @@ return(
                    backgroundColor: "#6ED528"
                  }
                }}
-             />
-
-          </View>
- </View>
+            />
+          </ScrollView>
+ </ScrollView>
  </DismissKeyboard>
 
  );

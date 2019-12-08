@@ -53,18 +53,26 @@ export default class Start extends Component {
   }
 }
 
-_firstLogin = async () => {
-  try {
-    const value = await AsyncStorage.getItem('firstLogin');
-    if (value !== null){
+_firstLogin () {
+    if (Store.Flog == 1){
       this.props.navigation.navigate('Dashboard')
     }
     else{
       this.props.navigation.navigate('TermsOfUse')
     }
-   } catch (error) {
+  };
+
+
+  async _removeItemValue(key) {
+    try {
+      await AsyncStorage.removeItem(key);
+      return true;
+    }
+    catch(exception) {
+      return false;
+    }
   }
-};
+
 
   onLogin() {
     const { username, password } = this.state;
@@ -87,8 +95,9 @@ _firstLogin = async () => {
             Store.setIsLog(true)
             this._storeToken(responseJson.token)
             this._storeType(JSON.stringify(responseJson.typeUser))
+            Store.setFirstLog(responseJson.cgu)
             this._firstLogin()
-            //this._removeItemValue("firstLogin")
+            //this._removeItemValue('firstLogin')
           }
           else {
             this.AlertPro.open()
