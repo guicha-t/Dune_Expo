@@ -76,7 +76,7 @@ export default class Header extends Component {
         <View style={{flex: 0.4}}>
           <TouchableOpacity style={styles.containerLogo} onPress={() => this._checkToUMenu(2)}>
             <Image
-              style={{flex: 1, height: undefined, width: undefined}}
+              style={{flex: 1, height: undefined, width: undefined, marginTop: 5}}
               source={require('./../../picture/header/dunelogo.png')}
               resizeMode="contain"
               />
