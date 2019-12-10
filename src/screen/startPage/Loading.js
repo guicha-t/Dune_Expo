@@ -47,6 +47,7 @@ export default class AuthLoadingScreen extends Component {
     const localType = await AsyncStorage.getItem('localType');
     const localDarkMode = await AsyncStorage.getItem('darkMode')
 
+ 
     fetch(cfg.API_URL + '/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',

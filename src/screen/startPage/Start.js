@@ -89,7 +89,7 @@ _firstLogin () {
       }),
     }).then((response) => response.json())
         .then((responseJson) => {
-          if (responseJson.status === 200) {
+          if (responseJson.status === 200 || responseJson.status === 201) {
             Store.setToken(responseJson.token)
             Store.setTypeUser(responseJson.typeUser)
             Store.setIsLog(true)

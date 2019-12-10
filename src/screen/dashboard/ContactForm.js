@@ -68,7 +68,7 @@ return(
               <View style={{marginTop:15, backgroundColor:Store.Back}}>
                 <Button
                   title=""
-                  onPress={()=>this.props.navigation.navigate('GamesList')}
+                  onPress={()=>this.props.navigation.navigate('Dashboard')}
                   icon={{
                    type: 'font-awesome',
                    name: 'arrow-left',
