@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render StudentList correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        },
+        Object {
+          "backgroundColor": "#FFF",
+        },
+      ]
+    }
+  >
+    <View
+      animating={true}
+      animationDuration={1200}
+      animationEasing={[Function]}
+      color="#2A5E85"
+      interaction={true}
+      renderComponent={[Function]}
+      size={40}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "height": 40,
+            "marginHorizontal": 4,
+            "width": 8,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#2A5E85",
+              "borderTopLeftRadius": 4,
+              "borderTopRightRadius": 4,
+              "height": 20,
+              "transform": Array [
+                Object {
+                  "translateY": 8,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#2A5E85",
+              "borderBottomLeftRadius": 4,
+              "borderBottomRightRadius": 4,
+              "height": 20,
+              "transform": Array [
+                Object {
+                  "translateY": -8,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "height": 40,
+            "marginHorizontal": 4,
+            "width": 8,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#2A5E85",
+              "borderTopLeftRadius": 4,
+              "borderTopRightRadius": 4,
+              "height": 20,
+              "transform": Array [
+                Object {
+                  "translateY": 4.898587196589413e-16,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#2A5E85",
+              "borderBottomLeftRadius": 4,
+              "borderBottomRightRadius": 4,
+              "height": 20,
+              "transform": Array [
+                Object {
+                  "translateY": -4.898587196589413e-16,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "height": 40,
+            "marginHorizontal": 4,
+            "width": 8,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#2A5E85",
+              "borderTopLeftRadius": 4,
+              "borderTopRightRadius": 4,
+              "height": 20,
+              "transform": Array [
+                Object {
+                  "translateY": 8,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "#2A5E85",
+              "borderBottomLeftRadius": 4,
+              "borderBottomRightRadius": 4,
+              "height": 20,
+              "transform": Array [
+                Object {
+                  "translateY": -8,
+                },
+              ],
+              "width": 8,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render Qrcode correctly 1`] = `
+<Text>
+  Demande d'autorisation de caméra
+</Text>
+`;
