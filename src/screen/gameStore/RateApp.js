@@ -85,6 +85,7 @@ _cancelDemand = async () => {
   };
 
   _confirmDemand = async () => {
+
       if (this.state.Commentaire === ''){
         Alert.alert('ATTENTION', 'Veuillez remplir la section \'Commentaire\'.');
         return;
@@ -192,10 +193,9 @@ render() {
           />
 
           <View style={{flex: 0.30, flexDirection:'row', justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity style={{ flex: 0.40 }} onPress={this._cancelDemand}>
               <Button
                 title=""
-                onPress={()=>this.props.navigation.navigate('GamesList')}
+                onPress={()=>this._cancelDemand()}
                 icon={{
                  type: 'font-awesome',
                  name: 'times',
@@ -214,12 +214,10 @@ render() {
                 containerStyle={{ height: 50, width: 250 }}
                 titleStyle={{ fontWeight: 'bold' }}
               />
-            </TouchableOpacity>
 
-            <TouchableOpacity style={{ flex: 0.20 }} onPress={this._confirmDemand}>
               <Button
                 title=""
-                onPress={()=>this.props.navigation.navigate('Dashboard')}
+                onPress={()=>this._confirmDemand()}
                 icon={{
                  type: 'font-awesome',
                  name: 'check',
@@ -238,16 +236,15 @@ render() {
                 containerStyle={{ height: 50, width: 250 }}
                 titleStyle={{ fontWeight: 'bold' }}
               />
-             </TouchableOpacity>
           </View>
           <AlertPro
             ref={ref => {
               this.AlertPro = ref;
             }}
-            onConfirm={() => this.props.navigation.navigate('GameContainer')}
+            onConfirm={() => this.props.navigation.navigate('GamesList')}
             showCancel={false}
             title="AVIS ENVOYÉ"
-            message="Merci pour vos commentaires."
+            message="Merci pour votre commentaire."
             textConfirm="Retour"
             closeOnPressMask={true}
             customStyles={{

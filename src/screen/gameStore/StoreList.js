@@ -124,12 +124,13 @@ import { Alert, Button, TextInput, View, Text,
             return <Text style={styles.textClass}> DISPONIBLES-{param.num}</Text>;
         } else if (param.level === 3){
             return <Text style={styles.textClass}> DEMANDES-{param.num} </Text>;
+        }
     }
 
     render() {
       return (
         <View style={styles.mainContainer}>
-          <Header navigation={this.props.navigation}/>
+            <Header navigation={this.props.navigation}/>
 
             <View style={{flex: 0.8}}>
               <FlatList
@@ -148,9 +149,7 @@ import { Alert, Button, TextInput, View, Text,
               }
               keyExtractor={item => item.id /*CHANGER EN IDGAME */}
               />
-          </View>
-        </View>
-
+            </View>
         <View style={styles.searchContainer}>
           <TextInput
             value={this.state.Search}
@@ -162,7 +161,7 @@ import { Alert, Button, TextInput, View, Text,
           <Button
             title={'Go'}
             style={styles.ButtonSearch}
-            color=cfg.SECONDARY
+            color={cfg.SECONDARY}
             onPress={() => this._searchRequest()}
           />
         </View>
