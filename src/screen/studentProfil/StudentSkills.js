@@ -273,8 +273,8 @@ export default class StudentSkills extends Component {
 
 
 
-          <View style={{flex: 0.1, flexDirection:'row'}}>
-            <View style={{flex: 0.3}}>
+          <View style={{flex: 0.2, flexDirection:'row'}}>
+            <View style={{flex: 0.3, justifyContent:'center'}}>
               <View style={{width: 60, justifyContent:'center'}}>
                 <Icon
                   raised
@@ -289,11 +289,11 @@ export default class StudentSkills extends Component {
               </View>
             </View>
             <View style={{flex: 0.4, justifyContent:'center', alignItems:'center'}}>
-              <Text style={{color: Store.Text2, fontSize: 20, fontWeight: 'bold'}}>
+              <Text style={{color: Store.Text2, fontSize: 16, fontWeight: 'bold'}}>
                 COMPÉTENCES
               </Text>
             </View>
-            <View style={{flex: 0.3, alignItems:'flex-end', paddingRight:4}}>
+            <View style={{flex: 0.3, alignItems:'flex-end', paddingRight:4, justifyContent:'center'}}>
               <View style={{width: 60, justifyContent:'center'}}>
                 <Icon
                   raised
@@ -309,7 +309,7 @@ export default class StudentSkills extends Component {
             </View>
           </View>
 
-          <View style={{flex: 0.8}}>
+          <View style={{flex: 0.7}}>
             {this.showNoResult()}
             <FlatList
               showsHorizontalScrollIndicator={false}
