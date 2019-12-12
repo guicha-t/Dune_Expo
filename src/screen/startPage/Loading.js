@@ -42,12 +42,15 @@ export default class AuthLoadingScreen extends Component {
 
 
   _bootstrapAsync = async () => {
+    
+    this.props.navigation.navigate('Start');
+
     const localId = await AsyncStorage.getItem('localId');
     const localToken = await AsyncStorage.getItem('localToken');
     const localType = await AsyncStorage.getItem('localType');
     const localDarkMode = await AsyncStorage.getItem('darkMode')
 
- 
+
     fetch(cfg.API_URL + '/tokens/verifyToken', {
       method: 'POST',
       Accept: 'application/json',

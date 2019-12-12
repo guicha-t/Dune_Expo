@@ -124,15 +124,7 @@ export default class StudentProfil extends Component {
                 }}
                 />
             </View>
-            <View style={{flex: 0.5, padding: 10, justifyContent:'center'}}>
-              <Image
-                source={{uri: cfg.API_URL + '/files/eleves/' + this.state.Student.idEleve + '-eleve.png'}}
-                style={{flex: 1, borderRadius: 1000}}
-                resizeMode="contain"
-                />
-            </View>
-
-            <View style={{flex: 0.5, justifyContent:'center'}}>
+            <View style={{flex: 1, justifyContent:'center', alignItems:'center'}}>
               <Text style={[styles.primetextblue, {color: Store.Text1}]}>{this.state.Student.nomEleve.toUpperCase()}</Text>
               <Text style={[styles.primetextblue, {color: Store.Text1}]}>{this.state.Student.prenomEleve}</Text>
             </View>
@@ -205,12 +197,10 @@ export default class StudentProfil extends Component {
                 <Text style={styles.gridtextwhite}>{this.state.StudentAvg.toFixed(2)}</Text>
               </View>
               <View style={{flex: 0.2, justifyContent:'center', alignItems:'center'}}>
-                <Text style={styles.gridtextwhite}>{this.state.ClassAvg.toFixed(2)}</Text>
+                <Text style={styles.gridtextwhite}>{this.state.ClassAvg}</Text>
               </View>
             </View>
-
           </View>
-
         </View>
       );
     }
