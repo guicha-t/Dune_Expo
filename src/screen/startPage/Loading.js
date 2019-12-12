@@ -42,7 +42,7 @@ export default class AuthLoadingScreen extends Component {
 
 
   _bootstrapAsync = async () => {
-    
+
     this.props.navigation.navigate('Start');
 
     const localId = await AsyncStorage.getItem('localId');

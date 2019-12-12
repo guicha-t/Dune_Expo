@@ -346,7 +346,6 @@ import { Alert, Button, TextInput, View, Text,
               </View>
             )}
             />
-            <Text>{JSON.stringify(this.state.Images)}</Text>
         </View>
       </View>
     );
