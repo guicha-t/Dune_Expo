@@ -49,9 +49,9 @@ export default class AddUserDirector extends Component {
       },
       body: JSON.stringify({
         idUser: Store.IdUser,
-        nomUser: this.state.lastname,
-        prenomUser: this.state.name,
-        emailUser: this.state.email,
+        nom: this.state.lastname,
+        prenom: this.state.name,
+        email: this.state.email,
         token: Store.Token,
 
       }),
